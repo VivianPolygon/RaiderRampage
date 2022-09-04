@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.OnScreen;
-using UnityEngine.UI;
 
 public class AimControls : MonoBehaviour
 {
@@ -15,6 +13,7 @@ public class AimControls : MonoBehaviour
     private RectTransform controlStickRect;
     [SerializeField]
     private RectTransform cursorRect;
+
 
 
     //movespeed for the courser on each axis
@@ -31,7 +30,7 @@ public class AimControls : MonoBehaviour
     private Vector2 cursorBoundsOffset;
 
     //adjustments
-    private Vector2 cursorSizeOffset;
+    //adjusts screensize based on canvas scaling
     private Vector2 adjustedScreensize;
 
     //applied bounds of the cursor
@@ -46,8 +45,11 @@ public class AimControls : MonoBehaviour
     {
         UpdateCursorBounds(cursorBounds.x, cursorBounds.y, cursorBoundsOffset.x, cursorBoundsOffset.y);
         UpdateCursorSpeed(cursorMoveSpeed.x, cursorMoveSpeed.y);
-        UpdateCursorSizeOffset(cursorRect.rect.width, cursorRect.rect.height);
+
         CenterCursor();
+
+        GetCursorWorldspace();
+        GunData.instance.PointGunAtCursor();
     }
 
     public void StartTrackMovement()
@@ -71,7 +73,10 @@ public class AimControls : MonoBehaviour
             newCursorPosition.x = Mathf.Clamp(newCursorPosition.x, boundsMin.x, boundsMax.x);
             newCursorPosition.y = Mathf.Clamp(newCursorPosition.y, boundsMin.y, boundsMax.y);
 
-            cursorRect.anchoredPosition = newCursorPosition - cursorSizeOffset;
+            cursorRect.anchoredPosition = newCursorPosition;
+
+            GetCursorWorldspace();
+            GunData.instance.PointGunAtCursor();
         }
 
     }
@@ -83,14 +88,14 @@ public class AimControls : MonoBehaviour
         adjustedScreensize.y = Screen.height / cursorCanvas.scaleFactor;
 
         //clamps the numbes to a percent and divides by 2 efectivly for caculation
-        xBoundsPercent = Mathf.Clamp(xBoundsPercent, 0, 100) / 200;
-        yBoundsPercent = Mathf.Clamp(yBoundsPercent, 0, 100) / 200;
+        xBoundsPercent = Mathf.Clamp(xBoundsPercent, 0, 100) / 100;
+        yBoundsPercent = Mathf.Clamp(yBoundsPercent, 0, 100) / 100;
         //sets the bounds in percent for the x values
-        boundsMin.x = (adjustedScreensize.x / 2) - (adjustedScreensize.x * xBoundsPercent);
-        boundsMax.x = (adjustedScreensize.x / 2) + (adjustedScreensize.x * xBoundsPercent);
+        boundsMin.x = 0;
+        boundsMax.x = adjustedScreensize.x * xBoundsPercent;
         //sets the bounds in percent for the y values
-        boundsMin.y = (adjustedScreensize.y / 2) - (adjustedScreensize.y * yBoundsPercent);
-        boundsMax.y = (adjustedScreensize.y / 2) + (adjustedScreensize.y * yBoundsPercent);
+        boundsMin.y = 0;
+        boundsMax.y = adjustedScreensize.y * yBoundsPercent;
 
         //converts and clamps offsts to a percent
         xOffsetPercent = Mathf.Clamp(xOffsetPercent, 0, 100) / 100;
@@ -109,17 +114,17 @@ public class AimControls : MonoBehaviour
         cursorMoveSpeed.y = ySpeed;
     }
 
-    public void UpdateCursorSizeOffset(float xSize, float ySize)
-    {
-        cursorSizeOffset.x = xSize / 2;
-        cursorSizeOffset.y = ySize / 2;
-    }
 
 
     public void CenterCursor()
     {
-        cursorRect.anchoredPosition = adjustedScreensize / 2;
-        newCursorPosition = cursorRect.anchoredPosition + cursorSizeOffset;
+        cursorRect.anchoredPosition = (boundsMax + boundsMin) / 2;
+        newCursorPosition = cursorRect.anchoredPosition;
+    }
+
+    private void GetCursorWorldspace()
+    {
+        GunData.instance.cursorPositon = cursorRect.transform.position;
     }
 
 }
