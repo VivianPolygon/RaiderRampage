@@ -1,16 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//Script that controls the way the aiming cursor behaves
 public class AimControls : MonoBehaviour
 {
+    //flag for if the cursor is moving
     private bool tracking;
 
     [Header("LD Dont Touch")]
+    //canvas for the cursor
     [SerializeField]
     Canvas cursorCanvas;
+    //controlstick's rect transform
     [SerializeField]
     private RectTransform controlStickRect;
+    //cursor's rect transform
     [SerializeField]
     private RectTransform cursorRect;
 
@@ -43,28 +47,30 @@ public class AimControls : MonoBehaviour
 
     private void Start()
     {
+        //updates the cursor bounds and speed to whats specified in the inspector on play
         UpdateCursorBounds(cursorBounds.x, cursorBounds.y, cursorBoundsOffset.x, cursorBoundsOffset.y);
         UpdateCursorSpeed(cursorMoveSpeed.x, cursorMoveSpeed.y);
-
+        //centers the cursor
         CenterCursor();
-
+        //gets the cursors position in world space, and the gun at the cursor
         GetCursorWorldspace();
         GunData.instance.PointGunAtCursor();
     }
 
+    //tracking flags, activated through input stick
     public void StartTrackMovement()
     {
         tracking = true;
     }
-
-
     public void StopTrackMovement()
     {
         tracking = false;
     }
 
+
     private void Update()
     {
+        //if the stick is being moved, runs this each frame to update the cursor smoothly
         if (tracking)
         {
             newCursorPosition.x += ((controlStickRect.anchoredPosition.x * Time.deltaTime) * cursorMoveSpeed.x);
@@ -81,6 +87,7 @@ public class AimControls : MonoBehaviour
 
     }
 
+    //updates the cursors bounds on the screen
     public void UpdateCursorBounds(float xBoundsPercent, float yBoundsPercent, float xOffsetPercent, float yOffsetPercent)
     {
         //adjusts canvas scaling to screen scaling
@@ -108,6 +115,7 @@ public class AimControls : MonoBehaviour
         boundsMax.y += (adjustedScreensize.y * yOffsetPercent);
     }
 
+    //updates the cursors speed
     public void UpdateCursorSpeed(float xSpeed, float ySpeed)
     {
         cursorMoveSpeed.x = xSpeed;
@@ -115,13 +123,14 @@ public class AimControls : MonoBehaviour
     }
 
 
-
+    //centers the cursor within the current bounds
     public void CenterCursor()
     {
         cursorRect.anchoredPosition = (boundsMax + boundsMin) / 2;
         newCursorPosition = cursorRect.anchoredPosition;
     }
-
+    
+    //sets the vector3 on gundata that tracks the cursor's worldspace to the cursor's worldspace
     private void GetCursorWorldspace()
     {
         GunData.instance.cursorPositon = cursorRect.transform.position;
