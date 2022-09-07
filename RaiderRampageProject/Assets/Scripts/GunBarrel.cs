@@ -5,8 +5,7 @@ using UnityEngine;
 public class GunBarrel : MonoBehaviour
 {
     //used to determine what type of barrel this is, used for ammo caculations
-    [SerializeField]
-    BarrelType barrelType;
+    public BarrelType barrelType;
 
     //prefab for projectile, and its spawnpoint transform
     [SerializeField]
@@ -32,6 +31,7 @@ public class GunBarrel : MonoBehaviour
     private float t;
     private GameObject shot;
     private bool canFire;
+
 
     private void Awake()
     {
@@ -83,6 +83,7 @@ public class GunBarrel : MonoBehaviour
             {
                 t = 0;
                 shot = Instantiate(projectilePrefab, projectileSpawnpoint.transform.position, transform.rotation);
+                shot.transform.LookAt(GunData.instance.cursorPositon);
                 shot.GetComponent<Rigidbody>().AddForce(shot.transform.forward * shotForce, ForceMode.Impulse);
                 Destroy(shot, projectileDestroyTime);
 

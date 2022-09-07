@@ -20,6 +20,9 @@ public class AimControls : MonoBehaviour
 
 
 
+
+
+
     //movespeed for the courser on each axis
     [Header("Cursor Speed Along Each Axis")]
     [Header("LD Touch")]
@@ -47,6 +50,7 @@ public class AimControls : MonoBehaviour
 
     private void Start()
     {
+
         //updates the cursor bounds and speed to whats specified in the inspector on play
         UpdateCursorBounds(cursorBounds.x, cursorBounds.y, cursorBoundsOffset.x, cursorBoundsOffset.y);
         UpdateCursorSpeed(cursorMoveSpeed.x, cursorMoveSpeed.y);
