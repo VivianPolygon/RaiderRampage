@@ -11,6 +11,9 @@ public class GunData : MonoBehaviour
     //base body model for the gun
     public GameObject gunModelBody;
 
+    //Reload delay in second
+    public float reloadTime;
+
     //cursor image, and the sprites for it to hold
     public Image cursorImage;
     public Sprite[] cursorSprites;
@@ -30,8 +33,13 @@ public class GunData : MonoBehaviour
     public Transform[] BarrelSlots;
     //will check if slots are available (not implemented yet)
     public BarrelType[] slotFillType;
+
     //flag for if the gun is firing
+    [HideInInspector]
     public bool firing;
+    //flag for reloading, used to prevent shooting while reloading
+    [HideInInspector]
+    public bool reloading;
 
 
     //used by functions
@@ -48,6 +56,17 @@ public class GunData : MonoBehaviour
     [SerializeField]
     private List<Vector3> barrelQuantitiesOrdered;
 
+    [Header("Related to Gun Spin")]
+    //object to spin
+    public GameObject spinningGunPiece;
+    //spin speed for the gun
+    public float maxSpinSpeed;
+    //used for spin speed caculations dependent on barrel ammount
+    private float spinSpeedPercent;
+    [SerializeField]
+    private float spinSpeedStartupTime;
+
+    private float currentSpinSpeed;
 
 
     private void Awake()
@@ -63,6 +82,11 @@ public class GunData : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        SpinBarrels();
+    }
+
     private void Start()
     {
         //sets the cursor sprite and gets the current slots at start
@@ -72,11 +96,6 @@ public class GunData : MonoBehaviour
         StopFiring();
     }
 
-    //orients the gun to point towards the cursor
-    public void PointGunAtCursor()
-    {
-        gunModelBody.transform.LookAt(cursorPositon, Camera.main.transform.up);
-    }
 
     //FUNCTIONS RELATING TO THE TRACKING OF SLOTS AND THEIR CONTENTS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -223,7 +242,9 @@ public class GunData : MonoBehaviour
         barrelQuantitiesOrdered.Add(rocketLauncherBarrelData);
 
         barrelQuantitiesOrdered.Sort(BarrelQuantitiesSortComparer);
+
         UpdateGunCursor();
+        CaculateSpinSpeedPercent();
     }
 
     //comparer function that sorts by quantity and priority
@@ -312,6 +333,48 @@ public class GunData : MonoBehaviour
         StaticGunData.instance.shotgunPriority,
         StaticGunData.instance.rockerLauncherPriority);
     }
+    //FUNCTIONS FOR GUN HEAD SPIN <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    private void CaculateSpinSpeedPercent()
+    {
+        int barrelAmount = 0;
+
+        for (int i = 0; i < BarrelSlots.Length; i++)
+        {
+            if (slotFillType[i] != BarrelType.Empty)
+            {
+                barrelAmount++;
+            }
+        }
+        //current / (max - 1)
+        spinSpeedPercent = Mathf.Clamp((barrelAmount / (float)BarrelSlots.Length) - (1 / (float)BarrelSlots.Length), 0, 1);
+    }
+
+    private void SpinBarrels()
+    {
+        spinningGunPiece.transform.Rotate(0, 0, (currentSpinSpeed * spinSpeedPercent) * Time.deltaTime);
+    }
+
+    private IEnumerator SpinStartup()
+    {
+        float currentSpeed = currentSpinSpeed;
+        for (float i = 0; i < spinSpeedStartupTime; i += Time.deltaTime)
+        {
+            currentSpinSpeed = Mathf.Lerp(currentSpeed, maxSpinSpeed, i / spinSpeedStartupTime);
+            yield return null;
+        }
+        currentSpinSpeed = maxSpinSpeed;
+    }
+    private IEnumerator SpinSlowdown()
+    {
+        float currentSpeed = currentSpinSpeed;
+        for (float i = 0; i < spinSpeedStartupTime; i += Time.deltaTime)
+        {
+            currentSpinSpeed = Mathf.Lerp(currentSpinSpeed, 0, i / spinSpeedStartupTime);
+            yield return null;
+        }
+        currentSpinSpeed = 0;
+    }
 
     //FUNCTIONS TRIGGERED BY BUTTONS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -319,11 +382,13 @@ public class GunData : MonoBehaviour
     public void startFiring()
     {
         firing = true;
+        StartCoroutine(SpinStartup());
         cursorImage.color = cursorFiringColor;
     }
     public void StopFiring()
     {
         firing = false;
+        StartCoroutine(SpinSlowdown());
         cursorImage.color = cursorInactiveColor;
     }
 

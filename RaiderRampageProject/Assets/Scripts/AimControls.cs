@@ -7,137 +7,87 @@ public class AimControls : MonoBehaviour
     //flag for if the cursor is moving
     private bool tracking;
 
-    [Header("LD Dont Touch")]
+    [Header("Cursor Move Speeds")]
+    //speed along each axis that the cursor can move
+    [SerializeField]
+    private float horizontalAimSpeed;
+    [SerializeField]
+    private float verticalAimSpeed;
+
+    [Header("Angle in Degrees the Gun Can Aim")]
+    //range in degrees that the gun can aim, 0 is center, 
+    //-90, 90 = 180 degrees infront of gun
+    [SerializeField]
+    private Vector2 horizontalAimRange;
+    [SerializeField]
+    private Vector2 verticalAimRange;
+    
+
+    [Header("Cursor and ControlStick")]
+    [Header("vvv LD, Dont Change vvv")]
     //canvas for the cursor
     [SerializeField]
     Canvas cursorCanvas;
     //controlstick's rect transform
     [SerializeField]
     private RectTransform controlStickRect;
-    //cursor's rect transform
-    [SerializeField]
-    private RectTransform cursorRect;
 
 
-
-
-
-
-    //movespeed for the courser on each axis
-    [Header("Cursor Speed Along Each Axis")]
-    [Header("LD Touch")]
-    [SerializeField]
-    Vector2 cursorMoveSpeed;
-
-    //bounds in percents, (0-100) of the screen
-    [Header("Cursor Bounds as Screen Percents")]
-    [SerializeField]
-    private Vector2 cursorBounds;
-    [SerializeField]
-    private Vector2 cursorBoundsOffset;
-
-    //adjustments
-    //adjusts screensize based on canvas scaling
-    private Vector2 adjustedScreensize;
-
-    //applied bounds of the cursor
-    private Vector2 boundsMin;
-    private Vector2 boundsMax;
-
-    //new position for the cursor
-    private Vector2 newCursorPosition;
+    //raycast for the cursor
+    private RaycastHit cursorDetect;
+    //vector3 used to caculate and limit gun rotation
+    private Vector3 gunRotationEuler;
 
 
     private void Start()
     {
-
-        //updates the cursor bounds and speed to whats specified in the inspector on play
-        UpdateCursorBounds(cursorBounds.x, cursorBounds.y, cursorBoundsOffset.x, cursorBoundsOffset.y);
-        UpdateCursorSpeed(cursorMoveSpeed.x, cursorMoveSpeed.y);
-        //centers the cursor
-        CenterCursor();
-        //gets the cursors position in world space, and the gun at the cursor
-        GetCursorWorldspace();
-        GunData.instance.PointGunAtCursor();
+        AimGun();
     }
-
-    //tracking flags, activated through input stick
-    public void StartTrackMovement()
-    {
-        tracking = true;
-    }
-    public void StopTrackMovement()
-    {
-        tracking = false;
-    }
-
 
     private void Update()
     {
-        //if the stick is being moved, runs this each frame to update the cursor smoothly
-        if (tracking)
+        if(tracking)
         {
-            newCursorPosition.x += ((controlStickRect.anchoredPosition.x * Time.deltaTime) * cursorMoveSpeed.x);
-            newCursorPosition.y += ((controlStickRect.anchoredPosition.y * Time.deltaTime) * cursorMoveSpeed.y);
-
-            newCursorPosition.x = Mathf.Clamp(newCursorPosition.x, boundsMin.x, boundsMax.x);
-            newCursorPosition.y = Mathf.Clamp(newCursorPosition.y, boundsMin.y, boundsMax.y);
-
-            cursorRect.anchoredPosition = newCursorPosition;
-
-            GetCursorWorldspace();
-            GunData.instance.PointGunAtCursor();
+            AimGun();
         }
-
     }
 
-    //updates the cursors bounds on the screen
-    public void UpdateCursorBounds(float xBoundsPercent, float yBoundsPercent, float xOffsetPercent, float yOffsetPercent)
+    private void AimGun()
     {
-        //adjusts canvas scaling to screen scaling
-        adjustedScreensize.x = Screen.width / cursorCanvas.scaleFactor;
-        adjustedScreensize.y = Screen.height / cursorCanvas.scaleFactor;
 
-        //clamps the numbes to a percent and divides by 2 efectivly for caculation
-        xBoundsPercent = Mathf.Clamp(xBoundsPercent, 0, 100) / 100;
-        yBoundsPercent = Mathf.Clamp(yBoundsPercent, 0, 100) / 100;
-        //sets the bounds in percent for the x values
-        boundsMin.x = 0;
-        boundsMax.x = adjustedScreensize.x * xBoundsPercent;
-        //sets the bounds in percent for the y values
-        boundsMin.y = 0;
-        boundsMax.y = adjustedScreensize.y * yBoundsPercent;
+        GunData.instance.gunModelBody.transform.Rotate((-controlStickRect.anchoredPosition.y * Time.deltaTime) * verticalAimSpeed,
+            (controlStickRect.anchoredPosition.x * Time.deltaTime) * horizontalAimSpeed,  
+            0);
 
-        //converts and clamps offsts to a percent
-        xOffsetPercent = Mathf.Clamp(xOffsetPercent, 0, 100) / 100;
-        yOffsetPercent = Mathf.Clamp(yOffsetPercent, 0, 100) / 100;
-        //applys the offsets on the x axis
-        boundsMin.x += (adjustedScreensize.x * xOffsetPercent);
-        boundsMax.x += (adjustedScreensize.x * xOffsetPercent);
-        //applys the offsets on the y axis
-        boundsMin.y += (adjustedScreensize.y * yOffsetPercent);
-        boundsMax.y += (adjustedScreensize.y * yOffsetPercent);
+        gunRotationEuler = GunData.instance.gunModelBody.transform.localEulerAngles;
+
+        gunRotationEuler.x = (gunRotationEuler.x > 180) ? gunRotationEuler.x - 360 : gunRotationEuler.x;
+        gunRotationEuler.y = (gunRotationEuler.y > 180) ? gunRotationEuler.y - 360 : gunRotationEuler.y;
+
+        gunRotationEuler.x = Mathf.Clamp(gunRotationEuler.x, -verticalAimRange.y, -verticalAimRange.x);
+        gunRotationEuler.y = Mathf.Clamp(gunRotationEuler.y, horizontalAimRange.x, horizontalAimRange.y);
+        gunRotationEuler.z = 0;
+
+        GunData.instance.gunModelBody.transform.localRotation = Quaternion.Euler(gunRotationEuler);
+
+        if (Physics.Raycast(GunData.instance.gunModelBody.transform.position, GunData.instance.gunModelBody.transform.forward, out cursorDetect, 100f))
+        {
+            cursorCanvas.transform.position = cursorDetect.point;
+
+            cursorCanvas.transform.rotation = Quaternion.FromToRotation(Vector3.forward, cursorDetect.normal);
+            cursorCanvas.transform.position += cursorCanvas.transform.forward;
+            cursorCanvas.transform.rotation = Quaternion.Euler(0, cursorCanvas.transform.rotation.y, cursorCanvas.transform.rotation.z);
+
+            GunData.instance.cursorPositon = cursorCanvas.transform.position;
+        }
     }
 
-    //updates the cursors speed
-    public void UpdateCursorSpeed(float xSpeed, float ySpeed)
+    public void StartTracking()
     {
-        cursorMoveSpeed.x = xSpeed;
-        cursorMoveSpeed.y = ySpeed;
+        tracking = true;
     }
-
-
-    //centers the cursor within the current bounds
-    public void CenterCursor()
+    public void StopTracking()
     {
-        cursorRect.anchoredPosition = (boundsMax + boundsMin) / 2;
-        newCursorPosition = cursorRect.anchoredPosition;
+        tracking = false;
     }
-    
-    //sets the vector3 on gundata that tracks the cursor's worldspace to the cursor's worldspace
-    private void GetCursorWorldspace()
-    {
-        GunData.instance.cursorPositon = cursorRect.transform.position;
-    }
-
 }

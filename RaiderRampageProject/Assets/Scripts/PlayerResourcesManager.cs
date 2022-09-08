@@ -48,6 +48,7 @@ public class PlayerResourcesManager : MonoBehaviour
     public float rocketLauncherAmmoCalc;
 
     private int reloadValue;
+    private Coroutine reloadCoroutine = null;
 
     //used to check if resources should be regenerated over time or not
     public enum resourcesGamestate
@@ -117,6 +118,20 @@ public class PlayerResourcesManager : MonoBehaviour
 
     public void Reload()
     {
+        if(reloadCoroutine == null)
+        {
+            reloadCoroutine = StartCoroutine(ReloadCoroutine());
+        }
+    }
+
+    private IEnumerator ReloadCoroutine()
+    {
+        GunData.instance.reloading = true;
+        for (float i = 0; i < GunData.instance.reloadTime; i += Time.deltaTime)
+        {
+            UIData.instance.ammoReloadTimerSlider.value = i / GunData.instance.reloadTime;
+            yield return null;
+        }
         //reloads pistol ammo
         reloadValue = Mathf.Clamp(Mathf.Clamp(pistolClipMax, 0, pistolClipMax - pistolClipCurrent), 0, pistolAmmo);
         pistolAmmoCalc -= reloadValue;
@@ -143,6 +158,11 @@ public class PlayerResourcesManager : MonoBehaviour
         UIData.instance.UpdateAmmoSlider(5, machineGunClipMax, machineGunClipCurrent);
         UIData.instance.UpdateAmmoSlider(6, shotGunClipMax, shotGunClipCurrent);
         UIData.instance.UpdateAmmoSlider(7, rocketLauncherClipMax, rocketLauncherClipCurrent);
+
+
+        UIData.instance.ammoReloadTimerSlider.value = 1;
+        GunData.instance.reloading = false;
+        reloadCoroutine = null;
     }
 
 }

@@ -42,7 +42,7 @@ public class GunBarrel : MonoBehaviour
     void Update()
     {
         //if the fire button is held, checks ammo stocks to determine if the barrel can fire
-        if(GunData.instance.firing)
+        if(GunData.instance.firing && !GunData.instance.reloading)
         {
             switch (barrelType)
             {

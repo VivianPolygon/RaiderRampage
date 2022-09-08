@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 3035413545681702517}
   - component: {fileID: 3035413545681702512}
   - component: {fileID: 3035413545681702519}
-  - component: {fileID: 3035413545681702518}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PistolTip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,19 +81,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3035413545681702518
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3035413545681702516}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3035413546687653773
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,9 +92,8 @@ GameObject:
   - component: {fileID: 3035413546687653774}
   - component: {fileID: 3035413546687653770}
   - component: {fileID: 3035413546687653769}
-  - component: {fileID: 3035413546687653768}
   - component: {fileID: 3035413546687653775}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PistolBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,19 +164,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3035413546687653768
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3035413546687653773}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3035413546687653775
 MonoBehaviour:
   m_ObjectHideFlags: 0
