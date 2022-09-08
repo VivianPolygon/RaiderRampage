@@ -1,76 +1,93 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UI;
-
+//Script that controls the way the aiming cursor behaves
 public class AimControls : MonoBehaviour
 {
-    [SerializeField]
-    RectTransform controlStick;
-
-    private List<Touch> touches;
-
-    private RectTransform stickInitialPosition;
-
-    private Vector3 stickOffset;
-
+    //flag for if the cursor is moving
     private bool tracking;
 
-
+    [Header("Cursor Move Speeds")]
+    //speed along each axis that the cursor can move
     [SerializeField]
-    private Canvas UICanvas;
-
-    Vector2 previousPosition;
-    Vector2 movement;
-    Vector2 mousePosition;
-
+    private float horizontalAimSpeed;
     [SerializeField]
-    float distance;
+    private float verticalAimSpeed;
 
-    float currentdistance;
+    [Header("Angle in Degrees the Gun Can Aim")]
+    //range in degrees that the gun can aim, 0 is center, 
+    //-90, 90 = 180 degrees infront of gun
+    [SerializeField]
+    private Vector2 horizontalAimRange;
+    [SerializeField]
+    private Vector2 verticalAimRange;
+    
 
+    [Header("Cursor and ControlStick")]
+    [Header("vvv LD, Dont Change vvv")]
+    //canvas for the cursor
+    [SerializeField]
+    Canvas cursorCanvas;
+    //controlstick's rect transform
+    [SerializeField]
+    private RectTransform controlStickRect;
+
+
+    //raycast for the cursor
+    private RaycastHit cursorDetect;
+    //vector3 used to caculate and limit gun rotation
+    private Vector3 gunRotationEuler;
 
 
     private void Start()
     {
-        stickInitialPosition = controlStick;
-        stickInitialPosition.anchoredPosition = controlStick.anchoredPosition;
+        AimGun();
     }
 
     private void Update()
     {
         if(tracking)
         {
-            mousePosition = Input.mousePosition;
-
-            movement = mousePosition - previousPosition;
-
-            previousPosition = mousePosition;
-
-            currentdistance = Mathf.Abs((controlStick.anchoredPosition.x + movement.x)) + Mathf.Abs((controlStick.anchoredPosition.y + movement.y));
-            if (currentdistance > distance)
-            {
-                movement /= currentdistance;
-            }
-            controlStick.anchoredPosition += (movement / UICanvas.scaleFactor);
-            print(distance);
-
+            AimGun();
         }
     }
 
-    public void TrackMovement()
+    private void AimGun()
     {
-        previousPosition = Input.mousePosition;
+
+        GunData.instance.gunModelBody.transform.Rotate((-controlStickRect.anchoredPosition.y * Time.deltaTime) * verticalAimSpeed,
+            (controlStickRect.anchoredPosition.x * Time.deltaTime) * horizontalAimSpeed,  
+            0);
+
+        gunRotationEuler = GunData.instance.gunModelBody.transform.localEulerAngles;
+
+        gunRotationEuler.x = (gunRotationEuler.x > 180) ? gunRotationEuler.x - 360 : gunRotationEuler.x;
+        gunRotationEuler.y = (gunRotationEuler.y > 180) ? gunRotationEuler.y - 360 : gunRotationEuler.y;
+
+        gunRotationEuler.x = Mathf.Clamp(gunRotationEuler.x, -verticalAimRange.y, -verticalAimRange.x);
+        gunRotationEuler.y = Mathf.Clamp(gunRotationEuler.y, horizontalAimRange.x, horizontalAimRange.y);
+        gunRotationEuler.z = 0;
+
+        GunData.instance.gunModelBody.transform.localRotation = Quaternion.Euler(gunRotationEuler);
+
+        if (Physics.Raycast(GunData.instance.gunModelBody.transform.position, GunData.instance.gunModelBody.transform.forward, out cursorDetect, 100f))
+        {
+            cursorCanvas.transform.position = cursorDetect.point;
+
+            cursorCanvas.transform.rotation = Quaternion.FromToRotation(Vector3.forward, cursorDetect.normal);
+            cursorCanvas.transform.position += cursorCanvas.transform.forward;
+            cursorCanvas.transform.rotation = Quaternion.Euler(0, cursorCanvas.transform.rotation.y, cursorCanvas.transform.rotation.z);
+
+            GunData.instance.cursorPositon = cursorCanvas.transform.position;
+        }
+    }
+
+    public void StartTracking()
+    {
         tracking = true;
     }
-
-
-    public void Release()
+    public void StopTracking()
     {
         tracking = false;
-        controlStick.anchoredPosition = Vector2.zero;
     }
-
-
 }
