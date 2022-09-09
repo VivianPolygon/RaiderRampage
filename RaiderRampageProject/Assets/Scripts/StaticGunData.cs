@@ -1,24 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 //script that holds data for the gun that will not need to change on runtime
 public class StaticGunData : MonoBehaviour
 {
     public static StaticGunData instance;
 
+
     [Header("Barrel Priority")]
     //number for the corresponding cursor sprite for that barel type, displayed if its the majority
     [SerializeField]
-    public int pistolPriority;
+    public int SMGSpritePriorityAndNumber;
     [SerializeField]
-    public int machineGunPriority;
+    public int pistolSpritePriorityAndNumber;
     [SerializeField]
-    public int shotgunPriority;
+    public int machineGunSpritePriorityAndNumber;
     [SerializeField]
-    public int rockerLauncherPriority;
+    public int shotgunSpritePriorityAndNumber;
+    [SerializeField]
+    public int sniperSpritePriorityAndNumber;
+    [SerializeField]
+    public int rockerLauncherSpritePriorityAndNumber;
 
+    /*
     [Header("Barrel Cursor Sprite Number")]
     //priority for the cursor, if theres a two or threeway tie in barrelquantity displays the highest priority cursor
+    [SerializeField]
+    public int SMGCursorSpriteNumber;
     [SerializeField]
     public int pistolCursorSpriteNumber;
     [SerializeField]
@@ -26,10 +35,14 @@ public class StaticGunData : MonoBehaviour
     [SerializeField]
     public int shotgunCursorSpriteNumber;
     [SerializeField]
+    public int sniperCursorSpriteNumber;
+    [SerializeField]
     public int rocketLauncherCursorSpriteNumber;
-
+    */
     private void Awake()
     {
+
+
         if (instance != null)
         {
             Destroy(this);
@@ -38,6 +51,6 @@ public class StaticGunData : MonoBehaviour
         {
             instance = this;
         }
-    }
 
+    }
 }

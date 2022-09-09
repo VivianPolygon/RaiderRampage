@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3035413545681702516}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0.497}
   m_LocalScale: {x: 1.4, y: 1.4, z: 0.1004668}
   m_Children: []
   m_Father: {fileID: 3035413546687653774}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!33 &3035413545681702512
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 659bf6854863e3146b0e457af58d39a5, type: 2}
+  - {fileID: 2100000, guid: 2b8e36d40226dd24094a416149b6ae03, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 3035413546687653769}
   - component: {fileID: 3035413546687653775}
   m_Layer: 2
-  m_Name: PistolBarrel
+  m_Name: SMGBarrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -109,7 +109,7 @@ Transform:
   m_GameObject: {fileID: 3035413546687653773}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 2}
+  m_LocalScale: {x: 0.41152, y: 0.5, z: 2}
   m_Children:
   - {fileID: 3035413545681702517}
   m_Father: {fileID: 0}
@@ -142,7 +142,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 659bf6854863e3146b0e457af58d39a5, type: 2}
+  - {fileID: 2100000, guid: 2b8e36d40226dd24094a416149b6ae03, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -179,7 +179,7 @@ MonoBehaviour:
   barrelType: 0
   projectilePrefab: {fileID: 7870221974262378874, guid: 9796769ee10d4db4c8f556465aa34abf, type: 3}
   projectileSpawnpoint: {fileID: 3035413545681702517}
-  shotsPerSecond: 2
+  shotsPerSecond: 6
   ammoDrain: 1
   shotForce: 60
-  projectileDestroyTime: 3
+  projectileDestroyTime: 2

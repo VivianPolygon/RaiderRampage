@@ -46,24 +46,39 @@ public class GunBarrel : MonoBehaviour
         {
             switch (barrelType)
             {
+                case BarrelType.SMG:
+                    if (PlayerResourcesManager.instance.pistolClipCurrent >= ammoDrain)
+                    {
+                        canFire = true;
+                    }
+                    break;
                 case BarrelType.Pistol:
                     if(PlayerResourcesManager.instance.pistolClipCurrent >= ammoDrain)
                     {
                         canFire = true;
                     }
                     break;
+
                 case BarrelType.Shotgun:
                     if (PlayerResourcesManager.instance.shotGunClipCurrent >= ammoDrain)
                     {
                         canFire = true;
                     }
                     break;
+
                 case BarrelType.MachineGun:
                     if (PlayerResourcesManager.instance.machineGunClipCurrent >= ammoDrain)
                     {
                         canFire = true;
                     }
                     break;
+                case BarrelType.Sniper:
+                    if (PlayerResourcesManager.instance.machineGunClipCurrent >= ammoDrain)
+                    {
+                        canFire = true;
+                    }
+                    break;
+
                 case BarrelType.RocketLauncher:
                     if (PlayerResourcesManager.instance.rocketLauncherClipCurrent >= ammoDrain)
                     {

@@ -46,9 +46,11 @@ public class GunData : MonoBehaviour
     private GameObject newBarrel;
 
     //x value is the quantity of barrels, y value is the coresponding cursor for if that barrel is the majority, Z is the cursor priority
+    private Vector3 SMGbarrelData;
     private Vector3 pistolBarrelData;
     private Vector3 machineGunBarrelData;
     private Vector3 shotgunBarrelData;
+    private Vector3 sniperBarrelData;
     private Vector3 rocketLauncherBarrelData;
 
 
@@ -82,7 +84,7 @@ public class GunData : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         SpinBarrels();
     }
@@ -208,24 +210,35 @@ public class GunData : MonoBehaviour
     {
         barrelQuantitiesOrdered.Clear();
 
+        SMGbarrelData.x = 0;
         pistolBarrelData.x = 0;
         machineGunBarrelData.x = 0;
         shotgunBarrelData.x = 0;
+        sniperBarrelData.x = 0;
         rocketLauncherBarrelData.x = 0;
 
         for (int i = 0; i < BarrelSlots.Length; i++)
         {
             switch (slotFillType[i])
             {
+                case BarrelType.SMG:
+                    pistolBarrelData.x++;
+                    break;
                 case BarrelType.Pistol:
                     pistolBarrelData.x++;
                     break;
+
                 case BarrelType.Shotgun:
                     shotgunBarrelData.x++;
                     break;
+
                 case BarrelType.MachineGun:
                     machineGunBarrelData.x++;
                     break;
+                case BarrelType.Sniper:
+                    machineGunBarrelData.x++;
+                    break;
+
                 case BarrelType.RocketLauncher:
                     rocketLauncherBarrelData.x++;
                     break;
@@ -236,9 +249,11 @@ public class GunData : MonoBehaviour
             }
         }
 
+        barrelQuantitiesOrdered.Add(SMGbarrelData);
         barrelQuantitiesOrdered.Add(pistolBarrelData);
         barrelQuantitiesOrdered.Add(machineGunBarrelData);
         barrelQuantitiesOrdered.Add(shotgunBarrelData);
+        barrelQuantitiesOrdered.Add(sniperBarrelData);
         barrelQuantitiesOrdered.Add(rocketLauncherBarrelData);
 
         barrelQuantitiesOrdered.Sort(BarrelQuantitiesSortComparer);
@@ -302,36 +317,33 @@ public class GunData : MonoBehaviour
     }
 
     //sets coresponding sprite for each guntype
-    private void SetCorespoondingSprites(int pistolSpriteNum, int machineGunSpriteNum, int shotGunSpriteNum, int rocketLauncherSpriteNum)
+    private void SetCorespoondingSpritesAndPriority(int SMGSpriteNum, int pistolSpriteNum, int machineGunSpriteNum, int shotGunSpriteNum, int sniperSpriteNum, int rocketLauncherSpriteNum)
     {
+        SMGbarrelData.y = SMGSpriteNum;
         pistolBarrelData.y = pistolSpriteNum;
         machineGunBarrelData.y = machineGunSpriteNum;
         shotgunBarrelData.y = shotGunSpriteNum;
+        sniperBarrelData.y = sniperSpriteNum;
         rocketLauncherBarrelData.y = rocketLauncherSpriteNum;
-    }
-    //sets priority for each guntype
-    private void SetCorespoondingPriority(int pistolPriorityNum, int machineGunPriorityNum, int shotGunPriorityNum, int rocketLauncherPriorityNum)
-    {
-        pistolBarrelData.z = pistolPriorityNum;
-        machineGunBarrelData.z = machineGunPriorityNum;
-        shotgunBarrelData.z = shotGunPriorityNum;
-        rocketLauncherBarrelData.z = rocketLauncherPriorityNum;
+
+        SMGbarrelData.z = SMGSpriteNum;
+        pistolBarrelData.z = pistolSpriteNum;
+        machineGunBarrelData.z = machineGunSpriteNum;
+        shotgunBarrelData.z = shotGunSpriteNum;
+        sniperBarrelData.z = sniperSpriteNum;
+        rocketLauncherBarrelData.z = rocketLauncherSpriteNum;
     }
 
     //applys static data to the vector 3s that control the orginization of the dffrent barrel types cursors and priorities in cases of ties
     private void ApplyStaticGunData()
     {
-        SetCorespoondingSprites
-        (StaticGunData.instance.pistolCursorSpriteNumber,
-        StaticGunData.instance.machineGunCursorSpriteNumber,
-        StaticGunData.instance.shotgunCursorSpriteNumber,
-        StaticGunData.instance.rocketLauncherCursorSpriteNumber);
-
-        SetCorespoondingPriority
-        (StaticGunData.instance.pistolPriority,
-        StaticGunData.instance.machineGunPriority,
-        StaticGunData.instance.shotgunPriority,
-        StaticGunData.instance.rockerLauncherPriority);
+        SetCorespoondingSpritesAndPriority
+        (StaticGunData.instance.SMGSpritePriorityAndNumber,
+        StaticGunData.instance.pistolSpritePriorityAndNumber,
+        StaticGunData.instance.machineGunSpritePriorityAndNumber,
+        StaticGunData.instance.shotgunSpritePriorityAndNumber,
+        StaticGunData.instance.sniperSpritePriorityAndNumber,
+        StaticGunData.instance.rockerLauncherSpritePriorityAndNumber);
     }
     //FUNCTIONS FOR GUN HEAD SPIN <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 

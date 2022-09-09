@@ -4775,14 +4775,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dda28a6c77eeaf41aa78d10e2af7c81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pistolPriority: 1
-  machineGunPriority: 2
-  shotgunPriority: 3
-  rockerLauncherPriority: 4
-  pistolCursorSpriteNumber: 1
-  machineGunCursorSpriteNumber: 2
-  shotgunCursorSpriteNumber: 3
-  rocketLauncherCursorSpriteNumber: 4
+  SMGSpritePriorityAndNumber: 1
+  pistolSpritePriorityAndNumber: 2
+  machineGunSpritePriorityAndNumber: 3
+  shotgunSpritePriorityAndNumber: 4
+  sniperSpritePriorityAndNumber: 5
+  rockerLauncherSpritePriorityAndNumber: 6
 --- !u!1 &1311259144
 GameObject:
   m_ObjectHideFlags: 0
