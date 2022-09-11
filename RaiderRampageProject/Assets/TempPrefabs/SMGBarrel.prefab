@@ -177,9 +177,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   barrelType: 0
-  projectilePrefab: {fileID: 7870221974262378874, guid: 9796769ee10d4db4c8f556465aa34abf, type: 3}
+  projectilePrefab: {fileID: 7870221974262378874, guid: 46aab880e3f155448b7e2b85c7d80d1a, type: 3}
   projectileSpawnpoint: {fileID: 3035413545681702517}
   shotsPerSecond: 6
   ammoDrain: 1
-  shotForce: 60
-  projectileDestroyTime: 2
+  shotForce: 200
+  projectileDestroyTime: 7

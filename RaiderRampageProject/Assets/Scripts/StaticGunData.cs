@@ -21,7 +21,7 @@ public class StaticGunData : MonoBehaviour
     [SerializeField]
     public int sniperSpritePriorityAndNumber;
     [SerializeField]
-    public int rockerLauncherSpritePriorityAndNumber;
+    public int rocketLauncherSpritePriorityAndNumber;
 
     /*
     [Header("Barrel Cursor Sprite Number")]
@@ -41,7 +41,6 @@ public class StaticGunData : MonoBehaviour
     */
     private void Awake()
     {
-
 
         if (instance != null)
         {

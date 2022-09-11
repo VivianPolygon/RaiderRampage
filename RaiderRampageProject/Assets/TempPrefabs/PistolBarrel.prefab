@@ -176,10 +176,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba987e87d917fb4cade94a575da69c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barrelType: 0
+  barrelType: 1
   projectilePrefab: {fileID: 7870221974262378874, guid: 9796769ee10d4db4c8f556465aa34abf, type: 3}
   projectileSpawnpoint: {fileID: 3035413545681702517}
   shotsPerSecond: 2
   ammoDrain: 1
-  shotForce: 60
-  projectileDestroyTime: 3
+  shotForce: 220
+  projectileDestroyTime: 5

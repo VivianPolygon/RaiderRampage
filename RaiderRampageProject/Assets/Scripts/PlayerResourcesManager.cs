@@ -4,6 +4,8 @@ using UnityEngine;
 //Script that tracks player resources like ammo and scrap
 public class PlayerResourcesManager : MonoBehaviour
 {
+    public static bool ammoRegen;
+
     public static PlayerResourcesManager instance;
     //current quantity of ammo
     [Header("Ammo Quantity")]
@@ -51,13 +53,6 @@ public class PlayerResourcesManager : MonoBehaviour
     private Coroutine reloadCoroutine = null;
 
     //used to check if resources should be regenerated over time or not
-    public enum resourcesGamestate
-    {
-        active, 
-        merge
-    }
-
-    public resourcesGamestate state;
 
     //established a singleton 
     private void Awake()
@@ -72,6 +67,15 @@ public class PlayerResourcesManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if(ammoRegen)
+        {
+            RegenAmmo();
+        }
+    }
+
+
     private void Start()
     {
         //sets the values added for caculations to initial ammo amount
@@ -81,21 +85,8 @@ public class PlayerResourcesManager : MonoBehaviour
         rocketLauncherAmmoCalc = rocketLauncherAmmo;
     }
 
-    private void Update()
-    {
-        switch (state)
-        {
-            case resourcesGamestate.active:
-                RegenAmmo();
-                break;
-            case resourcesGamestate.merge:
-                break;
-            default:
-                break;
-        }
-    }
 
-    private void RegenAmmo()
+    public void RegenAmmo()
     {
         //caculates the current amount of ammo from the regen and caps it to the respective ammo max, and prevents negative values
         pistolAmmoCalc = Mathf.Clamp(pistolAmmoCalc + (pistolAmmoRegen * Time.deltaTime), 0, pistolAmmoMax);

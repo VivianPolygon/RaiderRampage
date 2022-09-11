@@ -8,6 +8,9 @@ public class UIData : MonoBehaviour
     //singleton instance
     public static UIData instance;
 
+    public Canvas shootingControlsCanvas;
+    public Canvas mergeingCanvas;
+
     //sliders for the ammo bars and fills
     [SerializeField]
     private Slider[] ammoSliders;
@@ -22,6 +25,10 @@ public class UIData : MonoBehaviour
     private Color sliderEmptyColor;
     [SerializeField]
     private Color sliderFullColor;
+
+    [Header("Data used for Workshop UI")]
+    public Color[] gunTypeColors;
+    public Sprite[] gunTierShapes;
 
     //establishes the singleton
     private void Awake()
