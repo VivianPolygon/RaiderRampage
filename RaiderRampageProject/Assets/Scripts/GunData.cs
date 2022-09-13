@@ -27,13 +27,6 @@ public class GunData : MonoBehaviour
     [HideInInspector]
     public Vector3 cursorPositon;
 
-    //slots parent
-    public Transform slotParent;
-    //slots
-    public Transform[] BarrelSlots;
-    //will check if slots are available (not implemented yet)
-    public BarrelType[] slotFillType;
-
     //flag for if the gun is firing
     [HideInInspector]
     public bool firing;
@@ -70,11 +63,18 @@ public class GunData : MonoBehaviour
 
     private float currentSpinSpeed;
 
+    [HideInInspector]
+    public int currentHeadNumber;
+
+    //slots
+    //public Transform[] BarrelSlots;
+    //will check if slots are available
+    //public BarrelType[] slotFillType;
 
     private void Awake()
     {
         //establishes singleton
-        if(instance != null)
+        if (instance != null)
         {
             Destroy(this);
         }
@@ -93,119 +93,20 @@ public class GunData : MonoBehaviour
     {
         //sets the cursor sprite and gets the current slots at start
 
-        UpdateSlotCount();
         ApplyStaticGunData();
         StopFiring();
+
+        SwitchGunHeads(0);
     }
 
 
     //FUNCTIONS RELATING TO THE TRACKING OF SLOTS AND THEIR CONTENTS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-    //updates the slotcount, make sure to only put slots in slotparent
-    public void UpdateSlotCount()
-    {
-        BarrelSlots = new Transform[slotParent.childCount];
-        slotFillType = new BarrelType[slotParent.childCount];
-
-        for (int i = 0; i < BarrelSlots.Length; i++)
-        {
-            BarrelSlots[i] = slotParent.GetChild(i);
-        }
-
-        GetAllBarrelTypes();
-
-    }
-
-    public void GetSlotBarrelType(int slotNum)
-    {
-        if (BarrelSlots[slotNum].childCount > 0)
-        {
-            if (BarrelSlots[slotNum].GetChild(0).TryGetComponent(out GunBarrel gunbarrel))
-            {
-                slotFillType[slotNum] = gunbarrel.barrelType;
-            }
-            else
-            {
-                Debug.LogWarning("there is an object in a gunslot that is not a barrel or does not have the Gunbarrel script");
-            }
-        }
-        else if (BarrelSlots[slotNum].childCount <= 0)
-        {
-            slotFillType[slotNum] = BarrelType.Empty;
-        }
-        RefreshBarrelQuantitiesList();
-    }
-
-    public void GetAllBarrelTypes()
-    {
-        for (int i = 0; i < BarrelSlots.Length; i++)
-        {
-            if (BarrelSlots[i].childCount > 0)
-            {
-                if (BarrelSlots[i].GetChild(0).TryGetComponent(out GunBarrel gunbarrel))
-                {
-                    slotFillType[i] = gunbarrel.barrelType;
-                }
-                else
-                {
-                    Debug.LogWarning("there is an object in a gunslot that is not a barrel or does not have the Gunbarrel script");
-                }
-            }
-            else
-            {
-                slotFillType[i] = BarrelType.Empty;
-            }
-        }
-        RefreshBarrelQuantitiesList();
-    }
-
-    public void CreateBarrelInFirstAvailableSlot(GameObject barrelPrefab)
-    {
-        for (int i = 0; i < slotFillType.Length; i++)
-        {
-            if(slotFillType[i] == BarrelType.Empty)
-            {
-                newBarrel = Instantiate(barrelPrefab, BarrelSlots[i].position, BarrelSlots[i].rotation);
-                newBarrel.transform.parent = BarrelSlots[i];
-                newBarrel.transform.localScale = barrelPrefab.transform.localScale;
-
-                GetSlotBarrelType(i);
-                return;
-            }
-        }
-    }
-
-    public void DestroyBarrelInSlot(int slotnum)
-    {
-        if(BarrelSlots[slotnum].childCount > 0)
-        {
-            foreach (Transform child in BarrelSlots[slotnum])
-            {
-                Destroy(child.gameObject);
-            }
-            slotFillType[slotnum] = BarrelType.Empty;
-            RefreshBarrelQuantitiesList();
-        }
-    }
-
-    public void DestroyAllBarrels()
-    {
-        for (int i = 0; i < BarrelSlots.Length; i++)
-        {
-            {
-                foreach (Transform child in BarrelSlots[i])
-                {
-                    Destroy(child.gameObject);
-                }
-                slotFillType[i] = BarrelType.Empty;
-                RefreshBarrelQuantitiesList();
-            }
-        }
-    }
 
     //FUNCTIONS RELATING TO THE CURSOR DISPLAY SYSTEM <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     //refreshes the quantity of barrel List (used when a barrel is added to or removed from the gun)
+
     private void RefreshBarrelQuantitiesList()
     {
         barrelQuantitiesOrdered.Clear();
@@ -217,9 +118,9 @@ public class GunData : MonoBehaviour
         sniperBarrelData.x = 0;
         rocketLauncherBarrelData.x = 0;
 
-        for (int i = 0; i < BarrelSlots.Length; i++)
+        for (int i = 0; i < StaticGunData.instance.workshopGunHeads[currentHeadNumber].headSlots.Length; i++)
         {
-            switch (slotFillType[i])
+            switch (StaticGunData.instance.workshopGunHeads[currentHeadNumber].headSlots[i].slotType)
             {
                 case BarrelType.SMG:
                     SMGBarrelData.x++;
@@ -265,11 +166,11 @@ public class GunData : MonoBehaviour
     //comparer function that sorts by quantity and priority
     private int BarrelQuantitiesSortComparer(Vector3 a, Vector3 b)
     {
-        if(a.x > b.x)
+        if (a.x > b.x)
         {
             return -1;
         }
-        else if(a.x < b.x)
+        else if (a.x < b.x)
         {
             return 1;
         }
@@ -289,7 +190,7 @@ public class GunData : MonoBehaviour
     private void UpdateGunCursor()
     {
         //checks if the bottom and top of list are the same, if they are uses the default sprite
-        if(barrelQuantitiesOrdered[0].x == barrelQuantitiesOrdered[barrelQuantitiesOrdered.Count - 1].x)
+        if (barrelQuantitiesOrdered[0].x == barrelQuantitiesOrdered[barrelQuantitiesOrdered.Count - 1].x)
         {
             UpdateCursorSprite(0);
         }
@@ -350,21 +251,22 @@ public class GunData : MonoBehaviour
     private void CaculateSpinSpeedPercent()
     {
         int barrelAmount = 0;
+        int length = StaticGunData.instance.workshopGunHeads[currentHeadNumber].headSlots.Length;
 
-        for (int i = 0; i < BarrelSlots.Length; i++)
+        for (int i = 0; i < length; i++)
         {
-            if (slotFillType[i] != BarrelType.Empty)
+            if (StaticGunData.instance.workshopGunHeads[currentHeadNumber].headSlots[i].slotType != BarrelType.Empty)
             {
                 barrelAmount++;
             }
         }
         //current / (max - 1)
-        spinSpeedPercent = Mathf.Clamp((barrelAmount / (float)BarrelSlots.Length) - (1 / (float)BarrelSlots.Length), 0, 1);
+        spinSpeedPercent = Mathf.Clamp((barrelAmount / (float)length) - (1 / (float)length), 0, 1);
     }
 
     private void SpinBarrels()
     {
-        if(spinSpeedPercent > 0)
+        if (spinSpeedPercent > 0)
         {
             spinningGunPiece.transform.Rotate(0, 0, (currentSpinSpeed * spinSpeedPercent) * Time.deltaTime);
         }
@@ -405,6 +307,19 @@ public class GunData : MonoBehaviour
         firing = false;
         StartCoroutine(SpinSlowdown());
         cursorImage.color = cursorInactiveColor;
+    }
+
+    //FUNCTIONS USED FOR SWAPING CURRENT GUNHEAD <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+    public void SwitchGunHeads(int headNumber)
+    {
+        for (int i = 0; i < StaticGunData.instance.gunSlots.Length; i++)
+        {
+            StaticGunData.instance.gunSlots[i].UpdateSlotBarrel(headNumber);
+        }
+
+        currentHeadNumber = headNumber;
+        RefreshBarrelQuantitiesList();
     }
 
 }

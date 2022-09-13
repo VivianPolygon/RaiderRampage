@@ -7,10 +7,8 @@ public class WorkshopBarrelSlot : MonoBehaviour
 {
     public bool slotEmpty;
 
-    [SerializeField]
-    BarrelType slotType;
-    [SerializeField]
-    BarrelTeir slotTier;
+    public BarrelType slotType;
+    public BarrelTeir slotTier;
 
     private Vector2 slotData;
 

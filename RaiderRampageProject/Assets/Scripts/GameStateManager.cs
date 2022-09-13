@@ -74,6 +74,7 @@ public class GameStateManager : MonoBehaviour
     private void BeginShootingState()
     {
         PlayerResourcesManager.ammoRegen = true;
+        GunData.instance.SwitchGunHeads(GunData.instance.currentHeadNumber);
         StartCoroutine(RotatePlayerForward());
     }
 
