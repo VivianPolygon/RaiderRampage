@@ -52,7 +52,14 @@ public class PlayerResourcesManager : MonoBehaviour
     private int reloadValue;
     private Coroutine reloadCoroutine = null;
 
-    //used to check if resources should be regenerated over time or not
+    //used to check if ammo resources should be regenerated over time or not
+
+    [Header("Holds the Inventory Slots That Store Unused Barrels")]
+    [SerializeField]
+    private Transform inactiveBarrelInventoryParentObject;
+
+    private WorkshopBarrelSlot[] inactiveInventoryBarrelSlots;
+    private BarrelType[] inactiveInventoryBarrelSlotsType;
 
     //established a singleton 
     private void Awake()
@@ -83,6 +90,9 @@ public class PlayerResourcesManager : MonoBehaviour
         shotGunAmmoCalc = shotGunAmmo;
         machineGunAmmoCalc = machineGunAmmo;
         rocketLauncherAmmoCalc = rocketLauncherAmmo;
+
+        //initilizes the merging inventory on the excess inventory slots
+        InitilizeInventory();
     }
 
 
@@ -156,4 +166,70 @@ public class PlayerResourcesManager : MonoBehaviour
         reloadCoroutine = null;
     }
 
+    private void InitilizeInventory()
+    {
+        int inventorySlotQuantity = 0;
+
+        foreach (Transform child in inactiveBarrelInventoryParentObject)
+        {
+            if (child.TryGetComponent<WorkshopBarrelSlot>(out WorkshopBarrelSlot slot))
+            {
+                inventorySlotQuantity++;
+            }
+            else
+            {
+                Debug.LogWarning("there is an object in the inactivebarrleinventory that is not a barrel slot, please remove it, it has been destroyed on runtime");
+                Destroy(child);
+            }
+        }
+
+        inactiveInventoryBarrelSlots = new WorkshopBarrelSlot[inventorySlotQuantity];
+        for (int i = 0; i < inactiveInventoryBarrelSlots.Length; i++)
+        {
+            inactiveInventoryBarrelSlots[i] = inactiveBarrelInventoryParentObject.GetChild(i).GetComponent<WorkshopBarrelSlot>();
+        }
+    }
+
+    public void AddBarrelToInventory(int barrelNumber, int barrelTier)
+    {
+        //prevents tiers that dont exsist being added
+        barrelTier = Mathf.Clamp(barrelTier, 0, 2);
+        barrelNumber = Mathf.Clamp(barrelNumber, 0, 5);
+
+        //loops through inventory, adds barrel from inputs to the first slot available, the returns out
+        foreach(WorkshopBarrelSlot slot in inactiveInventoryBarrelSlots)
+        {
+            if(slot.slotType == BarrelType.Empty)
+            {
+                slot.slotType = (BarrelType)barrelNumber;
+                slot.slotTier = (BarrelTeir)barrelTier;
+
+                slot.UpdateDisplay();
+
+                return;
+            }
+        }
+    }
+
+    //Delete once tested, and above is implemented in normal gameplay, only needed for debugging
+    //same function as abouve, however teir is defaulted to 1, buttons in unity can only have one parameter
+    public void AddBarrelToInventoryButton(int barrelNumber)
+    {
+        //prevents tiers that dont exsist being added
+        barrelNumber = Mathf.Clamp(barrelNumber, 0, 5);
+
+        //loops through inventory, adds barrel from inputs to the first slot available, the returns out
+        foreach (WorkshopBarrelSlot slot in inactiveInventoryBarrelSlots)
+        {
+            if (slot.slotType == BarrelType.Empty)
+            {
+                slot.slotType = (BarrelType)barrelNumber;
+                slot.slotTier = (BarrelTeir)0;
+
+                slot.UpdateDisplay();
+
+                return;
+            }
+        }
+    }
 }

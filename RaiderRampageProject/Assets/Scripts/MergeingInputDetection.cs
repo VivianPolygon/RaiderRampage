@@ -70,6 +70,13 @@ public class MergeingInputDetection : MonoBehaviour
                     {
                         currentBarrelSlot.DropSlot();
                     }
+                    if(barrelSlot.slotIsScrapBin)
+                    {
+                        WorkshopBarrelSlot.slotScript.DropSlot();
+                        WorkshopBarrelSlot.slotScript.slotType = BarrelType.Empty;
+                        WorkshopBarrelSlot.slotScript.slotTier = BarrelTeir.Untiered;
+                        WorkshopBarrelSlot.slotScript.UpdateDisplay();
+                    }
                     else
                     {
                         barrelSlot.SwapSlots();

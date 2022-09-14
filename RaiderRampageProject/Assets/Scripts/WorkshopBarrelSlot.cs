@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class WorkshopBarrelSlot : MonoBehaviour
 {
+    public bool slotIsScrapBin;
+
     public bool slotEmpty;
 
     public BarrelType slotType;
@@ -26,6 +28,11 @@ public class WorkshopBarrelSlot : MonoBehaviour
 
     private void Awake()
     {
+        if(slotIsScrapBin)
+        { 
+            return; 
+        }
+
         slotIconObject = transform.GetChild(0).gameObject;
         slotEmpty = false;
 

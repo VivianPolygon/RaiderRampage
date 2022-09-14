@@ -653,9 +653,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe084bd92fa61e04e86ff7031ed5684b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotIsScrapBin: 0
   slotEmpty: 0
-  slotType: 0
-  slotTier: 0
+  slotType: 6
+  slotTier: 3
   slotImage: {fileID: 75955820}
   iconImage: {fileID: 561787017}
 --- !u!114 &75955820
@@ -1366,7 +1367,6 @@ GameObject:
   - component: {fileID: 182854776}
   - component: {fileID: 182854779}
   - component: {fileID: 182854778}
-  - component: {fileID: 182854777}
   m_Layer: 0
   m_Name: Ground (18)
   m_TagString: Untagged
@@ -1381,26 +1381,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 182854775}
-  m_LocalRotation: {x: -0.64970106, y: -0.19541681, z: -0.18748377, w: 0.7103174}
-  m_LocalPosition: {x: 11.13, y: -2.5, z: -5.17}
-  m_LocalScale: {x: 2.316601, y: 3.2816358, z: 3.142372}
+  m_LocalRotation: {x: -0, y: -0.000000014901159, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2048664635}
-  m_RootOrder: 15
+  m_Father: {fileID: 591766524}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -85.045, y: -23.18, z: -8.268}
---- !u!65 &182854777
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 182854775}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &182854778
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1759,6 +1746,7 @@ RectTransform:
   - {fileID: 181001312}
   - {fileID: 56093004}
   - {fileID: 1329324380}
+  - {fileID: 671469770}
   - {fileID: 1771027549}
   m_Father: {fileID: 0}
   m_RootOrder: 6
@@ -2136,51 +2124,51 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 33820110, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotTier
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 33820110, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotType
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 49198766, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotTier
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 49198766, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotType
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1268174355, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotTier
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1268174355, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotType
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1390024804902229728, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotTier
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1390024804902229728, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotType
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1390024804964954420, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotTier
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1390024804964954420, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotType
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1390024806452318635, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotTier
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1390024806452318635, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotType
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1390024806600297910, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: m_Pivot.x
@@ -2272,11 +2260,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1390024806944995113, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotTier
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1390024806944995113, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotType
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
@@ -2853,9 +2841,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe084bd92fa61e04e86ff7031ed5684b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotIsScrapBin: 0
   slotEmpty: 0
-  slotType: 0
-  slotTier: 0
+  slotType: 6
+  slotTier: 3
   slotImage: {fileID: 349186011}
   iconImage: {fileID: 798996439}
 --- !u!114 &349186011
@@ -3233,9 +3222,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe084bd92fa61e04e86ff7031ed5684b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotIsScrapBin: 0
   slotEmpty: 0
-  slotType: 0
-  slotTier: 0
+  slotType: 6
+  slotTier: 3
   slotImage: {fileID: 384719331}
   iconImage: {fileID: 1488746267}
 --- !u!114 &384719331
@@ -3458,9 +3448,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe084bd92fa61e04e86ff7031ed5684b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotIsScrapBin: 0
   slotEmpty: 0
-  slotType: 0
-  slotTier: 0
+  slotType: 6
+  slotTier: 3
   slotImage: {fileID: 475521680}
   iconImage: {fileID: 864813675}
 --- !u!114 &475521680
@@ -3745,7 +3736,7 @@ Transform:
   m_LocalScale: {x: 6.5248156, y: 7.026167, z: 1.1842545}
   m_Children: []
   m_Father: {fileID: 2048664635}
-  m_RootOrder: 18
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: -83.081, y: 353.096, z: -375.599}
 --- !u!65 &532461836
 BoxCollider:
@@ -3865,14 +3856,14 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 251861045}
-          m_TargetAssemblyTypeName: GunData, Assembly-CSharp
-          m_MethodName: CreateBarrelInFirstAvailableSlot
-          m_Mode: 2
+        - m_Target: {fileID: 1293482840}
+          m_TargetAssemblyTypeName: PlayerResourcesManager, Assembly-CSharp
+          m_MethodName: AddBarrelToInventoryButton
+          m_Mode: 3
           m_Arguments:
-            m_ObjectArgument: {fileID: 6044093331905591162, guid: 32905b66d2850634e93a534acfa95cb7, type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_IntArgument: 0
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 5
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -3993,9 +3984,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe084bd92fa61e04e86ff7031ed5684b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotIsScrapBin: 0
   slotEmpty: 0
-  slotType: 0
-  slotTier: 0
+  slotType: 6
+  slotTier: 3
   slotImage: {fileID: 544766080}
   iconImage: {fileID: 915457126}
 --- !u!114 &544766080
@@ -4127,14 +4119,14 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 251861045}
-          m_TargetAssemblyTypeName: GunData, Assembly-CSharp
-          m_MethodName: CreateBarrelInFirstAvailableSlot
-          m_Mode: 2
+        - m_Target: {fileID: 1293482840}
+          m_TargetAssemblyTypeName: PlayerResourcesManager, Assembly-CSharp
+          m_MethodName: AddBarrelToInventoryButton
+          m_Mode: 3
           m_Arguments:
-            m_ObjectArgument: {fileID: 3041153621231853109, guid: f44ff2b65461dd84b90ff9d9e83d66e4, type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_IntArgument: 0
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 4
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -4438,6 +4430,38 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 575202504}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &591766523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 591766524}
+  m_Layer: 0
+  m_Name: ScrapObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &591766524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591766523}
+  m_LocalRotation: {x: -0.7360383, y: -0.037243202, z: 0.031401664, w: -0.6751848}
+  m_LocalPosition: {x: 225.19563, y: 324.08557, z: 149.98015}
+  m_LocalScale: {x: 271.5572, y: 143.31577, z: 258.83127}
+  m_Children:
+  - {fileID: 182854776}
+  - {fileID: 2130791987}
+  m_Father: {fileID: 671469770}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &593324577
 GameObject:
   m_ObjectHideFlags: 0
@@ -4521,6 +4545,74 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 223875078}
     m_Modifications:
+    - target: {fileID: 33820107, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: m_Name
+      value: MergeSlot 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 33820110, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: slotTier
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 33820110, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: slotType
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 49198763, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: m_Name
+      value: MergeSlot 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 49198766, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: slotTier
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 49198766, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: slotType
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268174352, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: m_Name
+      value: MergeSlot 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268174355, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: slotTier
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1268174355, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: slotType
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390024804902229728, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: slotTier
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390024804902229728, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: slotType
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390024804902229732, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: m_Name
+      value: MergeSlot 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390024804964954420, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: slotTier
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390024804964954420, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: slotType
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390024804964954424, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: m_Name
+      value: MergeSlot 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390024806452318635, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: slotTier
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390024806452318635, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: slotType
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1390024806600297910, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4608,6 +4700,18 @@ PrefabInstance:
     - target: {fileID: 1390024806600297911, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: m_Name
       value: GunLoadout 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390024806944995113, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: slotTier
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390024806944995113, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: slotType
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390024806944995117, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: m_Name
+      value: MergeSlot 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
@@ -4815,6 +4919,116 @@ Transform:
   m_Father: {fileID: 2048664635}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -88.721, y: 65.522, z: -41.745}
+--- !u!1 &671469769
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 671469770}
+  - component: {fileID: 671469773}
+  - component: {fileID: 671469772}
+  - component: {fileID: 671469771}
+  - component: {fileID: 671469774}
+  m_Layer: 5
+  m_Name: ScrapBarrel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &671469770
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671469769}
+  m_LocalRotation: {x: -0.17033844, y: -0, z: 0.98538566, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 2.2295}
+  m_LocalScale: {x: 0.36267653, y: 0.67214, z: 1}
+  m_Children:
+  - {fileID: 2091269945}
+  - {fileID: 591766524}
+  m_Father: {fileID: 223875078}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: -19.615, z: 180}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 96.28107, y: 254.61}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &671469771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671469769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe084bd92fa61e04e86ff7031ed5684b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotIsScrapBin: 1
+  slotEmpty: 0
+  slotType: 6
+  slotTier: 3
+  slotImage: {fileID: 0}
+  iconImage: {fileID: 0}
+--- !u!114 &671469772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671469769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.5471698, g: 0.35216954, b: 0.33294767, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 41e22d80b1c9bc64780d33b537357814, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &671469773
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671469769}
+  m_CullTransparentMesh: 1
+--- !u!65 &671469774
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671469769}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 647.44696, y: 410.26678, z: 282.25043}
+  m_Center: {x: 213.51323, y: 224.22668, z: 78.15433}
 --- !u!1 &675932803
 GameObject:
   m_ObjectHideFlags: 0
@@ -5038,14 +5252,14 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 251861045}
-          m_TargetAssemblyTypeName: GunData, Assembly-CSharp
-          m_MethodName: CreateBarrelInFirstAvailableSlot
-          m_Mode: 2
+        - m_Target: {fileID: 1293482840}
+          m_TargetAssemblyTypeName: PlayerResourcesManager, Assembly-CSharp
+          m_MethodName: AddBarrelToInventoryButton
+          m_Mode: 3
           m_Arguments:
-            m_ObjectArgument: {fileID: 3035413546687653773, guid: 37088d848444e6d4381a9093bd4bfbd9, type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_IntArgument: 0
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 1
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -5621,9 +5835,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe084bd92fa61e04e86ff7031ed5684b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotIsScrapBin: 0
   slotEmpty: 0
-  slotType: 0
-  slotTier: 0
+  slotType: 6
+  slotTier: 3
   slotImage: {fileID: 824917860}
   iconImage: {fileID: 1903677839}
 --- !u!114 &824917860
@@ -6427,14 +6642,14 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 251861045}
-          m_TargetAssemblyTypeName: GunData, Assembly-CSharp
-          m_MethodName: CreateBarrelInFirstAvailableSlot
-          m_Mode: 2
+        - m_Target: {fileID: 1293482840}
+          m_TargetAssemblyTypeName: PlayerResourcesManager, Assembly-CSharp
+          m_MethodName: AddBarrelToInventoryButton
+          m_Mode: 3
           m_Arguments:
-            m_ObjectArgument: {fileID: 2569300696129403857, guid: 636f0fd7790c717418701b43d4b4824b, type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_IntArgument: 0
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 2
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -6868,9 +7083,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe084bd92fa61e04e86ff7031ed5684b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotIsScrapBin: 0
   slotEmpty: 0
-  slotType: 0
-  slotTier: 0
+  slotType: 6
+  slotTier: 3
   slotImage: {fileID: 935848537}
   iconImage: {fileID: 803838720}
 --- !u!114 &935848537
@@ -8768,6 +8984,7 @@ MonoBehaviour:
   shotGunAmmoCalc: 0
   machineGunAmmoCalc: 0
   rocketLauncherAmmoCalc: 0
+  inactiveBarrelInventoryParentObject: {fileID: 1329324380}
 --- !u!4 &1293482841
 Transform:
   m_ObjectHideFlags: 0
@@ -10606,9 +10823,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe084bd92fa61e04e86ff7031ed5684b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotIsScrapBin: 0
   slotEmpty: 0
-  slotType: 0
-  slotTier: 0
+  slotType: 6
+  slotTier: 3
   slotImage: {fileID: 1557258575}
   iconImage: {fileID: 1719015039}
 --- !u!114 &1557258575
@@ -10809,9 +11027,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe084bd92fa61e04e86ff7031ed5684b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotIsScrapBin: 0
   slotEmpty: 0
-  slotType: 0
-  slotTier: 0
+  slotType: 6
+  slotTier: 3
   slotImage: {fileID: 1580422920}
   iconImage: {fileID: 944308775}
 --- !u!114 &1580422920
@@ -11449,9 +11668,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe084bd92fa61e04e86ff7031ed5684b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotIsScrapBin: 0
   slotEmpty: 0
-  slotType: 0
-  slotTier: 0
+  slotType: 6
+  slotTier: 3
   slotImage: {fileID: 1659265496}
   iconImage: {fileID: 844581169}
 --- !u!114 &1659265496
@@ -11576,47 +11796,47 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 33820110, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotTier
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 33820110, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotType
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 49198766, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotTier
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 49198766, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotType
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1268174355, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotTier
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1268174355, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotType
-      value: 0
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1390024804902229728, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotTier
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1390024804902229728, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotType
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1390024804964954420, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: slotTier
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1390024804964954420, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
-      propertyPath: slotTier
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1390024804964954420, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotType
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1390024806452318635, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotTier
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1390024806452318635, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotType
@@ -11712,11 +11932,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1390024806944995113, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotTier
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1390024806944995113, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotType
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
@@ -11729,51 +11949,51 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 33820110, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotTier
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 33820110, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotType
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 49198766, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotTier
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 49198766, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotType
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1268174355, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotTier
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1268174355, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotType
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1390024804902229728, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotTier
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1390024804902229728, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotType
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1390024804964954420, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotTier
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1390024804964954420, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotType
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1390024806452318635, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotTier
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1390024806452318635, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotType
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1390024806600297910, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: m_Pivot.x
@@ -11865,11 +12085,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1390024806944995113, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotTier
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1390024806944995113, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotType
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
@@ -12556,7 +12776,7 @@ Transform:
   m_LocalScale: {x: 43.213398, y: 43.2134, z: 43.213398}
   m_Children: []
   m_Father: {fileID: 223875078}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1794210558
 GameObject:
@@ -12589,7 +12809,7 @@ Transform:
   m_LocalScale: {x: 14.974587, y: 7.026167, z: 1.1842545}
   m_Children: []
   m_Father: {fileID: 2048664635}
-  m_RootOrder: 19
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: -83.081, y: 353.096, z: -339.219}
 --- !u!65 &1794210560
 BoxCollider:
@@ -13820,9 +14040,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe084bd92fa61e04e86ff7031ed5684b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotIsScrapBin: 0
   slotEmpty: 0
-  slotType: 0
-  slotTier: 0
+  slotType: 6
+  slotTier: 3
   slotImage: {fileID: 2002207057}
   iconImage: {fileID: 1437482297}
 --- !u!114 &2002207057
@@ -13919,14 +14140,14 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 251861045}
-          m_TargetAssemblyTypeName: GunData, Assembly-CSharp
-          m_MethodName: CreateBarrelInFirstAvailableSlot
-          m_Mode: 2
+        - m_Target: {fileID: 1293482840}
+          m_TargetAssemblyTypeName: PlayerResourcesManager, Assembly-CSharp
+          m_MethodName: AddBarrelToInventoryButton
+          m_Mode: 3
           m_Arguments:
-            m_ObjectArgument: {fileID: 3041153621231853109, guid: b89ebf0b5d659944a91ddad8b917d0e5, type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-            m_IntArgument: 0
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 3
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
@@ -14163,7 +14384,7 @@ Transform:
   m_LocalScale: {x: 6.3451343, y: 4.1199074, z: 0.5313018}
   m_Children: []
   m_Father: {fileID: 2048664635}
-  m_RootOrder: 17
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: -82.095, y: 5.669, z: -31.485}
 --- !u!65 &2027756144
 BoxCollider:
@@ -14283,13 +14504,13 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 251861045}
-          m_TargetAssemblyTypeName: GunData, Assembly-CSharp
-          m_MethodName: CreateBarrelInFirstAvailableSlot
-          m_Mode: 2
+        - m_Target: {fileID: 1293482840}
+          m_TargetAssemblyTypeName: PlayerResourcesManager, Assembly-CSharp
+          m_MethodName: AddBarrelToInventoryButton
+          m_Mode: 3
           m_Arguments:
-            m_ObjectArgument: {fileID: 3035413546687653773, guid: f10750b169efbfb408b7b3a6460e3e89, type: 3}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
             m_StringArgument: 
@@ -14467,8 +14688,6 @@ Transform:
   - {fileID: 1066438248}
   - {fileID: 1741406887}
   - {fileID: 76333654}
-  - {fileID: 182854776}
-  - {fileID: 2130791987}
   - {fileID: 2027756143}
   - {fileID: 532461835}
   - {fileID: 1794210559}
@@ -14645,6 +14864,87 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &2091269944
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2091269945}
+  - component: {fileID: 2091269947}
+  - component: {fileID: 2091269946}
+  m_Layer: 5
+  m_Name: ScrapBarrelText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2091269945
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091269944}
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.0000086521}
+  m_LocalScale: {x: 2.0521, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 671469770}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 180, y: 180, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.3998909, y: -98.3}
+  m_SizeDelta: {x: 116.62, y: 88.56}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2091269946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091269944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.54901963, g: 0.3529412, b: 0.33333334, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 38
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 2
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Scrap
+
+    Barrel'
+--- !u!222 &2091269947
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091269944}
+  m_CullTransparentMesh: 1
 --- !u!1 &2098713680
 GameObject:
   m_ObjectHideFlags: 0
@@ -14750,7 +15050,6 @@ GameObject:
   - component: {fileID: 2130791987}
   - component: {fileID: 2130791990}
   - component: {fileID: 2130791989}
-  - component: {fileID: 2130791988}
   m_Layer: 0
   m_Name: Ground (19)
   m_TagString: Untagged
@@ -14765,26 +15064,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2130791986}
-  m_LocalRotation: {x: -0.64970106, y: -0.19541681, z: -0.18748377, w: 0.7103174}
-  m_LocalPosition: {x: 11.08, y: -1.24, z: -5.04}
-  m_LocalScale: {x: 2.5250952, y: 3.576983, z: 1.1083558}
+  m_LocalRotation: {x: -0, y: -0.000000014901159, z: -0, w: 1}
+  m_LocalPosition: {x: 0.004076231, y: -0.008768413, z: 0.40329826}
+  m_LocalScale: {x: 1.0900002, y: 1.09, z: 0.35271317}
   m_Children: []
-  m_Father: {fileID: 2048664635}
-  m_RootOrder: 16
+  m_Father: {fileID: 591766524}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -85.045, y: -23.18, z: -8.268}
---- !u!65 &2130791988
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2130791986}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &2130791989
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -15070,9 +15356,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe084bd92fa61e04e86ff7031ed5684b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slotIsScrapBin: 0
   slotEmpty: 0
-  slotType: 0
-  slotTier: 0
+  slotType: 6
+  slotTier: 3
   slotImage: {fileID: 2145651020}
   iconImage: {fileID: 1872262958}
 --- !u!114 &2145651020
