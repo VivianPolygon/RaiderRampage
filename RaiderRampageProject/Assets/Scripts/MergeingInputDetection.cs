@@ -66,7 +66,14 @@ public class MergeingInputDetection : MonoBehaviour
             {
                 if (tapHit.collider.TryGetComponent<WorkshopBarrelSlot>(out WorkshopBarrelSlot barrelSlot))
                 {
-                    barrelSlot.SwapSlots();
+                    if(barrelSlot == WorkshopBarrelSlot.slotScript)
+                    {
+                        currentBarrelSlot.DropSlot();
+                    }
+                    else
+                    {
+                        barrelSlot.SwapSlots();
+                    }
                 }
                 else
                 {

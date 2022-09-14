@@ -82,12 +82,23 @@ public class WorkshopBarrelSlot : MonoBehaviour
 
     public void SwapSlots()
     {
-        SlotSendToData();
-        dataStorage = slotData;
-        slotData = movingData;
-        SlotReceiveFromData();
-        slotScript.slotData = dataStorage;
-        slotScript.SlotReceiveFromData();
+        if(slotTier == slotScript.slotTier && slotType == slotScript.slotType && (int)slotTier < 2)
+        {
+            slotScript.slotType = BarrelType.Empty;
+            slotScript.slotTier = BarrelTeir.Untiered;
+
+            slotTier++;
+        }
+        else
+        {
+            SlotSendToData();
+            dataStorage = slotData;
+            slotData = movingData;
+            SlotReceiveFromData();
+            slotScript.slotData = dataStorage;
+            slotScript.SlotReceiveFromData();
+        }
+
 
         DropSlot();
         slotScript.DropSlot();
