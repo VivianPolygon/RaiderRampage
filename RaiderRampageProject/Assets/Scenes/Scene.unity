@@ -222,17 +222,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1390024806600297910, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
   m_PrefabInstance: {fileID: 595113572}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &14189277 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 14189277, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
-  m_PrefabInstance: {fileID: 595113572}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc8bc40b8d97e2a489aa3f3470503095, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &14992487
 GameObject:
   m_ObjectHideFlags: 0
@@ -1259,6 +1248,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   locked: 0
+--- !u!114 &167212144 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5220832368926503857, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+  m_PrefabInstance: {fileID: 301111624}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8bc40b8d97e2a489aa3f3470503095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &171747433
 GameObject:
   m_ObjectHideFlags: 0
@@ -1359,17 +1359,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1390024806600297910, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
   m_PrefabInstance: {fileID: 1680716727}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &181001315 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 14189277, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
-  m_PrefabInstance: {fileID: 1680716727}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc8bc40b8d97e2a489aa3f3470503095, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &181269860
 GameObject:
   m_ObjectHideFlags: 0
@@ -2379,6 +2368,10 @@ PrefabInstance:
     - target: {fileID: 1390024806944995113, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotType
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6494718921001936324, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: m_Name
+      value: GunheadUI2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
@@ -4673,6 +4666,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 223875078}
     m_Modifications:
+    - target: {fileID: 184575426244575102, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1390024806600297910, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4760,6 +4757,18 @@ PrefabInstance:
     - target: {fileID: 1390024806600297911, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: m_Name
       value: GunLoadout 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3702249226753763363, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5244018681649498829, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6494718921001936324, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: m_Name
+      value: GunheadUI1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
@@ -5486,6 +5495,17 @@ Transform:
   m_Father: {fileID: 602022021}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &757963622 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5220832368926503857, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+  m_PrefabInstance: {fileID: 595113572}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8bc40b8d97e2a489aa3f3470503095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &798996437
 GameObject:
   m_ObjectHideFlags: 0
@@ -8445,6 +8465,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1149445741}
   m_CullTransparentMesh: 1
+--- !u!114 &1155120724 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5220832368926503857, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+  m_PrefabInstance: {fileID: 1680716727}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8bc40b8d97e2a489aa3f3470503095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1202777026
 GameObject:
   m_ObjectHideFlags: 0
@@ -9093,10 +9124,10 @@ MonoBehaviour:
   sniperSpritePriorityAndNumber: 5
   rocketLauncherSpritePriorityAndNumber: 6
   workshopGunHeads:
-  - {fileID: 14189277}
-  - {fileID: 1802608295}
-  - {fileID: 1379898597}
-  - {fileID: 181001315}
+  - {fileID: 757963622}
+  - {fileID: 167212144}
+  - {fileID: 1680885950}
+  - {fileID: 1155120724}
   gunSlots:
   - {fileID: 1004664687}
   - {fileID: 61091261}
@@ -9728,17 +9759,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1390024806600297910, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
   m_PrefabInstance: {fileID: 1682353956}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1379898597 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 14189277, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
-  m_PrefabInstance: {fileID: 1682353956}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc8bc40b8d97e2a489aa3f3470503095, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1384352546
 GameObject:
   m_ObjectHideFlags: 0
@@ -12059,8 +12079,23 @@ PrefabInstance:
       propertyPath: slotType
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6494718921001936324, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: m_Name
+      value: GunheadUI4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+--- !u!114 &1680885950 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5220832368926503857, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+  m_PrefabInstance: {fileID: 1682353956}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc8bc40b8d97e2a489aa3f3470503095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1682353956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12211,6 +12246,10 @@ PrefabInstance:
     - target: {fileID: 1390024806944995113, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
       propertyPath: slotType
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6494718921001936324, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
+      propertyPath: m_Name
+      value: GunheadUI3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
@@ -12999,17 +13038,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1390024806600297910, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
   m_PrefabInstance: {fileID: 301111624}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1802608295 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 14189277, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}
-  m_PrefabInstance: {fileID: 301111624}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc8bc40b8d97e2a489aa3f3470503095, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1848412626 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1287313560986289384, guid: 8f8b7085008b40642a8ca729a0f34563, type: 3}

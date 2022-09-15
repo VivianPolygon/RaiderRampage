@@ -24,12 +24,22 @@ public class WorkshopBarrelSlot : MonoBehaviour
     public Image iconImage;
 
     private Coroutine pickupSlot;
+    private BoxCollider slotCollider;
 
     private void Awake()
     {
 
         slotIconObject = transform.GetChild(0).gameObject;
         slotEmpty = false;
+
+        if (TryGetComponent(out BoxCollider boxCollider))
+        {
+            slotCollider = boxCollider;
+        }
+        else
+        {
+            Debug.LogWarning("WorkshopBarrelSlot " + name + "does not have a boxcollider, please add one");
+        }
 
         if (slotIconObject.TryGetComponent<Image>(out Image Iconimage) && TryGetComponent<Image>(out Image image))
         {
@@ -46,11 +56,13 @@ public class WorkshopBarrelSlot : MonoBehaviour
     private void OnEnable()
     {
         slotImage.enabled = true;
+        slotCollider.enabled = true;
     }
     private void OnDisable()
     {
         iconImage.enabled = false;
         slotImage.enabled = false;
+        slotCollider.enabled = false;
     }
 
     private void Start()
