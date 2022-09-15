@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class WorkshopBarrelSlot : MonoBehaviour
 {
-    public bool slotIsScrapBin;
 
     public bool slotEmpty;
 
@@ -28,15 +27,11 @@ public class WorkshopBarrelSlot : MonoBehaviour
 
     private void Awake()
     {
-        if(slotIsScrapBin)
-        { 
-            return; 
-        }
 
         slotIconObject = transform.GetChild(0).gameObject;
         slotEmpty = false;
 
-        if(slotIconObject.TryGetComponent<Image>(out Image Iconimage) && TryGetComponent<Image>(out Image image))
+        if (slotIconObject.TryGetComponent<Image>(out Image Iconimage) && TryGetComponent<Image>(out Image image))
         {
             iconImage = Iconimage;
             slotImage = image;
@@ -48,9 +43,19 @@ public class WorkshopBarrelSlot : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        slotImage.enabled = true;
+    }
+    private void OnDisable()
+    {
+        iconImage.enabled = false;
+        slotImage.enabled = false;
+    }
+
     private void Start()
     {
-        if(slotImage != null)
+        if (slotImage != null)
         {
             UpdateDisplay();
         }
@@ -78,24 +83,35 @@ public class WorkshopBarrelSlot : MonoBehaviour
     }
     public void DropSlot()
     {
-        if(pickupSlot != null)
+        if (pickupSlot != null)
         {
             StopCoroutine(pickupSlot);
         }
         iconImage.transform.SetParent(slotImage.transform, true);
         iconImage.transform.position = slotImage.transform.position;
-        slotImage.enabled = false;
+
+        if(slotType == BarrelType.Empty)
+        {
+            slotImage.enabled = true;
+        }
+        else
+        {
+            slotImage.enabled = false;
+        }
+
     }
 
     public void SwapSlots()
     {
-        if(slotTier == slotScript.slotTier && slotType == slotScript.slotType && (int)slotTier < 2)
+        //used for merging
+        if (slotTier == slotScript.slotTier && slotType == slotScript.slotType && (int)slotTier < 2)
         {
             slotScript.slotType = BarrelType.Empty;
             slotScript.slotTier = BarrelTeir.Untiered;
 
             slotTier++;
         }
+        //swaps slots of differing barrels
         else
         {
             SlotSendToData();

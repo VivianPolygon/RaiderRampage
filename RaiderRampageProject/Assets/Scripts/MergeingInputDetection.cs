@@ -64,24 +64,27 @@ public class MergeingInputDetection : MonoBehaviour
         {
             if(barrelPickedUp)
             {
+                //controls merging/swapping if another slot is selected
                 if (tapHit.collider.TryGetComponent<WorkshopBarrelSlot>(out WorkshopBarrelSlot barrelSlot))
                 {
                     if(barrelSlot == WorkshopBarrelSlot.slotScript)
                     {
                         currentBarrelSlot.DropSlot();
                     }
-                    if(barrelSlot.slotIsScrapBin)
-                    {
-                        WorkshopBarrelSlot.slotScript.DropSlot();
-                        WorkshopBarrelSlot.slotScript.slotType = BarrelType.Empty;
-                        WorkshopBarrelSlot.slotScript.slotTier = BarrelTeir.Untiered;
-                        WorkshopBarrelSlot.slotScript.UpdateDisplay();
-                    }
                     else
                     {
                         barrelSlot.SwapSlots();
                     }
                 }
+                //controls scrapping mechanic if hovered over an object woth a collider and thats tagged as "ScrapBin"
+                if(tapHit.collider.tag == "ScrapBin")
+                {
+                    WorkshopBarrelSlot.slotScript.DropSlot();
+                    WorkshopBarrelSlot.slotScript.slotType = BarrelType.Empty;
+                    WorkshopBarrelSlot.slotScript.slotTier = BarrelTeir.Untiered;
+                    WorkshopBarrelSlot.slotScript.UpdateDisplay();
+                }
+                //snaps the slot back if nothing is selected
                 else
                 {
                     currentBarrelSlot.DropSlot();
