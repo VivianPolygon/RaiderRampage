@@ -1,25 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//Script for the gunslots on the actual gun
 public class GunSlot : MonoBehaviour
 {
+    //object for the spawned barrel prefab
     private GameObject slotBarrel;
+    //position in the array, set up through the inspector in StaticGunData
     private int arrayPosition;
 
-    private void Start()
+    //gets the position in the array from StaticGunData
+    private void Awake()
     {
         arrayPosition = System.Array.IndexOf(StaticGunData.instance.gunSlots, this);
     }
 
+    //updates barrel on the gun from the UI based on the currently active gunhead inputed
+    //array of gunheads located on StaticGunData
+    //function called from GunData
     public void UpdateSlotBarrel(int headNum)
     {
+        //destroys current barrel
         if(slotBarrel != null)
         {
             Destroy(slotBarrel);
         }
+        //checks for addon slots, if they are unlocked, renderes the slot's mesh independent of if there is a barrel or not
+        if(StaticGunData.instance.workshopGunHeads[headNum].headSlots[arrayPosition].gameObject.TryGetComponent(out WorkshopExtraSlotLock slotLock))
+        {
+            if (TryGetComponent(out MeshRenderer renderer))
+            {
+                if (slotLock.locked && renderer != null)
+                {
+                    renderer.enabled = false;
+                }
+                else if (!slotLock.locked && renderer != null)
+                {
+                    renderer.enabled = true;
+                }
+            }
+        }
 
-            
+        //updates dependent on enum data from the slots from the UI
         switch (StaticGunData.instance.workshopGunHeads[headNum].headSlots[arrayPosition].slotType)
             {               
             case BarrelType.SMG:                   

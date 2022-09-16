@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-//script that holds data for the gun that will not need to change on runtime
+//Script that holds data for the gun that will not need to change on runtime
+//Has -10 Script Execution order, runs before other scripts
 public class StaticGunData : MonoBehaviour
 {
     public static StaticGunData instance;
@@ -30,6 +31,7 @@ public class StaticGunData : MonoBehaviour
     public GameObject[] SniperPrefabs;
     public GameObject[] RocketLauncherPrefabs;
 
+    //establishes a singleton
     private void Awake()
     {
 

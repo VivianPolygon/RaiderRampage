@@ -1,3 +1,4 @@
+//enums used in multiple places as a uniform barrel type and tier data
 public enum BarrelType
 {
     SMG,

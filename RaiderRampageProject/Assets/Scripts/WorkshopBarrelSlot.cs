@@ -2,44 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+//Script used on the barrel slots in the workshop/merging screen, each slot behaves with any other slot in the same way irregardless of where it is,
+//as long as its not locked from WorkshopExtraSlotLock
 
 public class WorkshopBarrelSlot : MonoBehaviour
 {
-
-    public bool slotEmpty;
-
+    //barrel data
     public BarrelType slotType;
     public BarrelTeir slotTier;
-
+    //combined ray numbers from the previous two enums
     private Vector2 slotData;
-
+    //single shared instance of a slotscripts, used to save an instance of a script when swapping data between slots
     public static WorkshopBarrelSlot slotScript;
+    //stores a slotData vector 2, for data swapping
     public static Vector2 dataStorage;
+    //stores a slotData vector 2, for data swapping
     public static Vector2 movingData;
 
+    //gameobject for this barrelslot's image
     private GameObject slotIconObject;
+    //slot background image
     [HideInInspector]
     public Image slotImage;
+    //image used for the contents, changes depending on the data contained
     [HideInInspector]
     public Image iconImage;
-
+    //coroutine used for draggin icons around
     private Coroutine pickupSlot;
-    private BoxCollider slotCollider;
 
     private void Awake()
     {
-
+        //gets the child (there should only be one) and logs a warning if that child dosent have an image component
         slotIconObject = transform.GetChild(0).gameObject;
-        slotEmpty = false;
-
-        if (TryGetComponent(out BoxCollider boxCollider))
-        {
-            slotCollider = boxCollider;
-        }
-        else
-        {
-            Debug.LogWarning("WorkshopBarrelSlot " + name + "does not have a boxcollider, please add one");
-        }
 
         if (slotIconObject.TryGetComponent<Image>(out Image Iconimage) && TryGetComponent<Image>(out Image image))
         {
@@ -53,18 +47,20 @@ public class WorkshopBarrelSlot : MonoBehaviour
         }
     }
 
+    //enables the images when the script is enabled, needed for WorkshopExtraSlotLock to work properly and easily
     private void OnEnable()
     {
+        iconImage.enabled = true;
         slotImage.enabled = true;
-        slotCollider.enabled = true;
     }
+    //disables the images when the script is disabled, needed for WorkshopExtraSlotLock to work properly and easily
     private void OnDisable()
     {
         iconImage.enabled = false;
         slotImage.enabled = false;
-        slotCollider.enabled = false;
     }
 
+    //initilizes the display, as long as the images are present
     private void Start()
     {
         if (slotImage != null)
@@ -73,18 +69,21 @@ public class WorkshopBarrelSlot : MonoBehaviour
         }
     }
 
+    //sends the enums to the vector 2 for transfer
     public void SlotSendToData()
     {
         slotData.x = (int)slotType;
         slotData.y = (int)slotTier;
     }
 
+    //sends the vector 2 back to the enums to be used by the slot
     public void SlotReceiveFromData()
     {
         slotType = (BarrelType)slotData.x;
         slotTier = (BarrelTeir)slotData.y;
     }
 
+    //picks up the slots data, uses the vector 2
     public void PickupSlot(bool pickedUp)
     {
         SlotSendToData();
@@ -93,6 +92,7 @@ public class WorkshopBarrelSlot : MonoBehaviour
 
         pickupSlot = StartCoroutine(ContentsFollowTap(pickedUp));
     }
+    //drops the slot back to its initial position, used if the slot isint dragged over a new vailid slot where it would either swap or merge
     public void DropSlot()
     {
         if (pickupSlot != null)
@@ -112,7 +112,7 @@ public class WorkshopBarrelSlot : MonoBehaviour
         }
 
     }
-
+    //either swaps or merges the slots
     public void SwapSlots()
     {
         //used for merging
@@ -142,6 +142,7 @@ public class WorkshopBarrelSlot : MonoBehaviour
         slotScript.UpdateDisplay();
     }
 
+    //drags the icon around
     private IEnumerator ContentsFollowTap(bool pickedUp)
     {
         while (pickedUp)
@@ -158,7 +159,8 @@ public class WorkshopBarrelSlot : MonoBehaviour
             yield return null;
         }
     }
-
+    //updates the icon for the slot depending on the value of the enums, changes the color depending on type, and the shape depending on tier
+    //color and icon data is held in UI data on the game manager
     public void UpdateDisplay()
     {
         if (slotImage != null && iconImage != null)

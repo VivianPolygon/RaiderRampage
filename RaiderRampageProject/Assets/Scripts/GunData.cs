@@ -11,9 +11,14 @@ public class GunData : MonoBehaviour
     //base body model for the gun
     public GameObject gunModelBody;
 
+
     //Reload delay in second
     public float reloadTime;
+    [SerializeField]
+    private int startingGunHead;
 
+
+    [Header("Cursor Information")]
     //cursor image, and the sprites for it to hold
     public Image cursorImage;
     public Sprite[] cursorSprites;
@@ -66,10 +71,7 @@ public class GunData : MonoBehaviour
     [HideInInspector]
     public int currentHeadNumber;
 
-    //slots
-    //public Transform[] BarrelSlots;
-    //will check if slots are available
-    //public BarrelType[] slotFillType;
+
 
     private void Awake()
     {
@@ -82,6 +84,8 @@ public class GunData : MonoBehaviour
         {
             instance = this;
         }
+
+        currentHeadNumber = startingGunHead;
     }
 
     private void Update()
@@ -96,7 +100,6 @@ public class GunData : MonoBehaviour
         ApplyStaticGunData();
         StopFiring();
 
-        SwitchGunHeads(0);
     }
 
 
@@ -264,6 +267,7 @@ public class GunData : MonoBehaviour
         spinSpeedPercent = Mathf.Clamp((barrelAmount / (float)length) - (1 / (float)length), 0, 1);
     }
 
+    //spins the gun barrels depending on quantity of barrels in relation to the total
     private void SpinBarrels()
     {
         if (spinSpeedPercent > 0)
@@ -272,6 +276,7 @@ public class GunData : MonoBehaviour
         }
     }
 
+    //startup coroutine for the barrel spin
     private IEnumerator SpinStartup()
     {
         float currentSpeed = currentSpinSpeed;
@@ -282,6 +287,7 @@ public class GunData : MonoBehaviour
         }
         currentSpinSpeed = maxSpinSpeed;
     }
+    //slowdown coroutine for the barrel spin
     private IEnumerator SpinSlowdown()
     {
         float currentSpeed = currentSpinSpeed;
@@ -310,9 +316,11 @@ public class GunData : MonoBehaviour
     }
 
     //FUNCTIONS USED FOR SWAPING CURRENT GUNHEAD <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
+    //changes actuve gunhead, INITILIZED THROUGH THE GAME STATE MANAGER
     public void SwitchGunHeads(int headNumber)
     {
+        headNumber = Mathf.Clamp(headNumber, 0, StaticGunData.instance.workshopGunHeads.Length - 1);
+
         for (int i = 0; i < StaticGunData.instance.gunSlots.Length; i++)
         {
             StaticGunData.instance.gunSlots[i].UpdateSlotBarrel(headNumber);

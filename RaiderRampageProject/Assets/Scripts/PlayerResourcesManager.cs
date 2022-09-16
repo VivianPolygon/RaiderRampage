@@ -49,7 +49,9 @@ public class PlayerResourcesManager : MonoBehaviour
     [HideInInspector]
     public float rocketLauncherAmmoCalc;
 
+    //used to determine how much ammo is reloaded, needed for if the ammount in ammo storage is less than the clip capacity
     private int reloadValue;
+    //coroutine used for reloading
     private Coroutine reloadCoroutine = null;
 
     //used to check if ammo resources should be regenerated over time or not
@@ -59,7 +61,6 @@ public class PlayerResourcesManager : MonoBehaviour
     private Transform inactiveBarrelInventoryParentObject;
 
     private WorkshopBarrelSlot[] inactiveInventoryBarrelSlots;
-    private BarrelType[] inactiveInventoryBarrelSlotsType;
 
     //established a singleton 
     private void Awake()
@@ -76,6 +77,7 @@ public class PlayerResourcesManager : MonoBehaviour
 
     private void Update()
     {
+        //regens ammo based on delta time and regen speeds if the flag for ammo regen is true
         if(ammoRegen)
         {
             RegenAmmo();
@@ -119,6 +121,7 @@ public class PlayerResourcesManager : MonoBehaviour
 
     public void Reload()
     {
+        //reloads the clip, if the coroutine is still running, it wont run
         if(reloadCoroutine == null)
         {
             reloadCoroutine = StartCoroutine(ReloadCoroutine());
@@ -160,19 +163,24 @@ public class PlayerResourcesManager : MonoBehaviour
         UIData.instance.UpdateAmmoSlider(6, shotGunClipMax, shotGunClipCurrent);
         UIData.instance.UpdateAmmoSlider(7, rocketLauncherClipMax, rocketLauncherClipCurrent);
 
-
+        //sets the bar to full
         UIData.instance.ammoReloadTimerSlider.value = 1;
+        //sets the flag for reloading to false (used to prevent shooting while reloading)
         GunData.instance.reloading = false;
+        //sets the coroutine to null so it can be ran again
         reloadCoroutine = null;
     }
 
+    //initilizes the inactive barrel inventory (slots that are for storage and aren't on any gunheads)
     private void InitilizeInventory()
     {
+        //used to safly track each slot that has a WorkshopBarrelSlot script
         int inventorySlotQuantity = 0;
 
+        //loops through the children on the parent object, should each be a slot, will warn and destroy children that dont have a WorkshopBarrelSlot script
         foreach (Transform child in inactiveBarrelInventoryParentObject)
         {
-            if (child.TryGetComponent<WorkshopBarrelSlot>(out WorkshopBarrelSlot slot))
+            if (child.TryGetComponent(out WorkshopBarrelSlot slot))
             {
                 inventorySlotQuantity++;
             }
@@ -183,6 +191,7 @@ public class PlayerResourcesManager : MonoBehaviour
             }
         }
 
+        //establishes the array for the slots, used to add a barrel to the array
         inactiveInventoryBarrelSlots = new WorkshopBarrelSlot[inventorySlotQuantity];
         for (int i = 0; i < inactiveInventoryBarrelSlots.Length; i++)
         {
@@ -190,6 +199,7 @@ public class PlayerResourcesManager : MonoBehaviour
         }
     }
 
+    //adds to the first slot of the inactive inventory array (slots that are for storage and aren't on any gunheads)
     public void AddBarrelToInventory(int barrelNumber, int barrelTier)
     {
         //prevents tiers that dont exsist being added

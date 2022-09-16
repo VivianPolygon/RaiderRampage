@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+//Script that controls the overall gamestate
 public class GameStateManager : MonoBehaviour
 {
+    //used as a singleton
     static public GameStateManager instance;
 
+    //initial state, set in the inspector
     [SerializeField]
     private Gamestate startingState;
 
+    //TEMPORARY
+    //used to control how the coroutines for rotating work
     private bool facingForward;
 
+    //enum for gamestates
     public enum Gamestate
     {
         Shooting,
@@ -19,9 +24,12 @@ public class GameStateManager : MonoBehaviour
         Paused
     }
 
+    //current gamestate
     public Gamestate gameState;
+    //previous gamestate, will be needed for pausing
     private Gamestate previousGamestate;
 
+    //establishes a singleton
     void Awake()
     {
         if (instance != null) 
@@ -33,14 +41,17 @@ public class GameStateManager : MonoBehaviour
             instance = this;
         }
 
+        //initilizes facing forward (assumes starting by shooting)
         facingForward = true;
     }
 
     private void Start()
     {
+        //sets the initial state from input in the inspector
         UpdateGameState((int)startingState);
     }
 
+    //switch statement used to update the gamestate
     public void UpdateGameState(int newState)
     {
         gameState = (Gamestate)newState;
@@ -65,12 +76,14 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
+    //function called when switching to the merge state
     private void BeginMergeState()
     {
         PlayerResourcesManager.ammoRegen = true;
         StartCoroutine(RotatePlayerBack());
     }
 
+    //function called when switching the the begin shooting state
     private void BeginShootingState()
     {
         PlayerResourcesManager.ammoRegen = true;
@@ -78,7 +91,8 @@ public class GameStateManager : MonoBehaviour
         StartCoroutine(RotatePlayerForward());
     }
 
-
+    //TEMPORARY
+    //function used to rotate the player backwards, facing the workshop
     private IEnumerator RotatePlayerBack()
     {
         UIData.instance.shootingControlsCanvas.enabled = false;
@@ -98,6 +112,8 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
+    //TEMPORARY
+    //function used to rotate the player forwards, facing the level
     private IEnumerator RotatePlayerForward()
     {
         UIData.instance.mergeingCanvas.enabled = false;
