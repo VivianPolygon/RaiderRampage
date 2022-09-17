@@ -7,6 +7,8 @@ public class GunBarrel : MonoBehaviour
     //used to determine what type of barrel this is, used for ammo caculations
     public BarrelType barrelType;
 
+    public BarrelTeir barrelTier;
+
     //prefab for projectile, and its spawnpoint transform
     [SerializeField]
     private GameObject projectilePrefab;
@@ -46,24 +48,39 @@ public class GunBarrel : MonoBehaviour
         {
             switch (barrelType)
             {
+                case BarrelType.SMG:
+                    if (PlayerResourcesManager.instance.pistolClipCurrent >= ammoDrain)
+                    {
+                        canFire = true;
+                    }
+                    break;
                 case BarrelType.Pistol:
                     if(PlayerResourcesManager.instance.pistolClipCurrent >= ammoDrain)
                     {
                         canFire = true;
                     }
                     break;
+
                 case BarrelType.Shotgun:
                     if (PlayerResourcesManager.instance.shotGunClipCurrent >= ammoDrain)
                     {
                         canFire = true;
                     }
                     break;
+
                 case BarrelType.MachineGun:
                     if (PlayerResourcesManager.instance.machineGunClipCurrent >= ammoDrain)
                     {
                         canFire = true;
                     }
                     break;
+                case BarrelType.Sniper:
+                    if (PlayerResourcesManager.instance.machineGunClipCurrent >= ammoDrain)
+                    {
+                        canFire = true;
+                    }
+                    break;
+
                 case BarrelType.RocketLauncher:
                     if (PlayerResourcesManager.instance.rocketLauncherClipCurrent >= ammoDrain)
                     {
@@ -90,18 +107,29 @@ public class GunBarrel : MonoBehaviour
                 
                 switch (barrelType)
                 {
+                    case BarrelType.SMG:
+                        PlayerResourcesManager.instance.pistolClipCurrent -= ammoDrain;
+                        UIData.instance.UpdateAmmoSlider(4, PlayerResourcesManager.instance.pistolClipMax, PlayerResourcesManager.instance.pistolClipCurrent);
+                        break;
                     case BarrelType.Pistol:
                         PlayerResourcesManager.instance.pistolClipCurrent -= ammoDrain;
                         UIData.instance.UpdateAmmoSlider(4, PlayerResourcesManager.instance.pistolClipMax, PlayerResourcesManager.instance.pistolClipCurrent);
                         break;
-                    case BarrelType.MachineGun:
-                        PlayerResourcesManager.instance.machineGunClipCurrent -= ammoDrain;
-                        UIData.instance.UpdateAmmoSlider(5, PlayerResourcesManager.instance.machineGunClipMax, PlayerResourcesManager.instance.machineGunClipCurrent);
-                        break;
+
                     case BarrelType.Shotgun:
                         PlayerResourcesManager.instance.shotGunClipCurrent -= ammoDrain;
                         UIData.instance.UpdateAmmoSlider(6, PlayerResourcesManager.instance.shotGunClipMax, PlayerResourcesManager.instance.shotGunClipCurrent);
                         break;
+
+                    case BarrelType.MachineGun:
+                        PlayerResourcesManager.instance.machineGunClipCurrent -= ammoDrain;
+                        UIData.instance.UpdateAmmoSlider(5, PlayerResourcesManager.instance.machineGunClipMax, PlayerResourcesManager.instance.machineGunClipCurrent);
+                        break;
+                    case BarrelType.Sniper:
+                        PlayerResourcesManager.instance.machineGunClipCurrent -= ammoDrain;
+                        UIData.instance.UpdateAmmoSlider(5, PlayerResourcesManager.instance.machineGunClipMax, PlayerResourcesManager.instance.machineGunClipCurrent);
+                        break;
+
                     case BarrelType.RocketLauncher:
                         PlayerResourcesManager.instance.rocketLauncherClipCurrent -= ammoDrain;
                         UIData.instance.UpdateAmmoSlider(7, PlayerResourcesManager.instance.rocketLauncherClipMax, PlayerResourcesManager.instance.rocketLauncherClipCurrent);

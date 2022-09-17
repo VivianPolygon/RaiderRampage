@@ -1,0 +1,54 @@
+{
+    "name": "TapInputAction",
+    "maps": [
+        {
+            "name": "TapActionMap",
+            "id": "c0d1f3c0-a425-491b-87a2-3c28a81bb8a7",
+            "actions": [
+                {
+                    "name": "TapInput",
+                    "type": "PassThrough",
+                    "id": "12a1563c-1d21-438e-88ef-8f0d1397a506",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TapPosition",
+                    "type": "PassThrough",
+                    "id": "6987a986-82e1-4ef2-97b9-8ccd218dfcc7",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "4c2243fa-51e1-45e5-8346-c9ee5225ba06",
+                    "path": "<Touchscreen>/touch0/press",
+                    "interactions": "Press(behavior=2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TapInput",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5f8da880-e038-42a4-aa88-b96017e6d0fd",
+                    "path": "<Touchscreen>/primaryTouch/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TapPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
