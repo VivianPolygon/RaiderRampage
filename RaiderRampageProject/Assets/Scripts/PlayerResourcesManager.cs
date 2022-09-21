@@ -124,6 +124,7 @@ public class PlayerResourcesManager : MonoBehaviour
         //reloads the clip, if the coroutine is still running, it wont run
         if(reloadCoroutine == null)
         {
+            UIData.instance.reloadButtonImage.sprite = UIData.instance.SetSpriteFromLargeSheet(UIData.instance.activeReloadButtonSpriteNumber);
             reloadCoroutine = StartCoroutine(ReloadCoroutine());
         }
     }
@@ -169,6 +170,8 @@ public class PlayerResourcesManager : MonoBehaviour
         GunData.instance.reloading = false;
         //sets the coroutine to null so it can be ran again
         reloadCoroutine = null;
+        //sets the sprite back to default
+        UIData.instance.reloadButtonImage.sprite = UIData.instance.SetSpriteFromLargeSheet(UIData.instance.inactiveReloadButtonSpriteNumber);
     }
 
     //initilizes the inactive barrel inventory (slots that are for storage and aren't on any gunheads)

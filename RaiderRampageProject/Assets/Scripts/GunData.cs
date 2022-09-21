@@ -19,9 +19,8 @@ public class GunData : MonoBehaviour
 
 
     [Header("Cursor Information")]
-    //cursor image, and the sprites for it to hold
+    //cursor image
     public Image cursorImage;
-    public Sprite[] cursorSprites;
     //cursor color tints
     [SerializeField]
     private Color cursorInactiveColor;
@@ -40,21 +39,18 @@ public class GunData : MonoBehaviour
     public bool reloading;
 
 
-    //used by functions
-    private GameObject newBarrel;
-
-    //x value is the quantity of barrels, y value is the coresponding cursor for if that barrel is the majority, Z is the cursor priority
-    private Vector3 SMGBarrelData;
-    private Vector3 pistolBarrelData;
-    private Vector3 machineGunBarrelData;
-    private Vector3 shotgunBarrelData;
-    private Vector3 sniperBarrelData;
-    private Vector3 rocketLauncherBarrelData;
+    //x value is the quantity of barrels, y value is the spritesheet number for the cursorsprite
+    private Vector2 SMGBarrelData;
+    private Vector2 pistolBarrelData;
+    private Vector2 machineGunBarrelData;
+    private Vector2 shotgunBarrelData;
+    private Vector2 sniperBarrelData;
+    private Vector2 rocketLauncherBarrelData;
 
 
     //ordered list based on the x values of the above vector2s
     [SerializeField]
-    private List<Vector3> barrelQuantitiesOrdered;
+    private List<Vector2> barrelQuantitiesOrdered;
 
     [Header("Related to Gun Spin")]
     //object to spin
@@ -167,7 +163,7 @@ public class GunData : MonoBehaviour
     }
 
     //comparer function that sorts by quantity and priority
-    private int BarrelQuantitiesSortComparer(Vector3 a, Vector3 b)
+    private int BarrelQuantitiesSortComparer(Vector2 a, Vector2 b)
     {
         if (a.x > b.x)
         {
@@ -177,11 +173,11 @@ public class GunData : MonoBehaviour
         {
             return 1;
         }
-        if (a.z > b.z)
+        if (a.y > b.y)
         {
             return -1;
         }
-        else if (a.z < b.z)
+        else if (a.y < b.y)
         {
             return 1;
         }
@@ -195,29 +191,13 @@ public class GunData : MonoBehaviour
         //checks if the bottom and top of list are the same, if they are uses the default sprite
         if (barrelQuantitiesOrdered[0].x == barrelQuantitiesOrdered[barrelQuantitiesOrdered.Count - 1].x)
         {
-            UpdateCursorSprite(0);
+            cursorImage.sprite = UIData.instance.SetSpriteFromLargeSheet(30);
         }
         //checks the top of the lists y component, which coresponds to a sprite on the cursorSprites array
         else
         {
-            UpdateCursorSprite((int)barrelQuantitiesOrdered[0].y);
+            cursorImage.sprite = UIData.instance.SetSpriteFromLargeSheet((int)barrelQuantitiesOrdered[0].y);
         }
-
-    }
-    //updates the cursor sprite
-    public void UpdateCursorSprite(int spriteNum)
-    {
-        if (spriteNum > (cursorSprites.Length - 1))
-        {
-            spriteNum = cursorSprites.Length - 1;
-            Debug.LogWarning("Inputed Cursor Sprite number was above the top of the array and has been set to the highest number in the array");
-        }
-        if (spriteNum < 0)
-        {
-            spriteNum = 0;
-            Debug.LogWarning("Inputed Cursor Sprite number was below 0, and has been set to 0");
-        }
-        cursorImage.sprite = cursorSprites[spriteNum];
     }
 
     //sets coresponding sprite for each guntype
@@ -230,12 +210,6 @@ public class GunData : MonoBehaviour
         sniperBarrelData.y = sniperSpriteNum;
         rocketLauncherBarrelData.y = rocketLauncherSpriteNum;
 
-        SMGBarrelData.z = SMGSpriteNum;
-        pistolBarrelData.z = pistolSpriteNum;
-        machineGunBarrelData.z = machineGunSpriteNum;
-        shotgunBarrelData.z = shotGunSpriteNum;
-        sniperBarrelData.z = sniperSpriteNum;
-        rocketLauncherBarrelData.z = rocketLauncherSpriteNum;
     }
 
     //applys static data to the vector 3s that control the orginization of the diffrent barrel types cursors and priorities in cases of ties
@@ -302,16 +276,18 @@ public class GunData : MonoBehaviour
     //FUNCTIONS TRIGGERED BY BUTTONS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     //used by the button to set flag for firing
-    public void startFiring()
+    public void StartFiring()
     {
         firing = true;
         StartCoroutine(SpinStartup());
+        UIData.instance.fireButtonImage.sprite = UIData.instance.SetSpriteFromLargeSheet(UIData.instance.activeFireButtonSpriteNumber);
         cursorImage.color = cursorFiringColor;
     }
     public void StopFiring()
     {
         firing = false;
         StartCoroutine(SpinSlowdown());
+        UIData.instance.fireButtonImage.sprite = UIData.instance.SetSpriteFromLargeSheet(UIData.instance.inactiveFireButtonSpriteNumber);
         cursorImage.color = cursorInactiveColor;
     }
 

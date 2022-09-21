@@ -19,6 +19,8 @@ public class WorkshopExtraSlotLock : MonoBehaviour
 
     void Start()
     {
+        extraSlotBackgroundImage.sprite = UIData.instance.SetSpriteFromLargeSheet(UIData.instance.slotAddonIconSpriteNumber);
+
         //trys to get the workshopbarrelslot, if it cant logs a warning
         if (TryGetComponent(out WorkshopBarrelSlot slotscript))
         {
@@ -60,6 +62,7 @@ public class WorkshopExtraSlotLock : MonoBehaviour
         {
             workshopBarrelSlot.enabled = true;
             extraSlotBackgroundImage.color = activeColor;
+            workshopBarrelSlot.UpdateDisplay();
             return;
         }
     }

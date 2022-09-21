@@ -165,54 +165,43 @@ public class WorkshopBarrelSlot : MonoBehaviour
     {
         if (slotImage != null && iconImage != null)
         {
-            switch (slotTier)
-            {
-                case BarrelTeir.Teir1:
-                    iconImage.sprite = UIData.instance.gunTierShapes[0];
-                    break;
-                case BarrelTeir.Tier2:
-                    iconImage.sprite = UIData.instance.gunTierShapes[1];
-                    break;
-                case BarrelTeir.Tier3:
-                    iconImage.sprite = UIData.instance.gunTierShapes[2];
-                    break;
-                case BarrelTeir.Untiered:
-                    iconImage.sprite = UIData.instance.gunTierShapes[3];
-                    break;
-                default:
-                    break;
-            }
 
             switch (slotType)
             {
                 case BarrelType.SMG:
-                    iconImage.color = UIData.instance.gunTypeColors[0];
+                    iconImage.enabled = true;
+                    iconImage.sprite = UIData.instance.SetSpriteFromLargeSheet(UIData.instance.SMGSpriteNumber + (int)slotTier);
                     slotImage.enabled = false;
                     break;
                 case BarrelType.Pistol:
-                    iconImage.color = UIData.instance.gunTypeColors[1];
+                    iconImage.enabled = true;
+                    iconImage.sprite = UIData.instance.SetSpriteFromLargeSheet(UIData.instance.pistolSpriteNumber + (int)slotTier);
                     slotImage.enabled = false;
                     break;
                 case BarrelType.Shotgun:
-                    iconImage.color = UIData.instance.gunTypeColors[2];
+                    iconImage.enabled = true;
+                    iconImage.sprite = UIData.instance.SetSpriteFromLargeSheet(UIData.instance.shotgunSpriteNumber + (int)slotTier);
                     slotImage.enabled = false;
                     break;
                 case BarrelType.MachineGun:
-                    iconImage.color = UIData.instance.gunTypeColors[3];
+                    iconImage.enabled = true;
+                    iconImage.sprite = UIData.instance.SetSpriteFromLargeSheet(UIData.instance.machinegunSpriteNumber + (int)slotTier);
                     slotImage.enabled = false;
                     break;
                 case BarrelType.Sniper:
-                    iconImage.color = UIData.instance.gunTypeColors[4];
+                    iconImage.enabled = true;
+                    iconImage.sprite = UIData.instance.SetSpriteFromLargeSheet(UIData.instance.sniperSpriteNumber + (int)slotTier);
                     slotImage.enabled = false;
                     break;
                 case BarrelType.RocketLauncher:
-                    iconImage.color = UIData.instance.gunTypeColors[5];
+                    iconImage.enabled = true;
+                    iconImage.sprite = UIData.instance.SetSpriteFromLargeSheet(UIData.instance.rocketLauncherSpriteNumber + (int)slotTier);
                     slotImage.enabled = false;
                     break;
                 case BarrelType.Empty:
-                    iconImage.color = UIData.instance.gunTypeColors[6];
-                    iconImage.sprite = UIData.instance.gunTierShapes[3];
+                    slotImage.sprite = UIData.instance.SetSpriteFromLargeSheet(UIData.instance.emptySlot);
                     slotImage.enabled = true;
+                    iconImage.enabled = false;
                     break;
                 default:
                     break;

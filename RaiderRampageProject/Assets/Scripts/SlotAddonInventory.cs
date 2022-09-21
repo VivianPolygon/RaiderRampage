@@ -50,6 +50,7 @@ public class SlotAddonInventory : MonoBehaviour
         slotAddonQuantity = Mathf.Clamp(startingAddonQuantity, 0, addonQuantityMax);
 
         UpdateCountText();
+        SetAddonSprites();
     }
 
     //updates the text for the count, and updates color of the image
@@ -168,6 +169,20 @@ public class SlotAddonInventory : MonoBehaviour
         else
         {
             addonInventoryImage.color = noAddonSlotsPresentColor;
+        }
+    }
+
+    private void SetAddonSprites()
+    {
+        addonInventoryImage.sprite = UIData.instance.SetSpriteFromLargeSheet(UIData.instance.slotAddonIconSpriteNumber);
+
+        if(dragIcon.TryGetComponent(out Image iconImage))
+        {
+            iconImage.sprite = UIData.instance.SetSpriteFromLargeSheet(UIData.instance.slotAddonIconSpriteNumber);
+        }
+        else
+        {
+            Debug.LogWarning("The Object used to display the dragging of an addonsot does not have an image component, please add one");
         }
     }
 }

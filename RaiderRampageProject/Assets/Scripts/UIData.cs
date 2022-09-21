@@ -26,13 +26,47 @@ public class UIData : MonoBehaviour
     [SerializeField]
     private Color sliderFullColor;
 
-    [Header("Data used for Workshop UI")]
-    public Color[] gunTypeColors;
-    public Sprite[] gunTierShapes;
+    [Header("SpriteSheets")]
+    public Texture largeSpriteSheet;
+    [HideInInspector]
+    public Sprite[] largeSprites;
 
-    //establishes the singleton
+    [Header("ShootingUIImages")]
+    public Image fireButtonImage;
+    public Image reloadButtonImage;
+    public Image aimingStickImage;
+
+    public Image scrapBarrelArrowsImage;
+
+    [Header("FireButton")]
+    [Header("ShootingUISpriteSheetNumbers")]
+    public short inactiveFireButtonSpriteNumber;
+    public short activeFireButtonSpriteNumber;
+    [Header("ReloadButton")]
+    public short inactiveReloadButtonSpriteNumber;
+    public short activeReloadButtonSpriteNumber;
+    [Header("ThumbstickIcon")]
+    public short aimingStickSpriteNumber;
+
+    [Header("Make Tiers Consecutive on Sheet")]
+    [Header("WorkshopBarrels, First Slot")]
+    public short SMGSpriteNumber;
+    public short pistolSpriteNumber;
+    public short machinegunSpriteNumber;
+    public short shotgunSpriteNumber;
+    public short sniperSpriteNumber;
+    public short rocketLauncherSpriteNumber;
+    public short emptySlot;
+
+    [Header("WorkshopIcons")]
+    public short scrapBarrelArrowsSpriteNumber;
+    public short slotAddonIconSpriteNumber;
+
+    //establishes the singleton, initilizes spritesheets from resources folder
     private void Awake()
     {
+        largeSprites = Resources.LoadAll<Sprite>(largeSpriteSheet.name);
+
         if (instance != null)
         {
             Destroy(this);
@@ -47,6 +81,8 @@ public class UIData : MonoBehaviour
     {
         //initilizes the sliders
         SetAllAmmoSliders();
+        InitilizeShootingUISprites();
+        scrapBarrelArrowsImage.sprite = SetSpriteFromLargeSheet(scrapBarrelArrowsSpriteNumber);
     }
 
     //updates 1 ammo slider based on input
@@ -68,5 +104,19 @@ public class UIData : MonoBehaviour
         UpdateAmmoSlider(5, PlayerResourcesManager.instance.machineGunClipMax, PlayerResourcesManager.instance.machineGunClipCurrent);
         UpdateAmmoSlider(6, PlayerResourcesManager.instance.shotGunClipMax, PlayerResourcesManager.instance.shotGunClipCurrent);
         UpdateAmmoSlider(7, PlayerResourcesManager.instance.rocketLauncherClipMax, PlayerResourcesManager.instance.rocketLauncherClipCurrent);
+    }
+
+    public Sprite SetSpriteFromLargeSheet(int spriteNumber)
+    {
+        spriteNumber = Mathf.Clamp(spriteNumber, 0, largeSprites.Length - 1);
+
+        return largeSprites[spriteNumber];
+    }
+
+    private void InitilizeShootingUISprites()
+    {
+        fireButtonImage.sprite = SetSpriteFromLargeSheet(inactiveFireButtonSpriteNumber);
+        reloadButtonImage.sprite = SetSpriteFromLargeSheet(inactiveReloadButtonSpriteNumber);
+        aimingStickImage.sprite = SetSpriteFromLargeSheet(aimingStickSpriteNumber);
     }
 }
