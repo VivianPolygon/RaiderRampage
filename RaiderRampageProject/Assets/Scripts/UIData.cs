@@ -17,7 +17,6 @@ public class UIData : MonoBehaviour
     [SerializeField]
     private Image[] fillImages;
 
-    [SerializeField]
     public Slider ammoReloadTimerSlider;
 
     //colors for the bar fills
