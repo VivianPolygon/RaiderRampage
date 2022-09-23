@@ -24,6 +24,8 @@ public class GunBarrel : MonoBehaviour
     //impulse physics force applied to the bullet on spawn
     [SerializeField]
     private float shotForce;
+    [SerializeField]
+    private int bulletDamage;
 
     //how long until the projectile gets destroyed if it collides with nothing
     [SerializeField]
@@ -102,6 +104,10 @@ public class GunBarrel : MonoBehaviour
                 shot = Instantiate(projectilePrefab, projectileSpawnpoint.transform.position, transform.rotation);
                 shot.transform.LookAt(GunData.instance.cursorPositon);
                 shot.GetComponent<Rigidbody>().AddForce(shot.transform.forward * shotForce, ForceMode.Impulse);
+                if (shot.TryGetComponent(out Bullet bulletScript))
+                {
+                    bulletScript.damage = bulletDamage;
+                }
                 Destroy(shot, projectileDestroyTime);
 
                 

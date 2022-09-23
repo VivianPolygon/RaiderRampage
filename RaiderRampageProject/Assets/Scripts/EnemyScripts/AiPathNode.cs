@@ -21,8 +21,8 @@ public class AiPathNode : MonoBehaviour
 
     private void Awake()
     {
-
         InitilizeWeights();
+        HideNodeModel();
     }
     
     private void InitilizeWeights()
@@ -102,6 +102,14 @@ public class AiPathNode : MonoBehaviour
         return nextNodes[0];
     }
 
+    private void HideNodeModel()
+    {
+        if (TryGetComponent(out MeshRenderer meshRenderer))
+        {
+            meshRenderer.enabled = false;
+        }
+    }
+
     private void OnDrawGizmos()
     {
         weightTotal = 0;
@@ -115,7 +123,7 @@ public class AiPathNode : MonoBehaviour
             Gizmos.color = Color.Lerp(Color.black, Color.green, nodeWeights[i] / (float)weightTotal);
             Gizmos.DrawLine(transform.position, nextNodes[i].position);
             Gizmos.color = Color.red;
-            Gizmos.DrawLine(transform.position, transform.position + Vector3.Normalize(nextNodes[i].position - transform.position));
+            Gizmos.DrawLine(transform.position, transform.position + Vector3.Normalize(nextNodes[i].position - transform.position) * 5);
         }
     }
 }

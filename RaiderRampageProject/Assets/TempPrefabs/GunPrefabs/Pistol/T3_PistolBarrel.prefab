@@ -181,9 +181,10 @@ MonoBehaviour:
   barrelTier: 2
   projectilePrefab: {fileID: 7870221974262378874, guid: 9796769ee10d4db4c8f556465aa34abf, type: 3}
   projectileSpawnpoint: {fileID: 3035413545681702517}
-  shotsPerSecond: 1.25
+  shotsPerSecond: 2.5
   ammoDrain: 1
   shotForce: 280
+  bulletDamage: 5
   projectileDestroyTime: 5
 --- !u!1 &7231165460797159173
 GameObject:

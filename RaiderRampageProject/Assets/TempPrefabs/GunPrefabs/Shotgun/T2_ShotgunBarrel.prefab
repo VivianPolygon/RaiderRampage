@@ -183,4 +183,5 @@ MonoBehaviour:
   shotsPerSecond: 2
   ammoDrain: 8
   shotForce: 15
+  bulletDamage: 1
   projectileDestroyTime: 3

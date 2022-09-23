@@ -183,6 +183,7 @@ MonoBehaviour:
   shotsPerSecond: 0.5
   ammoDrain: 1
   shotForce: 420
+  bulletDamage: 40
   projectileDestroyTime: 3
 --- !u!1 &6044093332685321673
 GameObject:

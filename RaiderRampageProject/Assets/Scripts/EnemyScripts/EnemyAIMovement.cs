@@ -17,19 +17,26 @@ public class EnemyAIMovement : MonoBehaviour
 
     private void Start()
     {
-        MoveToObject();
+        //MoveToObject();
     }
 
+    /*
     private void MoveToObject()
     {
         navmeshAgent.destination = startingDestination.position;
     }
+    */
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.TryGetComponent(out AiPathNode node))
         {
             navmeshAgent.destination = node.DecideNextNode().position;
+        }
+        //Temporary, for testing purposes, destroys enemy when they contact somthing tagged ScrapBin <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        if(other.gameObject.tag == "ScrapBin")
+        {
+            Destroy(this.gameObject);
         }
     }
 }
