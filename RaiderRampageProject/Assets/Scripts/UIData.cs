@@ -49,15 +49,16 @@ public class UIData : MonoBehaviour
 
     [Header("Make Tiers Consecutive on Sheet")]
     [Header("WorkshopBarrels, First Slot")]
+    public short neutralReticle;
     public short SMGSpriteNumber;
     public short pistolSpriteNumber;
     public short machinegunSpriteNumber;
     public short shotgunSpriteNumber;
     public short sniperSpriteNumber;
     public short rocketLauncherSpriteNumber;
-    public short emptySlot;
 
     [Header("WorkshopIcons")]
+    public short emptySlot;
     public short scrapBarrelArrowsSpriteNumber;
     public short slotAddonIconSpriteNumber;
 

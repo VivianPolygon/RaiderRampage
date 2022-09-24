@@ -191,7 +191,7 @@ public class GunData : MonoBehaviour
         //checks if the bottom and top of list are the same, if they are uses the default sprite
         if (barrelQuantitiesOrdered[0].x == barrelQuantitiesOrdered[barrelQuantitiesOrdered.Count - 1].x)
         {
-            cursorImage.sprite = UIData.instance.SetSpriteFromLargeSheet(30);
+            cursorImage.sprite = UIData.instance.SetSpriteFromLargeSheet(UIData.instance.neutralReticle);
         }
         //checks the top of the lists y component, which coresponds to a sprite on the cursorSprites array
         else
