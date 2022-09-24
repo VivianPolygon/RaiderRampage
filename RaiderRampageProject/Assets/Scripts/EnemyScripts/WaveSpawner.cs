@@ -12,11 +12,6 @@ public class WaveSpawner : MonoBehaviour
     private int waveThresholdMin = 0;
     private int waveThresholdMax = 100;
 
-    //list of possible spawns from the threshold
-    [SerializeField]
-    private List<GameObject> possibleSpawns;
-
-
     [Header("Biases for Wave Enemy Types, Clamped between 1 and 100")]
     //ints used to caculate rations for each type to spawn from threshold list
     [SerializeField]
@@ -32,20 +27,13 @@ public class WaveSpawner : MonoBehaviour
     private float balancedBiasPercent = 1 / 3;
     private float fastBiasPercent = 1 / 3;
     private float armouredBiasPercent = 1 / 3;
-    //hidden ints used to caculate total amount of each type available
-    private int balancedEnemiesAvailable;
-    private int fastEnemiesAvailable;
-    private int armouredEnemiesAvailable;
 
-
-
-    [Header("Wave Difficulty, Determines Ratio of Stronger Enemies Spawned"), Space(5), Header("If an Enemy's Difficulty is Below this value, They Will No Longer Spawn, Clamped between 1 and 100")]
+    [Header("Wave Difficulty, Determines Ratio of Stronger Enemies Spawned")]
     [SerializeField]
     private int waveDifficulty;
     //hiddin ints that control minimum and max values for difficulty clamping
     private int difficultyMin = 1;
     private int difficultyMax = 100;
-
 
     [Header("Total Value of Enemies that Can be Spawned")]
     [SerializeField]
@@ -54,8 +42,12 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField]
     private int waveMaxQuantity;
 
-    [SerializeField]
+    //list of possible spawns from the difficulty
+    private List<GameObject> possibleSpawns;
+    //list of enemies that will be looped through and spawned
     private List<GameObject> enemiesToSpawn;
+    //list of enemies of the generated type that will be spawned from based on dificulty
+    private List<GameObject> difficultySortList;
 
     [Header("Random Time Delay Between Spawns")]
     //floats that control delay time between each enemy spawn, time is random between these two values
@@ -77,8 +69,16 @@ public class WaveSpawner : MonoBehaviour
 
     //spawnpoint for the enemies, should be a node used for navigation
     [SerializeField]
-    private Transform[] SpawnPoints;
+    private Transform[] spawnPoints;
 
+    private float percentChecker;
+
+    private void Awake()
+    { 
+        possibleSpawns = new List<GameObject>();
+        enemiesToSpawn = new List<GameObject>();
+        difficultySortList = new List<GameObject>();
+    }
 
     //set it up to allow parameters to be passed through
     public void SpawnWave()
@@ -95,11 +95,6 @@ public class WaveSpawner : MonoBehaviour
         //clamps the new wave threshold to the appropiate values
         waveDifficultyThreshold = Mathf.Clamp(newThreshhold, waveThresholdMin, waveThresholdMax);
 
-        //initilized the enemy type counts to zero so they increment properly
-        balancedEnemiesAvailable = 0;
-        fastEnemiesAvailable = 0;
-        armouredEnemiesAvailable = 0;
-
         //clears the list of possible spawns from the previous wave
         if(possibleSpawns != null && possibleSpawns.Count > 0)
         {
@@ -113,21 +108,6 @@ public class WaveSpawner : MonoBehaviour
                 if(enemyData.enemyDifficulty <= waveDifficultyThreshold)
                 {
                     possibleSpawns.Add(enemyData.gameObject);
-                }
-
-                switch (enemyData.enemyBias)
-                {
-                    case EnemyDifficultyData.BiasType.Balanced:
-                        balancedEnemiesAvailable++;
-                        break;
-                    case EnemyDifficultyData.BiasType.Agile:
-                        fastEnemiesAvailable++;
-                        break;
-                    case EnemyDifficultyData.BiasType.Armoured:
-                        armouredEnemiesAvailable++;
-                        break;
-                    default:
-                        break;
                 }
             }
             else
@@ -149,9 +129,9 @@ public class WaveSpawner : MonoBehaviour
 
         biasTotal = balancedBias + fastBias + armouredBias;
 
-        balancedBiasPercent = (balancedBias / biasTotal) / balancedEnemiesAvailable;
-        fastBiasPercent = (fastBias / biasTotal) / fastEnemiesAvailable;
-        armouredBiasPercent = (armouredBias / biasTotal) / armouredEnemiesAvailable;
+        balancedBiasPercent = balancedBias / biasTotal;
+        fastBiasPercent = fastBias / biasTotal;
+        armouredBiasPercent = armouredBias / biasTotal;
     }
 
     private void SetDifficulty(int newDifficulty)
@@ -180,75 +160,108 @@ public class WaveSpawner : MonoBehaviour
         int currentValue = 0;
         int currentQuantity = 0;
 
-        float percentChecker = Random.Range(0.01f, 0.99f);
+        EnemyDifficultyData difficultyData = null;
 
-        EnemyDifficultyData enemyData;
-        while(currentValue < waveMaxValue && currentQuantity < waveMaxQuantity)
+        if(difficultySortList != null && difficultySortList.Count > 0)
         {
-            foreach(GameObject enemy in possibleSpawns)
+            difficultySortList.Clear();
+        }
+
+        while (currentValue < waveMaxValue && currentQuantity < waveMaxQuantity)
+        {
+            percentChecker = Random.Range(0f, 1f);
+
+            if (percentChecker <= balancedBiasPercent)
             {
-                enemyData = enemy.GetComponent<EnemyDifficultyData>();
-
-                switch (enemyData.enemyBias)
+                foreach (GameObject enemy in possibleSpawns)
                 {
-                    case EnemyDifficultyData.BiasType.Balanced:
-                        percentChecker = Random.Range(0f, 1f);
-                        if (percentChecker < balancedBiasPercent)
-                        {
-                            percentChecker = Random.Range(0f, waveDifficulty);
-                            if(enemyData.enemyDifficulty <= percentChecker && enemyData.enemyDifficultyCutoff > waveDifficulty)
-                            {
-                                currentValue += enemyData.enemyCost;
-                                currentQuantity++;
-
-                                enemiesToSpawn.Add(enemyData.gameObject);
-                            }
-                        }
-                        break;
-                    case EnemyDifficultyData.BiasType.Agile:
-                        percentChecker = Random.Range(0f, 1f);
-                        if (percentChecker < fastBiasPercent)
-                        {
-                            percentChecker = Random.Range(0f, waveDifficulty);
-                            if (enemyData.enemyDifficulty <= percentChecker && enemyData.enemyDifficultyCutoff > waveDifficulty)
-                            {
-                                currentValue += enemyData.enemyCost;
-                                currentQuantity++;
-
-                                enemiesToSpawn.Add(enemyData.gameObject);
-                            }
-                        }
-                        break;
-                    case EnemyDifficultyData.BiasType.Armoured:
-                        percentChecker = Random.Range(0f, 1f);
-                        if (percentChecker < armouredBiasPercent)
-                        {
-                            percentChecker = Random.Range(0f, waveDifficulty);
-                            if (enemyData.enemyDifficulty <= percentChecker && enemyData.enemyDifficultyCutoff > waveDifficulty)
-                            {
-                                currentValue += enemyData.enemyCost;
-                                currentQuantity++;
-
-                                enemiesToSpawn.Add(enemyData.gameObject);
-                            }
-                        }
-                        break;
-                    default:
-                        break;
+                    if (enemy.TryGetComponent(out EnemyDifficultyData enemyDifficultyData) && enemyDifficultyData.enemyBias == EnemyDifficultyData.BiasType.Balanced)
+                    {
+                        difficultySortList.Add(enemyDifficultyData.gameObject);
+                        difficultyData = enemyDifficultyData;
+                    }
                 }
-                yield return null;
+                percentChecker = Random.Range(1f, waveDifficulty);
+
+                difficultySortList.Sort(DifficultySorter);
+
+                currentValue += difficultyData.enemyCost;
+                currentQuantity++;
+
+                enemiesToSpawn.Add(difficultySortList[0]);
             }
+            else if (percentChecker <= (fastBiasPercent + balancedBiasPercent))
+            {
+                foreach (GameObject enemy in possibleSpawns)
+                {
+                    if (enemy.TryGetComponent(out EnemyDifficultyData enemyDifficultyData) && enemyDifficultyData.enemyBias == EnemyDifficultyData.BiasType.Agile)
+                    {
+                        difficultySortList.Add(enemyDifficultyData.gameObject);
+                        difficultyData = enemyDifficultyData;
+                    }
+                }
+                percentChecker = Random.Range(1f, waveDifficulty);
+
+                difficultySortList.Sort(DifficultySorter);
+
+                currentValue += difficultyData.enemyCost;
+                currentQuantity++;
+
+                enemiesToSpawn.Add(difficultySortList[0]);
+            }
+            else if (percentChecker <= (armouredBiasPercent + fastBiasPercent + balancedBiasPercent))
+            {
+                foreach (GameObject enemy in possibleSpawns)
+                {
+                    if (enemy.TryGetComponent(out EnemyDifficultyData enemyDifficultyData) && enemyDifficultyData.enemyBias == EnemyDifficultyData.BiasType.Armoured)
+                    {
+                        difficultySortList.Add(enemyDifficultyData.gameObject);
+                        difficultyData = enemyDifficultyData;
+                    }
+                }
+                percentChecker = Random.Range(1f, waveDifficulty);
+
+                difficultySortList.Sort(DifficultySorter);
+
+                currentValue += difficultyData.enemyCost;
+                currentQuantity++;
+
+                enemiesToSpawn.Add(difficultySortList[0]);
+            }
+
             yield return null;
         }
 
+
         for (int i = 0; i < enemiesToSpawn.Count; i++)
         {
-            Instantiate(enemiesToSpawn[i], SpawnPoints[Random.Range(0, SpawnPoints.Length)].position, transform.rotation);
+            Instantiate(enemiesToSpawn[i], spawnPoints[Random.Range(0, spawnPoints.Length)].position, transform.rotation);
 
-            yield return new WaitForSecondsRealtime(Random.Range(spawnDelayMin, spawnDelayMax));
+            yield return new WaitForSecondsRealtime(Random.Range(spawnDelayMin, spawnDelayMax)); 
         }
+
+        yield return null;
     }
 
+
+    private int DifficultySorter(GameObject x, GameObject y)
+    {
+        int xDifficulty = x.GetComponent<EnemyDifficultyData>().enemyDifficulty;
+        int yDifficulty = y.GetComponent<EnemyDifficultyData>().enemyDifficulty;
+
+        xDifficulty = Mathf.Abs(xDifficulty - (int)percentChecker);
+        yDifficulty = Mathf.Abs(yDifficulty - (int)percentChecker);
+
+        if(xDifficulty < yDifficulty)
+        {
+            return -1;
+        }
+        else if(xDifficulty > yDifficulty)
+        {
+            return 1;
+        }
+        return 0;
+    }
 
     //used for testing sliders on UI, testing only <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     public void SetBalanceBias(int value)

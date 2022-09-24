@@ -10601,14 +10601,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waveDifficultyThreshold: 50
-  possibleSpawns: []
-  balancedBias: 1
-  fastBias: 50
-  armouredBias: 50
+  balancedBias: 10
+  fastBias: 10
+  armouredBias: 10
   waveDifficulty: 8
   waveMaxValue: 50
   waveMaxQuantity: 30
-  enemiesToSpawn: []
   spawnDelayMin: 0.25
   spawnDelayMax: 2
   enemyPrefabs:
@@ -10621,9 +10619,9 @@ MonoBehaviour:
   - {fileID: 6580315547016906536, guid: 6d72a85a3e676c44fbce1842bf38af94, type: 3}
   - {fileID: 4967751668195392282, guid: 47d4576a3c8eb8047a298955226bdcf1, type: 3}
   - {fileID: 7368823418792694985, guid: bf176a719df31fa43837207998549617, type: 3}
-  SpawnPoints:
-  - {fileID: 439673151}
+  spawnPoints:
   - {fileID: 1762804695}
+  - {fileID: 439673151}
 --- !u!1 &1311259144
 GameObject:
   m_ObjectHideFlags: 0

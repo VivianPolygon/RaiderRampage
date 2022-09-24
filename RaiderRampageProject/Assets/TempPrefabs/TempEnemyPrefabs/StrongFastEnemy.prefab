@@ -246,7 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52029ac44bff87640a3851977d096dd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyDifficulty: 54
+  enemyDifficulty: 4
   enemyDifficultyCutoff: 20
   enemyBias: 1
   enemyCost: 3
