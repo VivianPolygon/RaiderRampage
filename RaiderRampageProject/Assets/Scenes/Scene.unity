@@ -18139,19 +18139,19 @@ PrefabInstance:
       objectReference: {fileID: 431388202}
     - target: {fileID: 712735183706666542, guid: 88b7e0f52ff2802408f5963afd032eca, type: 3}
       propertyPath: nodeWeights.Array.data[0]
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 712735183706666542, guid: 88b7e0f52ff2802408f5963afd032eca, type: 3}
       propertyPath: nodeWeights.Array.data[1]
-      value: 10
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 712735183706666542, guid: 88b7e0f52ff2802408f5963afd032eca, type: 3}
       propertyPath: nodeWeights.Array.data[2]
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 712735183706666542, guid: 88b7e0f52ff2802408f5963afd032eca, type: 3}
       propertyPath: nodeWeights.Array.data[3]
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2508018258980124310, guid: 88b7e0f52ff2802408f5963afd032eca, type: 3}
       propertyPath: m_RootOrder
