@@ -62,6 +62,12 @@ public class UIData : MonoBehaviour
     public short scrapBarrelArrowsSpriteNumber;
     public short slotAddonIconSpriteNumber;
 
+    [Header("WaveBar")]
+    [SerializeField]
+    private Slider waveBarSlider;
+    [SerializeField]
+    private Text waveText;
+
     //establishes the singleton, initilizes spritesheets from resources folder
     private void Awake()
     {
@@ -82,6 +88,10 @@ public class UIData : MonoBehaviour
         //initilizes the sliders
         SetAllAmmoSliders();
         InitilizeShootingUISprites();
+
+        SetWaveBar(0);
+        waveText.text = ("It seems quiet, too quiet");
+
         scrapBarrelArrowsImage.sprite = SetSpriteFromLargeSheet(scrapBarrelArrowsSpriteNumber);
     }
 
@@ -118,5 +128,15 @@ public class UIData : MonoBehaviour
         fireButtonImage.sprite = SetSpriteFromLargeSheet(inactiveFireButtonSpriteNumber);
         reloadButtonImage.sprite = SetSpriteFromLargeSheet(inactiveReloadButtonSpriteNumber);
         aimingStickImage.sprite = SetSpriteFromLargeSheet(aimingStickSpriteNumber);
+    }
+
+    public void SetWaveBar(float waveProgressPercent)
+    {
+        waveBarSlider.value = waveProgressPercent;
+    }
+
+    public void SetWaveText(int waveNumber)
+    {
+        waveText.text = ("Current Wave: " + waveNumber.ToString());
     }
 }

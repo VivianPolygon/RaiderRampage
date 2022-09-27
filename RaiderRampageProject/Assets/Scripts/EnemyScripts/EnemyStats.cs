@@ -59,4 +59,9 @@ public class EnemyStats : MonoBehaviour
         }
         gameObject.GetComponent<MeshRenderer>().material = normalMat;
     }
+
+    private void OnDestroy()
+    {
+        UIData.instance.SetWaveBar(WaveTracker.instance.waveSpawner.UpdateWaveProgress(-1));
+    }
 }

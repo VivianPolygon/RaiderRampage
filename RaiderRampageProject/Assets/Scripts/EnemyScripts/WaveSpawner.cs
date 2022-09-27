@@ -5,20 +5,14 @@ using UnityEngine;
 public class WaveSpawner : MonoBehaviour
 {
     //updated threshold value of the wave
-    [Header("Controls Strongest Enemies Spawned, Clamped between 1-100")]
-    [SerializeField]
     private int waveDifficultyThreshold;
     //hidden ints that cap the threshold value
     private int waveThresholdMin = 0;
     private int waveThresholdMax = 100;
 
-    [Header("Biases for Wave Enemy Types, Clamped between 1 and 100")]
     //ints used to caculate rations for each type to spawn from threshold list
-    [SerializeField]
     private int balancedBias;
-    [SerializeField]
     private int fastBias;
-    [SerializeField]
     private int armouredBias;
     //hidden ints used for clamping
     private int biasMin = 1;
@@ -28,18 +22,12 @@ public class WaveSpawner : MonoBehaviour
     private float fastBiasPercent = 1 / 3;
     private float armouredBiasPercent = 1 / 3;
 
-    [Header("Wave Difficulty, Determines Ratio of Stronger Enemies Spawned")]
-    [SerializeField]
     private int waveDifficulty;
     //hiddin ints that control minimum and max values for difficulty clamping
     private int difficultyMin = 1;
     private int difficultyMax = 100;
 
-    [Header("Total Value of Enemies that Can be Spawned")]
-    [SerializeField]
     private int waveMaxValue;
-    [Header("Total Quantity of Enemies that Can be Spawned")]
-    [SerializeField]
     private int waveMaxQuantity;
 
     //list of possible spawns from the difficulty
@@ -49,11 +37,8 @@ public class WaveSpawner : MonoBehaviour
     //list of enemies of the generated type that will be spawned from based on dificulty
     private List<GameObject> difficultySortList;
 
-    [Header("Random Time Delay Between Spawns")]
     //floats that control delay time between each enemy spawn, time is random between these two values
-    [SerializeField]
     private float spawnDelayMin = 0.25f;
-    [SerializeField]
     private float spawnDelayMax = 2f;
 
     //1. get possible spawn points for enemies - Done
@@ -67,20 +52,49 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField]
     private GameObject[] enemyPrefabs;
 
-    //spawnpoint for the enemies, should be a node used for navigation
+    //spawnpoints for the enemies, should be a node used for navigation
     [SerializeField]
     private Transform[] spawnPoints;
 
     private float percentChecker;
+    //used to hold an enemy that was spawned to set their parent
+    private GameObject enemySpawn;
+    //empty parent for the enemies to be in, allows them to be counted easily
+    private GameObject enemyParent;        
+    //flag for if the current wave is ongoing, used in the wave tracker
+    public static bool waveActive;
+    public static bool waveSpawning;
+    private int enemiesAlive;
+    private int totalEnemiesInWave;
 
     private void Awake()
     { 
         possibleSpawns = new List<GameObject>();
         enemiesToSpawn = new List<GameObject>();
         difficultySortList = new List<GameObject>();
+        waveActive = false;
+        waveSpawning = false;
     }
 
     //set it up to allow parameters to be passed through
+
+    public void SetWaveData(WaveScriptableObject waveData, GameObject waveEnemiesParent)
+    {
+        waveDifficultyThreshold = waveData.waveDifficultyThreshold;
+        waveDifficulty = waveData.waveDifficulty;
+
+        balancedBias = waveData.balancedBias;
+        fastBias = waveData.fastBias;
+        armouredBias = waveData.armouredBias;
+
+        waveMaxValue = waveData.waveValue;
+        waveMaxQuantity = waveData.waveQuantity;
+
+        spawnDelayMin = waveData.delayMin;
+        spawnDelayMax = waveData.delayMax;
+
+        enemyParent = waveEnemiesParent;
+    }
     public void SpawnWave()
     {
         SetWaveThreshold(waveDifficultyThreshold);
@@ -152,11 +166,14 @@ public class WaveSpawner : MonoBehaviour
         {
             enemiesToSpawn.Clear();
         }
-        StartCoroutine(FillEnemyList());
+        StartCoroutine(FillAndSpawnEnemyList());
     }
 
-    private IEnumerator FillEnemyList()
+    private IEnumerator FillAndSpawnEnemyList()
     {
+        waveSpawning = true;
+        waveActive = true;
+
         int currentValue = 0;
         int currentQuantity = 0;
 
@@ -232,14 +249,22 @@ public class WaveSpawner : MonoBehaviour
             yield return null;
         }
 
+        totalEnemiesInWave = enemiesToSpawn.Count;
+        enemiesAlive = totalEnemiesInWave;
+        UIData.instance.SetWaveBar(1);
 
         for (int i = 0; i < enemiesToSpawn.Count; i++)
         {
-            Instantiate(enemiesToSpawn[i], spawnPoints[Random.Range(0, spawnPoints.Length)].position, transform.rotation);
+            enemySpawn = Instantiate(enemiesToSpawn[i], spawnPoints[Random.Range(0, spawnPoints.Length)].position, transform.rotation);
+            enemySpawn.transform.parent = enemyParent.transform;
+            //temporary fix to the navmesh potentialy making enemys stuck, improve enemy AI later
+            Destroy(enemySpawn, 45f);
 
             yield return new WaitForSecondsRealtime(Random.Range(spawnDelayMin, spawnDelayMax)); 
         }
 
+
+        waveSpawning = false;
         yield return null;
     }
 
@@ -263,18 +288,14 @@ public class WaveSpawner : MonoBehaviour
         return 0;
     }
 
-    //used for testing sliders on UI, testing only <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    public void SetBalanceBias(int value)
+    public float UpdateWaveProgress(int changeInEnemyCount)
     {
-        balancedBias = Mathf.Clamp(value, biasMin, biasMax);
-    }
-    public void SetFastBias(int value)
-    {
-        fastBias = Mathf.Clamp(value, biasMin, biasMax);
-    }
-    public void SetArmouredBias(int value)
-    {
-        armouredBias = Mathf.Clamp(value, biasMin, biasMax);
-    }
+        enemiesAlive += changeInEnemyCount;
 
+        if(enemiesAlive / (float)totalEnemiesInWave == 0)
+        {
+            waveActive = false;
+        }
+        return enemiesAlive / (float)totalEnemiesInWave;
+    }
 }
