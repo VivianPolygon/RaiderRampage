@@ -90,7 +90,7 @@ public class UIData : MonoBehaviour
         InitilizeShootingUISprites();
 
         SetWaveBar(0);
-        waveText.text = ("It seems quiet, too quiet");
+        waveText.text = ("-------------->");
 
         scrapBarrelArrowsImage.sprite = SetSpriteFromLargeSheet(scrapBarrelArrowsSpriteNumber);
     }
