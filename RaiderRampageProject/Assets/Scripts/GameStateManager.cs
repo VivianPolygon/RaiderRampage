@@ -13,18 +13,23 @@ public class GameStateManager : MonoBehaviour
 
     //TEMPORARY
     //used to control how the coroutines for rotating work
-    private bool facingForward;
 
     //enum for gamestates
     public enum Gamestate
     {
         Shooting,
         BetweenWaves,
-        Mergeing,
+        InInventory,
         Paused
+    }
+    public enum InventoryUIState
+    {
+        MergeScreen,
+        UpgradeScreen
     }
 
     //current gamestate
+    [HideInInspector]
     public Gamestate gameState;
     //previous gamestate, will be needed for pausing
     private Gamestate previousGamestate;
@@ -41,14 +46,17 @@ public class GameStateManager : MonoBehaviour
             instance = this;
         }
 
-        //initilizes facing forward (assumes starting by shooting)
-        facingForward = true;
+
     }
 
     private void Start()
     {
         //sets the initial state from input in the inspector
-        UpdateGameState((int)startingState);
+
+
+        //sets gamestate to shooting by default
+        SetInventoryCanvases(false);
+        BeginShootingState(false);
     }
 
     //switch statement used to update the gamestate
@@ -59,13 +67,15 @@ public class GameStateManager : MonoBehaviour
         switch (gameState)
         {
             case Gamestate.Shooting:
-                BeginShootingState();
+                SetInventoryCanvases(false);
+                BeginShootingState(true);
                 break;
             case Gamestate.BetweenWaves:
-                BeginShootingState();
+                BeginShootingState(true);
                 break;
-            case Gamestate.Mergeing:
-                BeginMergeState();
+            case Gamestate.InInventory:
+                UIData.instance.shootingControlsCanvas.enabled = false;
+                UpdateInventoryState(0);
                 break;
             case Gamestate.Paused:
                 PlayerResourcesManager.ammoRegen = false;
@@ -77,61 +87,114 @@ public class GameStateManager : MonoBehaviour
     }
 
     //function called when switching to the merge state
-    private void BeginMergeState()
+    public void UpdateInventoryState(int state)
     {
         PlayerResourcesManager.ammoRegen = true;
-        StartCoroutine(RotatePlayerBack());
+        StartCoroutine(RotatePlayerInventory(state));
     }
 
     //function called when switching the the begin shooting state
-    private void BeginShootingState()
+    private void BeginShootingState(bool turn)
     {
         PlayerResourcesManager.ammoRegen = true;
         GunData.instance.SwitchGunHeads(GunData.instance.currentHeadNumber);
-        StartCoroutine(RotatePlayerForward());
+        if(turn)
+        {
+            StartCoroutine(RotatePlayerForward());
+        }
+        else
+        {
+            UIData.instance.shootingControlsCanvas.enabled = true;
+            Camera.main.transform.rotation = Quaternion.AngleAxis(0, Camera.main.transform.up);
+        }
     }
 
     //TEMPORARY
     //function used to rotate the player backwards, facing the workshop
-    private IEnumerator RotatePlayerBack()
+    private IEnumerator RotatePlayerInventory(int state)
     {
-        UIData.instance.shootingControlsCanvas.enabled = false;
+        float startingRotation = Camera.main.gameObject.transform.rotation.eulerAngles.y;
 
-        if (facingForward)
+        switch ((InventoryUIState)state)
         {
-            for (float i = 0; i < 1; i += Time.deltaTime)
-            {
-                Camera.main.transform.Rotate(0, 180 * Time.deltaTime, 0);
+            case InventoryUIState.MergeScreen:
+                UIData.instance.upgradesCanvas.gameObject.GetComponent<BoxCollider>().enabled = false;
+                UIData.instance.upgradesCanvas.enabled = false;
+                for (float i = 0; i < 1; i += Time.deltaTime)
+                {
+                    Camera.main.transform.Rotate(0, (130 - startingRotation) * Time.deltaTime, 0);
 
-                yield return null;
-            }
-            UIData.instance.mergeingCanvas.enabled = true;
+                    yield return null;
+                }
 
-            Camera.main.transform.rotation = Quaternion.AngleAxis(180, Camera.main.transform.up);
-            facingForward = false;
+                Camera.main.transform.rotation = Quaternion.AngleAxis(130, Camera.main.transform.up);
+
+                UIData.instance.mergeingCanvas.gameObject.GetComponent<BoxCollider>().enabled = true;
+                UIData.instance.mergeingCanvas.enabled = true;
+                break;
+
+            case InventoryUIState.UpgradeScreen:
+                UIData.instance.mergeingCanvas.gameObject.GetComponent<BoxCollider>().enabled = false;
+                UIData.instance.mergeingCanvas.enabled = false;
+
+                for (float i = 0; i < 1; i += Time.deltaTime)
+                {
+                    Camera.main.transform.Rotate(0, (230 - startingRotation) * Time.deltaTime, 0);
+
+                    yield return null;
+                }
+
+                Camera.main.transform.rotation = Quaternion.AngleAxis(230, Camera.main.transform.up);
+
+                UIData.instance.upgradesCanvas.gameObject.GetComponent<BoxCollider>().enabled = true;
+                UIData.instance.upgradesCanvas.enabled = true;
+                break;
+            default:
+                break;
         }
+
     }
 
     //TEMPORARY
     //function used to rotate the player forwards, facing the level
     private IEnumerator RotatePlayerForward()
     {
-        UIData.instance.mergeingCanvas.enabled = false;
+        float startingRotation = Camera.main.gameObject.transform.rotation.eulerAngles.y;
 
-        if (!facingForward)
+        if (startingRotation > 180)
         {
+            startingRotation = startingRotation - 180;
+
             for (float i = 0; i < 1; i += Time.deltaTime)
             {
-                Camera.main.transform.Rotate(0, -180 * Time.deltaTime, 0);
-
+                Camera.main.transform.Rotate(0, (180 - startingRotation) * Time.deltaTime, 0);
                 yield return null;
             }
-            UIData.instance.shootingControlsCanvas.enabled = true;
+        }
+        else
+        {
+            startingRotation = 180 - startingRotation;
 
-            Camera.main.transform.rotation = Quaternion.AngleAxis(0, Camera.main.transform.up);
-            facingForward = true;
+            for (float i = 0; i < 1; i += Time.deltaTime)
+            {
+                Camera.main.transform.Rotate(0, (-180 + startingRotation) * Time.deltaTime, 0);
+                yield return null;
+            }
         }
 
+        UIData.instance.shootingControlsCanvas.enabled = true;
+
+        Camera.main.transform.rotation = Quaternion.AngleAxis(0, Camera.main.transform.up);
+
     }
+    private void SetInventoryCanvases(bool active)
+    {
+        UIData.instance.mergeingCanvas.gameObject.GetComponent<BoxCollider>().enabled = active;
+        UIData.instance.mergeingCanvas.gameObject.GetComponent<BoxCollider>().enabled = active;
+
+        UIData.instance.mergeingCanvas.enabled = active;
+        UIData.instance.upgradesCanvas.enabled = active;
+    }
+
 
 }

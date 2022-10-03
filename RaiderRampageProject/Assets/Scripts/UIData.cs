@@ -10,6 +10,7 @@ public class UIData : MonoBehaviour
 
     public Canvas shootingControlsCanvas;
     public Canvas mergeingCanvas;
+    public Canvas upgradesCanvas;
 
     //sliders for the ammo bars and fills
     [SerializeField]

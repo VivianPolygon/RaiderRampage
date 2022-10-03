@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 //script used for tracking iputs during the merge phase of the game, as well as applying logic to those inputs from functions using raycasts
 public class MergeingInputDetection : MonoBehaviour
 {
-    //instance of the actiiomap script, detects the first touch on the screen only, tracks the tap down and release
+    //instance of the actionmap script, detects the first touch on the screen only, tracks the tap down and release
     public static TapInput tapInput;
     //raycast variables
     public static Ray tapRay;

@@ -91,9 +91,8 @@ public class GunData : MonoBehaviour
 
     private void Start()
     {
-        //sets the cursor sprite and gets the current slots at start
-
         ApplyStaticGunData();
+        RefreshBarrelQuantitiesList();
         StopFiring();
 
     }
