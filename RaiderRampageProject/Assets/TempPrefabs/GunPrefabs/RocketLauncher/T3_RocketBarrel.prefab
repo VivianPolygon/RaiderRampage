@@ -184,6 +184,7 @@ MonoBehaviour:
   ammoDrain: 1
   shotForce: 420
   bulletDamage: 40
+  scrapValue: 4
   projectileDestroyTime: 3
 --- !u!1 &6044093332685321673
 GameObject:

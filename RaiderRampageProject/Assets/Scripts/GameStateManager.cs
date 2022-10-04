@@ -74,6 +74,7 @@ public class GameStateManager : MonoBehaviour
                 BeginShootingState(true);
                 break;
             case Gamestate.InInventory:
+                UIEvents.instance.UpdateAll();
                 UIData.instance.shootingControlsCanvas.enabled = false;
                 UpdateInventoryState(0);
                 break;

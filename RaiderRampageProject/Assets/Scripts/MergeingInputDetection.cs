@@ -119,12 +119,15 @@ public class MergeingInputDetection : MonoBehaviour
                     }
                 }
                 //controls scrapping mechanic if hovered over an object woth a collider and thats tagged as "ScrapBin"
-                if (tapHit.collider.tag == "ScrapBin")
+                if (tapHit.collider.TryGetComponent(out ScrapItem scrapItem))
                 {
                     WorkshopBarrelSlot.slotScript.DropSlot();
+                    scrapItem.ScrapBarrel(WorkshopBarrelSlot.slotScript.slotType, WorkshopBarrelSlot.slotScript.slotTier);
+
                     WorkshopBarrelSlot.slotScript.slotType = BarrelType.Empty;
                     WorkshopBarrelSlot.slotScript.slotTier = BarrelTeir.Untiered;
                     WorkshopBarrelSlot.slotScript.UpdateDisplay();
+
                 }
                 //snaps the slot back if nothing is selected
                 else

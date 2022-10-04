@@ -62,6 +62,22 @@ public class PlayerResourcesManager : MonoBehaviour
 
     private WorkshopBarrelSlot[] inactiveInventoryBarrelSlots;
 
+    [Header("Upgrade Resources")]
+    //initial scrap amount and tracked quantity of scrap
+    [SerializeField]
+    private int startingScrap;
+    public static int scrap;
+    //initial addon quantity
+    public int startingSlotAddonQuantity;
+
+    [Header("Upgrade Resources Caps")]
+    public int scrapCap;
+    public int addonCap;
+
+    [Header("Upgrade Resources Costs")]
+    public int addonCost;
+
+
     //established a singleton 
     private void Awake()
     {
@@ -73,6 +89,8 @@ public class PlayerResourcesManager : MonoBehaviour
         {
             instance = this;
         }
+
+        scrap = startingScrap;
     }
 
     private void Update()
@@ -242,6 +260,21 @@ public class PlayerResourcesManager : MonoBehaviour
                 slot.UpdateDisplay();
 
                 return;
+            }
+        }
+    }
+
+    public void PurchaseAddon()
+    {
+        if(scrap >= addonCost && SlotAddonInventory.slotAddonQuantity + SlotAddonInventory.currentAddonEquipt < addonCap)
+        {
+            scrap -= addonCost;
+            SlotAddonInventory.instance.AddSlotAddons(1);
+            UIEvents.instance.UpdateScrapCounts();
+
+            if(SlotAddonInventory.slotAddonQuantity + SlotAddonInventory.currentAddonEquipt >= addonCap)
+            {
+                UIData.instance.slotAddonButton.gameObject.SetActive(false);
             }
         }
     }

@@ -69,6 +69,15 @@ public class UIData : MonoBehaviour
     [SerializeField]
     private Text waveText;
 
+    [Header("UpgradeResourcesTexts")]
+    public Text[] ScrapQuantityTexts;
+    public Text[] AddonQuantityTexts;
+
+    //needed to make them disappear when they are irrelevent
+    [Header("Upgrade Buttons")]
+    [SerializeField]
+    public Button slotAddonButton;
+
     //establishes the singleton, initilizes spritesheets from resources folder
     private void Awake()
     {
@@ -94,6 +103,10 @@ public class UIData : MonoBehaviour
         waveText.text = ("-------------->");
 
         scrapBarrelArrowsImage.sprite = SetSpriteFromLargeSheet(scrapBarrelArrowsSpriteNumber);
+
+        //event subscriptions
+        UIEvents.instance.onUpdateScrapCounts += UpdateScrapQuantityTexts;
+        UIEvents.instance.onUpdateAddonCounts += UpdateAddonTexts;
     }
 
     //updates 1 ammo slider based on input
@@ -139,5 +152,20 @@ public class UIData : MonoBehaviour
     public void SetWaveText(int waveNumber)
     {
         waveText.text = ("Current Wave: " + waveNumber.ToString());
+    }
+
+    public void UpdateScrapQuantityTexts()
+    {
+        for (int i = 0; i < ScrapQuantityTexts.Length; i++)
+        {
+            ScrapQuantityTexts[i].text = ("Scrap: <size=40><color=white><b>" + PlayerResourcesManager.scrap.ToString() +  "</b></color></size>");
+        }
+    }
+    public void UpdateAddonTexts()
+    {
+        for (int i = 0; i < AddonQuantityTexts.Length; i++)
+        {
+            AddonQuantityTexts[i].text = SlotAddonInventory.slotAddonQuantity.ToString();
+        }
     }
 }

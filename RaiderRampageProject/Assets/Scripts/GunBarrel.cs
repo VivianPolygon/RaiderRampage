@@ -26,6 +26,9 @@ public class GunBarrel : MonoBehaviour
     private float shotForce;
     [SerializeField]
     private int bulletDamage;
+    //amount of scrap regained when discarded
+    public int scrapValue;
+
 
     //how long until the projectile gets destroyed if it collides with nothing
     [SerializeField]

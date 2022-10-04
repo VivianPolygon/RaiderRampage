@@ -5,19 +5,18 @@ using UnityEngine.UI;
 //Script used to control the stock of slot addons, and house their functions for MergineInputDetection to use in it's logic
 public class SlotAddonInventory : MonoBehaviour
 {
+    public static SlotAddonInventory instance;
+
     //static total count of addons in storage
     public static int slotAddonQuantity;
 
     //initial quantity of addons, sets slotAddonQuantity in start, then does nothing
-    [SerializeField]
     private int startingAddonQuantity;
     //maximum amout of addonslots, should be set to the maximum available (12 as of writing), will always total out to whats set, between stock and equipt
     //IE, if 5 are equipt and there is a total of 12, stock wont be able to excede 7
-    [SerializeField]
-    private int totalAddonSlots;
 
     //current amount equipt, used to create above behavior
-    private int currentAddonEquipt;
+    public static int currentAddonEquipt;
 
     //same as total, but set at start from total, used to prevent changes at runtime throwing the count off
     private int addonQuantityMax;
@@ -26,9 +25,6 @@ public class SlotAddonInventory : MonoBehaviour
     [SerializeField]
     private Transform dragIcon;
 
-    //text that shows current stock count
-    [SerializeField]
-    private Text addonNumberText;
     //coroutine used for dragging
     private Coroutine pickupCoroutine;
 
@@ -41,12 +37,28 @@ public class SlotAddonInventory : MonoBehaviour
     [SerializeField]
     private Image addonInventoryImage;
 
+    void Awake()
+    {
+        if (instance != null)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            instance = this;
+        }
+
+
+    }
+
     void Start()
     {
         DropAddon();
 
+        startingAddonQuantity = PlayerResourcesManager.instance.startingSlotAddonQuantity;
+
         currentAddonEquipt = 0;
-        addonQuantityMax = totalAddonSlots;
+        addonQuantityMax = PlayerResourcesManager.instance.addonCap; ;
         slotAddonQuantity = Mathf.Clamp(startingAddonQuantity, 0, addonQuantityMax);
 
         UpdateCountText();
@@ -56,7 +68,7 @@ public class SlotAddonInventory : MonoBehaviour
     //updates the text for the count, and updates color of the image
     private void UpdateCountText()
     {
-        addonNumberText.text = slotAddonQuantity.ToString();
+        UIEvents.instance.UpdateAddonCounts();
         SetColorFromCount(slotAddonQuantity);
     }
 
@@ -79,7 +91,7 @@ public class SlotAddonInventory : MonoBehaviour
 
             dragIcon.gameObject.SetActive(true);
             AddSlotAddons(-1);
-            pickupCoroutine = StartCoroutine(addonDrag());
+            pickupCoroutine = StartCoroutine(AddonDrag());
 
             return true;
         }
@@ -132,7 +144,7 @@ public class SlotAddonInventory : MonoBehaviour
             currentAddonEquipt--;
 
             dragIcon.gameObject.SetActive(true);
-            pickupCoroutine = StartCoroutine(addonDrag());
+            pickupCoroutine = StartCoroutine(AddonDrag());
 
             lockSlot.Locked(true);
 
@@ -142,7 +154,7 @@ public class SlotAddonInventory : MonoBehaviour
     }
 
     //coroutine used for dragging the icon
-    private IEnumerator addonDrag()
+    private IEnumerator AddonDrag()
     {
         while (true)
         {
