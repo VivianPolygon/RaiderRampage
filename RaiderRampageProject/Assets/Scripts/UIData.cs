@@ -73,6 +73,12 @@ public class UIData : MonoBehaviour
     public Text[] ScrapQuantityTexts;
     public Text[] AddonQuantityTexts;
 
+    [Header("Gunhead Swapping Images")]
+    public Image[] gunheadActiveImages;
+    public Color gunheadImageActiveColor;
+    public Color gunheadImageInactiveColor;
+
+
     //needed to make them disappear when they are irrelevent
     [Header("Upgrade Buttons")]
     [SerializeField]

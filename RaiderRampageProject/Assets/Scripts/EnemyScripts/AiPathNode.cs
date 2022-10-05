@@ -19,12 +19,25 @@ public class AiPathNode : MonoBehaviour
     private int generatedPathValue;
     private int weightsCheck;
 
+
+    public enum NodeMode
+    {
+        NextNode,
+        TakeCover
+    }
+
+    public NodeMode mode = NodeMode.NextNode;
+
+    //used to determine the range of cover time
+    public float minCoverTime = 1.5f;
+    public float maxCoverTime = 5f;
+
     private void Awake()
     {
         InitilizeWeights();
         HideNodeModel();
     }
-    
+
     private void InitilizeWeights()
     {
         weightTotal = 0;
@@ -54,7 +67,7 @@ public class AiPathNode : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("there are extra unneded node weights, make sure there is as many weights as their is next nodes, fixed on runtime");
+                Debug.LogWarning("there are extra unneded node weights, make sure there is as many weights as their is next nodes, fixed on runtime, GameObject Name : " + name);
                 weightsStorage = nodeWeights;
                 nodeWeights = new int[nextNodes.Length];
                 for (int i = 0; i < nextNodes.Length; i++)

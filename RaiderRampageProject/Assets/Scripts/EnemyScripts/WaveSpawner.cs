@@ -258,7 +258,7 @@ public class WaveSpawner : MonoBehaviour
             enemySpawn = Instantiate(enemiesToSpawn[i], spawnPoints[Random.Range(0, spawnPoints.Length)].position, transform.rotation);
             enemySpawn.transform.parent = enemyParent.transform;
             //temporary fix to the navmesh potentialy making enemys stuck, improve enemy AI later
-            Destroy(enemySpawn, 45f);
+            //Destroy(enemySpawn, 45f);
 
             yield return new WaitForSecondsRealtime(Random.Range(spawnDelayMin, spawnDelayMax)); 
         }

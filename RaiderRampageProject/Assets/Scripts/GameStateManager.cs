@@ -98,7 +98,7 @@ public class GameStateManager : MonoBehaviour
     private void BeginShootingState(bool turn)
     {
         PlayerResourcesManager.ammoRegen = true;
-        GunData.instance.SwitchGunHeads(GunData.instance.currentHeadNumber);
+        GunData.instance.ScrollGunHead(0);
         if(turn)
         {
             StartCoroutine(RotatePlayerForward());
@@ -119,8 +119,9 @@ public class GameStateManager : MonoBehaviour
         switch ((InventoryUIState)state)
         {
             case InventoryUIState.MergeScreen:
-                UIData.instance.upgradesCanvas.gameObject.GetComponent<BoxCollider>().enabled = false;
+
                 UIData.instance.upgradesCanvas.enabled = false;
+
                 for (float i = 0; i < 1; i += Time.deltaTime)
                 {
                     Camera.main.transform.Rotate(0, (130 - startingRotation) * Time.deltaTime, 0);
@@ -130,12 +131,12 @@ public class GameStateManager : MonoBehaviour
 
                 Camera.main.transform.rotation = Quaternion.AngleAxis(130, Camera.main.transform.up);
 
-                UIData.instance.mergeingCanvas.gameObject.GetComponent<BoxCollider>().enabled = true;
+                UIData.instance.mergeingCanvas.renderMode = RenderMode.ScreenSpaceCamera;
                 UIData.instance.mergeingCanvas.enabled = true;
                 break;
 
             case InventoryUIState.UpgradeScreen:
-                UIData.instance.mergeingCanvas.gameObject.GetComponent<BoxCollider>().enabled = false;
+
                 UIData.instance.mergeingCanvas.enabled = false;
 
                 for (float i = 0; i < 1; i += Time.deltaTime)
@@ -147,7 +148,7 @@ public class GameStateManager : MonoBehaviour
 
                 Camera.main.transform.rotation = Quaternion.AngleAxis(230, Camera.main.transform.up);
 
-                UIData.instance.upgradesCanvas.gameObject.GetComponent<BoxCollider>().enabled = true;
+                UIData.instance.upgradesCanvas.renderMode = RenderMode.ScreenSpaceCamera;
                 UIData.instance.upgradesCanvas.enabled = true;
                 break;
             default:
@@ -188,13 +189,20 @@ public class GameStateManager : MonoBehaviour
         Camera.main.transform.rotation = Quaternion.AngleAxis(0, Camera.main.transform.up);
 
     }
+
+    //sets both inventory canvases to active or inactive, used for switching to the shooting state
     private void SetInventoryCanvases(bool active)
     {
-        UIData.instance.mergeingCanvas.gameObject.GetComponent<BoxCollider>().enabled = active;
-        UIData.instance.mergeingCanvas.gameObject.GetComponent<BoxCollider>().enabled = active;
+
+        if (!active)
+        {
+            UIData.instance.mergeingCanvas.renderMode = RenderMode.WorldSpace;
+            UIData.instance.upgradesCanvas.renderMode = RenderMode.WorldSpace;
+        }
 
         UIData.instance.mergeingCanvas.enabled = active;
         UIData.instance.upgradesCanvas.enabled = active;
+
     }
 
 

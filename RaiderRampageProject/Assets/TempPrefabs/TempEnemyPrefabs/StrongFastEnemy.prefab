@@ -218,6 +218,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingDestination: {fileID: 0}
+  lastNode: {fileID: 0}
+  nextNode: {fileID: 0}
+  velocityResetTimeThreshold: 10
+  takesCover: 0
+  timeSenseNewNode: 0
 --- !u!54 &4967751668195392277
 Rigidbody:
   m_ObjectHideFlags: 0

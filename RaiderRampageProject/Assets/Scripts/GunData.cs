@@ -67,6 +67,8 @@ public class GunData : MonoBehaviour
     [HideInInspector]
     public int currentHeadNumber;
 
+    //total amount of gunheads, defaulted to 3 for now
+    private int gunHeadQuantity;
 
 
     private void Awake()
@@ -82,6 +84,7 @@ public class GunData : MonoBehaviour
         }
 
         currentHeadNumber = startingGunHead;
+        gunHeadQuantity = 3;
     }
 
     private void Update()
@@ -305,4 +308,34 @@ public class GunData : MonoBehaviour
         RefreshBarrelQuantitiesList();
     }
 
+    //used on arrow buttons to change gunhead
+    public void ScrollGunHead(int direction)
+    {
+        direction = Mathf.Clamp(direction, -1, 1);
+        if(currentHeadNumber + direction > gunHeadQuantity - 1)
+        {
+            SwitchGunHeads(0);
+        }
+        else if(currentHeadNumber + direction < 0)
+        {
+            SwitchGunHeads(gunHeadQuantity - 1);
+        }
+        else
+        {
+            SwitchGunHeads(Mathf.Clamp(currentHeadNumber + direction, 0, gunHeadQuantity - 1));
+        }
+
+        for (int i = 0; i < gunHeadQuantity; i++)
+        {
+            if(i == currentHeadNumber)
+            {
+                UIData.instance.gunheadActiveImages[i].color = UIData.instance.gunheadImageActiveColor;
+            }
+            else
+            {
+                UIData.instance.gunheadActiveImages[i].color = UIData.instance.gunheadImageInactiveColor;
+            }
+        }
+
+    } 
 }
