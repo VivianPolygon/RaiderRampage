@@ -102,6 +102,7 @@ public class WaveSpawner : MonoBehaviour
         SetDifficulty(waveDifficulty);
         SetWaveValues(waveMaxValue, waveMaxQuantity);
         SetSpawnList();
+
     }
 
     private void SetWaveThreshold(int newThreshhold)
@@ -294,7 +295,7 @@ public class WaveSpawner : MonoBehaviour
 
         if(enemiesAlive / (float)totalEnemiesInWave == 0)
         {
-            waveActive = false;
+            GameStateManager.instance.UpdateGameState((int)GameStateManager.Gamestate.BetweenWaves);
         }
         return enemiesAlive / (float)totalEnemiesInWave;
     }

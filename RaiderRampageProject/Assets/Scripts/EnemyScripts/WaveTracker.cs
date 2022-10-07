@@ -16,9 +16,6 @@ public class WaveTracker : MonoBehaviour
     [HideInInspector]
     public int currentWave = 0;
 
-    [SerializeField]
-    private GameObject WaveButton;
-
     private void Awake()
     {
         if(instance == null)
@@ -31,23 +28,10 @@ public class WaveTracker : MonoBehaviour
         }
     }
 
-
-    private void Update()
+    private void Start()
     {
-        if(WaveSpawner.waveActive)
-        { 
-            if(WaveButton.activeSelf)
-            {
-                WaveButton.SetActive(false);
-            }
-        }
-        else
-        {
-            if(!WaveButton.activeSelf)
-            {
-                WaveButton.SetActive(true);
-            }
-        }
+        //subscription for game state manager
+        GameStateManager.instance.onWaveStart += StartWave;
     }
 
     public void StartWave()
@@ -57,6 +41,5 @@ public class WaveTracker : MonoBehaviour
         UIData.instance.SetWaveText(currentWave + 1);
         currentWave = Mathf.Clamp(currentWave + 1, 0, waves.Length - 1);
     }
-
 
 }

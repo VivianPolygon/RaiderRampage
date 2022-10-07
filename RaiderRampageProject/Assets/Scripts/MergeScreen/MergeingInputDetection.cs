@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 //script used for tracking iputs during the merge phase of the game, as well as applying logic to those inputs from functions using raycasts
 public class MergeingInputDetection : MonoBehaviour
 {
+    public static MergeingInputDetection instance;
+
     //instance of the actionmap script, detects the first touch on the screen only, tracks the tap down and release
     public static TapInput tapInput;
     //raycast variables
@@ -28,6 +30,16 @@ public class MergeingInputDetection : MonoBehaviour
 
     private void Awake()
     {
+        if(instance != null)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            instance = this;
+        }
+
+
         //initilizes
         tapInput = new TapInput();
         barrelPickedUp = false;
@@ -149,6 +161,23 @@ public class MergeingInputDetection : MonoBehaviour
 
             }
 
+        }
+
+        //sets the flags back to false for when the logic runs next
+        barrelPickedUp = false;
+        slotAddonPickedUp = false;
+    }
+
+    //used for if the merging screen is botted out of due to the timer
+    public void MergingScreenCanceled()
+    {
+        if(barrelPickedUp)
+        {
+            currentBarrelSlot.DropSlot();
+        }
+        if (slotAddonPickedUp)
+        {
+            addonInventory.DropAddon();
         }
 
         //sets the flags back to false for when the logic runs next

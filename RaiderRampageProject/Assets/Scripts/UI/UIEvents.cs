@@ -42,4 +42,6 @@ public class UIEvents : MonoBehaviour
     {
         onUpdateAll?.Invoke();
     }
+
+
 }

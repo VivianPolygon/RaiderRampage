@@ -121,13 +121,15 @@ public class EnemyAIMovement : MonoBehaviour
         {
             timeSenseNewNode += Time.deltaTime;
 
-            //resets velocity every 10 seconds sense node started
+            //resets velocity every x seconds(defaulted to 10) sense node started, fixes enemies locking up
             if(timeSenseNewNode > velocityResetTimeThreshold * velocityResetCount)
             {
                 GetComponent<Rigidbody>().velocity = Vector3.zero;
 
                 velocityResetCount++;
             }
+            //sets target node to the previous node every x seconds(defaulted to 25), fixes potential gridlock from
+            //enemies blocking other enemies
             if(timeSenseNewNode > moveToLastNodeTimeThreshold && !nodeReset)
             {
                 navmeshAgent.destination = lastNode.position;

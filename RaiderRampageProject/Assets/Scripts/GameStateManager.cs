@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 //Script that controls the overall gamestate
 public class GameStateManager : MonoBehaviour
 {
@@ -10,9 +12,24 @@ public class GameStateManager : MonoBehaviour
     //initial state, set in the inspector
     [SerializeField]
     private Gamestate startingState;
+    //state of the level, used to determine if its a level or the shooting range
+    [SerializeField]
+    private LevelMode levelMode = LevelMode.StandardLevel;
 
-    //TEMPORARY
-    //used to control how the coroutines for rotating work
+
+    public event Action onWaveEnd;
+    public event Action onWaveStart;
+
+    public void WaveEnd()
+    {
+        onWaveEnd?.Invoke();
+        //Debug.log("Wave Ended");
+    }
+    public void WaveStart()
+    {
+        onWaveStart?.Invoke();
+        //Debug.log("Wave Started");
+    }
 
     //enum for gamestates
     public enum Gamestate
@@ -26,6 +43,11 @@ public class GameStateManager : MonoBehaviour
     {
         MergeScreen,
         UpgradeScreen
+    }
+    public enum LevelMode
+    {
+        StandardLevel,
+        ShootingRange
     }
 
     //current gamestate
@@ -54,9 +76,7 @@ public class GameStateManager : MonoBehaviour
         //sets the initial state from input in the inspector
 
 
-        //sets gamestate to shooting by default
-        SetInventoryCanvases(false);
-        BeginShootingState(false);
+        InitilizeFromLevelMode();
     }
 
     //switch statement used to update the gamestate
@@ -64,27 +84,61 @@ public class GameStateManager : MonoBehaviour
     {
         gameState = (Gamestate)newState;
 
-        switch (gameState)
+        switch (levelMode)
         {
-            case Gamestate.Shooting:
-                SetInventoryCanvases(false);
-                BeginShootingState(true);
-                break;
-            case Gamestate.BetweenWaves:
-                BeginShootingState(true);
-                break;
-            case Gamestate.InInventory:
-                UIEvents.instance.UpdateAll();
-                UIData.instance.shootingControlsCanvas.enabled = false;
-                UpdateInventoryState(0);
-                break;
-            case Gamestate.Paused:
-                PlayerResourcesManager.ammoRegen = false;
+            case LevelMode.StandardLevel:
+                //controls standard levels flow
+                switch (gameState)
+                {
+                    case Gamestate.Shooting:
+                        SetInventoryCanvases(false);
+                        BeginShootingState(true);
+                        WaveStart();
+                        break;
+                    case Gamestate.BetweenWaves:
+                        WaveEnd();
+                        break;
+                    case Gamestate.InInventory:
+                        UIEvents.instance.UpdateAll();
+                        UIData.instance.shootingControlsCanvas.enabled = false;
+                        UpdateInventoryState(0);
+                        break;
+                    case Gamestate.Paused:
+                        PlayerResourcesManager.ammoRegen = false;
 
+                        break;
+                    default:
+                        break;
+                }
+                break;
+                //controls shooting range's flow
+            case LevelMode.ShootingRange:
+                switch (gameState)
+                {
+                    case Gamestate.Shooting:
+                        SetInventoryCanvases(false);
+                        BeginShootingState(true);
+                        break;
+                    case Gamestate.BetweenWaves:
+                        break;
+                    case Gamestate.InInventory:
+                        UIEvents.instance.UpdateAll();
+                        UIData.instance.shootingControlsCanvas.enabled = false;
+                        UpdateInventoryState(0);
+                        break;
+                    case Gamestate.Paused:
+                        PlayerResourcesManager.ammoRegen = false;
+
+                        break;
+                    default:
+                        break;
+                }
                 break;
             default:
                 break;
         }
+
+
     }
 
     //function called when switching to the merge state
@@ -206,4 +260,19 @@ public class GameStateManager : MonoBehaviour
     }
 
 
+    private void InitilizeFromLevelMode()
+    {
+        switch (levelMode)
+        {
+            case LevelMode.StandardLevel:
+                //sets gamestate to shooting by default
+                UpdateGameState((int)Gamestate.Shooting);
+                break;
+            case LevelMode.ShootingRange:
+                UpdateGameState((int)Gamestate.Shooting);
+                break;
+            default:
+                break;
+        }
+    }
 }

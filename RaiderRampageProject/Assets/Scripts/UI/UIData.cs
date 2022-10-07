@@ -70,8 +70,11 @@ public class UIData : MonoBehaviour
     private Text waveText;
 
     [Header("UpgradeResourcesTexts")]
-    public Text[] ScrapQuantityTexts;
-    public Text[] AddonQuantityTexts;
+    public Text[] scrapQuantityTexts;
+    public Text[] addonQuantityTexts;
+
+    [Header("Indicators For Time Remaining for Merging/Upgrading")]
+    public Image[] timerIndicators;
 
     [Header("Gunhead Swapping Images")]
     public Image[] gunheadActiveImages;
@@ -83,6 +86,13 @@ public class UIData : MonoBehaviour
     [Header("Upgrade Buttons")]
     [SerializeField]
     public Button slotAddonButton;
+
+    [Header("Buttons Visible Only After a Wave")]
+    public GameObject nextWaveButton;
+    public GameObject mergeGunsButton;
+
+
+
 
     //establishes the singleton, initilizes spritesheets from resources folder
     private void Awake()
@@ -110,9 +120,12 @@ public class UIData : MonoBehaviour
 
         scrapBarrelArrowsImage.sprite = SetSpriteFromLargeSheet(scrapBarrelArrowsSpriteNumber);
 
-        //event subscriptions
+        //event subscriptions for UI events
         UIEvents.instance.onUpdateScrapCounts += UpdateScrapQuantityTexts;
         UIEvents.instance.onUpdateAddonCounts += UpdateAddonTexts;
+        //event subscriptions for GameStateManger events
+        GameStateManager.instance.onWaveEnd += ShowPostWaveUI;
+        GameStateManager.instance.onWaveStart += HidePostWaveUI;
     }
 
     //updates 1 ammo slider based on input
@@ -162,16 +175,50 @@ public class UIData : MonoBehaviour
 
     public void UpdateScrapQuantityTexts()
     {
-        for (int i = 0; i < ScrapQuantityTexts.Length; i++)
+        for (int i = 0; i < scrapQuantityTexts.Length; i++)
         {
-            ScrapQuantityTexts[i].text = ("Scrap: <size=40><color=white><b>" + PlayerResourcesManager.scrap.ToString() +  "</b></color></size>");
+            scrapQuantityTexts[i].text = ("Scrap: <size=40><color=white><b>" + PlayerResourcesManager.scrap.ToString() +  "</b></color></size>");
         }
     }
     public void UpdateAddonTexts()
     {
-        for (int i = 0; i < AddonQuantityTexts.Length; i++)
+        for (int i = 0; i < addonQuantityTexts.Length; i++)
         {
-            AddonQuantityTexts[i].text = SlotAddonInventory.slotAddonQuantity.ToString();
+            addonQuantityTexts[i].text = SlotAddonInventory.slotAddonQuantity.ToString();
         }
     }
+
+    public void HidePostWaveUI()
+    {
+        if(nextWaveButton != null)
+        {
+            nextWaveButton.SetActive(false);
+        }
+        if(mergeGunsButton != null)
+        {
+            mergeGunsButton.SetActive(false);
+        }
+        for (int i = 0; i < timerIndicators.Length; i++)
+        {
+            timerIndicators[i].gameObject.SetActive(false);
+        }
+    }
+
+    public void ShowPostWaveUI()
+    {
+        if (nextWaveButton != null)
+        {
+            nextWaveButton.SetActive(true);
+        }
+        if (mergeGunsButton != null)
+        {
+            mergeGunsButton.SetActive(true);
+        }
+        for (int i = 0; i < timerIndicators.Length; i++)
+        {
+            timerIndicators[i].gameObject.SetActive(true);
+        }
+    }
+
+    
 }
