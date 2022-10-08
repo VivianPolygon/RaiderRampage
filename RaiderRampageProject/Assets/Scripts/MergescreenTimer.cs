@@ -21,7 +21,10 @@ public class MergescreenTimer : MonoBehaviour
     {
         timerCoroutine = StartCoroutine(Timer());
     }
-
+    private void OnDisable()
+    {
+        GameStateManager.instance.onWaveEnd -= StartTimer;
+    }
     private IEnumerator Timer()
     {
         for (float i = 0; i < timerDuration; i += Time.deltaTime)

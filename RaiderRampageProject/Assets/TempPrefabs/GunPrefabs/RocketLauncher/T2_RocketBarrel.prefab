@@ -97,14 +97,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barrelType: 5
   barrelTier: 1
+  bulletPattern: 0
   projectilePrefab: {fileID: 5325694384607462396, guid: 88db48abae98bc14aa96e47711601528, type: 3}
   projectileSpawnpoint: {fileID: 6044093332685321672}
-  shotsPerSecond: 0.5
+  shotsPerSecond: 1.5
   ammoDrain: 1
   shotForce: 420
   bulletDamage: 25
   scrapValue: 4
   projectileDestroyTime: 3
+  bulletSpreadAmount: 6
+  spreadShotQuantity: 0
 --- !u!1 &6044093332685321673
 GameObject:
   m_ObjectHideFlags: 0

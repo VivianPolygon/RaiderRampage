@@ -57,8 +57,8 @@ public class GunData : MonoBehaviour
     public GameObject spinningGunPiece;
     //spin speed for the gun
     public float maxSpinSpeed;
-    //used for spin speed caculations dependent on barrel ammount
-    private float spinSpeedPercent;
+    //used for spin speed caculations dependent on barrel ammount, also used for spread caculations in GunBarrel
+    public float spinSpeedPercent;
     [SerializeField]
     private float spinSpeedStartupTime;
 

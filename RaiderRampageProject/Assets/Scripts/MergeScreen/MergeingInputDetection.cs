@@ -56,8 +56,9 @@ public class MergeingInputDetection : MonoBehaviour
     {
         //disables the tap script incase this is ever disabled
         tapInput.Disable();
-    }
 
+    }
+    
     private void Start()
     {
         //subscribes to the start and cancel events of the first touch on the screen
@@ -145,6 +146,7 @@ public class MergeingInputDetection : MonoBehaviour
                 else
                 {
                     currentBarrelSlot.DropSlot();
+
                 }
             }
             //if the addon slot flag was set, this runs

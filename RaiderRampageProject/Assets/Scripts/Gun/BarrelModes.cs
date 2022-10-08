@@ -9,11 +9,16 @@ public enum BarrelType
     RocketLauncher,
     Empty
 }
-
 public enum BarrelTeir
 {
     Teir1,
     Tier2,
     Tier3,
     Untiered
+}
+
+public enum BarrelShootingPattern
+{
+    Standard,
+    Spread,
 }

@@ -6,8 +6,10 @@ public class GunBarrel : MonoBehaviour
 {
     //used to determine what type of barrel this is, used for ammo caculations
     public BarrelType barrelType;
-
     public BarrelTeir barrelTier;
+
+    public BarrelShootingPattern bulletPattern;
+
 
     //prefab for projectile, and its spawnpoint transform
     [SerializeField]
@@ -39,6 +41,13 @@ public class GunBarrel : MonoBehaviour
     private GameObject shot;
     private bool canFire;
 
+    //variables used to control how the bullets shoot
+    [SerializeField]
+    private float bulletSpreadAmount;
+    [Header("only applyed if bulletPattern is set to spread")]
+    [SerializeField]
+    private int spreadShotQuantity;
+
 
     private void Awake()
     {
@@ -46,6 +55,19 @@ public class GunBarrel : MonoBehaviour
         t = 0;
         canFire = false;
     }
+
+    private void Start()
+    {
+        if (projectilePrefab.TryGetComponent(out Bullet bullet))
+        {
+            bullet.damage = bulletDamage;
+        }
+        if (projectilePrefab.TryGetComponent(out Explosive explosive))
+        {
+            explosive.explosionDamage = bulletDamage;
+        }
+    }
+
     void Update()
     {
         //if the fire button is held, checks ammo stocks to determine if the barrel can fire
@@ -104,14 +126,32 @@ public class GunBarrel : MonoBehaviour
             if(t > (1 / shotsPerSecond) && canFire)
             {
                 t = 0;
-                shot = Instantiate(projectilePrefab, projectileSpawnpoint.transform.position, transform.rotation);
-                shot.transform.LookAt(GunData.instance.cursorPositon);
-                shot.GetComponent<Rigidbody>().AddForce(shot.transform.forward * shotForce, ForceMode.Impulse);
-                if (shot.TryGetComponent(out Bullet bulletScript))
+                Vector3 appliedSpread = Vector3.zero;
+                switch (bulletPattern)
                 {
-                    bulletScript.damage = bulletDamage;
+
+                    case BarrelShootingPattern.Standard:
+                        shot = Instantiate(projectilePrefab, projectileSpawnpoint.transform.position, transform.rotation);
+                        shot.transform.LookAt(GunData.instance.cursorPositon);
+                        shot.GetComponent<Rigidbody>().AddForce(((shot.transform.forward * shotForce ) + (Random.onUnitSphere * bulletSpreadAmount) * GunData.instance.spinSpeedPercent), ForceMode.Impulse);
+
+                        Destroy(shot, projectileDestroyTime);
+
+                        break;
+                    case BarrelShootingPattern.Spread:
+                        for (int i = 0; i < spreadShotQuantity; i++)
+                        {
+                            shot = Instantiate(projectilePrefab, projectileSpawnpoint.transform.position, transform.rotation);
+                            shot.transform.LookAt(GunData.instance.cursorPositon);
+                            shot.GetComponent<Rigidbody>().AddForce((shot.transform.forward * shotForce)+ (Random.onUnitSphere * bulletSpreadAmount), ForceMode.Impulse);
+                            Destroy(shot, projectileDestroyTime);
+                        }
+
+                        break;
+                    default:
+                        break;
                 }
-                Destroy(shot, projectileDestroyTime);
+
 
                 
                 switch (barrelType)
@@ -153,5 +193,14 @@ public class GunBarrel : MonoBehaviour
         }
     }
 
+    private Vector3 RandomTargetFromSpread(Vector3 targetPosition)
+    {
+        Vector3 RandomVector;
 
+        RandomVector.x = UnityEngine.Random.Range(targetPosition.x - bulletSpreadAmount, targetPosition.x + bulletSpreadAmount);
+        RandomVector.y = UnityEngine.Random.Range(targetPosition.y - bulletSpreadAmount, targetPosition.y + bulletSpreadAmount);
+        RandomVector.z = UnityEngine.Random.Range(targetPosition.z - bulletSpreadAmount, targetPosition.z + bulletSpreadAmount);
+
+        return RandomVector;
+    }
 }

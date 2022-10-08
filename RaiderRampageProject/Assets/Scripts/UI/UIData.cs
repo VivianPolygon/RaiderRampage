@@ -128,6 +128,16 @@ public class UIData : MonoBehaviour
         GameStateManager.instance.onWaveStart += HidePostWaveUI;
     }
 
+    private void OnDisable()
+    {
+        //event unsubscriptions for UI events
+        UIEvents.instance.onUpdateScrapCounts -= UpdateScrapQuantityTexts;
+        UIEvents.instance.onUpdateAddonCounts -= UpdateAddonTexts;
+        //event unsubscriptions for GameStateManger events
+        GameStateManager.instance.onWaveEnd -= ShowPostWaveUI;
+        GameStateManager.instance.onWaveStart -= HidePostWaveUI;
+    }
+
     //updates 1 ammo slider based on input
     public void UpdateAmmoSlider(int slidernum, int maxCapacity, int currentCapacity)
     {
@@ -165,7 +175,10 @@ public class UIData : MonoBehaviour
 
     public void SetWaveBar(float waveProgressPercent)
     {
-        waveBarSlider.value = waveProgressPercent;
+        if(waveBarSlider != null)
+        {
+            waveBarSlider.value = waveProgressPercent;
+        }
     }
 
     public void SetWaveText(int waveNumber)
@@ -216,7 +229,10 @@ public class UIData : MonoBehaviour
         }
         for (int i = 0; i < timerIndicators.Length; i++)
         {
-            timerIndicators[i].gameObject.SetActive(true);
+            if(timerIndicators[i] != null)
+            {
+                timerIndicators[i].gameObject.SetActive(true);
+            }
         }
     }
 

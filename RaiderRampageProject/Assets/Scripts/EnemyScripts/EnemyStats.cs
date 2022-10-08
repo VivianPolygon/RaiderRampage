@@ -24,16 +24,19 @@ public class EnemyStats : MonoBehaviour
     {
         if(other.TryGetComponent(out Bullet bullet))
         {
-            health -= Mathf.Clamp((bullet.damage - armour), 1, bullet.damage);
-            TakeDamage();
+
+            TakeDamage(bullet.damage);
 
             Destroy(bullet.gameObject);
         }
     }
 
-    private void TakeDamage()
+
+    public void TakeDamage(int damageAmount)
     {
-        if(health <= 0)
+        health -= Mathf.Clamp((damageAmount - armour), 1, damageAmount);
+
+        if (health <= 0)
         {
             Destroy(this.gameObject);
         }

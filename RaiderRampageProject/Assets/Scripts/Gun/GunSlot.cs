@@ -44,34 +44,52 @@ public class GunSlot : MonoBehaviour
         //updates dependent on enum data from the slots from the UI
         switch (StaticGunData.instance.workshopGunHeads[headNum].headSlots[arrayPosition].slotType)
             {               
-            case BarrelType.SMG:                   
+            case BarrelType.SMG:
                 slotBarrel = Instantiate(StaticGunData.instance.SMGPrefabs[(int)StaticGunData.instance.workshopGunHeads[headNum].headSlots[arrayPosition].slotTier], transform.position, transform.rotation);                   
-                slotBarrel.transform.parent = transform;                    
+                slotBarrel.transform.parent = transform;
+
+                if ((int)StaticGunData.instance.workshopGunHeads[headNum].headSlots[arrayPosition].slotTier > 2) //warning that makes sure all barrels have tiers
+                { Debug.LogWarning("Barrel In inventory is unteired and will cause errors, make sure initial barrels are all set to have tiers"); }
                 break;
                
             case BarrelType.Pistol:                   
                 slotBarrel = Instantiate(StaticGunData.instance.PistolPrefabs[(int)StaticGunData.instance.workshopGunHeads[headNum].headSlots[arrayPosition].slotTier], transform.position, transform.rotation);                  
-                slotBarrel.transform.parent = transform;                
+                slotBarrel.transform.parent = transform;
+
+                if ((int)StaticGunData.instance.workshopGunHeads[headNum].headSlots[arrayPosition].slotTier > 2) //warning that makes sure all barrels have tiers
+                { Debug.LogWarning("Barrel In inventory is unteired and will cause errors, make sure initial barrels are all set to have tiers"); }
                 break;
                
             case BarrelType.Shotgun:                 
                 slotBarrel = Instantiate(StaticGunData.instance.ShotGunPrefabs[(int)StaticGunData.instance.workshopGunHeads[headNum].headSlots[arrayPosition].slotTier], transform.position, transform.rotation);                 
-                slotBarrel.transform.parent = transform;                  
+                slotBarrel.transform.parent = transform;
+
+                if ((int)StaticGunData.instance.workshopGunHeads[headNum].headSlots[arrayPosition].slotTier > 2) //warning that makes sure all barrels have tiers
+                { Debug.LogWarning("Barrel In inventory is unteired and will cause errors, make sure initial barrels are all set to have tiers"); }
                 break;
                
             case BarrelType.MachineGun:                  
                 slotBarrel = Instantiate(StaticGunData.instance.MachineGunPrefabs[(int)StaticGunData.instance.workshopGunHeads[headNum].headSlots[arrayPosition].slotTier], transform.position, transform.rotation);                 
-                slotBarrel.transform.parent = transform;                  
+                slotBarrel.transform.parent = transform;
+
+                if ((int)StaticGunData.instance.workshopGunHeads[headNum].headSlots[arrayPosition].slotTier > 2) //warning that makes sure all barrels have tiers
+                { Debug.LogWarning("Barrel In inventory is unteired and will cause errors, make sure initial barrels are all set to have tiers"); }
                 break;
                 
             case BarrelType.Sniper:                  
                 slotBarrel = Instantiate(StaticGunData.instance.SniperPrefabs[(int)StaticGunData.instance.workshopGunHeads[headNum].headSlots[arrayPosition].slotTier], transform.position, transform.rotation);                   
-                slotBarrel.transform.parent = transform;                 
+                slotBarrel.transform.parent = transform;
+
+                if ((int)StaticGunData.instance.workshopGunHeads[headNum].headSlots[arrayPosition].slotTier > 2) //warning that makes sure all barrels have tiers
+                { Debug.LogWarning("Barrel In inventory is unteired and will cause errors, make sure initial barrels are all set to have tiers"); }
                 break;
               
             case BarrelType.RocketLauncher:                  
                 slotBarrel = Instantiate(StaticGunData.instance.RocketLauncherPrefabs[(int)StaticGunData.instance.workshopGunHeads[headNum].headSlots[arrayPosition].slotTier], transform.position, transform.rotation);                  
-                slotBarrel.transform.parent = transform;                
+                slotBarrel.transform.parent = transform;
+
+                if ((int)StaticGunData.instance.workshopGunHeads[headNum].headSlots[arrayPosition].slotTier > 2) //warning that makes sure all barrels have tiers
+                { Debug.LogWarning("Barrel In inventory is unteired and will cause errors, make sure initial barrels are all set to have tiers"); }
                 break;
                 
             case BarrelType.Empty:                
