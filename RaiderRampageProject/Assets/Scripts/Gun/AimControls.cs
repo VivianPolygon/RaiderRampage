@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
+using UnityEngine.InputSystem.OnScreen;
+
 //Script that controls the way the aiming cursor behaves
 public class AimControls : MonoBehaviour
 {
@@ -31,12 +34,18 @@ public class AimControls : MonoBehaviour
     //controlstick's rect transform
     [SerializeField]
     private RectTransform controlStickRect;
+    [SerializeField]
+    private OnScreenStick stickScript;
 
 
     //raycast for the cursor
     private RaycastHit cursorDetect;
     //vector3 used to caculate and limit gun rotation
     private Vector3 gunRotationEuler;
+
+    [Header("CurveForMovement")]
+    [SerializeField]
+    private AnimationCurve aimSpeedCurve;
 
 
     private void Start()
@@ -54,10 +63,9 @@ public class AimControls : MonoBehaviour
 
     private void AimGun()
     {
-
-        GunData.instance.gunModelBody.transform.Rotate((-controlStickRect.anchoredPosition.y * Time.deltaTime) * verticalAimSpeed,
-            (controlStickRect.anchoredPosition.x * Time.deltaTime) * horizontalAimSpeed,  
-            0);
+        float aimSpeedX = (Time.deltaTime * verticalAimSpeed) * (aimSpeedCurve.Evaluate(Mathf.Abs(-controlStickRect.anchoredPosition.y / stickScript.movementRange)) * Mathf.Sign(-controlStickRect.anchoredPosition.y));
+        float aimSpeedY = (Time.deltaTime * horizontalAimSpeed) * (aimSpeedCurve.Evaluate(Mathf.Abs(controlStickRect.anchoredPosition.x / stickScript.movementRange)) * Mathf.Sign(controlStickRect.anchoredPosition.x));
+        GunData.instance.gunModelBody.transform.Rotate(aimSpeedX, aimSpeedY, 0);
 
         gunRotationEuler = GunData.instance.gunModelBody.transform.localEulerAngles;
 

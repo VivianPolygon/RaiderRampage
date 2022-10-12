@@ -189,6 +189,7 @@ MonoBehaviour:
   projectileDestroyTime: 3
   bulletSpreadAmount: 6
   spreadShotQuantity: 0
+  purchasePrice: 20
 --- !u!1 &6044093332685321673
 GameObject:
   m_ObjectHideFlags: 0

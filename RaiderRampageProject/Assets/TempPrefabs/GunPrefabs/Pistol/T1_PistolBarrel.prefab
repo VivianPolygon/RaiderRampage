@@ -189,3 +189,4 @@ MonoBehaviour:
   projectileDestroyTime: 5
   bulletSpreadAmount: 3
   spreadShotQuantity: 0
+  purchasePrice: 6

@@ -97,6 +97,7 @@ public class GameStateManager : MonoBehaviour
                         break;
                     case Gamestate.BetweenWaves:
                         WaveEnd();
+                        UIEvents.instance.UpdateAll();
                         break;
                     case Gamestate.InInventory:
                         UIEvents.instance.UpdateAll();

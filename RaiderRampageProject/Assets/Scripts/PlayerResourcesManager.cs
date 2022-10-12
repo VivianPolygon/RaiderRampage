@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//Script that tracks player resources like ammo and scrap
+//Script that tracks player resources like ammo and scrap, as well as houses functions needed for the upgrade screen
 public class PlayerResourcesManager : MonoBehaviour
 {
     public static bool ammoRegen;
@@ -220,34 +220,60 @@ public class PlayerResourcesManager : MonoBehaviour
         }
     }
 
-    //adds to the first slot of the inactive inventory array (slots that are for storage and aren't on any gunheads)
-    public void AddBarrelToInventory(int barrelNumber, int barrelTier)
-    {
-        //prevents tiers that dont exsist being added
-        barrelTier = Mathf.Clamp(barrelTier, 0, 2);
-        barrelNumber = Mathf.Clamp(barrelNumber, 0, 5);
-
-        //loops through inventory, adds barrel from inputs to the first slot available, the returns out
-        foreach(WorkshopBarrelSlot slot in inactiveInventoryBarrelSlots)
-        {
-            if(slot.slotType == BarrelType.Empty)
-            {
-                slot.slotType = (BarrelType)barrelNumber;
-                slot.slotTier = (BarrelTeir)barrelTier;
-
-                slot.UpdateDisplay();
-
-                return;
-            }
-        }
-    }
-
     //Delete once tested, and above is implemented in normal gameplay, only needed for debugging
     //same function as abouve, however teir is defaulted to 1, buttons in unity can only have one parameter
-    public void AddBarrelToInventoryButton(int barrelNumber)
+    public void CreateBarrel(int barrelNumber)
     {
         //prevents tiers that dont exsist being added
         barrelNumber = Mathf.Clamp(barrelNumber, 0, 5);
+
+        //charges the player for their purchase, returns out if they dont have enough
+        switch ((BarrelType)barrelNumber)
+        {
+            case BarrelType.SMG:
+                if(!PriceCheckAndCharge(StaticGunData.instance.SMGPrefabs[0].GetComponent<GunBarrel>().purchasePrice))
+                {
+                    return;
+                }
+                break;
+            case BarrelType.Pistol:
+                if (!PriceCheckAndCharge(StaticGunData.instance.PistolPrefabs[0].GetComponent<GunBarrel>().purchasePrice))
+                {
+                    return;
+                }
+                break;
+            case BarrelType.Shotgun:
+                if (!PriceCheckAndCharge(StaticGunData.instance.ShotGunPrefabs[0].GetComponent<GunBarrel>().purchasePrice))
+                {
+                    return;
+                }
+                break;
+            case BarrelType.MachineGun:
+                if (!PriceCheckAndCharge(StaticGunData.instance.MachineGunPrefabs[0].GetComponent<GunBarrel>().purchasePrice))
+                {
+                    return;
+                }
+                break;
+            case BarrelType.Sniper:
+                if (!PriceCheckAndCharge(StaticGunData.instance.SniperPrefabs[0].GetComponent<GunBarrel>().purchasePrice))
+                {
+                    return;
+                }
+                break;
+            case BarrelType.RocketLauncher:
+                if (!PriceCheckAndCharge(StaticGunData.instance.RocketLauncherPrefabs[0].GetComponent<GunBarrel>().purchasePrice))
+                {
+                    return;
+                }
+                break;
+            case BarrelType.Empty:
+                break;
+            default:
+                break;
+        }
+
+        UIEvents.instance.UpdateScrapCounts();
+        UIEvents.instance.CheckCosts();
 
         //loops through inventory, adds barrel from inputs to the first slot available, the returns out
         foreach (WorkshopBarrelSlot slot in inactiveInventoryBarrelSlots)
@@ -259,12 +285,39 @@ public class PlayerResourcesManager : MonoBehaviour
 
                 slot.UpdateDisplay();
 
+                UIEvents.instance.CheckBarrelInventorySpace();
                 return;
             }
+
         }
     }
 
-    public void PurchaseAddon()
+    public void RepairBarricade()
+    {
+        if(Barricade.instance != null)
+        {
+            if(PriceCheckAndCharge(Barricade.instance.CaculateRepairCost()))
+            {
+                Barricade.instance.BarricadeTakeDamage(-Barricade.instance.repairAmount);
+            }
+
+        }
+    }
+
+    private bool PriceCheckAndCharge(int price)
+    {
+        if (scrap >= price)
+        {
+            scrap -= price;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void CreateAddon()
     {
         if(scrap >= addonCost && SlotAddonInventory.slotAddonQuantity + SlotAddonInventory.currentAddonEquipt < addonCap)
         {
@@ -277,5 +330,44 @@ public class PlayerResourcesManager : MonoBehaviour
                 UIData.instance.slotAddonButton.gameObject.SetActive(false);
             }
         }
+        UIEvents.instance.CheckCosts();
+        UIEvents.instance.CheckBarrelInventorySpace();
     }
+
+    //adds to the first slot of the inactive inventory array (slots that are for storage and aren't on any gunheads)
+    public void AddBarrelToInventory(int barrelNumber, int barrelTier)
+    {
+        //prevents tiers that dont exsist being added
+        barrelTier = Mathf.Clamp(barrelTier, 0, 2);
+        barrelNumber = Mathf.Clamp(barrelNumber, 0, 5);
+
+        //loops through inventory, adds barrel from inputs to the first slot available, the returns out
+        foreach (WorkshopBarrelSlot slot in inactiveInventoryBarrelSlots)
+        {
+            if (slot.slotType == BarrelType.Empty)
+            {
+                slot.slotType = (BarrelType)barrelNumber;
+                slot.slotTier = (BarrelTeir)barrelTier;
+
+                slot.UpdateDisplay();
+
+                return;
+            }
+        }
+    }
+
+    public bool CheckInventoryFull()
+    {
+        foreach (WorkshopBarrelSlot slot in inactiveInventoryBarrelSlots)
+        {
+            if (slot.slotType == BarrelType.Empty)
+            {
+                return false;
+            }
+
+        }
+
+        return true;
+    }
+
 }

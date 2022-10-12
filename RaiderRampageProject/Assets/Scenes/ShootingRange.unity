@@ -2916,6 +2916,13 @@ MonoBehaviour:
   verticalAimRange: {x: -15, y: 15}
   cursorCanvas: {fileID: 1084924295}
   controlStickRect: {fileID: 209146898}
+  stickScript: {fileID: 209146902}
+  aimSpeedCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &251861044
 Transform:
   m_ObjectHideFlags: 0
@@ -2955,6 +2962,7 @@ MonoBehaviour:
   barrelQuantitiesOrdered: []
   spinningGunPiece: {fileID: 1928582419}
   maxSpinSpeed: 1400
+  spinSpeedPercent: 0
   spinSpeedStartupTime: 0.25
   currentHeadNumber: 0
 --- !u!1 &261466544
@@ -11471,8 +11479,8 @@ MonoBehaviour:
   gunheadImageActiveColor: {r: 0.9852829, g: 1, b: 0.4481132, a: 1}
   gunheadImageInactiveColor: {r: 0.46226418, g: 0.46226418, b: 0.46226418, a: 1}
   slotAddonButton: {fileID: 1522839985}
-  nextWaveButton: {fileID: 0}
-  mergeGunsButton: {fileID: 0}
+  waveEndObjects: []
+  repairBarricadeText: {fileID: 0}
 --- !u!114 &1293482843
 MonoBehaviour:
   m_ObjectHideFlags: 0

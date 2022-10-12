@@ -48,6 +48,8 @@ public class GunBarrel : MonoBehaviour
     [SerializeField]
     private int spreadShotQuantity;
 
+    [Header("cost to purchase on the UpgradeScreen")]
+    public int purchasePrice;
 
     private void Awake()
     {

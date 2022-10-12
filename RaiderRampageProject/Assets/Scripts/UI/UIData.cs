@@ -87,9 +87,11 @@ public class UIData : MonoBehaviour
     [SerializeField]
     public Button slotAddonButton;
 
-    [Header("Buttons Visible Only After a Wave")]
-    public GameObject nextWaveButton;
-    public GameObject mergeGunsButton;
+    [Header("Objects Visible Only After a Wave On Shooting Canvas")]
+    public GameObject[] waveEndObjects;
+
+    [Header("Text of Previous Buttons")]
+    public Text repairBarricadeText;
 
 
 
@@ -123,6 +125,8 @@ public class UIData : MonoBehaviour
         //event subscriptions for UI events
         UIEvents.instance.onUpdateScrapCounts += UpdateScrapQuantityTexts;
         UIEvents.instance.onUpdateAddonCounts += UpdateAddonTexts;
+
+        UIEvents.instance.onUpdateBarricade += UpdateRepairBarricadeTextAndButton;
         //event subscriptions for GameStateManger events
         GameStateManager.instance.onWaveEnd += ShowPostWaveUI;
         GameStateManager.instance.onWaveStart += HidePostWaveUI;
@@ -133,6 +137,8 @@ public class UIData : MonoBehaviour
         //event unsubscriptions for UI events
         UIEvents.instance.onUpdateScrapCounts -= UpdateScrapQuantityTexts;
         UIEvents.instance.onUpdateAddonCounts -= UpdateAddonTexts;
+
+        UIEvents.instance.onUpdateBarricade -= UpdateRepairBarricadeTextAndButton;
         //event unsubscriptions for GameStateManger events
         GameStateManager.instance.onWaveEnd -= ShowPostWaveUI;
         GameStateManager.instance.onWaveStart -= HidePostWaveUI;
@@ -201,32 +207,51 @@ public class UIData : MonoBehaviour
         }
     }
 
+    public void UpdateRepairBarricadeTextAndButton()
+    {
+        if(Barricade.instance.CaculateRepairScrap() > 0)
+        {
+            repairBarricadeText.text = ("Repair Baricade: " + Barricade.instance.CaculateRepairScrap().ToString() + " Scrap");
+            repairBarricadeText.transform.parent.GetComponent<Button>().interactable = true;
+            
+        }
+        else
+        {
+            repairBarricadeText.transform.parent.GetComponent<Button>().interactable = false;
+            repairBarricadeText.text = ("Barricade Maxxed");
+        }
+
+    }
+
     public void HidePostWaveUI()
     {
-        if(nextWaveButton != null)
+        for (int i = 0; i < waveEndObjects.Length; i++)
         {
-            nextWaveButton.SetActive(false);
+            if (waveEndObjects[i] != null)
+            {
+                waveEndObjects[i].SetActive(false);
+            }
         }
-        if(mergeGunsButton != null)
-        {
-            mergeGunsButton.SetActive(false);
-        }
+
         for (int i = 0; i < timerIndicators.Length; i++)
         {
-            timerIndicators[i].gameObject.SetActive(false);
+            if(timerIndicators[i] != null)
+            {
+                timerIndicators[i].gameObject.SetActive(false);
+            }
         }
     }
 
     public void ShowPostWaveUI()
     {
-        if (nextWaveButton != null)
+        for (int i = 0; i < waveEndObjects.Length; i++)
         {
-            nextWaveButton.SetActive(true);
+            if(waveEndObjects[i] != null)
+            {
+                waveEndObjects[i].SetActive(true);
+            }
         }
-        if (mergeGunsButton != null)
-        {
-            mergeGunsButton.SetActive(true);
-        }
+
         for (int i = 0; i < timerIndicators.Length; i++)
         {
             if(timerIndicators[i] != null)

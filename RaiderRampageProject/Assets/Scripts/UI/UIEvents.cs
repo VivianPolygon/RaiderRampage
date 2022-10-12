@@ -21,13 +21,29 @@ public class UIEvents : MonoBehaviour
 
     public event Action onUpdateScrapCounts;
     public event Action onUpdateAddonCounts;
+    public event Action onCheckCosts;
+    public event Action onCheckBarrelInventorySpace;
+    public event Action onUpdateBarricade;
 
+    
     public event Action onUpdateAll;
 
-    private void Start()
+    private void OnEnable()
     {
         onUpdateAll += UpdateAddonCounts;
         onUpdateAll += UpdateScrapCounts;
+        onUpdateAll += CheckCosts;
+        onUpdateAll += CheckBarrelInventorySpace;
+        onUpdateAll += UpdateBarricade;
+    }
+
+    private void OnDisable()
+    {
+        onUpdateAll -= UpdateAddonCounts;
+        onUpdateAll -= UpdateScrapCounts;
+        onUpdateAll -= CheckCosts;
+        onUpdateAll -= CheckBarrelInventorySpace;
+        onUpdateAll -= UpdateBarricade;
     }
 
     public void UpdateScrapCounts()
@@ -38,6 +54,20 @@ public class UIEvents : MonoBehaviour
     {
         onUpdateAddonCounts?.Invoke();
     }
+    public void CheckCosts()
+    {
+        onCheckCosts?.Invoke();
+    }
+    public void CheckBarrelInventorySpace()
+    {
+        onCheckBarrelInventorySpace?.Invoke();
+    }
+
+    public void UpdateBarricade()
+    {
+        onUpdateBarricade?.Invoke();
+    }
+
     public void UpdateAll()
     {
         onUpdateAll?.Invoke();

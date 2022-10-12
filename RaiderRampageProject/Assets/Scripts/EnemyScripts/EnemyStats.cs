@@ -9,6 +9,8 @@ public class EnemyStats : MonoBehaviour
     private int health = 20;
     [SerializeField]
     private int armour = 0;
+    [SerializeField]
+    private int damage = 5;
 
     [Header("Damage Indicater Material, Temporary")]
     [SerializeField]
@@ -44,6 +46,11 @@ public class EnemyStats : MonoBehaviour
         {
             StartCoroutine(IndicateDamage());
         }
+    }
+
+    public void DamageBarricade()
+    {
+        Barricade.instance.BarricadeTakeDamage(damage);
     }
 
     private IEnumerator IndicateDamage()

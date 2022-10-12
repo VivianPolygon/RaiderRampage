@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 6580315547016906537}
   - component: {fileID: 6018460635693030349}
   - component: {fileID: -1717334734755872632}
+  - component: {fileID: 195064902001073571}
+  - component: {fileID: -8258129986365171236}
   m_Layer: 0
   m_Name: NormalEnemy
   m_TagString: Untagged
@@ -187,4 +189,47 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 15
   armour: 1
+  damage: 2
   damageMat: {fileID: 2100000, guid: 836989f64665a1349a37827871055c56, type: 2}
+--- !u!114 &195064902001073571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6580315547016906536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d0c27997363b34cbb7db3105da29e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dropsBarrels: 1
+  barrelDropChance: 100
+  SMGDropWeight: 5
+  pistolDropWeight: 5
+  shotGunDropWeight: 15
+  machineGunDropWeight: 15
+  sniperDropWeight: 5
+  rocketLauncherDropWeight: 3
+  dropsScrap: 1
+  droppedScrapMin: 2
+  droppedScrapMax: 5
+--- !u!95 &-8258129986365171236
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6580315547016906536}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8c0ce3051bb2be94e85eb15cd152044c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
