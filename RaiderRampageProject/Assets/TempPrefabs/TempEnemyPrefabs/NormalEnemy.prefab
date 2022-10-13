@@ -187,7 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf16e295f3a894c4082617b91d622496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 15
+  health: 10
   armour: 1
   damage: 2
   damageMat: {fileID: 2100000, guid: 836989f64665a1349a37827871055c56, type: 2}
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropsBarrels: 1
-  barrelDropChance: 100
+  barrelDropChance: 50
   SMGDropWeight: 5
   pistolDropWeight: 5
   shotGunDropWeight: 15

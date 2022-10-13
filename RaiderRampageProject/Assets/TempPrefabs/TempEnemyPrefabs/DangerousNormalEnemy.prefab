@@ -286,7 +286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropsBarrels: 1
-  barrelDropChance: 100
+  barrelDropChance: 50
   SMGDropWeight: 5
   pistolDropWeight: 5
   shotGunDropWeight: 15

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class WaveTracker : MonoBehaviour
 {
@@ -39,7 +40,14 @@ public class WaveTracker : MonoBehaviour
         waveSpawner.SetWaveData(waves[currentWave], gameObject);
         waveSpawner.SpawnWave();
         UIData.instance.SetWaveText(currentWave + 1);
-        currentWave = Mathf.Clamp(currentWave + 1, 0, waves.Length - 1);
+        currentWave++;
+        if (currentWave > waves.Length - 1)
+        {
+            SceneManager.LoadScene(0);
+        }
+        currentWave = Mathf.Clamp(currentWave, 0, waves.Length - 1);
+
+
     }
 
 }

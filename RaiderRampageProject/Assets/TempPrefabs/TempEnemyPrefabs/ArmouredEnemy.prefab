@@ -204,13 +204,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropsBarrels: 1
-  barrelDropChance: 100
+  barrelDropChance: 65
   SMGDropWeight: 5
   pistolDropWeight: 5
-  shotGunDropWeight: 15
-  machineGunDropWeight: 15
-  sniperDropWeight: 5
-  rocketLauncherDropWeight: 3
+  shotGunDropWeight: 8
+  machineGunDropWeight: 5
+  sniperDropWeight: 15
+  rocketLauncherDropWeight: 7
   dropsScrap: 1
   droppedScrapMin: 2
   droppedScrapMax: 5
