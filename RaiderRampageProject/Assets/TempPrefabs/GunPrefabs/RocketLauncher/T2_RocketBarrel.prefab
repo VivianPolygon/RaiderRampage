@@ -106,7 +106,7 @@ MonoBehaviour:
   bulletDamage: 25
   scrapValue: 4
   projectileDestroyTime: 3
-  bulletSpreadAmount: 6
+  bulletSpreadAmount: 12
   spreadShotQuantity: 0
   purchasePrice: 20
 --- !u!1 &6044093332685321673

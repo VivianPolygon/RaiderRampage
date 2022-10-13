@@ -103,7 +103,7 @@ MonoBehaviour:
   shotsPerSecond: 8
   ammoDrain: 1
   shotForce: 380
-  bulletDamage: 2
+  bulletDamage: 3
   scrapValue: 2
   projectileDestroyTime: 4
   bulletSpreadAmount: 5

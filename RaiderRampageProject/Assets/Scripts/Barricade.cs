@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Barricade : MonoBehaviour
 {
@@ -68,6 +69,13 @@ public class Barricade : MonoBehaviour
     public void BarricadeTakeDamage(int damage)
     {
         barricadeCurrentHealth = Mathf.Clamp(barricadeCurrentHealth - damage, 0, barricadeMaxHealth);
+
+        //temporary reload to title menu if barricade is knocked down <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+        if(barricadeCurrentHealth <= 0)
+        {
+            Debug.Log("TitleMenu Returned to Due to Barricade Being Broken");
+            SceneManager.LoadScene(0);
+        }
 
         int healthCalc = barricadeMaxHealth;
         for (int i = 0; i < barricadeDamageModels.Length; i++)

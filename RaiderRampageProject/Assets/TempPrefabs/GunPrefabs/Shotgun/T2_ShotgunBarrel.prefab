@@ -188,5 +188,5 @@ MonoBehaviour:
   scrapValue: 3
   projectileDestroyTime: 0.5
   bulletSpreadAmount: 10
-  spreadShotQuantity: 12
+  spreadShotQuantity: 8
   purchasePrice: 12
