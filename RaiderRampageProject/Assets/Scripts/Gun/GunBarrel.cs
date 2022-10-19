@@ -107,7 +107,7 @@ public class GunBarrel : MonoBehaviour
             t += Time.deltaTime;
 
             //if the time requirments have been met, instantiates shot and does ammo caculations
-            if(t > (1 / shotsPerSecond) && canFire)
+            if(t > (1 / (shotsPerSecond * PlayerResourcesManager.fireSpeedMult)) && canFire)
             {
                 t = 0;
                 Vector3 appliedSpread = Vector3.zero;

@@ -26,6 +26,18 @@ TextureImporter:
   - first:
       213: -8282273355934126624
     second: SpriteSheet-02 4x4 - 512_7
+  - first:
+      213: -1008633753598522155
+    second: SpriteSheet-02 4x4 - 512_8
+  - first:
+      213: 6762174192478471797
+    second: SpriteSheet-02 4x4 - 512_9
+  - first:
+      213: -5540223291871337845
+    second: SpriteSheet-02 4x4 - 512_10
+  - first:
+      213: -3161366486311742466
+    second: SpriteSheet-02 4x4 - 512_11
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -291,6 +303,90 @@ TextureImporter:
       bones: []
       spriteID: 0ed2dde93447f0d80800000000000000
       internalID: -8282273355934126624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet-02 4x4 - 512_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dc8a40f1fc9002f0800000000000000
+      internalID: -1008633753598522155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet-02 4x4 - 512_9
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5764efbb99118dd50800000000000000
+      internalID: 6762174192478471797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet-02 4x4 - 512_10
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b82e9a7f44c2d13b0800000000000000
+      internalID: -5540223291871337845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpriteSheet-02 4x4 - 512_11
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 128
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef3509a2ee19024d0800000000000000
+      internalID: -3161366486311742466
       vertices: []
       indices: 
       edges: []

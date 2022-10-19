@@ -243,12 +243,12 @@ public class GunData : MonoBehaviour
         spinSpeedPercent = Mathf.Clamp((barrelAmount / (float)length) - (1 / (float)length), 0, 1);
     }
 
-    //spins the gun barrels depending on quantity of barrels in relation to the total
+    //spins the gun barrels depending on quantity of barrels in relation to the total, spins faster depending on fire rate mult
     private void SpinBarrels()
     {
         if (spinSpeedPercent > 0)
         {
-            spinningGunPiece.transform.Rotate(0, 0, (currentSpinSpeed * spinSpeedPercent) * Time.deltaTime);
+            spinningGunPiece.transform.Rotate(0, 0, ((currentSpinSpeed * spinSpeedPercent) * PlayerResourcesManager.fireSpeedMult) * Time.deltaTime);
         }
     }
 

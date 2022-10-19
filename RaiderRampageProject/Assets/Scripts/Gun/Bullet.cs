@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [HideInInspector]
     public int damage;
+
+    private void Start()
+    {
+        damage = PlayerResourcesManager.instance.MultiplyDamage(damage);
+    }
 
 
     private void OnTriggerEnter(Collider other)

@@ -305,7 +305,7 @@ public class UIData : MonoBehaviour
         clipDrainIconParents = InitilizeGunsGameObjectArray(clipDrainIconParents, pistolClipDrainIcons, shotGunClipDrainIcons, machineGunClipDrainIcons, rocketLauncherClipDrainIcons);
     }
 
-    private void SetDrainIcons()
+    public void SetDrainIcons()
     {
         GameObject newIcon;
 
@@ -314,11 +314,11 @@ public class UIData : MonoBehaviour
             //destroys current Icons
             foreach(Transform child in ammoDrainIconParents[i].transform)
             {
-                Destroy(child);
+                Destroy(child.gameObject);
             }
-            foreach (Transform child in clipDrainIconParents[i].transform)
+            foreach(Transform child in clipDrainIconParents[i].transform)
             {
-                Destroy(child);
+                Destroy(child.gameObject);
             }
 
             //initilizes the length of the coresponding slider array

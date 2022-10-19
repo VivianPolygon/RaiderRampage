@@ -5,7 +5,6 @@ using UnityEngine;
 //put this script on a bullet you want to explode, and it will explode apon being destroyed
 public class Explosive : MonoBehaviour
 {
-    [HideInInspector]
     public int explosionDamage = 10;
 
     public int explosionForce = 5;
@@ -15,6 +14,11 @@ public class Explosive : MonoBehaviour
     private GameObject ExplosionVisual;
     [SerializeField]
     private float visualTime;
+
+    private void Start()
+    {
+        explosionDamage = PlayerResourcesManager.instance.MultiplyDamage(explosionDamage);
+    }
 
     private void OnDestroy()
     {

@@ -9,15 +9,6 @@ public class PlayerResourcesManager : MonoBehaviour
     public static PlayerResourcesManager instance;
 
     //used to caculate current ammo, as a float
-    [HideInInspector]
-    public float pistolAmmoCalc;
-    [HideInInspector]
-    public float shotGunAmmoCalc;
-    [HideInInspector]
-    public float machineGunAmmoCalc;
-    [HideInInspector]
-    public float rocketLauncherAmmoCalc;
-
     [HideInInspector] public float[] ammoRegenCalcs;
 
     //regen of each ammo type per second
@@ -66,98 +57,6 @@ public class PlayerResourcesManager : MonoBehaviour
 
     [HideInInspector] public int[] iconValues;
 
-    public bool CheckCanShoot(int arraySlot, int ammodrain)
-    {
-        if (clipQuantities[arraySlot] >= ammodrain)
-        {
-            return true;
-        }
-        return false;
-    }
-
-    public void InitilizeAllAmmoArrays()
-    {
-
-        //initilizes clip icons amount
-        clipIconAmount = InitilizeAmmmoIntegerArray(clipIconAmount, pistolClipIcons, shotGunClipIcons, machineGunClipIcons, rockerLauncherClipIcons);
-        //initilized ammo icons amount
-        ammoIconAmount = InitilizeAmmmoIntegerArray(ammoIconAmount, pistolAmmoIcons, shotGunAmmoIcons, machineGunAmmoIcons, rockerLauncherAmmoIcons);
-        //initilises Icon Values
-        iconValues = InitilizeAmmmoIntegerArray (iconValues, pistolIconQuantity, shotGunIconQuantity, machineGunIconQuantity, rockerLauncherIconQuantity);
-        //initilizes ammo and clip caps from icon amount and values
-        ammoMaxes = InitilizeAmmmoIntegerArray(ammoMaxes, 0, 0, 0, 0);
-        clipMaxes = InitilizeAmmmoIntegerArray(clipMaxes, 0, 0, 0, 0);
-        SetAmmoCaps();
-        //initilizes, then sets ammo and clip current to full
-        ammoRegenCalcs = InitilizeAmmmoFloatArray(ammoRegenCalcs, 0, 0, 0, 0);
-        ammoQuantities = InitilizeAmmmoIntegerArray(ammoQuantities, 0, 0, 0, 0);
-        clipQuantities = InitilizeAmmmoIntegerArray(clipQuantities, 0, 0, 0, 0);
-        FillAmmos();
-        //initilizes regen rates
-        ammoRegenRates = InitilizeAmmmoFloatArray(ammoRegenRates, pistolAmmoRegen, shotGunAmmoRegen, machineGunAmmoRegen, rocketLauncherAmmoRegen);
-
-    }
-
-    public int[] InitilizeAmmmoIntegerArray(int[] array, int pistol, int shotGun, int machineGun, int rocketLauncher)
-    {
-        array = new int[4];
-        array[0] = pistol;
-        array[1] = shotGun;
-        array[2] = machineGun;
-        array[3] = rocketLauncher;
-
-        return array;
-    }
-    public int[] UpdateAmmmoIntegerArray(int[] array, int pistol, int shotGun, int machineGun, int rocketLauncher)
-    {
-        //will cause an error if initilize hasent been ran due to no null/length check
-        array[0] = pistol;
-        array[1] = shotGun;
-        array[2] = machineGun;
-        array[3] = rocketLauncher;
-
-        return array;
-    }
-
-    public float[] InitilizeAmmmoFloatArray(float[] array, float pistol, float shotGun, float machineGun, float rocketLauncher)
-    {
-        array = new float[4];
-        array[0] = pistol;
-        array[1] = shotGun;
-        array[2] = machineGun;
-        array[3] = rocketLauncher;
-
-        return array;
-    }
-    public float[] UpdateAmmmoFloatArray(float[] array, float pistol, float shotGun, float machineGun, float rocketLauncher)
-    {
-        //will cause an error if initilize hasent been ran due to no null/length check
-        array[0] = pistol;
-        array[1] = shotGun;
-        array[2] = machineGun;
-        array[3] = rocketLauncher;
-
-        return array;
-    }
-
-    public void SetAmmoCaps()
-    {
-        for (int i = 0; i < ammoMaxes.Length; i++)
-        {
-            ammoMaxes[i] = ammoIconAmount[i] * iconValues[i];
-            clipMaxes[i] = clipIconAmount[i] * iconValues[i];
-        }
-    }
-
-    private void FillAmmos()
-    {
-        for (int i = 0; i < ammoQuantities.Length; i++)
-        {
-            ammoRegenCalcs[i] = ammoMaxes[i];
-            clipQuantities[i] = clipMaxes[i];
-        }
-    }
-
 
     //used to determine how much ammo is reloaded, needed for if the ammount in ammo storage is less than the clip capacity
     private int reloadValue;
@@ -187,6 +86,24 @@ public class PlayerResourcesManager : MonoBehaviour
     [Header("Upgrade Resources Costs")]
     public int addonCost;
 
+    [Header("Clip Icons Gained from Clip Upgrades")]
+    [SerializeField] private int pistolClipIncrease;
+    [SerializeField] private int shotGunClipIncrease;
+    [SerializeField] private int machineGunClipIncrease;
+    [SerializeField] private int rocketLauncherClipIncrease;
+
+    [Header("Ammo Icons Gained from Clip Upgrades")]
+    [SerializeField] private int pistolAmmoIncrease;
+    [SerializeField] private int shotGunAmmoIncrease;
+    [SerializeField] private int machineGunAmmoIncrease;
+    [SerializeField] private int rocketLauncherAmmoIncrease;
+
+    [Header("Multiplyer Increase Per Upgrade")]
+    [SerializeField] private float damageMultIncrease;
+    [SerializeField] private float fireSpeedMultIncrease;
+
+    public static float damageMult = 1;
+    public static float fireSpeedMult = 1;
 
     //established a singleton 
     private void Awake()
@@ -220,6 +137,22 @@ public class PlayerResourcesManager : MonoBehaviour
 
         //initilizes the merging inventory on the excess inventory slots
         InitilizeInventory();
+
+        //initilizes multipliers to 1
+        InitilizeMults();
+
+    }
+
+
+    private void InitilizeMults()
+    {
+        damageMult = 1;
+        fireSpeedMult = 1;
+    }
+
+    public int MultiplyDamage(int damage)
+    {
+        return Mathf.RoundToInt(damage * damageMult);
     }
 
 
@@ -391,6 +324,7 @@ public class PlayerResourcesManager : MonoBehaviour
         if (scrap >= price)
         {
             scrap -= price;
+            UIEvents.instance.UpdateScrapCounts();
             return true;
         }
         else
@@ -451,5 +385,159 @@ public class PlayerResourcesManager : MonoBehaviour
 
         return true;
     }
+
+
+    //v functions for ammo icon system <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    public bool CheckCanShoot(int arraySlot, int ammodrain)
+    {
+        if (clipQuantities[arraySlot] >= ammodrain)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void InitilizeAllAmmoArrays()
+    {
+
+        //initilizes clip icons amount
+        clipIconAmount = InitilizeAmmmoIntegerArray(clipIconAmount, pistolClipIcons, shotGunClipIcons, machineGunClipIcons, rockerLauncherClipIcons);
+        //initilized ammo icons amount
+        ammoIconAmount = InitilizeAmmmoIntegerArray(ammoIconAmount, pistolAmmoIcons, shotGunAmmoIcons, machineGunAmmoIcons, rockerLauncherAmmoIcons);
+        //initilises Icon Values
+        iconValues = InitilizeAmmmoIntegerArray(iconValues, pistolIconQuantity, shotGunIconQuantity, machineGunIconQuantity, rockerLauncherIconQuantity);
+        //initilizes ammo and clip caps from icon amount and values
+        ammoMaxes = InitilizeAmmmoIntegerArray(ammoMaxes, 0, 0, 0, 0);
+        clipMaxes = InitilizeAmmmoIntegerArray(clipMaxes, 0, 0, 0, 0);
+        SetAmmoCaps();
+        //initilizes, then sets ammo and clip current to full
+        ammoRegenCalcs = InitilizeAmmmoFloatArray(ammoRegenCalcs, 0, 0, 0, 0);
+        ammoQuantities = InitilizeAmmmoIntegerArray(ammoQuantities, 0, 0, 0, 0);
+        clipQuantities = InitilizeAmmmoIntegerArray(clipQuantities, 0, 0, 0, 0);
+        FillAmmos();
+        //initilizes regen rates
+        ammoRegenRates = InitilizeAmmmoFloatArray(ammoRegenRates, pistolAmmoRegen, shotGunAmmoRegen, machineGunAmmoRegen, rocketLauncherAmmoRegen);
+
+    }
+
+    public bool AddClipIcons(int cost)
+    {
+        if (PriceCheckAndCharge(cost))
+        {
+            //increases icon quantities by values inputed
+            clipIconAmount[0] += pistolClipIncrease;
+            clipIconAmount[1] += shotGunClipIncrease;
+            clipIconAmount[2] += machineGunClipIncrease;
+            clipIconAmount[3] += rocketLauncherClipIncrease;
+
+            //updates ammo caps and refills ammo
+            SetAmmoCaps();
+            FillAmmos();
+            return true;
+        }
+        return false;
+    }
+    public bool AddAmmoIcons(int cost)
+    {
+        if (PriceCheckAndCharge(cost))
+        {
+            //increases icon quantities by values inputed
+            ammoIconAmount[0] += pistolAmmoIncrease;
+            ammoIconAmount[1] += shotGunAmmoIncrease;
+            ammoIconAmount[2] += machineGunAmmoIncrease;
+            ammoIconAmount[3] += rocketLauncherAmmoIncrease;
+
+            //updates ammo caps and refills ammo
+            SetAmmoCaps();
+            FillAmmos();
+            return true;
+        }
+        return false;
+    }
+
+    public bool IncreaseDamageMult(int cost)
+    {
+        if(PriceCheckAndCharge(cost))
+        {
+            //increases mult by value 
+            damageMult += damageMultIncrease;
+
+            return true;
+        }
+        return false;
+    }
+
+    public bool IncreaseFireSpeedMult(int cost)
+    {
+        if (PriceCheckAndCharge(cost))
+        {
+            //increases mult by value 
+            fireSpeedMult += fireSpeedMultIncrease;
+
+            return true;
+        }
+        return false;
+    }
+
+    public int[] InitilizeAmmmoIntegerArray(int[] array, int pistol, int shotGun, int machineGun, int rocketLauncher)
+    {
+        array = new int[4];
+        array[0] = pistol;
+        array[1] = shotGun;
+        array[2] = machineGun;
+        array[3] = rocketLauncher;
+
+        return array;
+    }
+    public int[] UpdateAmmmoIntegerArray(int[] array, int pistol, int shotGun, int machineGun, int rocketLauncher)
+    {
+        //will cause an error if initilize hasent been ran due to no null/length check
+        array[0] = pistol;
+        array[1] = shotGun;
+        array[2] = machineGun;
+        array[3] = rocketLauncher;
+
+        return array;
+    }
+
+    public float[] InitilizeAmmmoFloatArray(float[] array, float pistol, float shotGun, float machineGun, float rocketLauncher)
+    {
+        array = new float[4];
+        array[0] = pistol;
+        array[1] = shotGun;
+        array[2] = machineGun;
+        array[3] = rocketLauncher;
+
+        return array;
+    }
+    public float[] UpdateAmmmoFloatArray(float[] array, float pistol, float shotGun, float machineGun, float rocketLauncher)
+    {
+        //will cause an error if initilize hasent been ran due to no null/length check
+        array[0] = pistol;
+        array[1] = shotGun;
+        array[2] = machineGun;
+        array[3] = rocketLauncher;
+
+        return array;
+    }
+
+    public void SetAmmoCaps()
+    {
+        for (int i = 0; i < ammoMaxes.Length; i++)
+        {
+            ammoMaxes[i] = ammoIconAmount[i] * iconValues[i];
+            clipMaxes[i] = clipIconAmount[i] * iconValues[i];
+        }
+    }
+
+    public void FillAmmos()
+    {
+        for (int i = 0; i < ammoQuantities.Length; i++)
+        {
+            ammoRegenCalcs[i] = ammoMaxes[i];
+            clipQuantities[i] = clipMaxes[i];
+        }
+    }
+
 
 }

@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -8282273355934126624, guid: d5f949754ed4764499e57e61cd2199b4, type: 3}
+  m_Sprite: {fileID: -6222229379197226831, guid: d5f949754ed4764499e57e61cd2199b4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -112,7 +112,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000044465, y: -0.00000087917}
+  m_AnchoredPosition: {x: 0, y: 0.33}
   m_SizeDelta: {x: 15, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5983761935233761960
@@ -136,14 +136,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.87564063, g: 1, b: 0, a: 0.12941177}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.12941177}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2284835196622783632, guid: d5f949754ed4764499e57e61cd2199b4, type: 3}
+  m_Sprite: {fileID: 6762174192478471797, guid: d5f949754ed4764499e57e61cd2199b4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -251,7 +251,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 5983761935004792998}
   m_FillRect: {fileID: 5983761935688213078}
   m_HandleRect: {fileID: 0}
@@ -297,8 +297,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.0000047683716, y: -0.00000667572}
-  m_SizeDelta: {x: -0, y: -0.000012398}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5983761935688213080
 CanvasRenderer:
@@ -321,14 +321,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0.3452382, a: 0.78431374}
+  m_Color: {r: 1, g: 0, b: 0.3452382, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 2284835196622783632, guid: d5f949754ed4764499e57e61cd2199b4, type: 3}
+  m_Sprite: {fileID: 6762174192478471797, guid: d5f949754ed4764499e57e61cd2199b4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

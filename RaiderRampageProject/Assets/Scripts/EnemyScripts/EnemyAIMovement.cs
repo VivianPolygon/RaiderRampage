@@ -68,7 +68,7 @@ public class EnemyAIMovement : MonoBehaviour
             switch (node.mode)
             {
                 case AiPathNode.NodeMode.NextNode:
-                    navmeshAgent.destination = nextNode.position;
+                    SetNextTarget(nextNode.position);
                     break;
                 case AiPathNode.NodeMode.TakeCover:
                     //checks and starts the taking cover coroutine
@@ -83,7 +83,7 @@ public class EnemyAIMovement : MonoBehaviour
                     //if the enemy dosent take cover, simply moves them on to the next node
                     else if(!takesCover)
                     {
-                        navmeshAgent.destination = nextNode.position;
+                        SetNextTarget(nextNode.position);
                     }
                     break;
                 default:
@@ -98,6 +98,14 @@ public class EnemyAIMovement : MonoBehaviour
         if(other.gameObject.tag == "ScrapBin")
         {
             Destroy(this.gameObject);
+        }
+    }
+
+    private void SetNextTarget(Vector3 nextTarget)
+    {
+        if(navmeshAgent != null && navmeshAgent.enabled)
+        {
+            navmeshAgent.destination = nextTarget;
         }
     }
 
@@ -132,7 +140,7 @@ public class EnemyAIMovement : MonoBehaviour
             //enemies blocking other enemies
             if(timeSenseNewNode > moveToLastNodeTimeThreshold && !nodeReset)
             {
-                navmeshAgent.destination = lastNode.position;
+                SetNextTarget(lastNode.position);
                 nodeReset = true;
             }
 
@@ -143,27 +151,32 @@ public class EnemyAIMovement : MonoBehaviour
 
     private IEnumerator TakeCover(AiPathNode node)
     {
-        float speed = navmeshAgent.speed;
-        inCover = true;
-
-        transform.localScale = transform.localScale - (Vector3.up);
-        navmeshAgent.speed = 0;
-        gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-
-        for (float i = 0; i < Random.Range(node.minCoverTime, node.maxCoverTime); i += Time.deltaTime)
+        if(navmeshAgent.enabled && navmeshAgent != null)
         {
 
-            timeSenseNewNode = 0;
-            yield return null;
+            float speed = navmeshAgent.speed;
+            inCover = true;
+
+            transform.localScale = transform.localScale - (Vector3.up);
+            navmeshAgent.speed = 0;
+            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+
+            for (float i = 0; i < Random.Range(node.minCoverTime, node.maxCoverTime); i += Time.deltaTime)
+            {
+
+                timeSenseNewNode = 0;
+                yield return null;
+            }
+
+            navmeshAgent.speed = speed;
+
+            transform.localScale = transform.localScale + (Vector3.up);
+
+            navmeshAgent.destination = nextNode.position;
+
+            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         }
 
-        navmeshAgent.speed = speed;
-
-        transform.localScale = transform.localScale + (Vector3.up);
-
-        navmeshAgent.destination = nextNode.position;
-
-        gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
 
         //prevents cover being immediatly reentered
         for (float i = 0; i < 2; i += Time.deltaTime)
