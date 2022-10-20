@@ -105,6 +105,8 @@ public class PlayerResourcesManager : MonoBehaviour
     public static float damageMult = 1;
     public static float fireSpeedMult = 1;
 
+    public static float murderScore; //used for Overdrive Gauge, currently adds an enemies damage when they die to increase it
+
     //established a singleton 
     private void Awake()
     {
@@ -127,6 +129,9 @@ public class PlayerResourcesManager : MonoBehaviour
         {
             RegenAmmo();
         }
+
+        //Drains the murderscore from the overdrive gauge
+        DrainMurderScore();
     }
 
 
@@ -154,6 +159,17 @@ public class PlayerResourcesManager : MonoBehaviour
     {
         return Mathf.RoundToInt(damage * damageMult);
     }
+
+    public void DrainMurderScore()
+    {
+        if(murderScore > 0 && !OverdriveGauge.atTopTier && !OverdriveGauge.overdriveActive)
+        {
+            murderScore = Mathf.Clamp(murderScore - (OverdriveGauge.drainRate * Time.deltaTime), 0, OverdriveGauge.murderScoreMax);
+            OverdriveGauge.UpdateFillCalculations();
+
+        }
+    }
+
 
 
     public void RegenAmmo()

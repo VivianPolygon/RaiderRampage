@@ -119,6 +119,24 @@ public class GunBarrel : MonoBehaviour
                         shot.transform.LookAt(GunData.instance.cursorPositon);
                         shot.GetComponent<Rigidbody>().AddForce(((shot.transform.forward * shotForce ) + (Random.onUnitSphere * bulletSpreadAmount) * GunData.instance.spinSpeedPercent), ForceMode.Impulse);
 
+                        if(OverdriveGauge.armorPierceActive)
+                        {
+                            shot.transform.localScale *= OverdriveGauge.pierceScale;
+                        }
+                        if(OverdriveGauge.incendiaryActive)
+                        {
+                            GameObject fireTrail = Instantiate(OverdriveGauge.fireTrail, shot.transform.position, shot.transform.rotation);
+                            fireTrail.transform.parent = shot.transform;
+                        }
+                        if(OverdriveGauge.explosionActive)
+                        {
+                            GameObject explosionObject = Instantiate(OverdriveGauge.explosionObject, shot.transform.position, shot.transform.rotation);
+                            explosionObject.transform.parent = shot.transform;
+
+                            explosionObject.GetComponent<Explosive>().explosionDamage = OverdriveGauge._explosionDamage;
+                            explosionObject.GetComponent<Explosive>().explosionRange = OverdriveGauge._explosionRange;
+                        }
+
                         Destroy(shot, projectileDestroyTime);
 
                         break;
@@ -128,6 +146,26 @@ public class GunBarrel : MonoBehaviour
                             shot = Instantiate(projectilePrefab, projectileSpawnpoint.transform.position, transform.rotation);
                             shot.transform.LookAt(GunData.instance.cursorPositon);
                             shot.GetComponent<Rigidbody>().AddForce((shot.transform.forward * shotForce)+ (Random.onUnitSphere * bulletSpreadAmount), ForceMode.Impulse);
+
+
+                            if (OverdriveGauge.armorPierceActive)
+                            {
+                                shot.transform.localScale *= OverdriveGauge.pierceScale;
+                            }
+                            if (OverdriveGauge.incendiaryActive)
+                            {
+                                GameObject fireTrail = Instantiate(OverdriveGauge.fireTrail, shot.transform.position, shot.transform.rotation);
+                                fireTrail.transform.parent = shot.transform;
+                            }
+                            if (OverdriveGauge.explosionActive)
+                            {
+                                GameObject explosionObject = Instantiate(OverdriveGauge.explosionObject, shot.transform.position, shot.transform.rotation);
+                                explosionObject.transform.parent = shot.transform;
+
+                                explosionObject.GetComponent<Explosive>().explosionDamage = OverdriveGauge._explosionDamage;
+                                explosionObject.GetComponent<Explosive>().explosionRange = OverdriveGauge._explosionRange;
+                            }
+
                             Destroy(shot, projectileDestroyTime);
                         }
 
