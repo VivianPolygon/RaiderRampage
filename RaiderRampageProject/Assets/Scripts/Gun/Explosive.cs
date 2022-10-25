@@ -10,10 +10,8 @@ public class Explosive : MonoBehaviour
     public int explosionForce = 5;
     public int explosionRange = 5;
 
-    [SerializeField]
-    private GameObject ExplosionVisual;
-    [SerializeField]
-    private float visualTime;
+    public GameObject explosionVisual;
+    public float visualTime;
 
     private void Start()
     {
@@ -37,7 +35,7 @@ public class Explosive : MonoBehaviour
             
         }
 
-        GameObject visual = Instantiate(ExplosionVisual, transform.position, Quaternion.identity);
+        GameObject visual = Instantiate(explosionVisual, transform.position, Quaternion.identity);
         Destroy(visual, visualTime);
     }
 

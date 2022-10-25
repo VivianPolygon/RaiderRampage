@@ -116,7 +116,7 @@ public class OverdriveGauge : MonoBehaviour
         }
 
 
-        SetOverdriveTier(3);
+        SetOverdriveTier(0);
 
     }
 
