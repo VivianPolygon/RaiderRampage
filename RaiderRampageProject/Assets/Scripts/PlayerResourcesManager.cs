@@ -102,6 +102,9 @@ public class PlayerResourcesManager : MonoBehaviour
     [SerializeField] private float damageMultIncrease;
     [SerializeField] private float fireSpeedMultIncrease;
 
+    [Header("grenade refill delay time")]
+    public float grenadeRefillTime;
+
     public static float damageMult = 1;
     public static float fireSpeedMult = 1;
 

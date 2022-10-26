@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Grenade : MonoBehaviour
 {
@@ -25,17 +26,24 @@ public class Grenade : MonoBehaviour
     [SerializeField] private float throwForce;
     [SerializeField] private float lobIntensity;
 
+
+    private Image grenadeButtonImage; // pulled from UI Data
+
+
     private GameObject grenadeInstance;
     private Coroutine explosionTimeTracking;
+
+    private bool hasGrenade;
 
     private void Awake()
     {
         CheckNull();
+        SetUIComponents();
     }
 
     public void SpawnGrenade()
     {
-        if (grenadeInstance == null && explosionTimeTracking == null)
+        if (grenadeInstance == null && hasGrenade)
         {
             grenadeInstance = Instantiate(grenadePrefab, grenadeHoldingTransform.position, grenadeHoldingTransform.rotation);
             grenadeInstance.GetComponent<Rigidbody>().useGravity = false;
@@ -45,12 +53,15 @@ public class Grenade : MonoBehaviour
 
 
             Destroy(grenadeInstance, grenadeExplosionDelay);
+
+            hasGrenade = false;
+            StartCoroutine(GrenadeRefillTimer());
         }
     }
 
     public void ThrowGrenade()
     {
-        if(grenadeInstance != null)
+        if (grenadeInstance != null)
         {
             grenadeInstance.GetComponent<Rigidbody>().useGravity = true;
             grenadeInstance.GetComponent<Rigidbody>().AddForce((transform.forward * throwForce) + (transform.up * lobIntensity), ForceMode.Impulse);
@@ -60,6 +71,19 @@ public class Grenade : MonoBehaviour
             {
                 StopCoroutine(explosionTimeTracking);
             }
+        }     
+    }
+
+    private void SetUIComponents()
+    {
+        if(UIData.instance.grenadeImage != null)
+        {
+            grenadeButtonImage = UIData.instance.grenadeImage;
+        }
+        else
+        {
+            Debug.LogWarning("The Grenade script on: " + name + "does not have acsess to a grenade button image, most likely the UI data does not have one set, or is not present in the scene");
+            Destroy(this);
         }
     }
 
@@ -83,6 +107,7 @@ public class Grenade : MonoBehaviour
         }
 
         explosionTimeTracking = null;
+        hasGrenade = true;
     }
 
     private void SetExplosive(Explosive explosive)
@@ -107,5 +132,17 @@ public class Grenade : MonoBehaviour
 
                 yield return null;
         }
+    }
+
+    private IEnumerator GrenadeRefillTimer()
+    {
+        for (float t = 0; t < PlayerResourcesManager.instance.grenadeRefillTime; t += Time.deltaTime)
+        {
+            grenadeButtonImage.fillAmount = t / PlayerResourcesManager.instance.grenadeRefillTime;
+            yield return null;
+        }
+
+        grenadeButtonImage.fillAmount = 1;
+        hasGrenade = true;
     }
 }

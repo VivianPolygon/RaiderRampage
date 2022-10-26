@@ -142,5 +142,5 @@ MonoBehaviour:
   explosionDamage: 15
   explosionForce: 500
   explosionRange: 500
-  ExplosionVisual: {fileID: 4437001108132608195, guid: 9dd9cdd44b6f27648a7e31153180a1a5, type: 3}
+  explosionVisual: {fileID: 4437001108132608195, guid: 9dd9cdd44b6f27648a7e31153180a1a5, type: 3}
   visualTime: 1.5

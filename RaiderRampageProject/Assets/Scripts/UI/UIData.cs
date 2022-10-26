@@ -111,6 +111,10 @@ public class UIData : MonoBehaviour
     public Text repairBarricadeText;
 
 
+    [Header("Grenade UI Components")]
+    public Image grenadeImage;
+
+
 
 
     //establishes the singleton, initilizes spritesheets from resources folder
@@ -399,4 +403,5 @@ public class UIData : MonoBehaviour
             clipDrainIconSliders[iconsIndex][ii].value = ((float)PlayerResourcesManager.instance.clipQuantities[iconsIndex] / PlayerResourcesManager.instance.iconValues[iconsIndex]) - ii;
         }
     }
+
 }

@@ -12,10 +12,14 @@ public class EnemyStats : MonoBehaviour
     [SerializeField]
     private int damage = 5;
 
+
     [Header("Damage Indicater Material, Temporary")]
     [SerializeField]
-    private Material damageMat;
     private Material normalMat;
+    [SerializeField]
+    private Material damageMat;
+    [SerializeField]
+    private SkinnedMeshRenderer materialRenderer;
 
 
     //used for burn status
@@ -25,7 +29,15 @@ public class EnemyStats : MonoBehaviour
 
     private void Start()
     {
-        normalMat = GetComponent<MeshRenderer>().material;
+        if (materialRenderer != null)
+        {
+            materialRenderer.material = normalMat;
+        }
+        else
+        {
+            Debug.LogWarning("Enenmy: " + name + "Does not have a mesh renderer attatched as refrence in its enemyStats script, make sure this is assigned via the inspector, enemy destroyed");
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -62,7 +74,7 @@ public class EnemyStats : MonoBehaviour
         }
         else
         {
-            StartCoroutine(IndicateDamage());
+           StartCoroutine(IndicateDamage());
         }
     }
 
@@ -77,15 +89,15 @@ public class EnemyStats : MonoBehaviour
         {
             if(i % 2 == 0)
             {
-                gameObject.GetComponent<MeshRenderer>().material = damageMat;
+                materialRenderer.material = damageMat;
             }
             else
             {
-                gameObject.GetComponent<MeshRenderer>().material = normalMat;
+                materialRenderer.material = normalMat;
             }
             yield return new WaitForEndOfFrame();
         }
-        gameObject.GetComponent<MeshRenderer>().material = normalMat;
+        materialRenderer.material = normalMat;
     }
 
     private void InflictBurn(float duration, int burndamage, float frequency, GameObject burnEffectPrefab)
@@ -127,7 +139,7 @@ public class EnemyStats : MonoBehaviour
             }
             else
             {
-                StartCoroutine(IndicateDamage());
+               StartCoroutine(IndicateDamage());
             }
 
             yield return burnFrequency;
