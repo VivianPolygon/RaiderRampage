@@ -1,15 +1,16 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.AI;
 
 public class Barricade : MonoBehaviour
 {
     public static Barricade instance;
 
-    private int barricadeMaxHealth = 100;
-    [SerializeField]
-    private int barricadeCurrentHealth;
+    public int barricadeMaxHealth = 100;
+    [HideInInspector]
+    public int barricadeCurrentHealth;
 
     [SerializeField]
     private Mesh[] barricadeDamageModels;
@@ -24,6 +25,21 @@ public class Barricade : MonoBehaviour
     public int repairCost;
     public int repairAmount;
 
+    private static event Action onDamageBarricade;
+
+    public static void DamageBarricade() { onDamageBarricade?.Invoke(); }
+
+    private void OnEnable()
+    {
+        onDamageBarricade += BarricadeTakeDamage;
+    }
+
+    private void OnDisable()
+    {
+        onDamageBarricade -= BarricadeTakeDamage;
+    }
+
+
     private void Awake()
     {
         if(instance != null)
@@ -36,6 +52,7 @@ public class Barricade : MonoBehaviour
             instance = this;
         }
     }
+
 
     // Start is called before the first frame update
     void Start()
@@ -63,12 +80,13 @@ public class Barricade : MonoBehaviour
 
         modelSwapIncrement = barricadeMaxHealth / (barricadeDamageModels.Length - 1);
 
-        BarricadeTakeDamage(0);
+        barricadeCurrentHealth++;
+        BarricadeTakeDamage();
     }
 
-    public void BarricadeTakeDamage(int damage)
+    public void BarricadeTakeDamage()
     {
-        barricadeCurrentHealth = Mathf.Clamp(barricadeCurrentHealth - damage, 0, barricadeMaxHealth);
+        barricadeCurrentHealth = Mathf.Clamp(barricadeCurrentHealth - 1, 0, barricadeMaxHealth);
 
         //temporary reload to title menu if barricade is knocked down <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         if(barricadeCurrentHealth <= 0)
@@ -113,9 +131,18 @@ public class Barricade : MonoBehaviour
     //temporary way to trigger animat8ons
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent(out Animator anim))
+        if(other.TryGetComponent(out EnemyAnimatorController anim))
         {
-            anim.SetBool("isAttacking", true);
+            anim.SetAttacking(true);
+
+            other.GetComponent<NavMeshAgent>().destination = transform.position;
+            other.GetComponent<NavMeshAgent>().speed = 0;
+
+            other.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            other.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            other.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+
+            other.GetComponent<Rigidbody>().Sleep();
         }
     }
 }

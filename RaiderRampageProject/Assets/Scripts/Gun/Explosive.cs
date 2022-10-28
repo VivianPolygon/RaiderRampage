@@ -31,6 +31,7 @@ public class Explosive : MonoBehaviour
             if(collider.TryGetComponent(out EnemyStats enemyStats))
             {
                 enemyStats.TakeDamage(explosionDamage);
+               
             }
             
         }

@@ -86,6 +86,9 @@ public class EnemyAIMovement : MonoBehaviour
                         SetNextTarget(nextNode.position);
                     }
                     break;
+                case AiPathNode.NodeMode.RandomPointOnObject:
+                    SetNextTarget(SelectPointInObject(nextNode));
+                    break;
                 default:
                     break;
             }
@@ -93,12 +96,6 @@ public class EnemyAIMovement : MonoBehaviour
             SetTimer();
         }
 
-
-        //Temporary, for testing purposes, destroys enemy when they contact somthing tagged ScrapBin <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-        if(other.gameObject.tag == "ScrapBin")
-        {
-            Destroy(this.gameObject);
-        }
     }
 
     private void SetNextTarget(Vector3 nextTarget)
@@ -157,7 +154,9 @@ public class EnemyAIMovement : MonoBehaviour
             float speed = navmeshAgent.speed;
             inCover = true;
 
-            transform.localScale = transform.localScale - (Vector3.up);
+            //switches animator to ducking state
+            GetComponent<EnemyAnimatorController>().SetDucking(true);
+
             navmeshAgent.speed = 0;
             gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 
@@ -170,7 +169,8 @@ public class EnemyAIMovement : MonoBehaviour
 
             navmeshAgent.speed = speed;
 
-            transform.localScale = transform.localScale + (Vector3.up);
+            //switches animator out of ducking state
+            GetComponent<EnemyAnimatorController>().SetDucking(false);
 
             navmeshAgent.destination = nextNode.position;
 
@@ -186,5 +186,16 @@ public class EnemyAIMovement : MonoBehaviour
         }
 
         inCover = false;
+    }
+
+    private Vector3 SelectPointInObject(Transform objectTransform)
+    {
+        Vector3 point = Vector3.zero;
+
+        point.x = Random.Range(objectTransform.position.x - (objectTransform.localScale.x / 2), objectTransform.position.x + (objectTransform.localScale.x / 2));
+        point.y = Random.Range(objectTransform.position.y - (objectTransform.localScale.y / 2), objectTransform.position.y + (objectTransform.localScale.y / 2));
+        point.z = Random.Range(objectTransform.position.z - (objectTransform.localScale.z / 2), objectTransform.position.z + (objectTransform.localScale.z / 2));
+
+        return point;
     }
 }

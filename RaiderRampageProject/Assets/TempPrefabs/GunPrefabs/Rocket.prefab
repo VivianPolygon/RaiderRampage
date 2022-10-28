@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionDamage: 15
-  explosionForce: 500
+  explosionForce: 1200
   explosionRange: 500
   explosionVisual: {fileID: 4437001108132608195, guid: 9dd9cdd44b6f27648a7e31153180a1a5, type: 3}
   visualTime: 1.5

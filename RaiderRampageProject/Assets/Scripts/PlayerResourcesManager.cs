@@ -332,7 +332,8 @@ public class PlayerResourcesManager : MonoBehaviour
         {
             if(PriceCheckAndCharge(Barricade.instance.CaculateRepairCost()))
             {
-                Barricade.instance.BarricadeTakeDamage(-Barricade.instance.repairAmount);
+                Barricade.instance.barricadeCurrentHealth += 11;
+                Barricade.instance.BarricadeTakeDamage();
             }
 
         }
