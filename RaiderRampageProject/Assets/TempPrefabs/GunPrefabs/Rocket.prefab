@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 8498874780471190121}
   - component: {fileID: 7912356804995799399}
   - component: {fileID: 6697003788803156267}
+  - component: {fileID: 7041686523562060643}
+  - component: {fileID: -2616503644877995657}
   m_Layer: 2
   m_Name: Rocket
   m_TagString: Untagged
@@ -112,3 +114,33 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7041686523562060643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5325694384607462396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1af1bc8f1f7d34f4fa22a50aa742b8a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 15
+--- !u!114 &-2616503644877995657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5325694384607462396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 153da9809c85d974fa02db04e053a604, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionDamage: 15
+  explosionForce: 1200
+  explosionRange: 500
+  explosionVisual: {fileID: 4437001108132608195, guid: 9dd9cdd44b6f27648a7e31153180a1a5, type: 3}
+  visualTime: 1.5
