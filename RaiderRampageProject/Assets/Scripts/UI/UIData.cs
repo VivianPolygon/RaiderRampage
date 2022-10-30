@@ -137,7 +137,7 @@ public class UIData : MonoBehaviour
         InitilizeShootingUISprites();
 
         SetWaveBar(0);
-        waveText.text = ("-------------->");
+        waveText.text = ("Current Wave: 1");
 
         scrapBarrelArrowsImage.sprite = SetSpriteFromLargeSheet(scrapBarrelArrowsSpriteNumber);
 
