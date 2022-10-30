@@ -25,6 +25,10 @@ public class UIEvents : MonoBehaviour
     public event Action onCheckBarrelInventorySpace;
     public event Action onUpdateBarricade;
 
+    public event Action onUpdateAmmoIconCount;
+    public event Action onUpdateMults;
+
+    public event Action onUpdateOverdriveUI;
     
     public event Action onUpdateAll;
 
@@ -35,7 +39,12 @@ public class UIEvents : MonoBehaviour
         onUpdateAll += CheckCosts;
         onUpdateAll += CheckBarrelInventorySpace;
         onUpdateAll += UpdateBarricade;
+        onUpdateAll += UpdateAmmoIconCount;
+        onUpdateAll += UpdateMults;
+
+        onUpdateAll += UpdateOverdriveUI;
     }
+
 
     private void OnDisable()
     {
@@ -44,6 +53,10 @@ public class UIEvents : MonoBehaviour
         onUpdateAll -= CheckCosts;
         onUpdateAll -= CheckBarrelInventorySpace;
         onUpdateAll -= UpdateBarricade;
+        onUpdateAll -= UpdateAmmoIconCount;
+        onUpdateAll -= UpdateMults;
+
+        onUpdateAll -= UpdateOverdriveUI;
     }
 
     public void UpdateScrapCounts()
@@ -68,10 +81,26 @@ public class UIEvents : MonoBehaviour
         onUpdateBarricade?.Invoke();
     }
 
+    public void UpdateAmmoIconCount()
+    {
+        onUpdateAmmoIconCount?.Invoke();
+    }
+
+    public void UpdateMults()
+    {
+        onUpdateMults?.Invoke();
+    }
+
+    public void UpdateOverdriveUI()
+    {
+        onUpdateOverdriveUI?.Invoke();
+    }
+
     public void UpdateAll()
     {
         onUpdateAll?.Invoke();
     }
+
 
 
 }

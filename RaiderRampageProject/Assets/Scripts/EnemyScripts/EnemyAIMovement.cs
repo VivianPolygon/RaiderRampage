@@ -68,7 +68,7 @@ public class EnemyAIMovement : MonoBehaviour
             switch (node.mode)
             {
                 case AiPathNode.NodeMode.NextNode:
-                    navmeshAgent.destination = nextNode.position;
+                    SetNextTarget(nextNode.position);
                     break;
                 case AiPathNode.NodeMode.TakeCover:
                     //checks and starts the taking cover coroutine
@@ -83,8 +83,11 @@ public class EnemyAIMovement : MonoBehaviour
                     //if the enemy dosent take cover, simply moves them on to the next node
                     else if(!takesCover)
                     {
-                        navmeshAgent.destination = nextNode.position;
+                        SetNextTarget(nextNode.position);
                     }
+                    break;
+                case AiPathNode.NodeMode.RandomPointOnObject:
+                    SetNextTarget(SelectPointInObject(nextNode));
                     break;
                 default:
                     break;
@@ -93,11 +96,13 @@ public class EnemyAIMovement : MonoBehaviour
             SetTimer();
         }
 
+    }
 
-        //Temporary, for testing purposes, destroys enemy when they contact somthing tagged ScrapBin <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-        if(other.gameObject.tag == "ScrapBin")
+    private void SetNextTarget(Vector3 nextTarget)
+    {
+        if(navmeshAgent != null && navmeshAgent.enabled)
         {
-            Destroy(this.gameObject);
+            navmeshAgent.destination = nextTarget;
         }
     }
 
@@ -132,7 +137,7 @@ public class EnemyAIMovement : MonoBehaviour
             //enemies blocking other enemies
             if(timeSenseNewNode > moveToLastNodeTimeThreshold && !nodeReset)
             {
-                navmeshAgent.destination = lastNode.position;
+                SetNextTarget(lastNode.position);
                 nodeReset = true;
             }
 
@@ -143,27 +148,35 @@ public class EnemyAIMovement : MonoBehaviour
 
     private IEnumerator TakeCover(AiPathNode node)
     {
-        float speed = navmeshAgent.speed;
-        inCover = true;
-
-        transform.localScale = transform.localScale - (Vector3.up);
-        navmeshAgent.speed = 0;
-        gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-
-        for (float i = 0; i < Random.Range(node.minCoverTime, node.maxCoverTime); i += Time.deltaTime)
+        if(navmeshAgent.enabled && navmeshAgent != null)
         {
 
-            timeSenseNewNode = 0;
-            yield return null;
+            float speed = navmeshAgent.speed;
+            inCover = true;
+
+            //switches animator to ducking state
+            GetComponent<EnemyAnimatorController>().SetDucking(true);
+
+            navmeshAgent.speed = 0;
+            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+
+            for (float i = 0; i < Random.Range(node.minCoverTime, node.maxCoverTime); i += Time.deltaTime)
+            {
+
+                timeSenseNewNode = 0;
+                yield return null;
+            }
+
+            navmeshAgent.speed = speed;
+
+            //switches animator out of ducking state
+            GetComponent<EnemyAnimatorController>().SetDucking(false);
+
+            navmeshAgent.destination = nextNode.position;
+
+            gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         }
 
-        navmeshAgent.speed = speed;
-
-        transform.localScale = transform.localScale + (Vector3.up);
-
-        navmeshAgent.destination = nextNode.position;
-
-        gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
 
         //prevents cover being immediatly reentered
         for (float i = 0; i < 2; i += Time.deltaTime)
@@ -173,5 +186,16 @@ public class EnemyAIMovement : MonoBehaviour
         }
 
         inCover = false;
+    }
+
+    private Vector3 SelectPointInObject(Transform objectTransform)
+    {
+        Vector3 point = Vector3.zero;
+
+        point.x = Random.Range(objectTransform.position.x - (objectTransform.localScale.x / 2), objectTransform.position.x + (objectTransform.localScale.x / 2));
+        point.y = Random.Range(objectTransform.position.y - (objectTransform.localScale.y / 2), objectTransform.position.y + (objectTransform.localScale.y / 2));
+        point.z = Random.Range(objectTransform.position.z - (objectTransform.localScale.z / 2), objectTransform.position.z + (objectTransform.localScale.z / 2));
+
+        return point;
     }
 }
