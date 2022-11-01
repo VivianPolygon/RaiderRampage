@@ -70,6 +70,9 @@ public class GunData : MonoBehaviour
     //total amount of gunheads, defaulted to 3 for now
     private int gunHeadQuantity;
 
+    [Header("Gun Animator")]
+    [SerializeField] private Animator gunAnim;
+    public static Animator _gunAnim;
 
     private void Awake()
     {
@@ -85,6 +88,12 @@ public class GunData : MonoBehaviour
 
         currentHeadNumber = startingGunHead;
         gunHeadQuantity = 3;
+
+        _gunAnim = gunAnim;
+        if(_gunAnim == null)
+        {
+            Debug.LogWarning("The gun animator is null, double check that GunData located on: " + name + "has its field in the inspector for animator set to an animator");
+        }
     }
 
     private void Update()
@@ -254,6 +263,8 @@ public class GunData : MonoBehaviour
 
             //updates the speed of the chain shader
             ChainMovement.UpdateChainSpeed(currentSpinSpeed * spinSpeedPercent);
+            //updates the speed of the recoil Animation
+            _gunAnim.SetFloat("RecoilSpeed", spinSpeedPercent);
         }
         else
         {
@@ -293,6 +304,9 @@ public class GunData : MonoBehaviour
         StartCoroutine(SpinStartup());
         UIData.instance.fireButtonImage.sprite = UIData.instance.SetSpriteFromLargeSheet(UIData.instance.activeFireButtonSpriteNumber);
         cursorImage.color = cursorFiringColor;
+
+        //sets the recoil animation
+        _gunAnim.SetBool("Firing", true);
     }
     public void StopFiring()
     {
@@ -300,6 +314,9 @@ public class GunData : MonoBehaviour
         StartCoroutine(SpinSlowdown());
         UIData.instance.fireButtonImage.sprite = UIData.instance.SetSpriteFromLargeSheet(UIData.instance.inactiveFireButtonSpriteNumber);
         cursorImage.color = cursorInactiveColor;
+
+        //sets the recoil animation
+        _gunAnim.SetBool("Firing", false);
     }
 
     //FUNCTIONS USED FOR SWAPING CURRENT GUNHEAD <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

@@ -200,6 +200,10 @@ public class PlayerResourcesManager : MonoBehaviour
     private IEnumerator ReloadCoroutine()
     {
         GunData.instance.reloading = true;
+
+        //sets animator to reload
+        GunData._gunAnim.SetBool("Reloading", true);
+
         for (float i = 0; i < GunData.instance.reloadTime; i += Time.deltaTime)
         {
             UIData.instance.ammoReloadTimerSlider.value = i / GunData.instance.reloadTime;
@@ -224,6 +228,8 @@ public class PlayerResourcesManager : MonoBehaviour
         reloadCoroutine = null;
         //sets the sprite back to default
         UIData.instance.reloadButtonImage.sprite = UIData.instance.SetSpriteFromLargeSheet(UIData.instance.inactiveReloadButtonSpriteNumber);
+        //sets the animator back to normal
+        GunData._gunAnim.SetBool("Reloading", false);
     }
 
     //initilizes the inactive barrel inventory (slots that are for storage and aren't on any gunheads)
