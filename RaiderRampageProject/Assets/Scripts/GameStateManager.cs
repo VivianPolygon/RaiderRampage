@@ -6,6 +6,8 @@ using UnityEngine.Events;
 //Script that controls the overall gamestate
 public class GameStateManager : MonoBehaviour
 {
+    public bool ammoUpgradePurchased = false; 
+
     //used as a singleton
     static public GameStateManager instance;
 
@@ -23,12 +25,10 @@ public class GameStateManager : MonoBehaviour
     public void WaveEnd()
     {
         onWaveEnd?.Invoke();
-        //Debug.log("Wave Ended");
     }
     public void WaveStart()
     {
         onWaveStart?.Invoke();
-        //Debug.log("Wave Started");
     }
 
     //enum for gamestates
@@ -93,7 +93,9 @@ public class GameStateManager : MonoBehaviour
                     case Gamestate.Shooting:
                         SetInventoryCanvases(false);
                         BeginShootingState(true);
+                        CheckIfAmmoUpgrade();
                         WaveStart();
+                        PlayerResourcesManager.instance.FillAmmos();
                         break;
                     case Gamestate.BetweenWaves:
                         WaveEnd();
@@ -164,6 +166,23 @@ public class GameStateManager : MonoBehaviour
             Camera.main.transform.rotation = Quaternion.AngleAxis(0, Camera.main.transform.up);
         }
     }
+
+    private void CheckIfAmmoUpgrade()
+    {
+        if(ammoUpgradePurchased)
+        {
+            UIData.instance.SetDrainIcons();
+            UIData.instance.UpdateAllDrainIcons();
+
+            ammoUpgradePurchased = false;
+        }
+    }
+    public void SetAmmoUpgradeTrue()
+    {
+        ammoUpgradePurchased = true;
+    }
+
+
 
     //TEMPORARY
     //function used to rotate the player backwards, facing the workshop

@@ -23,7 +23,8 @@ public class AiPathNode : MonoBehaviour
     public enum NodeMode
     {
         NextNode,
-        TakeCover
+        TakeCover,
+        RandomPointOnObject,
     }
 
     public NodeMode mode = NodeMode.NextNode;

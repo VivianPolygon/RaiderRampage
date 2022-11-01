@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1af1bc8f1f7d34f4fa22a50aa742b8a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 40
+  damage: 15
 --- !u!114 &-2616503644877995657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,8 +139,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 153da9809c85d974fa02db04e053a604, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionDamage: 40
-  explosionForce: 5
-  explosionRange: 5
-  ExplosionVisual: {fileID: 4437001108132608195, guid: 9dd9cdd44b6f27648a7e31153180a1a5, type: 3}
+  explosionDamage: 15
+  explosionForce: 1200
+  explosionRange: 500
+  explosionVisual: {fileID: 4437001108132608195, guid: 9dd9cdd44b6f27648a7e31153180a1a5, type: 3}
   visualTime: 1.5

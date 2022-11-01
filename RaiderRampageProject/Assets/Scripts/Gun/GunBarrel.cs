@@ -78,43 +78,25 @@ public class GunBarrel : MonoBehaviour
             switch (barrelType)
             {
                 case BarrelType.SMG:
-                    if (PlayerResourcesManager.instance.pistolClipCurrent >= ammoDrain)
-                    {
-                        canFire = true;
-                    }
+                    canFire = PlayerResourcesManager.instance.CheckCanShoot(0, ammoDrain);
                     break;
                 case BarrelType.Pistol:
-                    if(PlayerResourcesManager.instance.pistolClipCurrent >= ammoDrain)
-                    {
-                        canFire = true;
-                    }
+                    canFire = PlayerResourcesManager.instance.CheckCanShoot(0, ammoDrain);
                     break;
 
                 case BarrelType.Shotgun:
-                    if (PlayerResourcesManager.instance.shotGunClipCurrent >= ammoDrain)
-                    {
-                        canFire = true;
-                    }
+                    canFire = PlayerResourcesManager.instance.CheckCanShoot(1, ammoDrain);
                     break;
 
                 case BarrelType.MachineGun:
-                    if (PlayerResourcesManager.instance.machineGunClipCurrent >= ammoDrain)
-                    {
-                        canFire = true;
-                    }
+                    canFire = PlayerResourcesManager.instance.CheckCanShoot(2, ammoDrain);
                     break;
                 case BarrelType.Sniper:
-                    if (PlayerResourcesManager.instance.machineGunClipCurrent >= ammoDrain)
-                    {
-                        canFire = true;
-                    }
+                    canFire = PlayerResourcesManager.instance.CheckCanShoot(2, ammoDrain);
                     break;
 
                 case BarrelType.RocketLauncher:
-                    if (PlayerResourcesManager.instance.rocketLauncherClipCurrent >= ammoDrain)
-                    {
-                        canFire = true;
-                    }
+                    canFire = PlayerResourcesManager.instance.CheckCanShoot(3, ammoDrain);
                     break;
                 default:
                     break;
@@ -125,7 +107,7 @@ public class GunBarrel : MonoBehaviour
             t += Time.deltaTime;
 
             //if the time requirments have been met, instantiates shot and does ammo caculations
-            if(t > (1 / shotsPerSecond) && canFire)
+            if(t > (1 / (shotsPerSecond * PlayerResourcesManager.fireSpeedMult)) && canFire)
             {
                 t = 0;
                 Vector3 appliedSpread = Vector3.zero;
@@ -137,6 +119,24 @@ public class GunBarrel : MonoBehaviour
                         shot.transform.LookAt(GunData.instance.cursorPositon);
                         shot.GetComponent<Rigidbody>().AddForce(((shot.transform.forward * shotForce ) + (Random.onUnitSphere * bulletSpreadAmount) * GunData.instance.spinSpeedPercent), ForceMode.Impulse);
 
+                        if(OverdriveGauge.armorPierceActive)
+                        {
+                            shot.transform.localScale *= OverdriveGauge.pierceScale;
+                        }
+                        if(OverdriveGauge.incendiaryActive)
+                        {
+                            GameObject fireTrail = Instantiate(OverdriveGauge.fireTrail, shot.transform.position, shot.transform.rotation);
+                            fireTrail.transform.parent = shot.transform;
+                        }
+                        if(OverdriveGauge.explosionActive)
+                        {
+                            GameObject explosionObject = Instantiate(OverdriveGauge.explosionObject, shot.transform.position, shot.transform.rotation);
+                            explosionObject.transform.parent = shot.transform;
+
+                            explosionObject.GetComponent<Explosive>().explosionDamage = OverdriveGauge._explosionDamage;
+                            explosionObject.GetComponent<Explosive>().explosionRange = OverdriveGauge._explosionRange;
+                        }
+
                         Destroy(shot, projectileDestroyTime);
 
                         break;
@@ -146,6 +146,26 @@ public class GunBarrel : MonoBehaviour
                             shot = Instantiate(projectilePrefab, projectileSpawnpoint.transform.position, transform.rotation);
                             shot.transform.LookAt(GunData.instance.cursorPositon);
                             shot.GetComponent<Rigidbody>().AddForce((shot.transform.forward * shotForce)+ (Random.onUnitSphere * bulletSpreadAmount), ForceMode.Impulse);
+
+
+                            if (OverdriveGauge.armorPierceActive)
+                            {
+                                shot.transform.localScale *= OverdriveGauge.pierceScale;
+                            }
+                            if (OverdriveGauge.incendiaryActive)
+                            {
+                                GameObject fireTrail = Instantiate(OverdriveGauge.fireTrail, shot.transform.position, shot.transform.rotation);
+                                fireTrail.transform.parent = shot.transform;
+                            }
+                            if (OverdriveGauge.explosionActive)
+                            {
+                                GameObject explosionObject = Instantiate(OverdriveGauge.explosionObject, shot.transform.position, shot.transform.rotation);
+                                explosionObject.transform.parent = shot.transform;
+
+                                explosionObject.GetComponent<Explosive>().explosionDamage = OverdriveGauge._explosionDamage;
+                                explosionObject.GetComponent<Explosive>().explosionRange = OverdriveGauge._explosionRange;
+                            }
+
                             Destroy(shot, projectileDestroyTime);
                         }
 
@@ -159,31 +179,31 @@ public class GunBarrel : MonoBehaviour
                 switch (barrelType)
                 {
                     case BarrelType.SMG:
-                        PlayerResourcesManager.instance.pistolClipCurrent -= ammoDrain;
-                        UIData.instance.UpdateAmmoSlider(4, PlayerResourcesManager.instance.pistolClipMax, PlayerResourcesManager.instance.pistolClipCurrent);
+                        PlayerResourcesManager.instance.clipQuantities[0] -= ammoDrain;
+                        UIData.instance.UpdateSpecificClipDrainIcon(0);
                         break;
                     case BarrelType.Pistol:
-                        PlayerResourcesManager.instance.pistolClipCurrent -= ammoDrain;
-                        UIData.instance.UpdateAmmoSlider(4, PlayerResourcesManager.instance.pistolClipMax, PlayerResourcesManager.instance.pistolClipCurrent);
+                        PlayerResourcesManager.instance.clipQuantities[0] -= ammoDrain;
+                        UIData.instance.UpdateSpecificClipDrainIcon(0);
                         break;
 
                     case BarrelType.Shotgun:
-                        PlayerResourcesManager.instance.shotGunClipCurrent -= ammoDrain;
-                        UIData.instance.UpdateAmmoSlider(6, PlayerResourcesManager.instance.shotGunClipMax, PlayerResourcesManager.instance.shotGunClipCurrent);
+                        PlayerResourcesManager.instance.clipQuantities[1] -= ammoDrain;
+                        UIData.instance.UpdateSpecificClipDrainIcon(1);
                         break;
 
                     case BarrelType.MachineGun:
-                        PlayerResourcesManager.instance.machineGunClipCurrent -= ammoDrain;
-                        UIData.instance.UpdateAmmoSlider(5, PlayerResourcesManager.instance.machineGunClipMax, PlayerResourcesManager.instance.machineGunClipCurrent);
+                        PlayerResourcesManager.instance.clipQuantities[2] -= ammoDrain;
+                        UIData.instance.UpdateSpecificClipDrainIcon(2);
                         break;
                     case BarrelType.Sniper:
-                        PlayerResourcesManager.instance.machineGunClipCurrent -= ammoDrain;
-                        UIData.instance.UpdateAmmoSlider(5, PlayerResourcesManager.instance.machineGunClipMax, PlayerResourcesManager.instance.machineGunClipCurrent);
+                        PlayerResourcesManager.instance.clipQuantities[2] -= ammoDrain;
+                        UIData.instance.UpdateSpecificClipDrainIcon(2);
                         break;
 
                     case BarrelType.RocketLauncher:
-                        PlayerResourcesManager.instance.rocketLauncherClipCurrent -= ammoDrain;
-                        UIData.instance.UpdateAmmoSlider(7, PlayerResourcesManager.instance.rocketLauncherClipMax, PlayerResourcesManager.instance.rocketLauncherClipCurrent);
+                        PlayerResourcesManager.instance.clipQuantities[3] -= ammoDrain;
+                        UIData.instance.UpdateSpecificClipDrainIcon(3);
                         break;
                     default:
                         break;

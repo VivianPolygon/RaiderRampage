@@ -7,47 +7,56 @@ public class PlayerResourcesManager : MonoBehaviour
     public static bool ammoRegen;
 
     public static PlayerResourcesManager instance;
-    //current quantity of ammo
-    [Header("Ammo Quantity")]
-    public int pistolAmmo;
-    public int shotGunAmmo;
-    public int machineGunAmmo;
-    public int rocketLauncherAmmo;
+
+    //used to caculate current ammo, as a float
+    [HideInInspector] public float[] ammoRegenCalcs;
+
     //regen of each ammo type per second
-    [Header("Ammo Regen Per Second")]
+    [Header("Ammo Regen Rates")]
     public float pistolAmmoRegen;
     public float shotGunAmmoRegen;
     public float machineGunAmmoRegen;
     public float rocketLauncherAmmoRegen;
+
+    [HideInInspector] public float[] ammoRegenRates;
+
     //maximum amout of ammo
-    [Header("Ammo Max")]
-    public int pistolAmmoMax;
-    public int shotGunAmmoMax;
-    public int machineGunAmmoMax;
-    public int rocketLauncherAmmoMax;
-
+    [HideInInspector] public int[] ammoMaxes;
     //max clip sizes
-    [Header("Clip Max")]
-    public int pistolClipMax;
-    public int shotGunClipMax;
-    public int machineGunClipMax;
-    public int rocketLauncherClipMax;
-    //current amount in clip
-    [Header("Clip Current")]
-    public int pistolClipCurrent;
-    public int shotGunClipCurrent;
-    public int machineGunClipCurrent;
-    public int rocketLauncherClipCurrent;
+    [HideInInspector] public int[] clipMaxes;
 
-    //used to caculate current ammo, as a float
-    [HideInInspector]
-    public float pistolAmmoCalc;
-    [HideInInspector]
-    public float shotGunAmmoCalc;
-    [HideInInspector]
-    public float machineGunAmmoCalc;
-    [HideInInspector]
-    public float rocketLauncherAmmoCalc;
+    //current quantity of ammo
+    [HideInInspector] public int[] ammoQuantities;
+    //current quantity of ammo in clip
+    [HideInInspector] public int[] clipQuantities;
+
+    //number of icons for clip
+    [Header("ClipIcons")]
+    public int pistolClipIcons;
+    public int shotGunClipIcons;
+    public int machineGunClipIcons;
+    public int rockerLauncherClipIcons;
+
+    [HideInInspector] public int[] clipIconAmount;
+
+    //number of icons for ammo
+    [Header("AmmoIcons")]
+    public int pistolAmmoIcons;
+    public int shotGunAmmoIcons;
+    public int machineGunAmmoIcons;
+    public int rockerLauncherAmmoIcons;
+
+    [HideInInspector] public int[] ammoIconAmount;
+
+    //ammo in each icon
+    [Header("Icon Value")]
+    public int pistolIconQuantity;
+    public int shotGunIconQuantity;
+    public int machineGunIconQuantity;
+    public int rockerLauncherIconQuantity;
+
+    [HideInInspector] public int[] iconValues;
+
 
     //used to determine how much ammo is reloaded, needed for if the ammount in ammo storage is less than the clip capacity
     private int reloadValue;
@@ -77,6 +86,29 @@ public class PlayerResourcesManager : MonoBehaviour
     [Header("Upgrade Resources Costs")]
     public int addonCost;
 
+    [Header("Clip Icons Gained from Clip Upgrades")]
+    [SerializeField] private int pistolClipIncrease;
+    [SerializeField] private int shotGunClipIncrease;
+    [SerializeField] private int machineGunClipIncrease;
+    [SerializeField] private int rocketLauncherClipIncrease;
+
+    [Header("Ammo Icons Gained from Clip Upgrades")]
+    [SerializeField] private int pistolAmmoIncrease;
+    [SerializeField] private int shotGunAmmoIncrease;
+    [SerializeField] private int machineGunAmmoIncrease;
+    [SerializeField] private int rocketLauncherAmmoIncrease;
+
+    [Header("Multiplyer Increase Per Upgrade")]
+    [SerializeField] private float damageMultIncrease;
+    [SerializeField] private float fireSpeedMultIncrease;
+
+    [Header("grenade refill delay time")]
+    public float grenadeRefillTime;
+
+    public static float damageMult = 1;
+    public static float fireSpeedMult = 1;
+
+    public static float murderScore; //used for Overdrive Gauge, currently adds an enemies damage when they die to increase it
 
     //established a singleton 
     private void Awake()
@@ -100,41 +132,59 @@ public class PlayerResourcesManager : MonoBehaviour
         {
             RegenAmmo();
         }
+
+        //Drains the murderscore from the overdrive gauge
+        DrainMurderScore();
     }
 
 
     private void Start()
     {
-        //sets the values added for caculations to initial ammo amount
-        pistolAmmoCalc = pistolAmmo;
-        shotGunAmmoCalc = shotGunAmmo;
-        machineGunAmmoCalc = machineGunAmmo;
-        rocketLauncherAmmoCalc = rocketLauncherAmmo;
+        //initilizes the ammo arrays
+        InitilizeAllAmmoArrays();
 
         //initilizes the merging inventory on the excess inventory slots
         InitilizeInventory();
+
+        //initilizes multipliers to 1
+        InitilizeMults();
+
     }
+
+
+    private void InitilizeMults()
+    {
+        damageMult = 1;
+        fireSpeedMult = 1;
+    }
+
+    public int MultiplyDamage(int damage)
+    {
+        return Mathf.RoundToInt(damage * damageMult);
+    }
+
+    public void DrainMurderScore()
+    {
+        if(murderScore > 0 && !OverdriveGauge.atTopTier && !OverdriveGauge.overdriveActive)
+        {
+            murderScore = Mathf.Clamp(murderScore - (OverdriveGauge.drainRate * Time.deltaTime), 0, OverdriveGauge.murderScoreMax);
+            OverdriveGauge.UpdateFillCalculations();
+
+        }
+    }
+
 
 
     public void RegenAmmo()
     {
-        //caculates the current amount of ammo from the regen and caps it to the respective ammo max, and prevents negative values
-        pistolAmmoCalc = Mathf.Clamp(pistolAmmoCalc + (pistolAmmoRegen * Time.deltaTime), 0, pistolAmmoMax);
-        shotGunAmmoCalc = Mathf.Clamp(shotGunAmmoCalc + (shotGunAmmoRegen * Time.deltaTime), 0, shotGunAmmoMax);
-        machineGunAmmoCalc = Mathf.Clamp(machineGunAmmoCalc + (machineGunAmmoRegen * Time.deltaTime), 0, machineGunAmmoMax);
-        rocketLauncherAmmoCalc = Mathf.Clamp(rocketLauncherAmmoCalc + (rocketLauncherAmmoRegen * Time.deltaTime), 0, rocketLauncherAmmoMax);
-
-        //rounds the cauclated ammo to a float and applies it
-        pistolAmmo = Mathf.RoundToInt(pistolAmmoCalc);
-        shotGunAmmo = Mathf.RoundToInt(shotGunAmmoCalc);
-        machineGunAmmo = Mathf.RoundToInt(machineGunAmmoCalc);
-        rocketLauncherAmmo = Mathf.RoundToInt(rocketLauncherAmmoCalc);
-
-        //updates the ammo sliders
-        UIData.instance.UpdateAmmoSlider(0, pistolAmmoMax, pistolAmmo);
-        UIData.instance.UpdateAmmoSlider(1, machineGunAmmoMax, machineGunAmmo);
-        UIData.instance.UpdateAmmoSlider(2, shotGunAmmoMax, shotGunAmmo);
-        UIData.instance.UpdateAmmoSlider(3, rocketLauncherAmmoMax, rocketLauncherAmmo);
+        for (int i = 0; i < ammoRegenCalcs.Length; i++)
+        {
+            //updates quantities
+            ammoRegenCalcs[i] = Mathf.Clamp(ammoRegenCalcs[i] + (ammoRegenRates[i] * Time.deltaTime), 0, ammoMaxes[i]);
+            ammoQuantities[i] = Mathf.RoundToInt(ammoRegenCalcs[i]);
+            //updates ammobank drainIcons
+            UIData.instance.UpdateAmmoDrainIcons();
+        }
     }
 
     public void Reload()
@@ -155,32 +205,16 @@ public class PlayerResourcesManager : MonoBehaviour
             UIData.instance.ammoReloadTimerSlider.value = i / GunData.instance.reloadTime;
             yield return null;
         }
-        //reloads pistol ammo
-        reloadValue = Mathf.Clamp(Mathf.Clamp(pistolClipMax, 0, pistolClipMax - pistolClipCurrent), 0, pistolAmmo);
-        pistolAmmoCalc -= reloadValue;
-        pistolClipCurrent += reloadValue;
 
-        //reloads machinegun ammo
-        reloadValue = Mathf.Clamp(Mathf.Clamp(machineGunClipMax, 0, machineGunClipMax - machineGunClipCurrent), 0, machineGunAmmo);
-        machineGunAmmoCalc -= reloadValue;
-        machineGunClipCurrent += reloadValue;
-
-        //reloads shotgun ammo
-        reloadValue = Mathf.Clamp(Mathf.Clamp(shotGunClipMax, 0, shotGunClipMax - shotGunClipCurrent), 0, shotGunAmmo);
-        shotGunAmmoCalc -= reloadValue;
-        shotGunClipCurrent += reloadValue;
-
-        //reloads rockerlauncher ammo
-        reloadValue = Mathf.Clamp(Mathf.Clamp(rocketLauncherClipMax, 0, rocketLauncherClipMax - rocketLauncherClipCurrent), 0, rocketLauncherAmmo);
-        rocketLauncherAmmoCalc -= reloadValue;
-        rocketLauncherClipCurrent += reloadValue;
-
-
-        //updates clipsliders
-        UIData.instance.UpdateAmmoSlider(4, pistolClipMax, pistolClipCurrent);
-        UIData.instance.UpdateAmmoSlider(5, machineGunClipMax, machineGunClipCurrent);
-        UIData.instance.UpdateAmmoSlider(6, shotGunClipMax, shotGunClipCurrent);
-        UIData.instance.UpdateAmmoSlider(7, rocketLauncherClipMax, rocketLauncherClipCurrent);
+        for (int i = 0; i < clipIconAmount.Length; i++)
+        {
+            //reloads each clip from respective ammo store
+            reloadValue = Mathf.Clamp(Mathf.Clamp(clipMaxes[i], 0, clipMaxes[i] - clipQuantities[i]), 0, ammoQuantities[i]);
+            ammoRegenCalcs[i] -= reloadValue;
+            clipQuantities[i] += reloadValue;
+            //updates UI DrainIcons
+            UIData.instance.UpdateAllDrainIcons();
+        }
 
         //sets the bar to full
         UIData.instance.ammoReloadTimerSlider.value = 1;
@@ -298,7 +332,8 @@ public class PlayerResourcesManager : MonoBehaviour
         {
             if(PriceCheckAndCharge(Barricade.instance.CaculateRepairCost()))
             {
-                Barricade.instance.BarricadeTakeDamage(-Barricade.instance.repairAmount);
+                Barricade.instance.barricadeCurrentHealth += 11;
+                Barricade.instance.BarricadeTakeDamage();
             }
 
         }
@@ -309,6 +344,7 @@ public class PlayerResourcesManager : MonoBehaviour
         if (scrap >= price)
         {
             scrap -= price;
+            UIEvents.instance.UpdateScrapCounts();
             return true;
         }
         else
@@ -369,5 +405,159 @@ public class PlayerResourcesManager : MonoBehaviour
 
         return true;
     }
+
+
+    //v functions for ammo icon system <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    public bool CheckCanShoot(int arraySlot, int ammodrain)
+    {
+        if (clipQuantities[arraySlot] >= ammodrain)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void InitilizeAllAmmoArrays()
+    {
+
+        //initilizes clip icons amount
+        clipIconAmount = InitilizeAmmmoIntegerArray(clipIconAmount, pistolClipIcons, shotGunClipIcons, machineGunClipIcons, rockerLauncherClipIcons);
+        //initilized ammo icons amount
+        ammoIconAmount = InitilizeAmmmoIntegerArray(ammoIconAmount, pistolAmmoIcons, shotGunAmmoIcons, machineGunAmmoIcons, rockerLauncherAmmoIcons);
+        //initilises Icon Values
+        iconValues = InitilizeAmmmoIntegerArray(iconValues, pistolIconQuantity, shotGunIconQuantity, machineGunIconQuantity, rockerLauncherIconQuantity);
+        //initilizes ammo and clip caps from icon amount and values
+        ammoMaxes = InitilizeAmmmoIntegerArray(ammoMaxes, 0, 0, 0, 0);
+        clipMaxes = InitilizeAmmmoIntegerArray(clipMaxes, 0, 0, 0, 0);
+        SetAmmoCaps();
+        //initilizes, then sets ammo and clip current to full
+        ammoRegenCalcs = InitilizeAmmmoFloatArray(ammoRegenCalcs, 0, 0, 0, 0);
+        ammoQuantities = InitilizeAmmmoIntegerArray(ammoQuantities, 0, 0, 0, 0);
+        clipQuantities = InitilizeAmmmoIntegerArray(clipQuantities, 0, 0, 0, 0);
+        FillAmmos();
+        //initilizes regen rates
+        ammoRegenRates = InitilizeAmmmoFloatArray(ammoRegenRates, pistolAmmoRegen, shotGunAmmoRegen, machineGunAmmoRegen, rocketLauncherAmmoRegen);
+
+    }
+
+    public bool AddClipIcons(int cost)
+    {
+        if (PriceCheckAndCharge(cost))
+        {
+            //increases icon quantities by values inputed
+            clipIconAmount[0] += pistolClipIncrease;
+            clipIconAmount[1] += shotGunClipIncrease;
+            clipIconAmount[2] += machineGunClipIncrease;
+            clipIconAmount[3] += rocketLauncherClipIncrease;
+
+            //updates ammo caps and refills ammo
+            SetAmmoCaps();
+            FillAmmos();
+            return true;
+        }
+        return false;
+    }
+    public bool AddAmmoIcons(int cost)
+    {
+        if (PriceCheckAndCharge(cost))
+        {
+            //increases icon quantities by values inputed
+            ammoIconAmount[0] += pistolAmmoIncrease;
+            ammoIconAmount[1] += shotGunAmmoIncrease;
+            ammoIconAmount[2] += machineGunAmmoIncrease;
+            ammoIconAmount[3] += rocketLauncherAmmoIncrease;
+
+            //updates ammo caps and refills ammo
+            SetAmmoCaps();
+            FillAmmos();
+            return true;
+        }
+        return false;
+    }
+
+    public bool IncreaseDamageMult(int cost)
+    {
+        if(PriceCheckAndCharge(cost))
+        {
+            //increases mult by value 
+            damageMult += damageMultIncrease;
+
+            return true;
+        }
+        return false;
+    }
+
+    public bool IncreaseFireSpeedMult(int cost)
+    {
+        if (PriceCheckAndCharge(cost))
+        {
+            //increases mult by value 
+            fireSpeedMult += fireSpeedMultIncrease;
+
+            return true;
+        }
+        return false;
+    }
+
+    public int[] InitilizeAmmmoIntegerArray(int[] array, int pistol, int shotGun, int machineGun, int rocketLauncher)
+    {
+        array = new int[4];
+        array[0] = pistol;
+        array[1] = shotGun;
+        array[2] = machineGun;
+        array[3] = rocketLauncher;
+
+        return array;
+    }
+    public int[] UpdateAmmmoIntegerArray(int[] array, int pistol, int shotGun, int machineGun, int rocketLauncher)
+    {
+        //will cause an error if initilize hasent been ran due to no null/length check
+        array[0] = pistol;
+        array[1] = shotGun;
+        array[2] = machineGun;
+        array[3] = rocketLauncher;
+
+        return array;
+    }
+
+    public float[] InitilizeAmmmoFloatArray(float[] array, float pistol, float shotGun, float machineGun, float rocketLauncher)
+    {
+        array = new float[4];
+        array[0] = pistol;
+        array[1] = shotGun;
+        array[2] = machineGun;
+        array[3] = rocketLauncher;
+
+        return array;
+    }
+    public float[] UpdateAmmmoFloatArray(float[] array, float pistol, float shotGun, float machineGun, float rocketLauncher)
+    {
+        //will cause an error if initilize hasent been ran due to no null/length check
+        array[0] = pistol;
+        array[1] = shotGun;
+        array[2] = machineGun;
+        array[3] = rocketLauncher;
+
+        return array;
+    }
+
+    public void SetAmmoCaps()
+    {
+        for (int i = 0; i < ammoMaxes.Length; i++)
+        {
+            ammoMaxes[i] = ammoIconAmount[i] * iconValues[i];
+            clipMaxes[i] = clipIconAmount[i] * iconValues[i];
+        }
+    }
+
+    public void FillAmmos()
+    {
+        for (int i = 0; i < ammoQuantities.Length; i++)
+        {
+            ammoRegenCalcs[i] = ammoMaxes[i];
+            clipQuantities[i] = clipMaxes[i];
+        }
+    }
+
 
 }
