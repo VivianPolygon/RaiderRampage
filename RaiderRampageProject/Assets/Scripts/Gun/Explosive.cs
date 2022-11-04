@@ -15,10 +15,13 @@ public class Explosive : MonoBehaviour
 
     private void Start()
     {
-        explosionDamage = PlayerResourcesManager.instance.MultiplyDamage(explosionDamage);
+        if(PlayerResourcesManager.instance != null)
+        {
+            explosionDamage = PlayerResourcesManager.instance.MultiplyDamage(explosionDamage);
+        }
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
 
         foreach (Collider collider in Physics.OverlapSphere(transform.position, explosionRange))

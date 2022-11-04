@@ -78,7 +78,7 @@ public class AimControls : MonoBehaviour
 
         GunData.instance.gunModelBody.transform.localRotation = Quaternion.Euler(gunRotationEuler);
 
-        if (Physics.Raycast(GunData.instance.gunModelBody.transform.position, GunData.instance.gunModelBody.transform.forward, out cursorDetect, 100f))
+        if (Physics.Raycast(GunData.instance.gunModelBody.transform.position, GunData.instance.gunModelBody.transform.forward, out cursorDetect, float.PositiveInfinity))
         {
             cursorCanvas.transform.position = cursorDetect.point;
 

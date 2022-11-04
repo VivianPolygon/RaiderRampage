@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 //Script that holds UI elements and their data
 public class UIData : MonoBehaviour
 {
@@ -114,8 +116,14 @@ public class UIData : MonoBehaviour
     [Header("Grenade UI Components")]
     public Image grenadeImage;
 
+    [Header("ScreenFades")]
+    [SerializeField] private Image fadeImage;
+
+    [SerializeField] private Color deathFadeColor;
+    [SerializeField] private Color victoryFadeColor;
 
 
+    [SerializeField] private float fadeTime;
 
     //establishes the singleton, initilizes spritesheets from resources folder
     private void Awake()
@@ -404,4 +412,27 @@ public class UIData : MonoBehaviour
         }
     }
 
+    //Screen Fades
+
+    public void DeathScreen()
+    {
+        StartCoroutine(DeathScreenFadeIn(deathFadeColor, 3));
+    }
+
+    public void VictoryScreen()
+    {
+        StartCoroutine(DeathScreenFadeIn(victoryFadeColor, 4));
+    }
+
+    private IEnumerator DeathScreenFadeIn(Color color, int sceneLoad)
+    {
+        for (float i = 0; i < fadeTime; i += Time.deltaTime)
+        {
+            fadeImage.color = Color.Lerp(Color.clear, color, (i / fadeTime));
+
+            yield return null;
+        }
+
+        SceneManager.LoadScene(sceneLoad);
+    }
 }

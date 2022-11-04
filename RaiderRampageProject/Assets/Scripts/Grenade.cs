@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class Grenade : MonoBehaviour
 {
+    [Header("Joint used to aim grenade")]
+    [SerializeField] private Transform grenadeAimTransform;
+
     [SerializeField] private GameObject grenadePrefab;
     [SerializeField] private Transform grenadeHoldingTransform;
 
@@ -64,7 +67,7 @@ public class Grenade : MonoBehaviour
         if (grenadeInstance != null)
         {
             grenadeInstance.GetComponent<Rigidbody>().useGravity = true;
-            grenadeInstance.GetComponent<Rigidbody>().AddForce((transform.forward * throwForce) + (transform.up * lobIntensity), ForceMode.Impulse);
+            grenadeInstance.GetComponent<Rigidbody>().AddForce((grenadeAimTransform.forward * throwForce) + (grenadeAimTransform.up * lobIntensity), ForceMode.Impulse);
             grenadeInstance = null;
 
             if(explosionTimeTracking != null)
