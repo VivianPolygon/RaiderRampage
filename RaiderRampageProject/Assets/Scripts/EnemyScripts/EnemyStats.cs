@@ -34,6 +34,7 @@ public class EnemyStats : MonoBehaviour
 
     [Header("Ragdoll Model Spawned on Death")]
     [SerializeField] private GameObject ragdollModel;
+    private GameObject ragdollInstance;
 
     private void Start()
     {
@@ -85,13 +86,15 @@ public class EnemyStats : MonoBehaviour
     {
         if (health <= 0)
         {
-            GetComponent<EnemyAnimatorController>().SetDeath(true);
 
-            GameObject ragdoll = Instantiate(ragdollModel, transform.GetChild(0).position, transform.rotation);
-            ragdoll.GetComponent<Rigidbody>().AddForce(GetComponent<Rigidbody>().velocity, ForceMode.Impulse);
-            Destroy(ragdoll, 5);
-            Destroy(this.gameObject);
-
+            if(ragdollInstance == null)
+            {
+                //GetComponent<EnemyAnimatorController>().SetDeath(true);
+                ragdollInstance = Instantiate(ragdollModel, transform.GetChild(0).position, transform.rotation);
+                //ragdoll.GetComponent<Rigidbody>().AddForce(GetComponent<Rigidbody>().velocity, ForceMode.Impulse);
+                Destroy(ragdollInstance, 5);
+                Destroy(this.gameObject);
+            }
 
         }
         else
@@ -169,12 +172,16 @@ public class EnemyStats : MonoBehaviour
 
     private void OnDestroy()
     {
-        //adds the murder score from enemies death
-        if(!OverdriveGauge.atTopTier)
+        if(gameObject.scene.isLoaded) //checks if the scene is running or being changed
         {
-            PlayerResourcesManager.murderScore += maxhealth;
+            //adds the murder score from enemies death
+            if (!OverdriveGauge.atTopTier)
+            {
+                PlayerResourcesManager.murderScore += maxhealth;
+            }
+
+            UIData.instance.SetWaveBar(WaveTracker.instance.waveSpawner.UpdateWaveProgress(-1));
         }
 
-        UIData.instance.SetWaveBar(WaveTracker.instance.waveSpawner.UpdateWaveProgress(-1));
     }
 }

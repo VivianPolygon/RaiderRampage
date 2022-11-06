@@ -10,6 +10,9 @@ public class GunBarrel : MonoBehaviour
 
     public BarrelShootingPattern bulletPattern;
 
+    [Header("Controls the barrels Smoke/Flash Effects")]
+    [SerializeField] private GunEffects gunEffects;
+
 
     //prefab for projectile, and its spawnpoint transform
     [SerializeField]
@@ -100,6 +103,7 @@ public class GunBarrel : MonoBehaviour
                     break;
                 default:
                     break;
+
             }
 
             //tracks time, always tracks so that the player cant spam shot by quicktapping,
@@ -212,6 +216,7 @@ public class GunBarrel : MonoBehaviour
             }
             //sets false for next loop
             canFire = false;
+
         }
     }
 

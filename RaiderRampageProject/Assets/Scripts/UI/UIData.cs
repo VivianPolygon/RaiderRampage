@@ -436,3 +436,4 @@ public class UIData : MonoBehaviour
         SceneManager.LoadScene(sceneLoad);
     }
 }
+

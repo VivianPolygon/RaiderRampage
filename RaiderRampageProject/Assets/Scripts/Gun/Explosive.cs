@@ -21,26 +21,29 @@ public class Explosive : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
-
-        foreach (Collider collider in Physics.OverlapSphere(transform.position, explosionRange))
+        if(gameObject.scene.isLoaded)
         {
-            if (collider.TryGetComponent(out Rigidbody rigidBody))
+            foreach (Collider collider in Physics.OverlapSphere(transform.position, explosionRange))
             {
-                rigidBody.AddExplosionForce(explosionForce, transform.position, explosionDamage);
+                if (collider.TryGetComponent(out Rigidbody rigidBody))
+                {
+                    rigidBody.AddExplosionForce(explosionForce, transform.position, explosionDamage);
+                }
+
+                if (collider.TryGetComponent(out EnemyStats enemyStats))
+                {
+                    enemyStats.TakeDamage(explosionDamage);
+
+                }
+
             }
 
-            if(collider.TryGetComponent(out EnemyStats enemyStats))
-            {
-                enemyStats.TakeDamage(explosionDamage);
-               
-            }
-            
+            GameObject visual = Instantiate(explosionVisual, transform.position, Quaternion.identity);
+            Destroy(visual, visualTime);
         }
 
-        GameObject visual = Instantiate(explosionVisual, transform.position, Quaternion.identity);
-        Destroy(visual, visualTime);
     }
 
 }

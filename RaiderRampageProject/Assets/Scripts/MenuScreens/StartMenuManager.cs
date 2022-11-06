@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class StartMenuManager : MonoBehaviour
 {
+    public static StartMenuManager instance;
+
     public enum MenuActive
     {
         noneActive,
@@ -36,6 +38,18 @@ public class StartMenuManager : MonoBehaviour
     public MenuActive menuState;
 
     private AsyncOperation loadingOperation;
+
+    private void Awake()
+    {
+        if(instance != null)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
 
     private void Start()
     {
