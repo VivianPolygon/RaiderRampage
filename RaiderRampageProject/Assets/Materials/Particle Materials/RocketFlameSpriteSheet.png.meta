@@ -1,0 +1,1549 @@
+fileFormatVersion: 2
+guid: 0facd91d3f4a8fa4d940f08bb48b4285
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8116710933344551846
+    second: SmallFlame01-mini_16x4_0
+  - first:
+      213: -2081952968997811329
+    second: SmallFlame01-mini_16x4_1
+  - first:
+      213: 5509068131002328417
+    second: SmallFlame01-mini_16x4_2
+  - first:
+      213: 1176289645112440349
+    second: SmallFlame01-mini_16x4_3
+  - first:
+      213: 5854614319195796133
+    second: SmallFlame01-mini_16x4_4
+  - first:
+      213: 2876081557132258833
+    second: SmallFlame01-mini_16x4_5
+  - first:
+      213: -238389278681987687
+    second: SmallFlame01-mini_16x4_6
+  - first:
+      213: 2968648197354566623
+    second: SmallFlame01-mini_16x4_7
+  - first:
+      213: 5026351366856644137
+    second: SmallFlame01-mini_16x4_8
+  - first:
+      213: 2292996187823200169
+    second: SmallFlame01-mini_16x4_9
+  - first:
+      213: -6354662367941682947
+    second: SmallFlame01-mini_16x4_10
+  - first:
+      213: 8129771845947337759
+    second: SmallFlame01-mini_16x4_11
+  - first:
+      213: 7066945066328903926
+    second: SmallFlame01-mini_16x4_12
+  - first:
+      213: 3934492526276530694
+    second: SmallFlame01-mini_16x4_13
+  - first:
+      213: 5023240648949251038
+    second: SmallFlame01-mini_16x4_14
+  - first:
+      213: 7300376648845605786
+    second: SmallFlame01-mini_16x4_15
+  - first:
+      213: -184561232292160184
+    second: SmallFlame01-mini_16x4_16
+  - first:
+      213: -1125030665558704939
+    second: SmallFlame01-mini_16x4_17
+  - first:
+      213: 3358002357540301431
+    second: SmallFlame01-mini_16x4_18
+  - first:
+      213: -3630238155806054667
+    second: SmallFlame01-mini_16x4_19
+  - first:
+      213: 1349282924903038187
+    second: SmallFlame01-mini_16x4_20
+  - first:
+      213: 9017068925445524427
+    second: SmallFlame01-mini_16x4_21
+  - first:
+      213: -2132491351019491070
+    second: SmallFlame01-mini_16x4_22
+  - first:
+      213: 7868807556474948100
+    second: SmallFlame01-mini_16x4_23
+  - first:
+      213: -5671577394857430281
+    second: SmallFlame01-mini_16x4_24
+  - first:
+      213: 6466322316301569117
+    second: SmallFlame01-mini_16x4_25
+  - first:
+      213: -5416327304826081969
+    second: SmallFlame01-mini_16x4_26
+  - first:
+      213: -2309147032958250180
+    second: SmallFlame01-mini_16x4_27
+  - first:
+      213: -4039417141189782836
+    second: SmallFlame01-mini_16x4_28
+  - first:
+      213: 5174345816102172707
+    second: SmallFlame01-mini_16x4_29
+  - first:
+      213: -7164635069136158151
+    second: SmallFlame01-mini_16x4_30
+  - first:
+      213: -8851201923775505894
+    second: SmallFlame01-mini_16x4_31
+  - first:
+      213: 518078321431358331
+    second: SmallFlame01-mini_16x4_32
+  - first:
+      213: 7697683615889717175
+    second: SmallFlame01-mini_16x4_33
+  - first:
+      213: 7657090797131875054
+    second: SmallFlame01-mini_16x4_34
+  - first:
+      213: 7888458667229865043
+    second: SmallFlame01-mini_16x4_35
+  - first:
+      213: 5408473020130172463
+    second: SmallFlame01-mini_16x4_36
+  - first:
+      213: -2615903928178542306
+    second: SmallFlame01-mini_16x4_37
+  - first:
+      213: 8755264385627329606
+    second: SmallFlame01-mini_16x4_38
+  - first:
+      213: -5474092258901399291
+    second: SmallFlame01-mini_16x4_39
+  - first:
+      213: 5420455177189481539
+    second: SmallFlame01-mini_16x4_40
+  - first:
+      213: 4253944787630807181
+    second: SmallFlame01-mini_16x4_41
+  - first:
+      213: 6749501242254765405
+    second: SmallFlame01-mini_16x4_42
+  - first:
+      213: -4895118254552821026
+    second: SmallFlame01-mini_16x4_43
+  - first:
+      213: 6865873149321199919
+    second: SmallFlame01-mini_16x4_44
+  - first:
+      213: 768507547388905447
+    second: SmallFlame01-mini_16x4_45
+  - first:
+      213: 9064205881234412566
+    second: SmallFlame01-mini_16x4_46
+  - first:
+      213: -1285091255386019216
+    second: SmallFlame01-mini_16x4_47
+  - first:
+      213: -1406891467013319434
+    second: SmallFlame01-mini_16x4_48
+  - first:
+      213: 2611812786501279874
+    second: SmallFlame01-mini_16x4_49
+  - first:
+      213: -7436712381542475989
+    second: SmallFlame01-mini_16x4_50
+  - first:
+      213: -6153064236807702031
+    second: SmallFlame01-mini_16x4_51
+  - first:
+      213: 3570304170509842450
+    second: SmallFlame01-mini_16x4_52
+  - first:
+      213: -7910535173016874363
+    second: SmallFlame01-mini_16x4_53
+  - first:
+      213: 1390746032475908789
+    second: SmallFlame01-mini_16x4_54
+  - first:
+      213: -6132898832559184416
+    second: SmallFlame01-mini_16x4_55
+  - first:
+      213: -8798411700058525581
+    second: SmallFlame01-mini_16x4_56
+  - first:
+      213: 6529401609542394577
+    second: SmallFlame01-mini_16x4_57
+  - first:
+      213: -7263083449205986283
+    second: SmallFlame01-mini_16x4_58
+  - first:
+      213: -1653976312376160102
+    second: SmallFlame01-mini_16x4_59
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5cf7790966ab5f80800000000000000
+      internalID: -8116710933344551846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_1
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 384
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7bc0db2eca6b13e0800000000000000
+      internalID: -2081952968997811329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_2
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 384
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 165a1dfd644247c40800000000000000
+      internalID: 5509068131002328417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_3
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 384
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d16b5e13335035010800000000000000
+      internalID: 1176289645112440349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_4
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 384
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a2b49844b4cf3150800000000000000
+      internalID: 5854614319195796133
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_5
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 384
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11eabe520f4e9e720800000000000000
+      internalID: 2876081557132258833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_6
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 384
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 99506edc63211bcf0800000000000000
+      internalID: -238389278681987687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_7
+      rect:
+        serializedVersion: 2
+        x: 476
+        y: 384
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd33c629ec1c23920800000000000000
+      internalID: 2968648197354566623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_8
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 384
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9261ac9ffef21c540800000000000000
+      internalID: 5026351366856644137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_9
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 384
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a7d68e42eb52df10800000000000000
+      internalID: 2292996187823200169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_10
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 384
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df81b4bae34bfc7a0800000000000000
+      internalID: -6354662367941682947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_11
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 384
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1ca9a6ab60c2d070800000000000000
+      internalID: 8129771845947337759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_12
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 384
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f0dbb57815d21260800000000000000
+      internalID: 7066945066328903926
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_13
+      rect:
+        serializedVersion: 2
+        x: 884
+        y: 384
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60254285b102a9630800000000000000
+      internalID: 3934492526276530694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_14
+      rect:
+        serializedVersion: 2
+        x: 952
+        y: 384
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edb3ce581c226b540800000000000000
+      internalID: 5023240648949251038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9bbff012e5205560800000000000000
+      internalID: 7300376648845605786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_16
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 256
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84ddaed798e407df0800000000000000
+      internalID: -184561232292160184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_17
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 256
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dcb3f102961360f0800000000000000
+      internalID: -1125030665558704939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_18
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 256
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77a2d1c4a550a9e20800000000000000
+      internalID: 3358002357540301431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_19
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 256
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f66c1191adce9dc0800000000000000
+      internalID: -3630238155806054667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_20
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 256
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bec7850ebad99b210800000000000000
+      internalID: 1349282924903038187
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_21
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 256
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcbc468c960132d70800000000000000
+      internalID: 9017068925445524427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_22
+      rect:
+        serializedVersion: 2
+        x: 476
+        y: 256
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 201f3e72a6ed762e0800000000000000
+      internalID: -2132491351019491070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_23
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 256
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40a499928ce933d60800000000000000
+      internalID: 7868807556474948100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_24
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 256
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f2336f98628a41b0800000000000000
+      internalID: -5671577394857430281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_25
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 256
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5c065af2edfcb950800000000000000
+      internalID: 6466322316301569117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_26
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 256
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4da790630755d4b0800000000000000
+      internalID: -5416327304826081969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_27
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 256
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c335066020344ffd0800000000000000
+      internalID: -2309147032958250180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_28
+      rect:
+        serializedVersion: 2
+        x: 884
+        y: 256
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc252c7038b11f7c0800000000000000
+      internalID: -4039417141189782836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_29
+      rect:
+        serializedVersion: 2
+        x: 952
+        y: 256
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3287cc9da18fec740800000000000000
+      internalID: 5174345816102172707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93245de4d5a129c90800000000000000
+      internalID: -7164635069136158151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_31
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 128
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1a5b1afeb63a2580800000000000000
+      internalID: -8851201923775505894
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_32
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 128
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7b2fba0d75903700800000000000000
+      internalID: 518078321431358331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_33
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 128
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b7737ee67aa3da60800000000000000
+      internalID: 7697683615889717175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_34
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 128
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee245ffc283734a60800000000000000
+      internalID: 7657090797131875054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_35
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 128
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 354669dec5f697d60800000000000000
+      internalID: 7888458667229865043
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_36
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 128
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2e94267e81ce0b40800000000000000
+      internalID: 5408473020130172463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_37
+      rect:
+        serializedVersion: 2
+        x: 476
+        y: 128
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e197e5aac3172bbd0800000000000000
+      internalID: -2615903928178542306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_38
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 128
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64412f34292f08970800000000000000
+      internalID: 8755264385627329606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_39
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 128
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5096770f71e1804b0800000000000000
+      internalID: -5474092258901399291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_40
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 128
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34c5e4dc343593b40800000000000000
+      internalID: 5420455177189481539
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_41
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 128
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d88dbd8fe3c090b30800000000000000
+      internalID: 4253944787630807181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_42
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 128
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5d27a39e9b0bad50800000000000000
+      internalID: 6749501242254765405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_43
+      rect:
+        serializedVersion: 2
+        x: 884
+        y: 128
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed259d702eb011cb0800000000000000
+      internalID: -4895118254552821026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_44
+      rect:
+        serializedVersion: 2
+        x: 952
+        y: 128
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f21ce2a904b784f50800000000000000
+      internalID: 6865873149321199919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_45
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e78259ea894aaa00800000000000000
+      internalID: 768507547388905447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_46
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 0
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 614dbf989378acd70800000000000000
+      internalID: 9064205881234412566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_47
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 0
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07a61cadf407a2ee0800000000000000
+      internalID: -1285091255386019216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_48
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 0
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f4942f2aa7b97ce0800000000000000
+      internalID: -1406891467013319434
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_49
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 0
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2806b3f24e50f3420800000000000000
+      internalID: 2611812786501279874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_50
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 0
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2759698d7d7bc890800000000000000
+      internalID: -7436712381542475989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_51
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 0
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f9baec4daceb9aa0800000000000000
+      internalID: -6153064236807702031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_52
+      rect:
+        serializedVersion: 2
+        x: 476
+        y: 0
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 218b55f0ab44c8130800000000000000
+      internalID: 3570304170509842450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_53
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 0
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58298150c22283290800000000000000
+      internalID: -7910535173016874363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_54
+      rect:
+        serializedVersion: 2
+        x: 612
+        y: 0
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5baa286e52cec4310800000000000000
+      internalID: 1390746032475908789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_55
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 0
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e5e6e9510193eaa0800000000000000
+      internalID: -6132898832559184416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_56
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 0
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 370fe5ebc23c5e580800000000000000
+      internalID: -8798411700058525581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_57
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 0
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d263ac6b281d9a50800000000000000
+      internalID: 6529401609542394577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_58
+      rect:
+        serializedVersion: 2
+        x: 884
+        y: 0
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51cee0c9518543b90800000000000000
+      internalID: -7263083449205986283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SmallFlame01-mini_16x4_59
+      rect:
+        serializedVersion: 2
+        x: 952
+        y: 0
+        width: 68.26667
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9098e99e45eb09e0800000000000000
+      internalID: -1653976312376160102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 0af1622939db5ea41be2d5566690839b
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
