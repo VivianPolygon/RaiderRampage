@@ -144,6 +144,8 @@ MonoBehaviour:
   materialRenderer: {fileID: 5211838850186906653}
   injuredThreshold: 0.4
   ragdollModel: {fileID: 6694282294907930372, guid: 41f13daac8bc5a3499e9c112cfc6c566, type: 3}
+  bloodEffect: {fileID: 3943092265159635157, guid: bf5c82312bb5dc349987d8077a9ae90a, type: 3}
+  bloodEffectLifetime: 1.5
 --- !u!114 &2149708567802554182
 MonoBehaviour:
   m_ObjectHideFlags: 0

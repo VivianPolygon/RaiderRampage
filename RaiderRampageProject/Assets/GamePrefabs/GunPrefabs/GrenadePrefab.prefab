@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 7785026671881062138}
   - component: {fileID: 3570788847149243739}
   m_Layer: 2
-  m_Name: TempGrenadePrefab
+  m_Name: GrenadePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -292,5 +292,5 @@ MonoBehaviour:
   explosionDamage: 10
   explosionForce: 5
   explosionRange: 5
-  explosionVisual: {fileID: 4437001108132608195, guid: 9dd9cdd44b6f27648a7e31153180a1a5, type: 3}
-  visualTime: 2
+  explosionVisual: {fileID: 8535709468347139486, guid: 69f9470b7505edc4b92226682cac1f85, type: 3}
+  visualTime: 1.1

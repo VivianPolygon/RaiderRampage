@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1011405128839330737}
   - component: {fileID: 5813482172260189214}
   - component: {fileID: 5670229096265645382}
+  - component: {fileID: 5598251789109599639}
   m_Layer: 0
   m_Name: TallBuildings_Industrial
   m_TagString: Untagged
@@ -81,3 +82,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &5598251789109599639
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5532404953274653516}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 82.006744, y: 2356.0781, z: 1105.6161}
+  m_Center: {x: -90.19055, y: 1178.0391, z: 0}

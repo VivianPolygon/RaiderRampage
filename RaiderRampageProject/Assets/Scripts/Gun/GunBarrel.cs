@@ -115,6 +115,10 @@ public class GunBarrel : MonoBehaviour
             {
                 t = 0;
                 Vector3 appliedSpread = Vector3.zero;
+
+                //muzzleFlash
+                gunEffects.FlashEffect();
+
                 switch (bulletPattern)
                 {
 
@@ -123,6 +127,7 @@ public class GunBarrel : MonoBehaviour
                         shot.transform.LookAt(GunData.instance.cursorPositon);
                         shot.GetComponent<Rigidbody>().AddForce(((shot.transform.forward * shotForce ) + (Random.onUnitSphere * bulletSpreadAmount) * GunData.instance.spinSpeedPercent), ForceMode.Impulse);
 
+                        //does aditional behaviors on overdrive
                         if(OverdriveGauge.armorPierceActive)
                         {
                             shot.transform.localScale *= OverdriveGauge.pierceScale;
@@ -151,7 +156,7 @@ public class GunBarrel : MonoBehaviour
                             shot.transform.LookAt(GunData.instance.cursorPositon);
                             shot.GetComponent<Rigidbody>().AddForce((shot.transform.forward * shotForce)+ (Random.onUnitSphere * bulletSpreadAmount), ForceMode.Impulse);
 
-
+                            //does aditional behaviors on overdrive
                             if (OverdriveGauge.armorPierceActive)
                             {
                                 shot.transform.localScale *= OverdriveGauge.pierceScale;

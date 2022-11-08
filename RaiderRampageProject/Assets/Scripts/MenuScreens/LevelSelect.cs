@@ -52,7 +52,7 @@ public class LevelSelect : MonoBehaviour
     {
         if(isInitilized)
         {
-            if((int)levelSelectSlider.value > ProgressManager.highestLevelCompleted)
+            if((int)levelSelectSlider.value > ProgressManager.instance.highestLevelCompleted)
             {
                 startButton.interactable = false;
             }

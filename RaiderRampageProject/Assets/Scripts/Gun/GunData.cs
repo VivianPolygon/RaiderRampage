@@ -83,6 +83,9 @@ public class GunData : MonoBehaviour
     public void BarrelSmokeOn() { onBarrelSmoke?.Invoke(); }
     public void BarrelSmokeOff() { offBarrelSmoke?.Invoke(); }
 
+    [Header("Sprites pulled randomly on each shot for the muzzle flash")]
+    public Sprite[] muzzleFlashes;
+
 
     private void Awake()
     {

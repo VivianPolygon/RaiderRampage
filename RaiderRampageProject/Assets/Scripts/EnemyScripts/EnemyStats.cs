@@ -36,6 +36,10 @@ public class EnemyStats : MonoBehaviour
     [SerializeField] private GameObject ragdollModel;
     private GameObject ragdollInstance;
 
+    [Header("For Blood effect")]
+    [SerializeField] private GameObject bloodEffect;
+    [SerializeField] private float bloodEffectLifetime;
+
     private void Start()
     {
         if (materialRenderer != null)
@@ -56,14 +60,14 @@ public class EnemyStats : MonoBehaviour
         if(other.TryGetComponent(out Bullet bullet))
         {
 
-            TakeDamage(bullet.damage);
+            TakeDamage(bullet.damage, bullet.transform.position);
 
             Destroy(bullet.gameObject);
         }
     }
 
 
-    public void TakeDamage(int damageAmount)
+    public void TakeDamage(int damageAmount, Vector3 contactPoint)
     {
         if(OverdriveGauge.armorPierceActive)
         {
@@ -74,10 +78,14 @@ public class EnemyStats : MonoBehaviour
             health -= Mathf.Clamp((damageAmount - armour), 1, damageAmount);
         }
 
+        //if incendary overdrive is active, inflicts the burn status
         if(OverdriveGauge.incendiaryActive)
         {
             InflictBurn(OverdriveGauge._burnDuration, OverdriveGauge._incendiaryDamage, OverdriveGauge._burnFrequency, OverdriveGauge._enemyFireEffect);
         }
+
+        //spawns the blood efect
+        SpawnBloodEffect(contactPoint);
 
         CheckDeathOrDamage();
     }
@@ -167,6 +175,15 @@ public class EnemyStats : MonoBehaviour
         {
             Destroy(burnEffect);
         }
+    }
+
+    private void SpawnBloodEffect(Vector3 position)
+    {
+        GameObject bloodParticleInstance;
+        bloodParticleInstance = Instantiate(bloodEffect, position, transform.rotation);
+        bloodParticleInstance.transform.LookAt(GunData.instance.gunModelBody.transform.position);
+
+        Destroy(bloodParticleInstance, bloodEffectLifetime);
     }
 
 

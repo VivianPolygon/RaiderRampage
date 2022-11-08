@@ -46,5 +46,5 @@ MonoBehaviour:
   explosionDamage: 4
   explosionForce: 50
   explosionRange: 8
-  explosionVisual: {fileID: 8145493365078260984, guid: 7c83c8243ef949b4c9f264f9f765d3b8, type: 3}
-  visualTime: 0.25
+  explosionVisual: {fileID: 8535709468347139486, guid: 8c08babed68360e408cbce7a689a7a17, type: 3}
+  visualTime: 1.1

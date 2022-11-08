@@ -149,6 +149,9 @@ public class UIData : MonoBehaviour
 
         scrapBarrelArrowsImage.sprite = SetSpriteFromLargeSheet(scrapBarrelArrowsSpriteNumber);
 
+        //disables the fade image, its used to block raycasts when active so needs to be disabled initialy. enabled when the fade is called
+        fadeImage.enabled = false;
+
         //event subscriptions for UI events
         UIEvents.instance.onUpdateScrapCounts += UpdateScrapQuantityTexts;
         UIEvents.instance.onUpdateAddonCounts += UpdateAddonTexts;
@@ -416,16 +419,31 @@ public class UIData : MonoBehaviour
 
     public void DeathScreen()
     {
+        //fades screen out
         StartCoroutine(DeathScreenFadeIn(deathFadeColor, 3));
     }
 
     public void VictoryScreen()
     {
+        //fades screen out
         StartCoroutine(DeathScreenFadeIn(victoryFadeColor, 4));
+
+        //updates the level progress tracking and saves the games progress
+        if(ProgressManager.instance != null)
+        {
+            if(ProgressManager.instance.highestLevelCompleted < LevelData.adjustedLevelNumber)
+            {
+                ProgressManager.instance.highestLevelCompleted = LevelData.adjustedLevelNumber;
+
+                ProgressManager.instance.Save();
+            }
+        }
     }
 
     private IEnumerator DeathScreenFadeIn(Color color, int sceneLoad)
     {
+        fadeImage.enabled = true;
+
         for (float i = 0; i < fadeTime; i += Time.deltaTime)
         {
             fadeImage.color = Color.Lerp(Color.clear, color, (i / fadeTime));

@@ -4,11 +4,51 @@ using UnityEngine;
 
 public class ProgressManager : MonoBehaviour
 {
-    public static int highestLevelCompleted;
+    public static ProgressManager instance;
 
-    public int testingvalue;
-    private void Start()
+
+    public int highestLevelCompleted;
+
+
+    private PlayerData playerData;
+
+    private void Awake()
     {
-        highestLevelCompleted = testingvalue;
+        if(instance != null)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            instance = this;
+        }
+
+        DontDestroyOnLoad(gameObject);
     }
+
+
+
+
+
+
+
+
+    //instanced saveing functions
+
+    public void Save()
+    {
+        SaveManager.SavePlayerData(this);
+    }
+
+    public void Load()
+    {
+        playerData = SaveManager.LoadPlayerData();
+        highestLevelCompleted = playerData.highestLevelBeat;
+    }
+
+    public void DeleteSave()
+    {
+        SaveManager.DeleteSaveData();
+    }
+
 }

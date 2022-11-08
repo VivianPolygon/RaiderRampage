@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4169491116227863014}
   - component: {fileID: 5657670731032586246}
   - component: {fileID: 3660894173355080692}
+  - component: {fileID: 7149300683990321717}
   m_Layer: 0
   m_Name: TallBuildings_PlaneWall
   m_TagString: Untagged
@@ -81,3 +82,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7149300683990321717
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815931023360638916}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 829.21216, y: 2356.0781, z: 34.816895}
+  m_Center: {x: 0.000015258789, y: 1178.0391, z: -70.21643}

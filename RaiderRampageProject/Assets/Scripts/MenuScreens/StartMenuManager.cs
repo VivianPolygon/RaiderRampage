@@ -54,6 +54,12 @@ public class StartMenuManager : MonoBehaviour
     private void Start()
     {
         UpdateDisplayedMenu(0);
+
+        //loads whenever the scene is opened
+        if(ProgressManager.instance != null)
+        {
+            ProgressManager.instance.Load();
+        }
     }
 
     public void UpdateDisplayedMenu(int newState)
