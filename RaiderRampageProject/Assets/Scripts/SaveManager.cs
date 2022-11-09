@@ -32,22 +32,26 @@ public static class SaveManager
             FileStream stream = new FileStream(path, FileMode.Open);
 
             PlayerData data = formatter.Deserialize(stream) as PlayerData;
+
             stream.Close();
 
             return data;
         }
         else // no save data exsists, default values, ran when game is first loaded and there is no save data. 
         {
-            //sets defauly progress value, only level 1 should be accesible
+            //sets default progress value, only level 1 should be accesible
             ProgressManager defaultProgress = new ProgressManager();
             defaultProgress.highestLevelCompleted = 1;
-
-            //player settings here
 
             //sets default data to a player data, saves generated default data
             SavePlayerData(defaultProgress);
 
             PlayerData defaultData = new PlayerData(defaultProgress);
+
+            //player settings here (default settings)
+            SettingsManager.SetAimSensitivity(5);
+            SettingsManager.SetLeftHandMode(false);
+
             return defaultData;
         }
     }

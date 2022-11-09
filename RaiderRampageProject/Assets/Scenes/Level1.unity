@@ -3491,6 +3491,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4874430058288471999, guid: b3ca8738c710fff4d8b41dc97324014b, type: 3}
+      propertyPath: verticalAimSpeed
+      value: 110
+      objectReference: {fileID: 0}
+    - target: {fileID: 4874430058288471999, guid: b3ca8738c710fff4d8b41dc97324014b, type: 3}
+      propertyPath: horizontalAimSpeed
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 4874430058345722068, guid: b3ca8738c710fff4d8b41dc97324014b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
