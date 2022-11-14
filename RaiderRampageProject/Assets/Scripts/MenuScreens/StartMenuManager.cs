@@ -123,7 +123,7 @@ public class StartMenuManager : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.OpenURL("https://docs.google.com/forms/d/12PqXF_EcWWMgyVuR1Rd1FM-GsLdIBY6V60XcLjAFf9M/viewform?edit_requested=true");
+        Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSfzfuXDD3y5Mqf_X75YoNFBjiVHByo5SaUFKR_F7P8zFrUrhg/viewform");
         Application.Quit();
     }
 

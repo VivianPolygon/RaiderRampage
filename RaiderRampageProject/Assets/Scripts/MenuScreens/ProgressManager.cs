@@ -28,11 +28,6 @@ public class ProgressManager : MonoBehaviour
 
 
 
-
-
-
-
-
     //instanced saveing functions
 
     public void Save()
@@ -43,7 +38,16 @@ public class ProgressManager : MonoBehaviour
     public void Load()
     {
         playerData = SaveManager.LoadPlayerData();
-        highestLevelCompleted = playerData.highestLevelBeat;
+        if(playerData != null)
+        {
+            //sets the level progress
+            highestLevelCompleted = playerData.highestLevelBeat;
+        }
+    }
+
+    public void DefaultProgress(int level)
+    {
+        highestLevelCompleted = level;
     }
 
     public void DeleteSave()

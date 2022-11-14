@@ -37,22 +37,13 @@ public static class SaveManager
 
             return data;
         }
-        else // no save data exsists, default values, ran when game is first loaded and there is no save data. 
+        else // no save data exsists, returns null. checked for when loading. 
         {
-            //sets default progress value, only level 1 should be accesible
-            ProgressManager defaultProgress = new ProgressManager();
-            defaultProgress.highestLevelCompleted = 1;
+            SettingsManager.DefaultSettings(5, false);
+            ProgressManager.instance.DefaultProgress(1);
+            SavePlayerData(ProgressManager.instance);
 
-            //sets default data to a player data, saves generated default data
-            SavePlayerData(defaultProgress);
-
-            PlayerData defaultData = new PlayerData(defaultProgress);
-
-            //player settings here (default settings)
-            SettingsManager.SetAimSensitivity(5);
-            SettingsManager.SetLeftHandMode(false);
-
-            return defaultData;
+            return null;
         }
     }
 
@@ -66,4 +57,5 @@ public static class SaveManager
             File.Delete(path);
         }
     }
+
 }

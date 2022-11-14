@@ -382,5 +382,5 @@ public class GunData : MonoBehaviour
             }
         }
 
-    } 
+    }
 }

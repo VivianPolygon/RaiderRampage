@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 //keeps tracks of settings information. dosent destroy on load so it follows from scene to scene
@@ -11,6 +12,8 @@ public class SettingsManager : MonoBehaviour
     public static float aimSensitivity;
 
     public static bool leftHandMode;
+
+    public static Toggle leftHandToggle;
 
     private static PlayerData _saveData;
 
@@ -36,6 +39,19 @@ public class SettingsManager : MonoBehaviour
         leftHandMode = state;
     }
 
+    public static void SwapLeftHandMode()
+    {
+        if(leftHandMode)
+        {
+            leftHandMode = false;
+            return;
+        }
+        else
+        {
+            leftHandMode = true;
+        }
+    }
+
     //sets the sensitivity value, clamps between 1 and 10 (coresponds to the slider that sets it) clamped for safter incase its accidentlaly called wrong
     public static void SetAimSensitivity(float newSensitivity)
     {
@@ -52,7 +68,45 @@ public class SettingsManager : MonoBehaviour
     {
         _saveData = SaveManager.LoadPlayerData();
 
-        aimSensitivity = _saveData.aimSensitivity;
-        leftHandMode = _saveData.leftHanded;
+        if(_saveData != null)
+        {
+            aimSensitivity = _saveData.aimSensitivity;
+            leftHandMode = _saveData.leftHanded;
+        }
+
+        InitilizeToggle();
+    }
+
+    public static void DefaultSettings(int sensitivity, bool leftHand)
+    {
+        SetAimSensitivity(sensitivity);
+        SetLeftHandMode(leftHand);
+    }
+
+    public static void SetToggleLeftHandMode()
+    {
+        if (leftHandToggle.isOn)
+        {
+            SetLeftHandMode(true);
+        }
+        else
+        {
+            SetLeftHandMode(false);
+        }
+    }
+
+    public static void InitilizeToggle()
+    {
+        print(leftHandMode);
+        if (leftHandMode)
+        {
+            leftHandToggle.isOn = true;
+            return;
+        }
+        else
+        {
+            leftHandToggle.isOn = false;
+            return;
+        }
     }
 }
