@@ -36,19 +36,13 @@ public class ShootingUIFlip : MonoBehaviour
 
     private void OrientUI()
     {
-        print(SettingsManager.leftHandMode);
-
         if (SettingsManager.leftHandMode)
         {
             SetLeft();
-
-            print("LeftHanded");
         }
         else if(!SettingsManager.leftHandMode)
         {
             SetRight();
-
-            print("RightHanded");
         }
     }
 

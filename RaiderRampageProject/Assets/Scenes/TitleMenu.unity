@@ -451,7 +451,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -7445298198152529563, guid: 7477cb3a625e11c43bfe02cbbe4bc608, type: 3}
+  m_Sprite: {fileID: 7730679208791034040, guid: 0d10c7ab9a14c7f41a4f1aea891584a2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2167,7 +2167,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6298752180311372569, guid: 7477cb3a625e11c43bfe02cbbe4bc608, type: 3}
+  m_Sprite: {fileID: 6298752180311372569, guid: 0d10c7ab9a14c7f41a4f1aea891584a2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3702,6 +3702,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2010183493}
+        m_TargetAssemblyTypeName: ProgressManager, Assembly-CSharp
+        m_MethodName: Save
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1421981310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4163,7 +4175,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6298752180311372569, guid: 7477cb3a625e11c43bfe02cbbe4bc608, type: 3}
+  m_Sprite: {fileID: 6298752180311372569, guid: 0d10c7ab9a14c7f41a4f1aea891584a2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4319,7 +4331,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -7445298198152529563, guid: 7477cb3a625e11c43bfe02cbbe4bc608, type: 3}
+  m_Sprite: {fileID: 7730679208791034040, guid: 0d10c7ab9a14c7f41a4f1aea891584a2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4679,7 +4691,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6298752180311372569, guid: 7477cb3a625e11c43bfe02cbbe4bc608, type: 3}
+  m_Sprite: {fileID: 6298752180311372569, guid: 0d10c7ab9a14c7f41a4f1aea891584a2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5245,7 +5257,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -7445298198152529563, guid: 7477cb3a625e11c43bfe02cbbe4bc608, type: 3}
+  m_Sprite: {fileID: 7730679208791034040, guid: 0d10c7ab9a14c7f41a4f1aea891584a2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5514,7 +5526,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6298752180311372569, guid: 7477cb3a625e11c43bfe02cbbe4bc608, type: 3}
+  m_Sprite: {fileID: 6298752180311372569, guid: 0d10c7ab9a14c7f41a4f1aea891584a2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3063557651753224021}
   - component: {fileID: 4937634729250545935}
   - component: {fileID: 1594560579352816920}
-  - component: {fileID: 4666708306892313061}
   m_Layer: 0
   m_Name: TallBuildings_Apartment
   m_TagString: Untagged
@@ -82,16 +81,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4666708306892313061
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4727939150296927275}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 130.16557, y: 2356.0781, z: 1072.0635}
-  m_Center: {x: 98.32668, y: 1178.0391, z: -16.776276}

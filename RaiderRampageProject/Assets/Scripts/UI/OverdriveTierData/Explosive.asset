@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Explosive
   m_EditorClassIdentifier: 
   mode: 3
-  nextTierMurderScoreThreshold: 20
-  gaugeDrainRate: 0.3
-  barColor: {r: 0.6509434, g: 0.21472971, b: 0.13817197, a: 1}
+  overDriveButtonText: 
+  nextTierMurderScoreThreshold: 80
+  gaugeDrainRate: 1
+  barColor: {r: 0.5283019, g: 0.21436907, b: 0.102171585, a: 1}

@@ -19,5 +19,5 @@ MonoBehaviour:
   armouredBias: 5
   waveValue: 20
   waveQuantity: 20
-  delayMin: 0.25
+  delayMin: 0.4
   delayMax: 1.75

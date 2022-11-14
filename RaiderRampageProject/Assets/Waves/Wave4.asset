@@ -20,4 +20,4 @@ MonoBehaviour:
   waveValue: 40
   waveQuantity: 25
   delayMin: 0.25
-  delayMax: 1.5
+  delayMax: 2

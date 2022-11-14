@@ -97,7 +97,6 @@ public class SettingsManager : MonoBehaviour
 
     public static void InitilizeToggle()
     {
-        print(leftHandMode);
         if (leftHandMode)
         {
             leftHandToggle.isOn = true;

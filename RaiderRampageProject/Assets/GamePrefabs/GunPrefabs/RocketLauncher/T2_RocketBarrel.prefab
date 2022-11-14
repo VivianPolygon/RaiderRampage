@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3642954204659573020}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.46, z: -1.24}
+  m_LocalPosition: {x: 0, y: -0.39, z: 1.682}
   m_LocalScale: {x: 2.5, y: 2.5, z: 0.2}
   m_Children: []
   m_Father: {fileID: 6044093331905591161}
@@ -59,7 +59,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3791703745330730671}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -50}
+  m_LocalPosition: {x: 0, y: 0, z: -61.7}
   m_LocalScale: {x: 4.768408, y: 4.768408, z: 3.418367}
   m_Children: []
   m_Father: {fileID: 4257613357517826449}
@@ -67,7 +67,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 14.648549}
+  m_AnchoredPosition: {x: 0, y: 13.4}
   m_SizeDelta: {x: 12, y: 12}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &1077245238378351113
@@ -219,7 +219,7 @@ MonoBehaviour:
   barrelTier: 1
   bulletPattern: 0
   gunEffects: {fileID: 5756482079640936067}
-  projectilePrefab: {fileID: 5325694384607462396, guid: 88db48abae98bc14aa96e47711601528, type: 3}
+  projectilePrefab: {fileID: 5325694384607462396, guid: 18c8da53a4bfd6e4bb2bc898da110d11, type: 3}
   projectileSpawnpoint: {fileID: 4083160376385048793}
   shotsPerSecond: 1.5
   ammoDrain: 1
@@ -259,11 +259,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cbb717c82744b494fb603a83a56f97bc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.84
+      value: -2.08
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cbb717c82744b494fb603a83a56f97bc, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.205
+      value: 0.267
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cbb717c82744b494fb603a83a56f97bc, type: 3}
       propertyPath: m_LocalRotation.w
@@ -296,11 +296,15 @@ PrefabInstance:
     - target: {fileID: -8052375461614772742, guid: cbb717c82744b494fb603a83a56f97bc, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6298b3ba4f98d7e4d8a1c11a6c951764, type: 2}
+      objectReference: {fileID: 2100000, guid: 4a0fd3efd65fe9e4c8f07e73b638cd9f, type: 2}
     - target: {fileID: -6207074468148860718, guid: cbb717c82744b494fb603a83a56f97bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3415416756292480254, guid: cbb717c82744b494fb603a83a56f97bc, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 8931246280608505757, guid: baee4ae53643de442bfe06e9d452af6c, type: 3}
     - target: {fileID: 919132149155446097, guid: cbb717c82744b494fb603a83a56f97bc, type: 3}
       propertyPath: m_Name
       value: RPG_Barrel
@@ -346,11 +350,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3220392607724255491, guid: d8249c523071c45469b4de9fade03b70, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.51
+      value: -0.16
       objectReference: {fileID: 0}
     - target: {fileID: 3220392607724255491, guid: d8249c523071c45469b4de9fade03b70, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.656
+      value: 1.721
       objectReference: {fileID: 0}
     - target: {fileID: 3220392607724255491, guid: d8249c523071c45469b4de9fade03b70, type: 3}
       propertyPath: m_LocalRotation.w

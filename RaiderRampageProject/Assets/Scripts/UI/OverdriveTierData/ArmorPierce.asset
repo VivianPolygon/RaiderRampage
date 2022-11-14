@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ArmorPierce
   m_EditorClassIdentifier: 
   mode: 1
-  nextTierMurderScoreThreshold: 8
-  gaugeDrainRate: 0.15
-  barColor: {r: 0.54362977, g: 0.7264151, b: 0.3186632, a: 1}
+  overDriveButtonText: 
+  nextTierMurderScoreThreshold: 40
+  gaugeDrainRate: 0.4
+  barColor: {r: 0.3855614, g: 0.4716981, b: 0.11792453, a: 1}
