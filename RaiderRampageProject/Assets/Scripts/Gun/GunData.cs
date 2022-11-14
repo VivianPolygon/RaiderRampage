@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -73,6 +74,18 @@ public class GunData : MonoBehaviour
     [Header("Gun Animator")]
     [SerializeField] private Animator gunAnim;
     public static Animator _gunAnim;
+
+
+    //event used for smoke VFX
+    public event Action onBarrelSmoke;
+    public event Action offBarrelSmoke;
+
+    public void BarrelSmokeOn() { onBarrelSmoke?.Invoke(); }
+    public void BarrelSmokeOff() { offBarrelSmoke?.Invoke(); }
+
+    [Header("Sprites pulled randomly on each shot for the muzzle flash")]
+    public Sprite[] muzzleFlashes;
+
 
     private void Awake()
     {
@@ -307,6 +320,9 @@ public class GunData : MonoBehaviour
 
         //sets the recoil animation
         _gunAnim.SetBool("Firing", true);
+
+        //spawns smoke from barrels
+        BarrelSmokeOn();
     }
     public void StopFiring()
     {
@@ -317,6 +333,9 @@ public class GunData : MonoBehaviour
 
         //sets the recoil animation
         _gunAnim.SetBool("Firing", false);
+
+        //stops smoke from barrels
+        BarrelSmokeOff();
     }
 
     //FUNCTIONS USED FOR SWAPING CURRENT GUNHEAD <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -363,5 +382,5 @@ public class GunData : MonoBehaviour
             }
         }
 
-    } 
+    }
 }

@@ -25,6 +25,8 @@ public class Barricade : MonoBehaviour
     public int repairCost;
     public int repairAmount;
 
+    private bool isdead;
+
     private static event Action onDamageBarricade;
 
     public static void DamageBarricade() { onDamageBarricade?.Invoke(); }
@@ -51,6 +53,8 @@ public class Barricade : MonoBehaviour
         {
             instance = this;
         }
+
+        isdead = false;
     }
 
 
@@ -88,11 +92,11 @@ public class Barricade : MonoBehaviour
     {
         barricadeCurrentHealth = Mathf.Clamp(barricadeCurrentHealth - 1, 0, barricadeMaxHealth);
 
-        //temporary reload to title menu if barricade is knocked down <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-        if(barricadeCurrentHealth <= 0)
+        //functon called on death
+        if (barricadeCurrentHealth <= 0 && isdead == false)
         {
-            Debug.Log("TitleMenu Returned to Due to Barricade Being Broken");
-            SceneManager.LoadScene(0);
+            UIData.instance.DeathScreen();
+            isdead = true;
         }
 
         int healthCalc = barricadeMaxHealth;

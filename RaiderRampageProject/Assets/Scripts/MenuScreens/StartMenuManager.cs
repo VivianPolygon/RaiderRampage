@@ -6,12 +6,15 @@ using UnityEngine.UI;
 
 public class StartMenuManager : MonoBehaviour
 {
+    public static StartMenuManager instance;
+
     public enum MenuActive
     {
         noneActive,
         levelSelect,
         shootingRange,
-        loading
+        loading,
+        settings
     }
 
     [Header("UI Canvases")]
@@ -19,13 +22,20 @@ public class StartMenuManager : MonoBehaviour
     [SerializeField]
     private GameObject MenuCanvas;
 
+    //canvases for each menu
     [SerializeField]
     private GameObject levelSelectCanvas;
     [SerializeField]
     private GameObject shootingRangeCanvas;
-
+    [SerializeField]
+    private GameObject settingsCanvas;
     [SerializeField]
     private GameObject loadingCanvas;
+    //array made from all of the canvases
+    private GameObject[] canvases;
+
+
+
 
     [Header("Loadbar Slider")]
     [SerializeField]
@@ -37,8 +47,33 @@ public class StartMenuManager : MonoBehaviour
 
     private AsyncOperation loadingOperation;
 
+    private void Awake()
+    {
+        if(instance != null)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            instance = this;
+        }
+    }
+
     private void Start()
     {
+        //loads whenever the scene is opened
+        if(ProgressManager.instance != null)
+        {
+            ProgressManager.instance.Load();
+        }
+
+        //sets the canvas array
+        canvases = new GameObject[4];
+        canvases[0] = levelSelectCanvas;
+        canvases[1] = shootingRangeCanvas;
+        canvases[2] = settingsCanvas;
+        canvases[3] = loadingCanvas;
+
         UpdateDisplayedMenu(0);
     }
 
@@ -49,20 +84,19 @@ public class StartMenuManager : MonoBehaviour
         switch (menuState)     
         {
             case MenuActive.levelSelect:
-                shootingRangeCanvas.SetActive(false);
-                levelSelectCanvas.SetActive(true);
+                SetSingleCanvasActive(levelSelectCanvas);
                 break;
             case MenuActive.shootingRange:
-                levelSelectCanvas.SetActive(false);
-                shootingRangeCanvas.SetActive(true);
+                SetSingleCanvasActive(shootingRangeCanvas);
                 break;
             case MenuActive.loading:
-                MenuCanvas.SetActive(false);
-                loadingCanvas.SetActive(true);
+                SetSingleCanvasActive(loadingCanvas);
+                break;
+            case MenuActive.settings:
+                SetSingleCanvasActive(settingsCanvas);
                 break;
             case MenuActive.noneActive:
-                levelSelectCanvas.SetActive(false);
-                shootingRangeCanvas.SetActive(false);
+                SetSingleCanvasActive(null);
                 break;
             default:
                 break;
@@ -89,8 +123,23 @@ public class StartMenuManager : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.OpenURL("https://docs.google.com/forms/d/12PqXF_EcWWMgyVuR1Rd1FM-GsLdIBY6V60XcLjAFf9M/viewform?edit_requested=true");
+        Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSfzfuXDD3y5Mqf_X75YoNFBjiVHByo5SaUFKR_F7P8zFrUrhg/viewform");
         Application.Quit();
+    }
+
+    private void SetSingleCanvasActive(GameObject canvasActive)
+    {
+        for (int i = 0; i < canvases.Length; i++)
+        {
+            if(canvases[i] == canvasActive)
+            {
+                canvases[i].SetActive(true);
+            }
+            else
+            {
+                canvases[i].SetActive(false);
+            }
+        }
     }
 
     private void OnApplicationQuit()

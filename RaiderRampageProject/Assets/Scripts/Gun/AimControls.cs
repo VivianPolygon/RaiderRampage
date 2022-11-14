@@ -65,6 +65,13 @@ public class AimControls : MonoBehaviour
     {
         float aimSpeedX = (Time.deltaTime * verticalAimSpeed) * (aimSpeedCurve.Evaluate(Mathf.Abs(-controlStickRect.anchoredPosition.y / stickScript.movementRange)) * Mathf.Sign(-controlStickRect.anchoredPosition.y));
         float aimSpeedY = (Time.deltaTime * horizontalAimSpeed) * (aimSpeedCurve.Evaluate(Mathf.Abs(controlStickRect.anchoredPosition.x / stickScript.movementRange)) * Mathf.Sign(controlStickRect.anchoredPosition.x));
+
+        if(SettingsManager.instance != null)
+        {
+            aimSpeedX *= SettingsManager.aimSensitivity;
+            aimSpeedY *= SettingsManager.aimSensitivity;
+        }
+
         GunData.instance.gunModelBody.transform.Rotate(aimSpeedX, aimSpeedY, 0);
 
         gunRotationEuler = GunData.instance.gunModelBody.transform.localEulerAngles;
@@ -78,7 +85,7 @@ public class AimControls : MonoBehaviour
 
         GunData.instance.gunModelBody.transform.localRotation = Quaternion.Euler(gunRotationEuler);
 
-        if (Physics.Raycast(GunData.instance.gunModelBody.transform.position, GunData.instance.gunModelBody.transform.forward, out cursorDetect, 100f))
+        if (Physics.Raycast(GunData.instance.gunModelBody.transform.position, GunData.instance.gunModelBody.transform.forward, out cursorDetect, float.PositiveInfinity))
         {
             cursorCanvas.transform.position = cursorDetect.point;
 

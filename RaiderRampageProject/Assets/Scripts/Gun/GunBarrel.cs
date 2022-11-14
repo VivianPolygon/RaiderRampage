@@ -10,6 +10,9 @@ public class GunBarrel : MonoBehaviour
 
     public BarrelShootingPattern bulletPattern;
 
+    [Header("Controls the barrels Smoke/Flash Effects")]
+    [SerializeField] private GunEffects gunEffects;
+
 
     //prefab for projectile, and its spawnpoint transform
     [SerializeField]
@@ -100,6 +103,7 @@ public class GunBarrel : MonoBehaviour
                     break;
                 default:
                     break;
+
             }
 
             //tracks time, always tracks so that the player cant spam shot by quicktapping,
@@ -111,6 +115,10 @@ public class GunBarrel : MonoBehaviour
             {
                 t = 0;
                 Vector3 appliedSpread = Vector3.zero;
+
+                //muzzleFlash
+                gunEffects.FlashEffect();
+
                 switch (bulletPattern)
                 {
 
@@ -119,6 +127,7 @@ public class GunBarrel : MonoBehaviour
                         shot.transform.LookAt(GunData.instance.cursorPositon);
                         shot.GetComponent<Rigidbody>().AddForce(((shot.transform.forward * shotForce ) + (Random.onUnitSphere * bulletSpreadAmount) * GunData.instance.spinSpeedPercent), ForceMode.Impulse);
 
+                        //does aditional behaviors on overdrive
                         if(OverdriveGauge.armorPierceActive)
                         {
                             shot.transform.localScale *= OverdriveGauge.pierceScale;
@@ -147,7 +156,7 @@ public class GunBarrel : MonoBehaviour
                             shot.transform.LookAt(GunData.instance.cursorPositon);
                             shot.GetComponent<Rigidbody>().AddForce((shot.transform.forward * shotForce)+ (Random.onUnitSphere * bulletSpreadAmount), ForceMode.Impulse);
 
-
+                            //does aditional behaviors on overdrive
                             if (OverdriveGauge.armorPierceActive)
                             {
                                 shot.transform.localScale *= OverdriveGauge.pierceScale;
@@ -212,6 +221,7 @@ public class GunBarrel : MonoBehaviour
             }
             //sets false for next loop
             canFire = false;
+
         }
     }
 

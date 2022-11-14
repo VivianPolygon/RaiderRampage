@@ -40,14 +40,16 @@ public class WaveTracker : MonoBehaviour
         waveSpawner.SetWaveData(waves[currentWave], gameObject);
         waveSpawner.SpawnWave();
         UIData.instance.SetWaveText(currentWave + 1);
+
         currentWave++;
-        if (currentWave > waves.Length - 1)
+    }
+
+    public void CheckVictory()
+    {
+        if (currentWave >= waves.Length)
         {
-            SceneManager.LoadScene(0);
+            UIData.instance.VictoryScreen();
         }
-        currentWave = Mathf.Clamp(currentWave, 0, waves.Length - 1);
-
-
     }
 
 }

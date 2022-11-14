@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8745109653131096643}
   - component: {fileID: 2271355129591384823}
   - component: {fileID: 6177265941638601659}
+  - component: {fileID: 2917335871266146404}
   m_Layer: 0
   m_Name: TallBuildings_StoreFront
   m_TagString: Untagged
@@ -81,3 +82,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2917335871266146404
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4359468839997183629}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 829.2121, y: 2356.0781, z: 150.3937}
+  m_Center: {x: 0, y: 1178.0391, z: 46.13336}

@@ -83,14 +83,18 @@ public class EnemyDrops : MonoBehaviour
 
     private void OnDestroy()
     {
-        if(dropsBarrels)
+        if(gameObject.scene.isLoaded)
         {
-            DropBarrel();
+            if (dropsBarrels)
+            {
+                DropBarrel();
+            }
+
+            if (dropsScrap)
+            {
+                DropScrap();
+            }
         }
 
-        if(dropsScrap)
-        {
-            DropScrap();
-        }
     }
 }

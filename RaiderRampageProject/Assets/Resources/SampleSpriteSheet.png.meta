@@ -167,38 +167,11 @@ TextureImporter:
   - first:
       213: -51416895020319475
     second: SampleSpriteSheet_54
-  - first:
-      213: -5297024333140220572
-    second: SampleSpriteSheet_55
-  - first:
-      213: 4095138410508247537
-    second: SampleSpriteSheet_56
-  - first:
-      213: 1618161804162005362
-    second: SampleSpriteSheet_57
-  - first:
-      213: 7728617826565432781
-    second: SampleSpriteSheet_58
-  - first:
-      213: -5372561521378593244
-    second: SampleSpriteSheet_59
-  - first:
-      213: -1795762123245673496
-    second: SampleSpriteSheet_60
-  - first:
-      213: -5059914224402875796
-    second: SampleSpriteSheet_61
-  - first:
-      213: -4533009515672679412
-    second: SampleSpriteSheet_62
-  - first:
-      213: 6173097471106315995
-    second: SampleSpriteSheet_63
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
+    enableMipMap: 1
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -235,14 +208,14 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 1
+  alphaIsTransparency: 0
   spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
@@ -258,7 +231,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -270,7 +243,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Standalone
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -282,7 +255,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
-    maxTextureSize: 4096
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -300,9 +273,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1960
-        width: 278
-        height: 280
+        y: 1792
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -320,10 +293,10 @@ TextureImporter:
       name: SampleSpriteSheet_1
       rect:
         serializedVersion: 2
-        x: 278
-        y: 1960
-        width: 278
-        height: 280
+        x: 256
+        y: 1792
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -341,10 +314,10 @@ TextureImporter:
       name: SampleSpriteSheet_2
       rect:
         serializedVersion: 2
-        x: 556
-        y: 1960
-        width: 278
-        height: 280
+        x: 512
+        y: 1792
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -362,10 +335,10 @@ TextureImporter:
       name: SampleSpriteSheet_3
       rect:
         serializedVersion: 2
-        x: 834
-        y: 1960
-        width: 278
-        height: 280
+        x: 768
+        y: 1792
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -383,10 +356,10 @@ TextureImporter:
       name: SampleSpriteSheet_4
       rect:
         serializedVersion: 2
-        x: 1112
-        y: 1960
-        width: 278
-        height: 280
+        x: 1024
+        y: 1792
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -404,10 +377,10 @@ TextureImporter:
       name: SampleSpriteSheet_5
       rect:
         serializedVersion: 2
-        x: 1390
-        y: 1960
-        width: 278
-        height: 280
+        x: 1280
+        y: 1792
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -425,10 +398,10 @@ TextureImporter:
       name: SampleSpriteSheet_6
       rect:
         serializedVersion: 2
-        x: 1668
-        y: 1960
-        width: 278
-        height: 280
+        x: 1536
+        y: 1792
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -446,10 +419,10 @@ TextureImporter:
       name: SampleSpriteSheet_7
       rect:
         serializedVersion: 2
-        x: 1946
-        y: 1960
-        width: 278
-        height: 280
+        x: 1792
+        y: 1792
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -468,9 +441,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1680
-        width: 278
-        height: 280
+        y: 1536
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -488,10 +461,10 @@ TextureImporter:
       name: SampleSpriteSheet_9
       rect:
         serializedVersion: 2
-        x: 278
-        y: 1680
-        width: 278
-        height: 280
+        x: 256
+        y: 1536
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -509,10 +482,10 @@ TextureImporter:
       name: SampleSpriteSheet_10
       rect:
         serializedVersion: 2
-        x: 556
-        y: 1680
-        width: 278
-        height: 280
+        x: 512
+        y: 1536
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -530,10 +503,10 @@ TextureImporter:
       name: SampleSpriteSheet_11
       rect:
         serializedVersion: 2
-        x: 834
-        y: 1680
-        width: 278
-        height: 280
+        x: 768
+        y: 1536
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -551,10 +524,10 @@ TextureImporter:
       name: SampleSpriteSheet_12
       rect:
         serializedVersion: 2
-        x: 1112
-        y: 1680
-        width: 278
-        height: 280
+        x: 1024
+        y: 1536
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -572,10 +545,10 @@ TextureImporter:
       name: SampleSpriteSheet_13
       rect:
         serializedVersion: 2
-        x: 1390
-        y: 1680
-        width: 278
-        height: 280
+        x: 1280
+        y: 1536
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -593,10 +566,10 @@ TextureImporter:
       name: SampleSpriteSheet_14
       rect:
         serializedVersion: 2
-        x: 1668
-        y: 1680
-        width: 278
-        height: 280
+        x: 1536
+        y: 1536
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -614,10 +587,10 @@ TextureImporter:
       name: SampleSpriteSheet_15
       rect:
         serializedVersion: 2
-        x: 1946
-        y: 1680
-        width: 278
-        height: 280
+        x: 1792
+        y: 1536
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -636,9 +609,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 1400
-        width: 278
-        height: 280
+        y: 1280
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -656,10 +629,10 @@ TextureImporter:
       name: SampleSpriteSheet_17
       rect:
         serializedVersion: 2
-        x: 278
-        y: 1400
-        width: 278
-        height: 280
+        x: 256
+        y: 1280
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -677,10 +650,10 @@ TextureImporter:
       name: SampleSpriteSheet_18
       rect:
         serializedVersion: 2
-        x: 556
-        y: 1400
-        width: 278
-        height: 280
+        x: 512
+        y: 1280
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -698,10 +671,10 @@ TextureImporter:
       name: SampleSpriteSheet_19
       rect:
         serializedVersion: 2
-        x: 834
-        y: 1400
-        width: 278
-        height: 280
+        x: 768
+        y: 1280
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -719,10 +692,10 @@ TextureImporter:
       name: SampleSpriteSheet_20
       rect:
         serializedVersion: 2
-        x: 1112
-        y: 1400
-        width: 278
-        height: 280
+        x: 1024
+        y: 1280
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -740,10 +713,10 @@ TextureImporter:
       name: SampleSpriteSheet_21
       rect:
         serializedVersion: 2
-        x: 1390
-        y: 1400
-        width: 278
-        height: 280
+        x: 1280
+        y: 1280
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -761,10 +734,10 @@ TextureImporter:
       name: SampleSpriteSheet_22
       rect:
         serializedVersion: 2
-        x: 1668
-        y: 1400
-        width: 278
-        height: 280
+        x: 0
+        y: 1024
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -782,10 +755,10 @@ TextureImporter:
       name: SampleSpriteSheet_23
       rect:
         serializedVersion: 2
-        x: 1946
-        y: 1400
-        width: 278
-        height: 280
+        x: 256
+        y: 1024
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -803,10 +776,10 @@ TextureImporter:
       name: SampleSpriteSheet_24
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1120
-        width: 278
-        height: 280
+        x: 512
+        y: 1024
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -824,10 +797,10 @@ TextureImporter:
       name: SampleSpriteSheet_25
       rect:
         serializedVersion: 2
-        x: 278
-        y: 1120
-        width: 278
-        height: 280
+        x: 768
+        y: 1024
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -845,10 +818,10 @@ TextureImporter:
       name: SampleSpriteSheet_26
       rect:
         serializedVersion: 2
-        x: 556
-        y: 1120
-        width: 278
-        height: 280
+        x: 1024
+        y: 1024
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -866,10 +839,10 @@ TextureImporter:
       name: SampleSpriteSheet_27
       rect:
         serializedVersion: 2
-        x: 834
-        y: 1120
-        width: 278
-        height: 280
+        x: 1280
+        y: 1024
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -887,10 +860,10 @@ TextureImporter:
       name: SampleSpriteSheet_28
       rect:
         serializedVersion: 2
-        x: 1112
-        y: 1120
-        width: 278
-        height: 280
+        x: 1536
+        y: 1024
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -908,10 +881,10 @@ TextureImporter:
       name: SampleSpriteSheet_29
       rect:
         serializedVersion: 2
-        x: 1390
-        y: 1120
-        width: 278
-        height: 280
+        x: 0
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -929,10 +902,10 @@ TextureImporter:
       name: SampleSpriteSheet_30
       rect:
         serializedVersion: 2
-        x: 1668
-        y: 1120
-        width: 278
-        height: 280
+        x: 256
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -950,10 +923,10 @@ TextureImporter:
       name: SampleSpriteSheet_31
       rect:
         serializedVersion: 2
-        x: 1946
-        y: 1120
-        width: 278
-        height: 280
+        x: 512
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -971,10 +944,10 @@ TextureImporter:
       name: SampleSpriteSheet_32
       rect:
         serializedVersion: 2
-        x: 0
-        y: 840
-        width: 278
-        height: 280
+        x: 768
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -992,10 +965,10 @@ TextureImporter:
       name: SampleSpriteSheet_33
       rect:
         serializedVersion: 2
-        x: 278
-        y: 840
-        width: 278
-        height: 280
+        x: 1024
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1013,10 +986,10 @@ TextureImporter:
       name: SampleSpriteSheet_34
       rect:
         serializedVersion: 2
-        x: 556
-        y: 840
-        width: 278
-        height: 280
+        x: 1280
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1034,10 +1007,10 @@ TextureImporter:
       name: SampleSpriteSheet_35
       rect:
         serializedVersion: 2
-        x: 834
-        y: 840
-        width: 278
-        height: 280
+        x: 1536
+        y: 768
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1055,10 +1028,10 @@ TextureImporter:
       name: SampleSpriteSheet_36
       rect:
         serializedVersion: 2
-        x: 1112
-        y: 840
-        width: 278
-        height: 280
+        x: 0
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1076,10 +1049,10 @@ TextureImporter:
       name: SampleSpriteSheet_37
       rect:
         serializedVersion: 2
-        x: 1390
-        y: 840
-        width: 278
-        height: 280
+        x: 256
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1097,10 +1070,10 @@ TextureImporter:
       name: SampleSpriteSheet_38
       rect:
         serializedVersion: 2
-        x: 1668
-        y: 840
-        width: 278
-        height: 280
+        x: 512
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1118,10 +1091,10 @@ TextureImporter:
       name: SampleSpriteSheet_39
       rect:
         serializedVersion: 2
-        x: 1946
-        y: 840
-        width: 278
-        height: 280
+        x: 768
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1139,10 +1112,10 @@ TextureImporter:
       name: SampleSpriteSheet_40
       rect:
         serializedVersion: 2
-        x: 0
-        y: 560
-        width: 278
-        height: 280
+        x: 1024
+        y: 512
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1160,10 +1133,10 @@ TextureImporter:
       name: SampleSpriteSheet_41
       rect:
         serializedVersion: 2
-        x: 278
-        y: 560
-        width: 278
-        height: 280
+        x: 0
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1181,10 +1154,10 @@ TextureImporter:
       name: SampleSpriteSheet_42
       rect:
         serializedVersion: 2
-        x: 556
-        y: 560
-        width: 278
-        height: 280
+        x: 256
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1202,10 +1175,10 @@ TextureImporter:
       name: SampleSpriteSheet_43
       rect:
         serializedVersion: 2
-        x: 834
-        y: 560
-        width: 278
-        height: 280
+        x: 512
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1223,10 +1196,10 @@ TextureImporter:
       name: SampleSpriteSheet_44
       rect:
         serializedVersion: 2
-        x: 1112
-        y: 560
-        width: 278
-        height: 280
+        x: 768
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1244,10 +1217,10 @@ TextureImporter:
       name: SampleSpriteSheet_45
       rect:
         serializedVersion: 2
-        x: 1390
-        y: 560
-        width: 278
-        height: 280
+        x: 1024
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1265,10 +1238,10 @@ TextureImporter:
       name: SampleSpriteSheet_46
       rect:
         serializedVersion: 2
-        x: 1668
-        y: 560
-        width: 278
-        height: 280
+        x: 1280
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1286,10 +1259,10 @@ TextureImporter:
       name: SampleSpriteSheet_47
       rect:
         serializedVersion: 2
-        x: 1946
-        y: 560
-        width: 278
-        height: 280
+        x: 1536
+        y: 256
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1308,9 +1281,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 280
-        width: 278
-        height: 280
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1328,10 +1301,10 @@ TextureImporter:
       name: SampleSpriteSheet_49
       rect:
         serializedVersion: 2
-        x: 278
-        y: 280
-        width: 278
-        height: 280
+        x: 256
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1349,10 +1322,10 @@ TextureImporter:
       name: SampleSpriteSheet_50
       rect:
         serializedVersion: 2
-        x: 556
-        y: 280
-        width: 278
-        height: 280
+        x: 512
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1370,10 +1343,10 @@ TextureImporter:
       name: SampleSpriteSheet_51
       rect:
         serializedVersion: 2
-        x: 834
-        y: 280
-        width: 278
-        height: 280
+        x: 768
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1391,10 +1364,10 @@ TextureImporter:
       name: SampleSpriteSheet_52
       rect:
         serializedVersion: 2
-        x: 1112
-        y: 280
-        width: 278
-        height: 280
+        x: 1024
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1412,10 +1385,10 @@ TextureImporter:
       name: SampleSpriteSheet_53
       rect:
         serializedVersion: 2
-        x: 1390
-        y: 280
-        width: 278
-        height: 280
+        x: 1280
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1433,10 +1406,10 @@ TextureImporter:
       name: SampleSpriteSheet_54
       rect:
         serializedVersion: 2
-        x: 1668
-        y: 280
-        width: 278
-        height: 280
+        x: 1536
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1450,199 +1423,10 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: SampleSpriteSheet_55
-      rect:
-        serializedVersion: 2
-        x: 1946
-        y: 280
-        width: 278
-        height: 280
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 465a3901f603d76b0800000000000000
-      internalID: -5297024333140220572
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SampleSpriteSheet_56
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 278
-        height: 280
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1f1e668ffaad4d830800000000000000
-      internalID: 4095138410508247537
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SampleSpriteSheet_57
-      rect:
-        serializedVersion: 2
-        x: 278
-        y: 0
-        width: 278
-        height: 280
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2797e26669dd47610800000000000000
-      internalID: 1618161804162005362
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SampleSpriteSheet_58
-      rect:
-        serializedVersion: 2
-        x: 556
-        y: 0
-        width: 278
-        height: 280
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dc52f2d17f0914b60800000000000000
-      internalID: 7728617826565432781
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SampleSpriteSheet_59
-      rect:
-        serializedVersion: 2
-        x: 834
-        y: 0
-        width: 278
-        height: 280
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 426fb48e2c3d075b0800000000000000
-      internalID: -5372561521378593244
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SampleSpriteSheet_60
-      rect:
-        serializedVersion: 2
-        x: 1112
-        y: 0
-        width: 278
-        height: 280
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8e327defcdb2417e0800000000000000
-      internalID: -1795762123245673496
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SampleSpriteSheet_61
-      rect:
-        serializedVersion: 2
-        x: 1390
-        y: 0
-        width: 278
-        height: 280
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c6a358c42d297c9b0800000000000000
-      internalID: -5059914224402875796
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SampleSpriteSheet_62
-      rect:
-        serializedVersion: 2
-        x: 1668
-        y: 0
-        width: 278
-        height: 280
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c0c4dd6ccd38711c0800000000000000
-      internalID: -4533009515672679412
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SampleSpriteSheet_63
-      rect:
-        serializedVersion: 2
-        x: 1946
-        y: 0
-        width: 278
-        height: 280
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bd67729817f3ba550800000000000000
-      internalID: 6173097471106315995
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 9ef70f828438cf34099b11457cf40177
+    spriteID: 8616bc1353dc17346b8a33db9203d14f
     internalID: 0
     vertices: []
     indices: 

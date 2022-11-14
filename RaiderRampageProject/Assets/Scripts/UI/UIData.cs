@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 //Script that holds UI elements and their data
 public class UIData : MonoBehaviour
 {
@@ -114,8 +116,14 @@ public class UIData : MonoBehaviour
     [Header("Grenade UI Components")]
     public Image grenadeImage;
 
+    [Header("ScreenFades")]
+    [SerializeField] private Image fadeImage;
+
+    [SerializeField] private Color deathFadeColor;
+    [SerializeField] private Color victoryFadeColor;
 
 
+    [SerializeField] private float fadeTime;
 
     //establishes the singleton, initilizes spritesheets from resources folder
     private void Awake()
@@ -140,6 +148,9 @@ public class UIData : MonoBehaviour
         waveText.text = ("Current Wave: 1");
 
         scrapBarrelArrowsImage.sprite = SetSpriteFromLargeSheet(scrapBarrelArrowsSpriteNumber);
+
+        //disables the fade image, its used to block raycasts when active so needs to be disabled initialy. enabled when the fade is called
+        fadeImage.enabled = false;
 
         //event subscriptions for UI events
         UIEvents.instance.onUpdateScrapCounts += UpdateScrapQuantityTexts;
@@ -404,4 +415,43 @@ public class UIData : MonoBehaviour
         }
     }
 
+    //Screen Fades
+
+    public void DeathScreen()
+    {
+        //fades screen out
+        StartCoroutine(DeathScreenFadeIn(deathFadeColor, 3));
+    }
+
+    public void VictoryScreen()
+    {
+        //fades screen out
+        StartCoroutine(DeathScreenFadeIn(victoryFadeColor, 4));
+
+        //updates the level progress tracking and saves the games progress
+        if(ProgressManager.instance != null)
+        {
+            if(ProgressManager.instance.highestLevelCompleted < LevelData.adjustedLevelNumber)
+            {
+                ProgressManager.instance.highestLevelCompleted = LevelData.adjustedLevelNumber;
+
+                ProgressManager.instance.Save();
+            }
+        }
+    }
+
+    private IEnumerator DeathScreenFadeIn(Color color, int sceneLoad)
+    {
+        fadeImage.enabled = true;
+
+        for (float i = 0; i < fadeTime; i += Time.deltaTime)
+        {
+            fadeImage.color = Color.Lerp(Color.clear, color, (i / fadeTime));
+
+            yield return null;
+        }
+
+        SceneManager.LoadScene(sceneLoad);
+    }
 }
+

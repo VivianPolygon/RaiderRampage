@@ -296,6 +296,8 @@ public class WaveSpawner : MonoBehaviour
         if(enemiesAlive / (float)totalEnemiesInWave == 0)
         {
             GameStateManager.instance.UpdateGameState((int)GameStateManager.Gamestate.BetweenWaves);
+            WaveTracker.instance.CheckVictory();
+            
         }
         return enemiesAlive / (float)totalEnemiesInWave;
     }
