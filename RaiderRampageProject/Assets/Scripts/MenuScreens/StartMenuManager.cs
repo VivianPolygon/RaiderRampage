@@ -123,7 +123,6 @@ public class StartMenuManager : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.OpenURL("https://docs.google.com/forms/d/e/1FAIpQLSfzfuXDD3y5Mqf_X75YoNFBjiVHByo5SaUFKR_F7P8zFrUrhg/viewform");
         Application.Quit();
     }
 
@@ -140,10 +139,5 @@ public class StartMenuManager : MonoBehaviour
                 canvases[i].SetActive(false);
             }
         }
-    }
-
-    private void OnApplicationQuit()
-    {
-        //save game
     }
 }

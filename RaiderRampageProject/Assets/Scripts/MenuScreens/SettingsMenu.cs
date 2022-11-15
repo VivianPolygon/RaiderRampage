@@ -27,8 +27,12 @@ public class SettingsMenu : MonoBehaviour
     {
         SettingsManager.LoadSettingsData();
 
-        sensitivitySlider.value = SettingsManager.aimSensitivity * 10;
-        SetAimSensitivity();
+        if (sensitivitySlider != null)
+        {
+            sensitivitySlider.value = SettingsManager.aimSensitivity * 10;
+
+            SetAimSensitivity();
+        }
     }
 
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem.OnScreen;
 
 //Script that holds UI elements and their data
 public class UIData : MonoBehaviour
@@ -100,6 +101,13 @@ public class UIData : MonoBehaviour
     public Color gunheadImageActiveColor;
     public Color gunheadImageInactiveColor;
 
+    [Header("On-Screen Scripts")]
+    public OnScreenButton fireButton;
+    public OnScreenButton reloadButton;
+    public OnScreenStick stickAim;
+
+    [Header("Pause Canvas")]
+    public Canvas pauseCanvas;
 
     //needed to make them disappear when they are irrelevent
     [Header("Upgrade Buttons")]
@@ -152,6 +160,9 @@ public class UIData : MonoBehaviour
         //disables the fade image, its used to block raycasts when active so needs to be disabled initialy. enabled when the fade is called
         fadeImage.enabled = false;
 
+        //sets the reloading fill icon to empty initialy
+        ammoReloadTimerSlider.value = 0;
+
         //event subscriptions for UI events
         UIEvents.instance.onUpdateScrapCounts += UpdateScrapQuantityTexts;
         UIEvents.instance.onUpdateAddonCounts += UpdateAddonTexts;
@@ -160,6 +171,9 @@ public class UIData : MonoBehaviour
         //event subscriptions for GameStateManger events
         GameStateManager.instance.onWaveEnd += ShowPostWaveUI;
         GameStateManager.instance.onWaveStart += HidePostWaveUI;
+
+        //disables the spawn canvas at start
+        pauseCanvas.enabled = false;
 
 
         ammoDrainIconSliders = new Slider[4][];
@@ -452,6 +466,20 @@ public class UIData : MonoBehaviour
         }
 
         SceneManager.LoadScene(sceneLoad);
+    }
+
+    //functions that disable or enable the On-Screen components
+
+    public void OnScreenSetActive(bool isActive)
+    {
+        fireButton.enabled = isActive;
+        fireButton.gameObject.SetActive(isActive);
+
+        reloadButton.enabled = isActive;
+        reloadButton.gameObject.SetActive(isActive);
+
+        stickAim.enabled = isActive;
+        stickAim.gameObject.SetActive(isActive);
     }
 }
 

@@ -220,8 +220,8 @@ public class PlayerResourcesManager : MonoBehaviour
             UIData.instance.UpdateAllDrainIcons();
         }
 
-        //sets the bar to full
-        UIData.instance.ammoReloadTimerSlider.value = 1;
+        //sets the icon to empty, making it invisible
+        UIData.instance.ammoReloadTimerSlider.value = 0;
         //sets the flag for reloading to false (used to prevent shooting while reloading)
         GunData.instance.reloading = false;
         //sets the coroutine to null so it can be ran again

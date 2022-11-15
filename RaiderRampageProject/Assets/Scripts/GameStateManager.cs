@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
+
 //Script that controls the overall gamestate
 public class GameStateManager : MonoBehaviour
 {
@@ -18,6 +20,7 @@ public class GameStateManager : MonoBehaviour
     [SerializeField]
     private LevelMode levelMode = LevelMode.StandardLevel;
 
+    private bool isPaused;
 
     public event Action onWaveEnd;
     public event Action onWaveStart;
@@ -75,6 +78,7 @@ public class GameStateManager : MonoBehaviour
     {
         //sets the initial state from input in the inspector
 
+        isPaused = false;
 
         InitilizeFromLevelMode();
     }
@@ -294,5 +298,60 @@ public class GameStateManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void PauseGame()
+    {
+        if(isPaused)
+        {
+            //if the game is currently paused, unpauses
+            Time.timeScale = 1;
+            isPaused = false;
+
+            //enables On-screen components
+            UIData.instance.OnScreenSetActive(true);
+            UIData.instance.pauseCanvas.enabled = false;
+            UIData.instance.shootingControlsCanvas.gameObject.SetActive(true);
+
+            //saves settings incase of change
+            if (ProgressManager.instance != null)
+            {
+                SaveManager.SavePlayerData(ProgressManager.instance);
+            }
+
+
+            return;
+        }
+        else
+        {
+            //if the game isint paused, pauses
+            Time.timeScale = 0;
+            isPaused = true;
+
+            //disables On-screen components
+            UIData.instance.OnScreenSetActive(false);
+            UIData.instance.pauseCanvas.enabled = true;
+            UIData.instance.shootingControlsCanvas.gameObject.SetActive(false);
+
+            //saves settings incase of change
+            if (ProgressManager.instance != null)
+            {
+                SaveManager.SavePlayerData(ProgressManager.instance);
+            }
+
+            return;
+        }
+    }
+
+    //hold loading scene functions
+    public void LoadScene(int sceneNum)
+    {
+        SceneManager.LoadScene(sceneNum);
+    }
+
+    //quit game function
+    public void Quitgame()
+    {
+        Application.Quit();
     }
 }
