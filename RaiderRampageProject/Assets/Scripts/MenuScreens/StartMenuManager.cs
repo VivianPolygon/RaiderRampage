@@ -105,6 +105,9 @@ public class StartMenuManager : MonoBehaviour
 
     public void LoadScene(int sceneNumber)
     {
+        //sets timescale to one to prevent a quitout from game paused causing issues
+        Time.timeScale = 1;
+
         loadingOperation = SceneManager.LoadSceneAsync(sceneNumber);
         UpdateDisplayedMenu(3);
         StartCoroutine(LoadingBar());

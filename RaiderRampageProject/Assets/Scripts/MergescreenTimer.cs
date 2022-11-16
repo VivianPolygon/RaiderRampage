@@ -11,6 +11,9 @@ public class MergescreenTimer : MonoBehaviour
 
     private Coroutine timerCoroutine;
 
+    //static versions of variables set in start and coroutines
+    public static int waveTimerDuration;
+    public static float currentTimerPlace;
 
     private void OnEnable()
     {
@@ -25,6 +28,12 @@ public class MergescreenTimer : MonoBehaviour
     {
         GameStateManager.instance.onWaveEnd -= StartTimer;
     }
+
+    private void Start()
+    {
+        waveTimerDuration = timerDuration;
+    }
+
     private IEnumerator Timer()
     {
         if (UIData.instance.timerIndicators == null)
@@ -33,13 +42,17 @@ public class MergescreenTimer : MonoBehaviour
         }
         else
         {
-            for (float i = 0; i < timerDuration; i += Time.deltaTime)
+            for (float t = 0; t < timerDuration; t += Time.deltaTime)
             {
+                currentTimerPlace = t;
 
                 //causes timer icons from UIData to flash, speeding up as the time gets lower
                 foreach (Image timerIcon in UIData.instance.timerIndicators)
                 {
-                    timerIcon.color = Color.Lerp(Color.grey, Color.red, i / timerDuration) * Mathf.RoundToInt(Mathf.Clamp(Mathf.Sin(i * i), 0, 1));
+                    if(t > waveTimerDuration / 2) //only flashes if there is half time left or less
+                    {
+                        timerIcon.color = Color.Lerp(Color.grey, Color.red, t / timerDuration);
+                    }
                 }
                 //stops the coroutine if the shootingstate is entered manualy before the timer is up
                 if (GameStateManager.instance.gameState == GameStateManager.Gamestate.Shooting)
@@ -59,6 +72,6 @@ public class MergescreenTimer : MonoBehaviour
                 GameStateManager.instance.UpdateGameState((int)GameStateManager.Gamestate.Shooting);
             }
         }
-
+        currentTimerPlace = waveTimerDuration;
     }
 }
