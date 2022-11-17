@@ -49,10 +49,8 @@ public class MergescreenTimer : MonoBehaviour
                 //causes timer icons from UIData to flash, speeding up as the time gets lower
                 foreach (Image timerIcon in UIData.instance.timerIndicators)
                 {
-                    if(t > waveTimerDuration / 2) //only flashes if there is half time left or less
-                    {
-                        timerIcon.color = Color.Lerp(Color.grey, Color.red, t / timerDuration);
-                    }
+                    //slowly turns red as time gets closer to being up
+                    timerIcon.color = Color.Lerp(Color.grey, Color.red, t / timerDuration);
                 }
                 //stops the coroutine if the shootingstate is entered manualy before the timer is up
                 if (GameStateManager.instance.gameState == GameStateManager.Gamestate.Shooting)

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7696aa46f0fab047be8f8435ecabc72, type: 3}
+  m_Name: L1 Wave4
+  m_EditorClassIdentifier: 
+  waveDifficultyThreshold: 12
+  waveDifficulty: 6
+  balancedBias: 5
+  fastBias: 10
+  armouredBias: 7
+  waveValue: 40
+  waveQuantity: 25
+  delayMin: 0.25
+  delayMax: 2

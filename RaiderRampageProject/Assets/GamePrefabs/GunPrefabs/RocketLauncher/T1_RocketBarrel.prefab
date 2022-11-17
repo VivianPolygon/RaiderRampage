@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3307597304559898856}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.46, z: -1.24}
+  m_LocalPosition: {x: 0, y: -0.09, z: 1.633}
   m_LocalScale: {x: 2.5, y: 2.5, z: 0.2}
   m_Children: []
   m_Father: {fileID: 6044093331905591161}
@@ -80,7 +80,7 @@ MonoBehaviour:
   barrelTier: 0
   bulletPattern: 0
   gunEffects: {fileID: 4218821172138117346}
-  projectilePrefab: {fileID: 5325694384607462396, guid: 88db48abae98bc14aa96e47711601528, type: 3}
+  projectilePrefab: {fileID: 5325694384607462396, guid: ab9e98c901121b849b6b2b8c9ef92487, type: 3}
   projectileSpawnpoint: {fileID: 4451474642310687865}
   shotsPerSecond: 1.5
   ammoDrain: 1
@@ -120,7 +120,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8118415306493554294}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -50}
+  m_LocalPosition: {x: 0, y: 0, z: -47.7}
   m_LocalScale: {x: 4.768408, y: 4.768408, z: 3.418367}
   m_Children: []
   m_Father: {fileID: 8719615479459045155}
@@ -243,15 +243,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3220392607724255491, guid: d8249c523071c45469b4de9fade03b70, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.5
+      value: 1.7249999
       objectReference: {fileID: 0}
     - target: {fileID: 3220392607724255491, guid: d8249c523071c45469b4de9fade03b70, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.5
+      value: 1.7249999
       objectReference: {fileID: 0}
     - target: {fileID: 3220392607724255491, guid: d8249c523071c45469b4de9fade03b70, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.5
+      value: 1.7249999
       objectReference: {fileID: 0}
     - target: {fileID: 3220392607724255491, guid: d8249c523071c45469b4de9fade03b70, type: 3}
       propertyPath: m_LocalPosition.x
@@ -352,7 +352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cbb717c82744b494fb603a83a56f97bc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.84
+      value: -1.41
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: cbb717c82744b494fb603a83a56f97bc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -389,11 +389,27 @@ PrefabInstance:
     - target: {fileID: -8052375461614772742, guid: cbb717c82744b494fb603a83a56f97bc, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6298b3ba4f98d7e4d8a1c11a6c951764, type: 2}
+      objectReference: {fileID: 2100000, guid: 85f8dd71cd287684ea6049341c015d5c, type: 2}
+    - target: {fileID: -6207074468148860718, guid: cbb717c82744b494fb603a83a56f97bc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.76586
+      objectReference: {fileID: 0}
+    - target: {fileID: -6207074468148860718, guid: cbb717c82744b494fb603a83a56f97bc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.76586
+      objectReference: {fileID: 0}
+    - target: {fileID: -6207074468148860718, guid: cbb717c82744b494fb603a83a56f97bc, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.76586
+      objectReference: {fileID: 0}
     - target: {fileID: -6207074468148860718, guid: cbb717c82744b494fb603a83a56f97bc, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3415416756292480254, guid: cbb717c82744b494fb603a83a56f97bc, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -5243732931742046706, guid: 21b32093521e15149971a5d328e458b6, type: 3}
     - target: {fileID: 919132149155446097, guid: cbb717c82744b494fb603a83a56f97bc, type: 3}
       propertyPath: m_Name
       value: RPG_Barrel

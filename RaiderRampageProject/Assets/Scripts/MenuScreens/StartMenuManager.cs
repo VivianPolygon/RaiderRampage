@@ -14,7 +14,8 @@ public class StartMenuManager : MonoBehaviour
         levelSelect,
         shootingRange,
         loading,
-        settings
+        settings,
+        credits
     }
 
     [Header("UI Canvases")]
@@ -31,6 +32,8 @@ public class StartMenuManager : MonoBehaviour
     private GameObject settingsCanvas;
     [SerializeField]
     private GameObject loadingCanvas;
+    [SerializeField]
+    private GameObject creditsCanvas;
     //array made from all of the canvases
     private GameObject[] canvases;
 
@@ -68,11 +71,12 @@ public class StartMenuManager : MonoBehaviour
         }
 
         //sets the canvas array
-        canvases = new GameObject[4];
+        canvases = new GameObject[5];
         canvases[0] = levelSelectCanvas;
         canvases[1] = shootingRangeCanvas;
         canvases[2] = settingsCanvas;
         canvases[3] = loadingCanvas;
+        canvases[4] = creditsCanvas;
 
         UpdateDisplayedMenu(0);
     }
@@ -97,6 +101,9 @@ public class StartMenuManager : MonoBehaviour
                 break;
             case MenuActive.noneActive:
                 SetSingleCanvasActive(null);
+                break;
+            case MenuActive.credits:
+                SetSingleCanvasActive(creditsCanvas);
                 break;
             default:
                 break;

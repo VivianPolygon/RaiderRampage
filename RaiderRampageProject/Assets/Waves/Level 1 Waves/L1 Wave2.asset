@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d7696aa46f0fab047be8f8435ecabc72, type: 3}
-  m_Name: Wave3
+  m_Name: L1 Wave2
   m_EditorClassIdentifier: 
-  waveDifficultyThreshold: 8
-  waveDifficulty: 6
-  balancedBias: 5
-  fastBias: 5
+  waveDifficultyThreshold: 9
+  waveDifficulty: 4
+  balancedBias: 40
+  fastBias: 40
   armouredBias: 5
-  waveValue: 30
+  waveValue: 20
   waveQuantity: 20
-  delayMin: 0.25
-  delayMax: 1.25
+  delayMin: 0.4
+  delayMax: 1.75

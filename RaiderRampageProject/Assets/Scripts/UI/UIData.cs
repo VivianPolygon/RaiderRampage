@@ -434,13 +434,13 @@ public class UIData : MonoBehaviour
     public void DeathScreen()
     {
         //fades screen out
-        StartCoroutine(DeathScreenFadeIn(deathFadeColor, 3));
+        StartCoroutine(DeathScreenFadeIn(deathFadeColor, 2));
     }
 
     public void VictoryScreen()
     {
         //fades screen out
-        StartCoroutine(DeathScreenFadeIn(victoryFadeColor, 4));
+        StartCoroutine(DeathScreenFadeIn(victoryFadeColor, 3));
 
         //updates the level progress tracking and saves the games progress
         if(ProgressManager.instance != null)
