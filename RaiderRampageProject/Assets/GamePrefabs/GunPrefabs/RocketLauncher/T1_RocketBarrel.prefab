@@ -87,7 +87,7 @@ MonoBehaviour:
   shotForce: 2800
   bulletDamage: 15
   scrapValue: 4
-  projectileDestroyTime: 3
+  projectileDestroyTime: 6
   bulletSpreadAmount: 45
   spreadShotQuantity: 0
   purchasePrice: 20

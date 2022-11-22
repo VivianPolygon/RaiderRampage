@@ -242,7 +242,7 @@ MonoBehaviour:
   levelSprites:
   - {fileID: 21300000, guid: f1002c9452cc7f448850e6e35b2cb571, type: 3}
   - {fileID: 21300000, guid: 21018cf6fe3605a4e95e44120b372a01, type: 3}
-  - {fileID: 21300000, guid: 0b1ad672ad037694190064f91e8a8c8f, type: 3}
+  - {fileID: 21300000, guid: 30980284fb011c14283751ccb60bf73f, type: 3}
   levelNames:
   - '1: First Rampage'
   - '2: Another Rampage'
