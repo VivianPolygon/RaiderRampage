@@ -6,6 +6,13 @@ public class GunBarrel : MonoBehaviour
 {
     //used to determine what type of barrel this is, used for ammo caculations
     public BarrelType barrelType;
+    public BarrelTeir barrelTier;
+
+    public BarrelShootingPattern bulletPattern;
+
+    [Header("Controls the barrels Smoke/Flash Effects")]
+    [SerializeField] private GunEffects gunEffects;
+
 
     //prefab for projectile, and its spawnpoint transform
     [SerializeField]
@@ -22,6 +29,11 @@ public class GunBarrel : MonoBehaviour
     //impulse physics force applied to the bullet on spawn
     [SerializeField]
     private float shotForce;
+    [SerializeField]
+    private int bulletDamage;
+    //amount of scrap regained when discarded
+    public int scrapValue;
+
 
     //how long until the projectile gets destroyed if it collides with nothing
     [SerializeField]
@@ -32,6 +44,15 @@ public class GunBarrel : MonoBehaviour
     private GameObject shot;
     private bool canFire;
 
+    //variables used to control how the bullets shoot
+    [SerializeField]
+    private float bulletSpreadAmount;
+    [Header("only applyed if bulletPattern is set to spread")]
+    [SerializeField]
+    private int spreadShotQuantity;
+
+    [Header("cost to purchase on the UpgradeScreen")]
+    public int purchasePrice;
 
     private void Awake()
     {
@@ -39,6 +60,19 @@ public class GunBarrel : MonoBehaviour
         t = 0;
         canFire = false;
     }
+
+    private void Start()
+    {
+        if (projectilePrefab.TryGetComponent(out Bullet bullet))
+        {
+            bullet.damage = bulletDamage;
+        }
+        if (projectilePrefab.TryGetComponent(out Explosive explosive))
+        {
+            explosive.explosionDamage = bulletDamage;
+        }
+    }
+
     void Update()
     {
         //if the fire button is held, checks ammo stocks to determine if the barrel can fire
@@ -46,32 +80,30 @@ public class GunBarrel : MonoBehaviour
         {
             switch (barrelType)
             {
+                case BarrelType.SMG:
+                    canFire = PlayerResourcesManager.instance.CheckCanShoot(0, ammoDrain);
+                    break;
                 case BarrelType.Pistol:
-                    if(PlayerResourcesManager.instance.pistolClipCurrent >= ammoDrain)
-                    {
-                        canFire = true;
-                    }
+                    canFire = PlayerResourcesManager.instance.CheckCanShoot(0, ammoDrain);
                     break;
+
                 case BarrelType.Shotgun:
-                    if (PlayerResourcesManager.instance.shotGunClipCurrent >= ammoDrain)
-                    {
-                        canFire = true;
-                    }
+                    canFire = PlayerResourcesManager.instance.CheckCanShoot(1, ammoDrain);
                     break;
+
                 case BarrelType.MachineGun:
-                    if (PlayerResourcesManager.instance.machineGunClipCurrent >= ammoDrain)
-                    {
-                        canFire = true;
-                    }
+                    canFire = PlayerResourcesManager.instance.CheckCanShoot(2, ammoDrain);
                     break;
+                case BarrelType.Sniper:
+                    canFire = PlayerResourcesManager.instance.CheckCanShoot(2, ammoDrain);
+                    break;
+
                 case BarrelType.RocketLauncher:
-                    if (PlayerResourcesManager.instance.rocketLauncherClipCurrent >= ammoDrain)
-                    {
-                        canFire = true;
-                    }
+                    canFire = PlayerResourcesManager.instance.CheckCanShoot(3, ammoDrain);
                     break;
                 default:
                     break;
+
             }
 
             //tracks time, always tracks so that the player cant spam shot by quicktapping,
@@ -79,32 +111,108 @@ public class GunBarrel : MonoBehaviour
             t += Time.deltaTime;
 
             //if the time requirments have been met, instantiates shot and does ammo caculations
-            if(t > (1 / shotsPerSecond) && canFire)
+            if(t > (1 / (shotsPerSecond * PlayerResourcesManager.fireSpeedMult)) && canFire)
             {
                 t = 0;
-                shot = Instantiate(projectilePrefab, projectileSpawnpoint.transform.position, transform.rotation);
-                shot.transform.LookAt(GunData.instance.cursorPositon);
-                shot.GetComponent<Rigidbody>().AddForce(shot.transform.forward * shotForce, ForceMode.Impulse);
-                Destroy(shot, projectileDestroyTime);
+                Vector3 appliedSpread = Vector3.zero;
+
+                //muzzleFlash
+                gunEffects.FlashEffect();
+
+                switch (bulletPattern)
+                {
+
+                    case BarrelShootingPattern.Standard:
+                        shot = Instantiate(projectilePrefab, projectileSpawnpoint.transform.position, transform.rotation);
+                        shot.transform.LookAt(GunData.instance.cursorPositon);
+                        shot.GetComponent<Rigidbody>().AddForce(((shot.transform.forward * shotForce ) + (Random.onUnitSphere * bulletSpreadAmount) * GunData.instance.spinSpeedPercent), ForceMode.Impulse);
+
+                        //does aditional behaviors on overdrive
+                        if(OverdriveGauge.armorPierceActive)
+                        {
+                            shot.transform.localScale *= OverdriveGauge.pierceScale;
+                        }
+                        if(OverdriveGauge.incendiaryActive)
+                        {
+                            GameObject fireTrail = Instantiate(OverdriveGauge.fireTrail, shot.transform.position, shot.transform.rotation);
+                            fireTrail.transform.parent = shot.transform;
+                        }
+                        if(OverdriveGauge.explosionActive)
+                        {
+                            GameObject explosionObject = Instantiate(OverdriveGauge.explosionObject, shot.transform.position, shot.transform.rotation);
+                            explosionObject.transform.parent = shot.transform;
+
+                            explosionObject.GetComponent<Explosive>().explosionDamage = OverdriveGauge._explosionDamage;
+                            explosionObject.GetComponent<Explosive>().explosionRange = OverdriveGauge._explosionRange;
+                        }
+
+                        Destroy(shot, projectileDestroyTime);
+
+                        break;
+                    case BarrelShootingPattern.Spread:
+                        for (int i = 0; i < spreadShotQuantity; i++)
+                        {
+                            shot = Instantiate(projectilePrefab, projectileSpawnpoint.transform.position, transform.rotation);
+                            shot.transform.LookAt(GunData.instance.cursorPositon);
+                            shot.GetComponent<Rigidbody>().AddForce((shot.transform.forward * shotForce)+ (Random.onUnitSphere * bulletSpreadAmount), ForceMode.Impulse);
+
+                            //does aditional behaviors on overdrive
+                            if (OverdriveGauge.armorPierceActive)
+                            {
+                                shot.transform.localScale *= OverdriveGauge.pierceScale;
+                            }
+                            if (OverdriveGauge.incendiaryActive)
+                            {
+                                GameObject fireTrail = Instantiate(OverdriveGauge.fireTrail, shot.transform.position, shot.transform.rotation);
+                                fireTrail.transform.parent = shot.transform;
+                            }
+                            if (OverdriveGauge.explosionActive)
+                            {
+                                GameObject explosionObject = Instantiate(OverdriveGauge.explosionObject, shot.transform.position, shot.transform.rotation);
+                                explosionObject.transform.parent = shot.transform;
+
+                                explosionObject.GetComponent<Explosive>().explosionDamage = OverdriveGauge._explosionDamage;
+                                explosionObject.GetComponent<Explosive>().explosionRange = OverdriveGauge._explosionRange;
+                            }
+
+                            Destroy(shot, projectileDestroyTime);
+                        }
+
+                        break;
+                    default:
+                        break;
+                }
+
 
                 
                 switch (barrelType)
                 {
+                    case BarrelType.SMG:
+                        PlayerResourcesManager.instance.clipQuantities[0] -= ammoDrain;
+                        UIData.instance.UpdateSpecificClipDrainIcon(0);
+                        break;
                     case BarrelType.Pistol:
-                        PlayerResourcesManager.instance.pistolClipCurrent -= ammoDrain;
-                        UIData.instance.UpdateAmmoSlider(4, PlayerResourcesManager.instance.pistolClipMax, PlayerResourcesManager.instance.pistolClipCurrent);
+                        PlayerResourcesManager.instance.clipQuantities[0] -= ammoDrain;
+                        UIData.instance.UpdateSpecificClipDrainIcon(0);
                         break;
-                    case BarrelType.MachineGun:
-                        PlayerResourcesManager.instance.machineGunClipCurrent -= ammoDrain;
-                        UIData.instance.UpdateAmmoSlider(5, PlayerResourcesManager.instance.machineGunClipMax, PlayerResourcesManager.instance.machineGunClipCurrent);
-                        break;
+
                     case BarrelType.Shotgun:
-                        PlayerResourcesManager.instance.shotGunClipCurrent -= ammoDrain;
-                        UIData.instance.UpdateAmmoSlider(6, PlayerResourcesManager.instance.shotGunClipMax, PlayerResourcesManager.instance.shotGunClipCurrent);
+                        PlayerResourcesManager.instance.clipQuantities[1] -= ammoDrain;
+                        UIData.instance.UpdateSpecificClipDrainIcon(1);
                         break;
+
+                    case BarrelType.MachineGun:
+                        PlayerResourcesManager.instance.clipQuantities[2] -= ammoDrain;
+                        UIData.instance.UpdateSpecificClipDrainIcon(2);
+                        break;
+                    case BarrelType.Sniper:
+                        PlayerResourcesManager.instance.clipQuantities[2] -= ammoDrain;
+                        UIData.instance.UpdateSpecificClipDrainIcon(2);
+                        break;
+
                     case BarrelType.RocketLauncher:
-                        PlayerResourcesManager.instance.rocketLauncherClipCurrent -= ammoDrain;
-                        UIData.instance.UpdateAmmoSlider(7, PlayerResourcesManager.instance.rocketLauncherClipMax, PlayerResourcesManager.instance.rocketLauncherClipCurrent);
+                        PlayerResourcesManager.instance.clipQuantities[3] -= ammoDrain;
+                        UIData.instance.UpdateSpecificClipDrainIcon(3);
                         break;
                     default:
                         break;
@@ -113,8 +221,18 @@ public class GunBarrel : MonoBehaviour
             }
             //sets false for next loop
             canFire = false;
+
         }
     }
 
+    private Vector3 RandomTargetFromSpread(Vector3 targetPosition)
+    {
+        Vector3 RandomVector;
 
+        RandomVector.x = UnityEngine.Random.Range(targetPosition.x - bulletSpreadAmount, targetPosition.x + bulletSpreadAmount);
+        RandomVector.y = UnityEngine.Random.Range(targetPosition.y - bulletSpreadAmount, targetPosition.y + bulletSpreadAmount);
+        RandomVector.z = UnityEngine.Random.Range(targetPosition.z - bulletSpreadAmount, targetPosition.z + bulletSpreadAmount);
+
+        return RandomVector;
+    }
 }

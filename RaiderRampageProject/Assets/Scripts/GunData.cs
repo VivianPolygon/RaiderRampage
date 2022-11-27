@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,12 +12,16 @@ public class GunData : MonoBehaviour
     //base body model for the gun
     public GameObject gunModelBody;
 
+
     //Reload delay in second
     public float reloadTime;
+    [SerializeField]
+    private int startingGunHead;
 
-    //cursor image, and the sprites for it to hold
+
+    [Header("Cursor Information")]
+    //cursor image
     public Image cursorImage;
-    public Sprite[] cursorSprites;
     //cursor color tints
     [SerializeField]
     private Color cursorInactiveColor;
@@ -27,13 +32,6 @@ public class GunData : MonoBehaviour
     [HideInInspector]
     public Vector3 cursorPositon;
 
-    //slots parent
-    public Transform slotParent;
-    //slots
-    public Transform[] BarrelSlots;
-    //will check if slots are available (not implemented yet)
-    public BarrelType[] slotFillType;
-
     //flag for if the gun is firing
     [HideInInspector]
     public bool firing;
@@ -42,37 +40,57 @@ public class GunData : MonoBehaviour
     public bool reloading;
 
 
-    //used by functions
-    private GameObject newBarrel;
-
-    //x value is the quantity of barrels, y value is the coresponding cursor for if that barrel is the majority, Z is the cursor priority
-    private Vector3 pistolBarrelData;
-    private Vector3 machineGunBarrelData;
-    private Vector3 shotgunBarrelData;
-    private Vector3 rocketLauncherBarrelData;
+    //x value is the quantity of barrels, y value is the spritesheet number for the cursorsprite
+    private Vector2 SMGBarrelData;
+    private Vector2 pistolBarrelData;
+    private Vector2 machineGunBarrelData;
+    private Vector2 shotgunBarrelData;
+    private Vector2 sniperBarrelData;
+    private Vector2 rocketLauncherBarrelData;
 
 
     //ordered list based on the x values of the above vector2s
     [SerializeField]
-    private List<Vector3> barrelQuantitiesOrdered;
+    private List<Vector2> barrelQuantitiesOrdered;
 
     [Header("Related to Gun Spin")]
     //object to spin
     public GameObject spinningGunPiece;
     //spin speed for the gun
     public float maxSpinSpeed;
-    //used for spin speed caculations dependent on barrel ammount
-    private float spinSpeedPercent;
+    //used for spin speed caculations dependent on barrel ammount, also used for spread caculations in GunBarrel
+    public float spinSpeedPercent;
     [SerializeField]
     private float spinSpeedStartupTime;
 
     private float currentSpinSpeed;
 
+    [HideInInspector]
+    public int currentHeadNumber;
+
+    //total amount of gunheads, defaulted to 3 for now
+    private int gunHeadQuantity;
+
+    [Header("Gun Animator")]
+    [SerializeField] private Animator gunAnim;
+    public static Animator _gunAnim;
+
+
+    //event used for smoke VFX
+    public event Action onBarrelSmoke;
+    public event Action offBarrelSmoke;
+
+    public void BarrelSmokeOn() { onBarrelSmoke?.Invoke(); }
+    public void BarrelSmokeOff() { offBarrelSmoke?.Invoke(); }
+
+    [Header("Sprites pulled randomly on each shot for the muzzle flash")]
+    public Sprite[] muzzleFlashes;
+
 
     private void Awake()
     {
         //establishes singleton
-        if(instance != null)
+        if (instance != null)
         {
             Destroy(this);
         }
@@ -80,152 +98,71 @@ public class GunData : MonoBehaviour
         {
             instance = this;
         }
+
+        currentHeadNumber = startingGunHead;
+        gunHeadQuantity = 3;
+
+        _gunAnim = gunAnim;
+        if(_gunAnim == null)
+        {
+            Debug.LogWarning("The gun animator is null, double check that GunData located on: " + name + "has its field in the inspector for animator set to an animator");
+        }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         SpinBarrels();
     }
 
     private void Start()
     {
-        //sets the cursor sprite and gets the current slots at start
-
-        UpdateSlotCount();
         ApplyStaticGunData();
+        RefreshBarrelQuantitiesList();
         StopFiring();
+
     }
 
 
     //FUNCTIONS RELATING TO THE TRACKING OF SLOTS AND THEIR CONTENTS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-    //updates the slotcount, make sure to only put slots in slotparent
-    public void UpdateSlotCount()
-    {
-        BarrelSlots = new Transform[slotParent.childCount];
-        slotFillType = new BarrelType[slotParent.childCount];
-
-        for (int i = 0; i < BarrelSlots.Length; i++)
-        {
-            BarrelSlots[i] = slotParent.GetChild(i);
-        }
-
-        GetAllBarrelTypes();
-
-    }
-
-    public void GetSlotBarrelType(int slotNum)
-    {
-        if (BarrelSlots[slotNum].childCount > 0)
-        {
-            if (BarrelSlots[slotNum].GetChild(0).TryGetComponent(out GunBarrel gunbarrel))
-            {
-                slotFillType[slotNum] = gunbarrel.barrelType;
-            }
-            else
-            {
-                Debug.LogWarning("there is an object in a gunslot that is not a barrel or does not have the Gunbarrel script");
-            }
-        }
-        else if (BarrelSlots[slotNum].childCount <= 0)
-        {
-            slotFillType[slotNum] = BarrelType.Empty;
-        }
-        RefreshBarrelQuantitiesList();
-    }
-
-    public void GetAllBarrelTypes()
-    {
-        for (int i = 0; i < BarrelSlots.Length; i++)
-        {
-            if (BarrelSlots[i].childCount > 0)
-            {
-                if (BarrelSlots[i].GetChild(0).TryGetComponent(out GunBarrel gunbarrel))
-                {
-                    slotFillType[i] = gunbarrel.barrelType;
-                }
-                else
-                {
-                    Debug.LogWarning("there is an object in a gunslot that is not a barrel or does not have the Gunbarrel script");
-                }
-            }
-            else
-            {
-                slotFillType[i] = BarrelType.Empty;
-            }
-        }
-        RefreshBarrelQuantitiesList();
-    }
-
-    public void CreateBarrelInFirstAvailableSlot(GameObject barrelPrefab)
-    {
-        for (int i = 0; i < slotFillType.Length; i++)
-        {
-            if(slotFillType[i] == BarrelType.Empty)
-            {
-                newBarrel = Instantiate(barrelPrefab, BarrelSlots[i].position, BarrelSlots[i].rotation);
-                newBarrel.transform.parent = BarrelSlots[i];
-                newBarrel.transform.localScale = barrelPrefab.transform.localScale;
-
-                GetSlotBarrelType(i);
-                return;
-            }
-        }
-    }
-
-    public void DestroyBarrelInSlot(int slotnum)
-    {
-        if(BarrelSlots[slotnum].childCount > 0)
-        {
-            foreach (Transform child in BarrelSlots[slotnum])
-            {
-                Destroy(child.gameObject);
-            }
-            slotFillType[slotnum] = BarrelType.Empty;
-            RefreshBarrelQuantitiesList();
-        }
-    }
-
-    public void DestroyAllBarrels()
-    {
-        for (int i = 0; i < BarrelSlots.Length; i++)
-        {
-            {
-                foreach (Transform child in BarrelSlots[i])
-                {
-                    Destroy(child.gameObject);
-                }
-                slotFillType[i] = BarrelType.Empty;
-                RefreshBarrelQuantitiesList();
-            }
-        }
-    }
 
     //FUNCTIONS RELATING TO THE CURSOR DISPLAY SYSTEM <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     //refreshes the quantity of barrel List (used when a barrel is added to or removed from the gun)
+
     private void RefreshBarrelQuantitiesList()
     {
         barrelQuantitiesOrdered.Clear();
 
+        SMGBarrelData.x = 0;
         pistolBarrelData.x = 0;
         machineGunBarrelData.x = 0;
         shotgunBarrelData.x = 0;
+        sniperBarrelData.x = 0;
         rocketLauncherBarrelData.x = 0;
 
-        for (int i = 0; i < BarrelSlots.Length; i++)
+        for (int i = 0; i < StaticGunData.instance.workshopGunHeads[currentHeadNumber].headSlots.Length; i++)
         {
-            switch (slotFillType[i])
+            switch (StaticGunData.instance.workshopGunHeads[currentHeadNumber].headSlots[i].slotType)
             {
+                case BarrelType.SMG:
+                    SMGBarrelData.x++;
+                    break;
                 case BarrelType.Pistol:
                     pistolBarrelData.x++;
                     break;
+
                 case BarrelType.Shotgun:
                     shotgunBarrelData.x++;
                     break;
+
                 case BarrelType.MachineGun:
                     machineGunBarrelData.x++;
                     break;
+                case BarrelType.Sniper:
+                    sniperBarrelData.x++;
+                    break;
+
                 case BarrelType.RocketLauncher:
                     rocketLauncherBarrelData.x++;
                     break;
@@ -236,9 +173,11 @@ public class GunData : MonoBehaviour
             }
         }
 
+        barrelQuantitiesOrdered.Add(SMGBarrelData);
         barrelQuantitiesOrdered.Add(pistolBarrelData);
         barrelQuantitiesOrdered.Add(machineGunBarrelData);
         barrelQuantitiesOrdered.Add(shotgunBarrelData);
+        barrelQuantitiesOrdered.Add(sniperBarrelData);
         barrelQuantitiesOrdered.Add(rocketLauncherBarrelData);
 
         barrelQuantitiesOrdered.Sort(BarrelQuantitiesSortComparer);
@@ -248,21 +187,21 @@ public class GunData : MonoBehaviour
     }
 
     //comparer function that sorts by quantity and priority
-    private int BarrelQuantitiesSortComparer(Vector3 a, Vector3 b)
+    private int BarrelQuantitiesSortComparer(Vector2 a, Vector2 b)
     {
-        if(a.x > b.x)
+        if (a.x > b.x)
         {
             return -1;
         }
-        else if(a.x < b.x)
+        else if (a.x < b.x)
         {
             return 1;
         }
-        if (a.z > b.z)
+        if (a.y > b.y)
         {
             return -1;
         }
-        else if (a.z < b.z)
+        else if (a.y < b.y)
         {
             return 1;
         }
@@ -274,87 +213,79 @@ public class GunData : MonoBehaviour
     private void UpdateGunCursor()
     {
         //checks if the bottom and top of list are the same, if they are uses the default sprite
-        if(barrelQuantitiesOrdered[0].x == barrelQuantitiesOrdered[barrelQuantitiesOrdered.Count - 1].x)
+        if (barrelQuantitiesOrdered[0].x == barrelQuantitiesOrdered[barrelQuantitiesOrdered.Count - 1].x)
         {
-            UpdateCursorSprite(0);
+            cursorImage.sprite = UIData.instance.SetSpriteFromLargeSheet(UIData.instance.neutralReticle);
         }
         //checks the top of the lists y component, which coresponds to a sprite on the cursorSprites array
         else
         {
-            UpdateCursorSprite((int)barrelQuantitiesOrdered[0].y);
+            cursorImage.sprite = UIData.instance.SetSpriteFromLargeSheet((int)barrelQuantitiesOrdered[0].y);
         }
-
-    }
-    //updates the cursor sprite
-    public void UpdateCursorSprite(int spriteNum)
-    {
-        if (spriteNum > (cursorSprites.Length - 1))
-        {
-            spriteNum = cursorSprites.Length - 1;
-            Debug.LogWarning("Inputed Cursor Sprite number was above the top of the array and has been set to the highest number in the array");
-        }
-        if (spriteNum < 0)
-        {
-            spriteNum = 0;
-            Debug.LogWarning("Inputed Cursor Sprite number was below 0, and has been set to 0");
-        }
-        cursorImage.sprite = cursorSprites[spriteNum];
     }
 
     //sets coresponding sprite for each guntype
-    private void SetCorespoondingSprites(int pistolSpriteNum, int machineGunSpriteNum, int shotGunSpriteNum, int rocketLauncherSpriteNum)
+    private void SetCorespoondingSpritesAndPriority(int SMGSpriteNum, int pistolSpriteNum, int machineGunSpriteNum, int shotGunSpriteNum, int sniperSpriteNum, int rocketLauncherSpriteNum)
     {
+        SMGBarrelData.y = SMGSpriteNum;
         pistolBarrelData.y = pistolSpriteNum;
         machineGunBarrelData.y = machineGunSpriteNum;
         shotgunBarrelData.y = shotGunSpriteNum;
+        sniperBarrelData.y = sniperSpriteNum;
         rocketLauncherBarrelData.y = rocketLauncherSpriteNum;
-    }
-    //sets priority for each guntype
-    private void SetCorespoondingPriority(int pistolPriorityNum, int machineGunPriorityNum, int shotGunPriorityNum, int rocketLauncherPriorityNum)
-    {
-        pistolBarrelData.z = pistolPriorityNum;
-        machineGunBarrelData.z = machineGunPriorityNum;
-        shotgunBarrelData.z = shotGunPriorityNum;
-        rocketLauncherBarrelData.z = rocketLauncherPriorityNum;
+
     }
 
-    //applys static data to the vector 3s that control the orginization of the dffrent barrel types cursors and priorities in cases of ties
+    //applys static data to the vector 3s that control the orginization of the diffrent barrel types cursors and priorities in cases of ties
     private void ApplyStaticGunData()
     {
-        SetCorespoondingSprites
-        (StaticGunData.instance.pistolCursorSpriteNumber,
-        StaticGunData.instance.machineGunCursorSpriteNumber,
-        StaticGunData.instance.shotgunCursorSpriteNumber,
-        StaticGunData.instance.rocketLauncherCursorSpriteNumber);
-
-        SetCorespoondingPriority
-        (StaticGunData.instance.pistolPriority,
-        StaticGunData.instance.machineGunPriority,
-        StaticGunData.instance.shotgunPriority,
-        StaticGunData.instance.rockerLauncherPriority);
+        SetCorespoondingSpritesAndPriority
+        (StaticGunData.instance.SMGSpritePriorityAndNumber,
+        StaticGunData.instance.pistolSpritePriorityAndNumber,
+        StaticGunData.instance.machineGunSpritePriorityAndNumber,
+        StaticGunData.instance.shotgunSpritePriorityAndNumber,
+        StaticGunData.instance.sniperSpritePriorityAndNumber,
+        StaticGunData.instance.rocketLauncherSpritePriorityAndNumber);
     }
     //FUNCTIONS FOR GUN HEAD SPIN <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     private void CaculateSpinSpeedPercent()
     {
         int barrelAmount = 0;
+        int length = StaticGunData.instance.workshopGunHeads[currentHeadNumber].headSlots.Length;
 
-        for (int i = 0; i < BarrelSlots.Length; i++)
+        for (int i = 0; i < length; i++)
         {
-            if (slotFillType[i] != BarrelType.Empty)
+            if (StaticGunData.instance.workshopGunHeads[currentHeadNumber].headSlots[i].slotType != BarrelType.Empty)
             {
                 barrelAmount++;
             }
         }
         //current / (max - 1)
-        spinSpeedPercent = Mathf.Clamp((barrelAmount / (float)BarrelSlots.Length) - (1 / (float)BarrelSlots.Length), 0, 1);
+        spinSpeedPercent = Mathf.Clamp((barrelAmount / (float)length) - (1 / (float)length), 0, 1);
+
+
     }
 
+    //spins the gun barrels depending on quantity of barrels in relation to the total, spins faster depending on fire rate mult
     private void SpinBarrels()
     {
-        spinningGunPiece.transform.Rotate(0, 0, (currentSpinSpeed * spinSpeedPercent) * Time.deltaTime);
+        if (spinSpeedPercent > 0)
+        {
+            spinningGunPiece.transform.Rotate(0, 0, ((currentSpinSpeed * spinSpeedPercent) * PlayerResourcesManager.fireSpeedMult) * Time.deltaTime);
+
+            //updates the speed of the chain shader
+            ChainMovement.UpdateChainSpeed(currentSpinSpeed * spinSpeedPercent);
+            //updates the speed of the recoil Animation
+            _gunAnim.SetFloat("RecoilSpeed", spinSpeedPercent);
+        }
+        else
+        {
+            ChainMovement.UpdateChainSpeed(0);
+        }
     }
 
+    //startup coroutine for the barrel spin
     private IEnumerator SpinStartup()
     {
         float currentSpeed = currentSpinSpeed;
@@ -365,6 +296,7 @@ public class GunData : MonoBehaviour
         }
         currentSpinSpeed = maxSpinSpeed;
     }
+    //slowdown coroutine for the barrel spin
     private IEnumerator SpinSlowdown()
     {
         float currentSpeed = currentSpinSpeed;
@@ -379,17 +311,76 @@ public class GunData : MonoBehaviour
     //FUNCTIONS TRIGGERED BY BUTTONS <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
     //used by the button to set flag for firing
-    public void startFiring()
+    public void StartFiring()
     {
         firing = true;
         StartCoroutine(SpinStartup());
+        UIData.instance.fireButtonImage.sprite = UIData.instance.SetSpriteFromLargeSheet(UIData.instance.activeFireButtonSpriteNumber);
         cursorImage.color = cursorFiringColor;
+
+        //sets the recoil animation
+        _gunAnim.SetBool("Firing", true);
+
+        //spawns smoke from barrels
+        BarrelSmokeOn();
     }
     public void StopFiring()
     {
         firing = false;
         StartCoroutine(SpinSlowdown());
+        UIData.instance.fireButtonImage.sprite = UIData.instance.SetSpriteFromLargeSheet(UIData.instance.inactiveFireButtonSpriteNumber);
         cursorImage.color = cursorInactiveColor;
+
+        //sets the recoil animation
+        _gunAnim.SetBool("Firing", false);
+
+        //stops smoke from barrels
+        BarrelSmokeOff();
     }
 
+    //FUNCTIONS USED FOR SWAPING CURRENT GUNHEAD <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    //changes actuve gunhead, INITILIZED THROUGH THE GAME STATE MANAGER
+    public void SwitchGunHeads(int headNumber)
+    {
+        headNumber = Mathf.Clamp(headNumber, 0, StaticGunData.instance.workshopGunHeads.Length - 1);
+
+        for (int i = 0; i < StaticGunData.instance.gunSlots.Length; i++)
+        {
+            StaticGunData.instance.gunSlots[i].UpdateSlotBarrel(headNumber);
+        }
+
+        currentHeadNumber = headNumber;
+        RefreshBarrelQuantitiesList();
+    }
+
+    //used on arrow buttons to change gunhead
+    public void ScrollGunHead(int direction)
+    {
+        direction = Mathf.Clamp(direction, -1, 1);
+        if(currentHeadNumber + direction > gunHeadQuantity - 1)
+        {
+            SwitchGunHeads(0);
+        }
+        else if(currentHeadNumber + direction < 0)
+        {
+            SwitchGunHeads(gunHeadQuantity - 1);
+        }
+        else
+        {
+            SwitchGunHeads(Mathf.Clamp(currentHeadNumber + direction, 0, gunHeadQuantity - 1));
+        }
+
+        for (int i = 0; i < gunHeadQuantity; i++)
+        {
+            if(i == currentHeadNumber)
+            {
+                UIData.instance.gunheadActiveImages[i].color = UIData.instance.gunheadImageActiveColor;
+            }
+            else
+            {
+                UIData.instance.gunheadActiveImages[i].color = UIData.instance.gunheadImageInactiveColor;
+            }
+        }
+
+    }
 }
