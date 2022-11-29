@@ -14,11 +14,18 @@ public class EnemyStats : MonoBehaviour
 
     [Header("Damage Indicater Material, Temporary")]
     [SerializeField]
-    private Material normalMat;
+    private Material _skinMat;
     [SerializeField]
     private Material damageMat;
     [SerializeField]
     private SkinnedMeshRenderer materialRenderer;
+
+    private float _generatedColorValue;
+
+    [Header("Skintone colors to lerp between")]
+    [SerializeField] private Color lightColor;
+    [SerializeField] private Color darkColor;
+
 
     [Header("Animation Related")]
     [SerializeField] private float injuredThreshold = 0.4f; // 0-1;
@@ -44,7 +51,7 @@ public class EnemyStats : MonoBehaviour
     {
         if (materialRenderer != null)
         {
-            materialRenderer.material = normalMat;
+            materialRenderer.material = _skinMat;
         }
         else
         {
@@ -53,6 +60,11 @@ public class EnemyStats : MonoBehaviour
         }
 
         maxhealth = health;
+
+        _generatedColorValue = Random.Range(0, 1f);
+
+        //sets the mat color
+        materialRenderer.material.color = Color.Lerp(lightColor, darkColor, _generatedColorValue);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -126,11 +138,12 @@ public class EnemyStats : MonoBehaviour
             }
             else
             {
-                materialRenderer.material = normalMat;
+                materialRenderer.material = _skinMat;
             }
             yield return new WaitForEndOfFrame();
         }
-        materialRenderer.material = normalMat;
+        materialRenderer.material = _skinMat;
+        materialRenderer.material.color = Color.Lerp(lightColor, darkColor, _generatedColorValue);
     }
 
     private void InflictBurn(float duration, int burndamage, float frequency, GameObject burnEffectPrefab)
