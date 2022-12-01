@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,10 @@ public class ProgressManager : MonoBehaviour
 
 
     private PlayerData playerData;
+
+    //event for updating some UI when loaded, currently updates the audio sliders
+    public event Action onLoadTriggered;
+    public void LoadTriggered() { onLoadTriggered?.Invoke(); }
 
     private void Awake()
     {
@@ -42,6 +47,20 @@ public class ProgressManager : MonoBehaviour
         {
             //sets the level progress
             highestLevelCompleted = playerData.highestLevelBeat;
+
+            //sets the audio values
+            AudioManager.SetMusicVolume(playerData.musicVolume);
+            AudioManager.SetSFXVolume(playerData.SFXVolume);
+
+            AudioManager.musicVolume = playerData.musicVolume;
+            AudioManager.SFXVolume = playerData.SFXVolume;
+
+            AudioManager.UpdateAudioValues();
+
+            //calls update event
+            LoadTriggered();
+
+
         }
     }
 

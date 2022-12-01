@@ -41,7 +41,14 @@ public static class SaveManager
         {
             SettingsManager.DefaultSettings(5, false);
             ProgressManager.instance.DefaultProgress(1);
+
+            AudioManager.SetMusicVolume(0.5f);
+            AudioManager.SetSFXVolume(0.5f);
+
+            ProgressManager.instance.LoadTriggered();
+
             SavePlayerData(ProgressManager.instance);
+
 
             return null;
         }

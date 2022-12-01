@@ -13,12 +13,18 @@ public class PlayerData
     public float aimSensitivity;
     public bool leftHanded;
 
+    public float musicVolume;
+    public float SFXVolume;
+
     public PlayerData(ProgressManager progress)
     {
         highestLevelBeat = progress.highestLevelCompleted;
 
         aimSensitivity = SettingsManager.aimSensitivity;
         leftHanded = SettingsManager.leftHandMode;
+
+        musicVolume = AudioManager.musicVolume;
+        SFXVolume = AudioManager.SFXVolume;
     }
 
 }
