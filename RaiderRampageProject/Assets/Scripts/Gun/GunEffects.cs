@@ -18,6 +18,9 @@ public class GunEffects : MonoBehaviour
     public Image flashImage;
     [SerializeField] private float flashDuration;
 
+
+    [SerializeField] private Sprite[] flashSprites;
+
     private Coroutine flash;
 
     private void Start()
@@ -91,6 +94,7 @@ public class GunEffects : MonoBehaviour
 
     private IEnumerator MuzzleFlash()
     {
+        SetMuzzleSprite();
         flashImage.enabled = true;
 
         for (float i = 0; i < flashDuration; i += Time.deltaTime)
@@ -99,5 +103,13 @@ public class GunEffects : MonoBehaviour
         }
 
         flashImage.enabled = false;
+    }
+
+    private void SetMuzzleSprite()
+    {
+        if(flashSprites != null)
+        {
+            flashImage.sprite = flashSprites[Random.Range(0, flashSprites.Length)];
+        }
     }
 }

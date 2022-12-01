@@ -43,6 +43,12 @@ public class VictoryScreenRagdollSpawner : MonoBehaviour
             }
         }
 
+        //sets the clothing and skin tone if it can find the appropiate script
+        if (spawnedDoll.TryGetComponent(out RagdollArmourTransfer RATransfer))
+        {
+            RATransfer.RandomSelectArmourAndSkinTone();
+        }
+
 
         Destroy(spawnedDoll, ragdollDestroyTime);
     }

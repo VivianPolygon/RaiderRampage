@@ -6,13 +6,19 @@ using UnityEngine;
 //controled on each enemy prefab by deleting one that shouldnn't be in the pool
 public class ArmourPicker : MonoBehaviour
 {
-    [SerializeField] private GameObject torsos;
-    [SerializeField] private GameObject pants;
-    [SerializeField] private GameObject helmets;
-    [SerializeField] private GameObject faces;
+    [SerializeField] protected GameObject torsos;
+    [SerializeField] protected GameObject pants;
+    [SerializeField] protected GameObject helmets;
+    [SerializeField] protected GameObject faces;
 
     private GameObject[] _armorSelectionPool;
     private int _selectionNum;
+
+    //used for transfering over to ragdoll
+    [HideInInspector] public int generatedTorsoValue;
+    [HideInInspector] public int generatedPantsValue;
+    [HideInInspector] public int generatedHelmetsValue;
+    [HideInInspector] public int generatedFaceValue;
 
     //used for skin tone adjustments
 
@@ -26,14 +32,16 @@ public class ArmourPicker : MonoBehaviour
             return;
         }
 
-        SelectArmourPiece(torsos);
-        SelectArmourPiece(pants);
-        SelectArmourPiece(helmets);
-        SelectArmourPiece(faces);
+        //grabs the values in the array and sets the selected item as the equipment
+        generatedTorsoValue = SelectArmourPiece(torsos);
+        generatedPantsValue = SelectArmourPiece(pants);
+        generatedHelmetsValue = SelectArmourPiece(helmets);
+        generatedFaceValue = SelectArmourPiece(faces);
+
     }
 
     //takes one of the emptys that holds the possible objects and selects one of their children to remain, deletes the others
-    private void SelectArmourPiece(GameObject armorPoolObject)
+    private int SelectArmourPiece(GameObject armorPoolObject)
     {
         //creates the array
         _armorSelectionPool = new GameObject[armorPoolObject.transform.childCount];
@@ -58,5 +66,7 @@ public class ArmourPicker : MonoBehaviour
                 Destroy(_armorSelectionPool[i]);
             }
         }
+
+        return _selectionNum;
     }
 }

@@ -20,11 +20,11 @@ public class EnemyStats : MonoBehaviour
     [SerializeField]
     private SkinnedMeshRenderer materialRenderer;
 
-    private float _generatedColorValue;
+    public float _generatedColorValue;
 
     [Header("Skintone colors to lerp between")]
-    [SerializeField] private Color lightColor;
-    [SerializeField] private Color darkColor;
+    public Color lightColor;
+    public Color darkColor;
 
 
     [Header("Animation Related")]
@@ -46,6 +46,9 @@ public class EnemyStats : MonoBehaviour
     [Header("For Blood effect")]
     [SerializeField] private GameObject bloodEffect;
     [SerializeField] private float bloodEffectLifetime;
+
+    [Header("To transfer armor to ragdoll")]
+    [SerializeField] private ArmourPicker armourPicker;
 
     private void Start()
     {
@@ -111,6 +114,15 @@ public class EnemyStats : MonoBehaviour
             {
                 //GetComponent<EnemyAnimatorController>().SetDeath(true);
                 ragdollInstance = Instantiate(ragdollModel, transform.GetChild(0).position, transform.rotation);
+
+                //transfers armor
+                if (ragdollInstance.TryGetComponent(out RagdollArmourTransfer armourTransfer))
+                {
+                    armourTransfer.SetRagdollArmours(armourPicker.generatedTorsoValue, armourPicker.generatedPantsValue, armourPicker.generatedHelmetsValue, armourPicker.generatedFaceValue);
+                    armourTransfer.setRagdollSkintone(materialRenderer.material.color = Color.Lerp(lightColor, darkColor, _generatedColorValue));
+                }
+
+
                 //ragdoll.GetComponent<Rigidbody>().AddForce(GetComponent<Rigidbody>().velocity, ForceMode.Impulse);
                 Destroy(ragdollInstance, 5);
                 Destroy(this.gameObject);

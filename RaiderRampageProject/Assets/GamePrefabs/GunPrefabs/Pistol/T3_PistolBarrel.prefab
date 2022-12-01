@@ -220,7 +220,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 4477181885882837687, guid: 7477cb3a625e11c43bfe02cbbe4bc608, type: 3}
+  m_Sprite: {fileID: -5397916008248988276, guid: f848402db43d9cc439d67c13876ffb51, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -305,6 +305,26 @@ PrefabInstance:
       propertyPath: flashDuration
       value: 0.15
       objectReference: {fileID: 0}
+    - target: {fileID: 4060249244032241654, guid: d8249c523071c45469b4de9fade03b70, type: 3}
+      propertyPath: flashSprites.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4060249244032241654, guid: d8249c523071c45469b4de9fade03b70, type: 3}
+      propertyPath: flashSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 6514927153470872433, guid: f848402db43d9cc439d67c13876ffb51, type: 3}
+    - target: {fileID: 4060249244032241654, guid: d8249c523071c45469b4de9fade03b70, type: 3}
+      propertyPath: flashSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 6929573686133038935, guid: f848402db43d9cc439d67c13876ffb51, type: 3}
+    - target: {fileID: 4060249244032241654, guid: d8249c523071c45469b4de9fade03b70, type: 3}
+      propertyPath: flashSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 4911598277057127070, guid: f848402db43d9cc439d67c13876ffb51, type: 3}
+    - target: {fileID: 4060249244032241654, guid: d8249c523071c45469b4de9fade03b70, type: 3}
+      propertyPath: flashSprites.Array.data[3]
+      value: 
+      objectReference: {fileID: -5397916008248988276, guid: f848402db43d9cc439d67c13876ffb51, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8249c523071c45469b4de9fade03b70, type: 3}
 --- !u!4 &297095481764167513 stripped

@@ -729,9 +729,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ragdollPrefabs:
-  - {fileID: 6694282294907930372, guid: 9513581838fe2eb4cb1663cbf3330c26, type: 3}
-  - {fileID: 6694282294907930372, guid: 5776f26996582db45b3dd083d260d717, type: 3}
-  - {fileID: 6694282294907930372, guid: 41f13daac8bc5a3499e9c112cfc6c566, type: 3}
+  - {fileID: 8724270709210128888, guid: 71410c24aaaf50443b17ff68f16b6d9c, type: 3}
+  - {fileID: 8550442714578616603, guid: f232d092995fbbe478544da948870d6c, type: 3}
+  - {fileID: 4925444278156994674, guid: c721e6d43c487274ebfedc8005ed6ecc, type: 3}
+  - {fileID: 4501013852978623699, guid: af881c64aaa71ee4490b28cb958740ef, type: 3}
+  - {fileID: 3215693261432726427, guid: 9682d42a75e52214894bb5ac80633d26, type: 3}
+  - {fileID: 2344720799634517058, guid: a084472a8b0f95b478a1b7c25e104598, type: 3}
+  - {fileID: 1833014899091999329, guid: 2f3078976954d5d43b3c39006e9a0344, type: 3}
+  - {fileID: 8685803503457666398, guid: 25e54360a6035d945976857b76621beb, type: 3}
+  - {fileID: 8422040620757022460, guid: 9f259960c75036b45b1d979e47386918, type: 3}
   ragdollForceMin: 1000
   ragdollForceMax: 1600
   ragdollDestroyTime: 15
