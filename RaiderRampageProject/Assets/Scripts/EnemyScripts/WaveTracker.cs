@@ -17,6 +17,9 @@ public class WaveTracker : MonoBehaviour
     [HideInInspector]
     public int currentWave = 0;
 
+    [Header("Audio Stuff")]
+    public AudioSource waveStartSong;
+
     private void Awake()
     {
         if(instance == null)
@@ -37,6 +40,9 @@ public class WaveTracker : MonoBehaviour
 
     public void StartWave()
     {
+        //plays wave song
+        StartWaveSong();
+
         waveSpawner.SetWaveData(waves[currentWave], gameObject);
         waveSpawner.SpawnWave();
         UIData.instance.SetWaveText(currentWave + 1);
@@ -52,4 +58,19 @@ public class WaveTracker : MonoBehaviour
         }
     }
 
+    public void StartWaveSong()
+    {
+        if (waveStartSong != null)
+        {
+            waveStartSong.time = 0;
+            waveStartSong.Play();
+        }
+    }
+    public void StopWaveSong()
+    {
+        if (waveStartSong != null)
+        {
+            waveStartSong.Pause(); 
+        }
+    }
 }

@@ -1492,6 +1492,8 @@ MonoBehaviour:
   bloodEffect: {fileID: 3943092265159635157, guid: bf5c82312bb5dc349987d8077a9ae90a, type: 3}
   bloodEffectLifetime: 1.5
   armourPicker: {fileID: 6821054930091595246}
+  diedByExplosion: 0
+  gibExplosion: {fileID: 8836640962574890846, guid: 36aa8ad3452216a49b4ff058825c5bd3, type: 3}
 --- !u!114 &2357070389185975276
 MonoBehaviour:
   m_ObjectHideFlags: 0

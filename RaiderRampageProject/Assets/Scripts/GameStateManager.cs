@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 //Script that controls the overall gamestate
 public class GameStateManager : MonoBehaviour
 {
-    public bool ammoUpgradePurchased = false; 
+    public bool ammoUpgradePurchased = false;
 
     //used as a singleton
     static public GameStateManager instance;
@@ -24,6 +24,9 @@ public class GameStateManager : MonoBehaviour
 
     public event Action onWaveEnd;
     public event Action onWaveStart;
+
+    [Header("audio stuff")]
+    [SerializeField] private AudioSource mergeStationAmbiance;
 
     public void WaveEnd()
     {
@@ -98,16 +101,19 @@ public class GameStateManager : MonoBehaviour
                         SetInventoryCanvases(false);
                         BeginShootingState(true);
                         CheckIfAmmoUpgrade();
+                        StopMergeStationAudio();
                         WaveStart();
                         PlayerResourcesManager.instance.FillAmmos();
                         break;
                     case Gamestate.BetweenWaves:
                         WaveEnd();
+                        if (WaveTracker.instance != null) { WaveTracker.instance.StopWaveSong(); }
                         UIEvents.instance.UpdateAll();
                         break;
                     case Gamestate.InInventory:
                         UIEvents.instance.UpdateAll();
                         UIData.instance.shootingControlsCanvas.enabled = false;
+                        PlayMergeStationAudio();
                         UpdateInventoryState(0);
                         break;
                     case Gamestate.Paused:
@@ -353,5 +359,24 @@ public class GameStateManager : MonoBehaviour
     public void Quitgame()
     {
         Application.Quit();
+    }
+
+    //audio functions
+    private void PlayMergeStationAudio()
+    {
+        if(mergeStationAmbiance != null)
+        {
+            mergeStationAmbiance.time = 0;
+            mergeStationAmbiance.Play();
+        }
+    }
+
+    private void StopMergeStationAudio()
+    {
+        if (mergeStationAmbiance != null)
+        {
+            mergeStationAmbiance.time = 0;
+            mergeStationAmbiance.Pause();
+        }
     }
 }

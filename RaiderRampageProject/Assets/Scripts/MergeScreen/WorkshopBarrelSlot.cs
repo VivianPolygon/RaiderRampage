@@ -121,6 +121,9 @@ public class WorkshopBarrelSlot : MonoBehaviour
             slotScript.slotType = BarrelType.Empty;
             slotScript.slotTier = BarrelTeir.Untiered;
 
+            //plays audio
+            InventoryScreenSFX.PlayInventorySFXClip(InventoryScreenSFX.mergeSound);
+
             slotTier++;
         }
         //swaps slots of differing barrels
@@ -132,6 +135,9 @@ public class WorkshopBarrelSlot : MonoBehaviour
             SlotReceiveFromData();
             slotScript.slotData = dataStorage;
             slotScript.SlotReceiveFromData();
+
+            //plays audio
+            InventoryScreenSFX.PlayInventorySFXClip(InventoryScreenSFX.dropInSlotSound);
         }
 
 

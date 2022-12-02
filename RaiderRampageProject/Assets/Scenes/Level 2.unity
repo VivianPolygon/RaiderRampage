@@ -5682,7 +5682,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: f0961d9eb5730484e96c933e284d123c, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d72f92a245d13024f847736982c3772e, type: 2}
+      objectReference: {fileID: 2100000, guid: 736e7aa2d7fb05043a0960ff998eedb3, type: 2}
     - target: {fileID: 919132149155446097, guid: f0961d9eb5730484e96c933e284d123c, type: 3}
       propertyPath: m_Name
       value: terrain_3.0

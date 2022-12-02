@@ -204,6 +204,9 @@ public class PlayerResourcesManager : MonoBehaviour
         //sets animator to reload
         GunData._gunAnim.SetBool("Reloading", true);
 
+        //plays the reload audio
+        GunData.instance.PlayReloadAudio();
+
         for (float i = 0; i < GunData.instance.reloadTime; i += Time.deltaTime)
         {
             UIData.instance.ammoReloadTimerSlider.value = i / GunData.instance.reloadTime;
@@ -565,5 +568,8 @@ public class PlayerResourcesManager : MonoBehaviour
         }
     }
 
-
+    public void ButtonSound()
+    {
+        InventoryScreenSFX.PlayInventorySFXClip(InventoryScreenSFX.purchaseSound);
+    }
 }

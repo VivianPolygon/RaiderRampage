@@ -50,6 +50,10 @@ public class EnemyStats : MonoBehaviour
     [Header("To transfer armor to ragdoll")]
     [SerializeField] private ArmourPicker armourPicker;
 
+    //used to determine if needs to spawn ragdoll or explosion gib effect
+    [HideInInspector] public bool diedByExplosion;
+    [Header("Gib eplosion prefab for if the enemy dies by explosion")]
+    [SerializeField] private GameObject gibExplosion;
     private void Start()
     {
         if (materialRenderer != null)
@@ -75,15 +79,18 @@ public class EnemyStats : MonoBehaviour
         if(other.TryGetComponent(out Bullet bullet))
         {
 
-            TakeDamage(bullet.damage, bullet.transform.position);
+            TakeDamage(bullet.damage, bullet.transform.position, false);
 
             Destroy(bullet.gameObject);
         }
     }
 
 
-    public void TakeDamage(int damageAmount, Vector3 contactPoint)
+    public void TakeDamage(int damageAmount, Vector3 contactPoint, bool isExplosionDamage)
     {
+        if (isExplosionDamage) { diedByExplosion = true; }
+        else { diedByExplosion = false; }
+
         if(OverdriveGauge.armorPierceActive)
         {
             health -= damageAmount;
@@ -109,25 +116,30 @@ public class EnemyStats : MonoBehaviour
     {
         if (health <= 0)
         {
-
-            if(ragdollInstance == null)
+            if(diedByExplosion)
             {
-                //GetComponent<EnemyAnimatorController>().SetDeath(true);
-                ragdollInstance = Instantiate(ragdollModel, transform.GetChild(0).position, transform.rotation);
-
-                //transfers armor
-                if (ragdollInstance.TryGetComponent(out RagdollArmourTransfer armourTransfer))
-                {
-                    armourTransfer.SetRagdollArmours(armourPicker.generatedTorsoValue, armourPicker.generatedPantsValue, armourPicker.generatedHelmetsValue, armourPicker.generatedFaceValue);
-                    armourTransfer.setRagdollSkintone(materialRenderer.material.color = Color.Lerp(lightColor, darkColor, _generatedColorValue));
-                }
-
-
-                //ragdoll.GetComponent<Rigidbody>().AddForce(GetComponent<Rigidbody>().velocity, ForceMode.Impulse);
-                Destroy(ragdollInstance, 5);
-                Destroy(this.gameObject);
+                //spawns gibs effect
+                Instantiate(gibExplosion, transform.position, transform.rotation);
             }
+            else
+            {
+                //spawns ragdoll
+                if (ragdollInstance == null)
+                {
+                    //GetComponent<EnemyAnimatorController>().SetDeath(true);
+                    ragdollInstance = Instantiate(ragdollModel, transform.GetChild(0).position, transform.rotation);
 
+                    //transfers armor
+                    if (ragdollInstance.TryGetComponent(out RagdollArmourTransfer armourTransfer))
+                    {
+                        armourTransfer.SetRagdollArmours(armourPicker.generatedTorsoValue, armourPicker.generatedPantsValue, armourPicker.generatedHelmetsValue, armourPicker.generatedFaceValue);
+                        armourTransfer.setRagdollSkintone(materialRenderer.material.color = Color.Lerp(lightColor, darkColor, _generatedColorValue));
+                    }
+
+                    Destroy(ragdollInstance, 5);
+                }
+            }
+            Destroy(this.gameObject);
         }
         else
         {
@@ -190,6 +202,8 @@ public class EnemyStats : MonoBehaviour
             hitsTaken++;
 
             health -= burnDamage;
+
+            diedByExplosion = true; //burning to death = explosion, don't question it
 
             CheckDeathOrDamage();
 

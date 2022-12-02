@@ -86,6 +86,8 @@ public class GunData : MonoBehaviour
     [Header("Sprites pulled randomly on each shot for the muzzle flash")]
     public Sprite[] muzzleFlashes;
 
+    [Header("Audio Stuff")]
+    public AudioSource reloadAudio;
 
     private void Awake()
     {
@@ -382,5 +384,14 @@ public class GunData : MonoBehaviour
             }
         }
 
+    }
+
+    public void PlayReloadAudio()
+    {
+        if(reloadAudio != null)
+        {
+            reloadAudio.time = 0;
+            reloadAudio.Play();
+        }
     }
 }

@@ -54,6 +54,9 @@ public class GunBarrel : MonoBehaviour
     [Header("cost to purchase on the UpgradeScreen")]
     public int purchasePrice;
 
+    [Header("Audio Stuff")]
+    [SerializeField] private AudioSource barrelAudioSource;
+
     private void Awake()
     {
         //initilizes time and can fire flag
@@ -118,6 +121,9 @@ public class GunBarrel : MonoBehaviour
 
                 //muzzleFlash
                 gunEffects.FlashEffect();
+
+                //sound effect
+                PlayShotAudio();
 
                 switch (bulletPattern)
                 {
@@ -225,14 +231,13 @@ public class GunBarrel : MonoBehaviour
         }
     }
 
-    private Vector3 RandomTargetFromSpread(Vector3 targetPosition)
+    private void PlayShotAudio()
     {
-        Vector3 RandomVector;
-
-        RandomVector.x = UnityEngine.Random.Range(targetPosition.x - bulletSpreadAmount, targetPosition.x + bulletSpreadAmount);
-        RandomVector.y = UnityEngine.Random.Range(targetPosition.y - bulletSpreadAmount, targetPosition.y + bulletSpreadAmount);
-        RandomVector.z = UnityEngine.Random.Range(targetPosition.z - bulletSpreadAmount, targetPosition.z + bulletSpreadAmount);
-
-        return RandomVector;
+        if(barrelAudioSource != null)
+        {
+            barrelAudioSource.time = 0;
+            barrelAudioSource.Play();
+        }
     }
+
 }

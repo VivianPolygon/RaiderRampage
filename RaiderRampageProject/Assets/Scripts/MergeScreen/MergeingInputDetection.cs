@@ -82,8 +82,11 @@ public class MergeingInputDetection : MonoBehaviour
                 barrelPickedUp = true;
                 currentBarrelSlot = barrelSlot;
                 currentBarrelSlot.PickupSlot(barrelPickedUp);
+
+                //plays audio
+                InventoryScreenSFX.PlayInventorySFXClip(InventoryScreenSFX.dropInSlotSound);
             }
-            //if the collider his is the slot addon stock, does similar to above, but for slot addons
+            //if the collider hit is the slot addon stock, does similar to above, but for slot addons
             //sets flag for addon being picked up
             if (tapHit.collider.TryGetComponent(out SlotAddonInventory slotAddonInventory))
             {
@@ -92,6 +95,9 @@ public class MergeingInputDetection : MonoBehaviour
                 if (slotAddonInventory.PickupAddon())
                 {
                     slotAddonPickedUp = true;
+
+                    //plays audio
+                    InventoryScreenSFX.PlayInventorySFXClip(InventoryScreenSFX.dropInSlotSound);
                 }
             }
             //if a workshop barrel slot has a lock on it, removes the addon, and picks it up (if it has one)
@@ -101,6 +107,9 @@ public class MergeingInputDetection : MonoBehaviour
                 if(addonInventory.RemoveAddon(slotLock, slotBarrel))
                 {
                     slotAddonPickedUp = true;
+
+                    //plays audio
+                    InventoryScreenSFX.PlayInventorySFXClip(InventoryScreenSFX.dropInSlotSound);
                 }
             }
         }
@@ -125,10 +134,15 @@ public class MergeingInputDetection : MonoBehaviour
                     if(barrelSlot == WorkshopBarrelSlot.slotScript)
                     {
                         currentBarrelSlot.DropSlot();
+
+                        //plays audio
+                        InventoryScreenSFX.PlayInventorySFXClip(InventoryScreenSFX.dropInSlotSound);
                     }
                     else
                     {
                         barrelSlot.SwapSlots();
+
+                        //audio handled on workshopBarrelSlot for swapSlots
                     }
                 }
                 //controls scrapping mechanic if hovered over an object woth a collider and thats tagged as "ScrapBin"
@@ -141,12 +155,14 @@ public class MergeingInputDetection : MonoBehaviour
                     WorkshopBarrelSlot.slotScript.slotTier = BarrelTeir.Untiered;
                     WorkshopBarrelSlot.slotScript.UpdateDisplay();
 
+                    //plays audio
+                    InventoryScreenSFX.PlayInventorySFXClip(InventoryScreenSFX.purchaseSound);
+
                 }
                 //snaps the slot back if nothing is selected
                 else
                 {
                     currentBarrelSlot.DropSlot();
-
                 }
             }
             //if the addon slot flag was set, this runs
@@ -155,6 +171,9 @@ public class MergeingInputDetection : MonoBehaviour
                 if(tapHit.collider.TryGetComponent(out WorkshopExtraSlotLock lockSlot))
                 {
                     addonInventory.PlaceAddon(lockSlot);
+
+                    //plays audio
+                    InventoryScreenSFX.PlayInventorySFXClip(InventoryScreenSFX.dropInSlotSound);
                 }
                 else
                 {
