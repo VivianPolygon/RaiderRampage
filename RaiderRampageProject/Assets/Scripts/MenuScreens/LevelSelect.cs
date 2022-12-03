@@ -43,6 +43,7 @@ public class LevelSelect : MonoBehaviour
             Debug.LogWarning("LevelSelect.cs Object does not have a Slider component, located on: " + name);
         }
 
+        SetSliderPositionFromProgress();
 
         isInitilized = true;
     }
@@ -70,5 +71,25 @@ public class LevelSelect : MonoBehaviour
     public void LoadSelectedLevel()
     {
         StartMenuManager.instance.LoadScene(levelSceneNumbers[(int)levelSelectSlider.value - 1]);
+    }
+
+    public void SetSliderPositionFromProgress()
+    {
+        if(ProgressManager.instance != null)
+        {
+            levelSelectSlider.value = Mathf.Clamp(ProgressManager.instance.highestLevelCompleted, 0, levelSelectSlider.maxValue);
+
+            if ((int)levelSelectSlider.value > ProgressManager.instance.highestLevelCompleted)
+            {
+                startButton.interactable = false;
+            }
+            else
+            {
+                startButton.interactable = true;
+            }
+
+            nameText.text = levelNames[(int)levelSelectSlider.value - 1];
+            levelImage.sprite = levelSprites[(int)levelSelectSlider.value - 1];
+        }
     }
 }

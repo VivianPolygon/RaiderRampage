@@ -51,19 +51,20 @@ public class MergeingInputDetection : MonoBehaviour
     {
         //enables the tapinput script
         tapInput.Enable();
-    }
-    private void OnDisable()
-    {
-        //disables the tap script incase this is ever disabled
-        tapInput.Disable();
 
-    }
-    
-    private void Start()
-    {
         //subscribes to the start and cancel events of the first touch on the screen
         tapInput.TapActionMap.TapInput.started += context => TapPressed(context);
         tapInput.TapActionMap.TapInput.canceled += context => TapReleased(context);
+    }
+    private void OnDisable()
+    {
+        //unsubscribes from the events when disabled
+        tapInput.TapActionMap.TapInput.started -= context => TapPressed(context);
+        tapInput.TapActionMap.TapInput.canceled -= context => TapReleased(context);
+
+
+        //disposes of the action map when disabled (happens when new scene is loaded)
+        tapInput.Dispose();
     }
 
     //raycast used fro when the tap is pressed down

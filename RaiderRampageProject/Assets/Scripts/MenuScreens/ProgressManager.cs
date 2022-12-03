@@ -31,7 +31,10 @@ public class ProgressManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-
+    private void Start()
+    {
+        highestLevelCompleted = Mathf.Clamp(highestLevelCompleted, 1, 100); //clamps the progress to 1, to prevent the player from ever potentialy being locked out of any levels by some wierd save issue
+    }
 
     //instanced saveing functions
 
@@ -61,6 +64,14 @@ public class ProgressManager : MonoBehaviour
             LoadTriggered();
 
 
+        }
+    }
+
+    private void OnApplicationFocus(bool focus)
+    {
+        if (!focus)
+        {
+            Save();
         }
     }
 

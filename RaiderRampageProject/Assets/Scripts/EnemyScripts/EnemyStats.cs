@@ -194,7 +194,6 @@ public class EnemyStats : MonoBehaviour
 
         int hitsTaken = 1;
 
-        print("Enemy Burned");
 
         for (float i = 0; i < duration; i += Time.deltaTime)
         {

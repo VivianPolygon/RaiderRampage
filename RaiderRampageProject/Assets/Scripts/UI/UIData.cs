@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem.OnScreen;
+using UnityEngine.EventSystems;
 
 //Script that holds UI elements and their data
 public class UIData : MonoBehaviour
@@ -130,6 +131,9 @@ public class UIData : MonoBehaviour
     [SerializeField] private Color deathFadeColor;
     [SerializeField] private Color victoryFadeColor;
 
+    [Header("Event Triggers")]
+    [SerializeField] private EventTrigger[] UIEventTriggers;
+
 
     [SerializeField] private float fadeTime;
 
@@ -183,6 +187,7 @@ public class UIData : MonoBehaviour
         SetDrainIcons();
 
         UpdateAllDrainIcons();
+
     }
 
     private void OnDisable()
@@ -434,13 +439,13 @@ public class UIData : MonoBehaviour
     public void DeathScreen()
     {
         //fades screen out
-        StartCoroutine(DeathScreenFadeIn(deathFadeColor, 2));
+        StartCoroutine(DeathScreenFadeIn(deathFadeColor, 1));
     }
 
     public void VictoryScreen()
     {
         //fades screen out
-        StartCoroutine(DeathScreenFadeIn(victoryFadeColor, 3));
+        StartCoroutine(DeathScreenFadeIn(victoryFadeColor, 2));
 
         //updates the level progress tracking and saves the games progress
         if(ProgressManager.instance != null)
@@ -456,6 +461,9 @@ public class UIData : MonoBehaviour
 
     private IEnumerator DeathScreenFadeIn(Color color, int sceneLoad)
     {
+        //disables event triggers to prevent errors if an input is held while scene changes
+        DisableEventTriggers();
+
         fadeImage.enabled = true;
 
         for (float i = 0; i < fadeTime; i += Time.deltaTime)
@@ -480,6 +488,19 @@ public class UIData : MonoBehaviour
 
         stickAim.enabled = isActive;
         stickAim.gameObject.SetActive(isActive);
+    }
+
+    //disables event triggers before loading a new scene
+    private void DisableEventTriggers()
+    {
+        if(UIEventTriggers != null)
+        {
+
+            for (int i = 0; i < UIEventTriggers.Length; i++)
+            {
+                UIEventTriggers[i].enabled = false;
+            }
+        }
     }
 }
 
