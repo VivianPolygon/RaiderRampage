@@ -341,6 +341,9 @@ public class PlayerResourcesManager : MonoBehaviour
         {
             if(PriceCheckAndCharge(Barricade.instance.CaculateRepairCost()))
             {
+                //plays repair audio
+                Barricade.instance.PlayAudioOfCategory(Barricade.instance.RepairAudio);
+
                 Barricade.instance.barricadeCurrentHealth += 11;
                 Barricade.instance.BarricadeTakeDamage();
             }

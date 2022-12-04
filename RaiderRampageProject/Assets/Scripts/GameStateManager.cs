@@ -317,7 +317,7 @@ public class GameStateManager : MonoBehaviour
             //enables On-screen components
             UIData.instance.OnScreenSetActive(true);
             UIData.instance.pauseCanvas.enabled = false;
-            UIData.instance.shootingControlsCanvas.gameObject.SetActive(true);
+            UIData.instance.shootingControlsCanvas.enabled = true;
 
             //saves settings incase of change
             if (ProgressManager.instance != null)
@@ -337,7 +337,7 @@ public class GameStateManager : MonoBehaviour
             //disables On-screen components
             UIData.instance.OnScreenSetActive(false);
             UIData.instance.pauseCanvas.enabled = true;
-            UIData.instance.shootingControlsCanvas.gameObject.SetActive(false);
+            UIData.instance.shootingControlsCanvas.enabled = false;
 
             //saves settings incase of change
             if (ProgressManager.instance != null)
@@ -353,6 +353,12 @@ public class GameStateManager : MonoBehaviour
     public void LoadScene(int sceneNum)
     {
         SceneManager.LoadScene(sceneNum);
+
+        //saves settings incase of change
+        if (ProgressManager.instance != null)
+        {
+            SaveManager.SavePlayerData(ProgressManager.instance);
+        }
     }
 
     //quit game function

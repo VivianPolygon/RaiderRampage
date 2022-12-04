@@ -40,7 +40,7 @@ public class AudioSlider : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Progress manager instance was null and could not unsubscribe to load update event" + name);
+            //Debug.LogWarning("Progress manager instance was null and could not unsubscribe to load update event" + name);
         }
     }
 

@@ -13,6 +13,8 @@ public class Explosive : MonoBehaviour
     public GameObject explosionVisual;
     public float visualTime;
 
+    [SerializeField] private AudioClip explosionSound;
+
     private void Start()
     {
         if(PlayerResourcesManager.instance != null)
@@ -38,6 +40,13 @@ public class Explosive : MonoBehaviour
                 }
 
             }
+
+            //plays audio
+            if(ExplosionAudioManager.instance != null && explosionSound != null)
+            {
+                ExplosionAudioManager.instance.PlayExplosion(explosionSound, transform.position);
+            }
+
 
             GameObject visual = Instantiate(explosionVisual, transform.position, Quaternion.identity);
             Destroy(visual, visualTime);

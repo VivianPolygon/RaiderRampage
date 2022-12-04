@@ -144,3 +144,4 @@ MonoBehaviour:
   explosionRange: 6
   explosionVisual: {fileID: 9067721601336473107, guid: 96ea6f958c0266640827675329ec72c6, type: 3}
   visualTime: 1.1
+  explosionSound: {fileID: 8300000, guid: cb215efb1af06c747b4c4fd4302259cb, type: 3}

@@ -29,6 +29,12 @@ public class Barricade : MonoBehaviour
 
     private static event Action onDamageBarricade;
 
+    [Header("Audio Stuff")]
+    [SerializeField] private AudioSource barricadeAudioSource;
+
+    public AudioClip[] DamageAudio;
+    public AudioClip[] RepairAudio;
+
     public static void DamageBarricade() { onDamageBarricade?.Invoke(); }
 
     private void OnEnable()
@@ -92,6 +98,9 @@ public class Barricade : MonoBehaviour
     {
         barricadeCurrentHealth = Mathf.Clamp(barricadeCurrentHealth - 1, 0, barricadeMaxHealth);
 
+        //plays audio
+        PlayAudioOfCategory(DamageAudio);
+
         //functon called on death
         if (barricadeCurrentHealth <= 0 && isdead == false)
         {
@@ -147,6 +156,16 @@ public class Barricade : MonoBehaviour
             other.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
 
             other.GetComponent<Rigidbody>().Sleep();
+        }
+    }
+
+    public void PlayAudioOfCategory(AudioClip[] categoryClipArray)
+    {
+        if (barricadeAudioSource != null && categoryClipArray != null && !barricadeAudioSource.isPlaying)
+        {
+            barricadeAudioSource.clip = categoryClipArray[UnityEngine.Random.Range(0, categoryClipArray.Length)];
+            barricadeAudioSource.time = 0;
+            barricadeAudioSource.Play();
         }
     }
 }
