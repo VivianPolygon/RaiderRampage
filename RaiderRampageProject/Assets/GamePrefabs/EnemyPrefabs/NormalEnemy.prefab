@@ -1380,8 +1380,8 @@ MonoBehaviour:
   pistolDropWeight: 25
   shotGunDropWeight: 10
   machineGunDropWeight: 30
-  sniperDropWeight: 5
-  rocketLauncherDropWeight: 5
+  sniperDropWeight: 10
+  rocketLauncherDropWeight: 10
   dropsScrap: 1
   droppedScrapMin: 1
   droppedScrapMax: 2
