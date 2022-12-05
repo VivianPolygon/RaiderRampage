@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7696aa46f0fab047be8f8435ecabc72, type: 3}
   m_Name: L3 Wave 9
   m_EditorClassIdentifier: 
-  waveDifficultyThreshold: 40
-  waveDifficulty: 26
-  balancedBias: 99
+  waveDifficultyThreshold: 30
+  waveDifficulty: 22
+  balancedBias: 35
   fastBias: 1
-  armouredBias: 1
-  waveValue: 30
-  waveQuantity: 25
-  delayMin: 0.15
-  delayMax: 0.4
+  armouredBias: 55
+  waveValue: 50
+  waveQuantity: 22
+  delayMin: 0.4
+  delayMax: 1.5

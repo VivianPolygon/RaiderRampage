@@ -56,12 +56,12 @@ MonoBehaviour:
   shotsPerSecond: 2.5
   ammoDrain: 1
   shotForce: 1100
-  bulletDamage: 5
-  scrapValue: 1
+  bulletDamage: 26
+  scrapValue: 15
   projectileDestroyTime: 5
   bulletSpreadAmount: 120
   spreadShotQuantity: 0
-  purchasePrice: 6
+  purchasePrice: 15
   barrelAudioSource: {fileID: -3510998714232574781}
 --- !u!82 &-3510998714232574781
 AudioSource:

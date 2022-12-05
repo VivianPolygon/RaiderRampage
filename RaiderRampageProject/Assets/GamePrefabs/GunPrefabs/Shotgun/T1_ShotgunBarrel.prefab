@@ -83,15 +83,15 @@ MonoBehaviour:
   gunEffects: {fileID: 7442375971979944449}
   projectilePrefab: {fileID: 3263994021358073260, guid: eeb1a9fee29623744b4cde30ef2436d4, type: 3}
   projectileSpawnpoint: {fileID: 3796567296468403038}
-  shotsPerSecond: 2
+  shotsPerSecond: 1.25
   ammoDrain: 2
   shotForce: 250
-  bulletDamage: 1
-  scrapValue: 3
+  bulletDamage: 12
+  scrapValue: 5
   projectileDestroyTime: 0.5
   bulletSpreadAmount: 60
   spreadShotQuantity: 6
-  purchasePrice: 12
+  purchasePrice: 20
   barrelAudioSource: {fileID: 1330231291346099830}
 --- !u!82 &1330231291346099830
 AudioSource:
@@ -105,7 +105,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -6770272373671851070, guid: cf0a5f8b40d40cc4798c9b29958697de, type: 2}
   m_audioClip: {fileID: 8300000, guid: 60cad4deeb8dcb44db2596c86ce6d578, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 0
   Mute: 0

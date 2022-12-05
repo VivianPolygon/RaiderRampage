@@ -192,15 +192,15 @@ MonoBehaviour:
   gunEffects: {fileID: 3034822981500446127}
   projectilePrefab: {fileID: 4671604987794294500, guid: 6aeb1b9627ba36042b1c4e5c9e8ef516, type: 3}
   projectileSpawnpoint: {fileID: 5181987485545232237}
-  shotsPerSecond: 1
+  shotsPerSecond: 1.2
   ammoDrain: 4
   shotForce: 960
-  bulletDamage: 50
-  scrapValue: 3
+  bulletDamage: 224
+  scrapValue: 25
   projectileDestroyTime: 2
   bulletSpreadAmount: 0
   spreadShotQuantity: 0
-  purchasePrice: 15
+  purchasePrice: 25
   barrelAudioSource: {fileID: 4094751811572909721}
 --- !u!82 &4094751811572909721
 AudioSource:

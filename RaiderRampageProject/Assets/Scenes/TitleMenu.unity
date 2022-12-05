@@ -256,9 +256,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 21018cf6fe3605a4e95e44120b372a01, type: 3}
   - {fileID: 21300000, guid: 30980284fb011c14283751ccb60bf73f, type: 3}
   levelNames:
-  - '1: First Rampage'
-  - '2: Another Rampage'
-  - '3: Yet Another Rampage'
+  - '1: Main Street'
+  - '2: Sunset Sideroads'
+  - '3: Midnight Raid'
   nameText: {fileID: 1489614526}
   levelImage: {fileID: 1345088684}
   startButton: {fileID: 479866771}
@@ -5340,7 +5340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d28e786fadd453d40ac834bf9a6575f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highestLevelCompleted: 0
+  highestLevelCompleted: 1
 --- !u!4 &2010183494
 Transform:
   m_ObjectHideFlags: 0

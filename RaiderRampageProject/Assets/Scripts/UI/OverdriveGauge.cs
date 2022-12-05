@@ -293,5 +293,11 @@ public class OverdriveGauge : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        SetOverdriveTier(0);
+        overdrive = null;
+        overdriveActive = false;
+    }
 
 }

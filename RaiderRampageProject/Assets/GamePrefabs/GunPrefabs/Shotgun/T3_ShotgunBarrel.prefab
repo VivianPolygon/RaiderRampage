@@ -56,12 +56,12 @@ MonoBehaviour:
   shotsPerSecond: 2
   ammoDrain: 4
   shotForce: 250
-  bulletDamage: 2
-  scrapValue: 3
+  bulletDamage: 28
+  scrapValue: 20
   projectileDestroyTime: 0.5
   bulletSpreadAmount: 75
   spreadShotQuantity: 12
-  purchasePrice: 12
+  purchasePrice: 20
   barrelAudioSource: {fileID: 1832575769718072770}
 --- !u!82 &1832575769718072770
 AudioSource:
@@ -75,7 +75,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: -6770272373671851070, guid: cf0a5f8b40d40cc4798c9b29958697de, type: 2}
   m_audioClip: {fileID: 8300000, guid: 60cad4deeb8dcb44db2596c86ce6d578, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 0
   Mute: 0

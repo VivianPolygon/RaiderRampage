@@ -1499,10 +1499,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52029ac44bff87640a3851977d096dd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyDifficulty: 18
+  enemyDifficulty: 50
   enemyDifficultyCutoff: 101
   enemyBias: 2
-  enemyCost: 4
+  enemyCost: 5
 --- !u!114 &1822928171523984489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1515,8 +1515,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf16e295f3a894c4082617b91d622496, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 30
-  armour: 5
+  health: 400
+  armour: 16
   _skinMat: {fileID: 2100000, guid: 38691967bc481ee46acf30bca296da1c, type: 2}
   damageMat: {fileID: 2100000, guid: 836989f64665a1349a37827871055c56, type: 2}
   materialRenderer: {fileID: 4593783961861952980}
@@ -1543,15 +1543,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dropsBarrels: 1
-  barrelDropChance: 65
+  barrelDropChance: 50
   SMGDropWeight: 5
   pistolDropWeight: 5
-  shotGunDropWeight: 8
+  shotGunDropWeight: 25
   machineGunDropWeight: 5
-  sniperDropWeight: 15
-  rocketLauncherDropWeight: 7
+  sniperDropWeight: 25
+  rocketLauncherDropWeight: 10
   dropsScrap: 1
-  droppedScrapMin: 2
+  droppedScrapMin: 3
   droppedScrapMax: 5
 --- !u!114 &-1091976601765290204
 MonoBehaviour:

@@ -192,10 +192,10 @@ public class EnemyStats : MonoBehaviour
 
         burnFrequency = new WaitForSeconds(frequency);
 
-        int hitsTaken = 1;
+        int hitsTaken = 0;
 
 
-        for (float i = 0; i < duration; i += Time.deltaTime)
+        while (hitsTaken < duration)
         {
 
             hitsTaken++;

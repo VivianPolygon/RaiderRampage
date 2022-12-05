@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mode: 1
   overDriveButtonText: 
-  nextTierMurderScoreThreshold: 40
-  gaugeDrainRate: 0.4
+  nextTierMurderScoreThreshold: 500
+  gaugeDrainRate: 5
   barColor: {r: 0.3855614, g: 0.4716981, b: 0.11792453, a: 1}
